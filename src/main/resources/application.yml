@@ -1,0 +1,54 @@
+# 上传文件根目录
+bio:
+  # 用户文件上传的地址
+  uploadPath: E:/bioResp/upload/
+  # 脚本生成结果的地址
+  genPath: http://127.0.0.1:8887/result/
+  # 使用文件训练的脚本地址
+  exePath: E:/bioResp/exec/blastNew.py
+  # 使用参数训练的脚本地址
+  exeParamPath: E:/bioResp/exec/blastNewParam.py
+  # 你的脚本执行方式
+  exeMethod: python
+
+
+
+---
+server:
+  port: 8080
+
+---
+# 设置session的过期时间为120min 过了120min后自动销毁session
+server:
+  servlet:
+    session:
+      timeout: 120
+
+---
+
+# mail配置
+spring:
+  mail:
+    host: smtp.qq.com
+    username: 123456@qq.com # 发给谁 用你自己的要去qq设置啊
+    password: abcdef # 授权码
+    port: 587 # 端口号
+    default-encoding: utf-8
+    properties:
+      mail:
+        #配置SSL 加密工厂
+        smtp:
+          ssl:
+            #本地测试，先放开ssl
+            enable: false
+            required: false
+          #开启debug模式，这样邮件发送过程的日志会在控制台打印出来，方便排查错误
+        debug: true
+
+
+
+
+
+
+
+

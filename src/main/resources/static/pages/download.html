@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>download</title>
+    <style>
+        /*根节点html字体大小*/
+        html{
+            font-size:12px
+        }
+        body {
+            background-color:#f7f6f2; /*#f7f6f2  #d5d5d5*/
+            /* 针对web元素塌陷*/
+            min-width: 65rem;
+            max-width: 130rem;
+            margin: 0 auto;
+        }
+        /* 针对设备自适应自适应*/
+        #app{
+            width: 106rem;
+            margin: 0 auto;
+            box-shadow: 2rem 2rem 1rem #888888;
+        }
+        /* 手机 宽度小于768px的 */
+        @media only screen and (max-width: 768px) {
+            #app {
+                width: 100%;
+            }
+        }
+        /* 平板 宽度大于768px的*/
+        @media only screen and (min-width: 768px) {
+            #app {
+                width: 62rem;
+            }
+        }
+        /* 电脑 */
+        @media only screen and (min-width: 992px) {
+            #app {
+                width: 80rem;
+            }
+        }
+        /* web 更宽的屏幕 */
+        @media only screen and (min-width: 1200px) {
+            #app {
+                width: 97rem;
+            }
+        }
+
+        .el-header, .el-footer {
+            background-color: #20558a;
+            color: #333;
+            text-align: justify; /*设置文字 两端分布*/
+            line-height: 2rem;
+        }
+
+        /* 设置页头下元素属性*/
+        .el-header > p {
+            font-size: 140%;
+            color: whitesmoke;
+            font-family: Calibri, sans-serif
+        }
+
+        /* 设置页脚下元素属性*/
+        .el-footer > div {
+            font-size: 140%;
+            color: whitesmoke;
+            font-family: Calibri, sans-serif;
+            text-align: center;
+        }
+        /*让表单不空出来*/
+        #el-form{
+            margin-left: 0px;
+            /*margin-top: 60px;*/
+        }
+        .el-main {
+            background-color: #E9EEF3;
+            color: #333;
+            text-align: center;
+            /*line-height: 160px;*/
+            /*margin-left: 10%;*/
+            /*margin-right: 10%;*/
+        }
+        /*设置导航栏的字体*/
+        .el-menu-demo>.el-menu-item{
+            font-family: Helvetica,sans-serif;
+            font-size: 120%;
+            font-weight: bold;
+        }
+        /*设置进度条的字体*/
+        .el-steps>.el-step{
+            font-family: Arial,sans-serif;
+            font-size: 120%;
+            font-weight: bold;
+        }
+        /*设置提交表单字体*/
+        .el-form-item{
+            font-family: Helvetica,sans-serif;
+            font-size: 120%;
+        }
+
+        /*ele container setting*/
+        body > .el-container {
+            margin-bottom: 40px;
+        }
+        .el-container:nth-child(5) .el-aside,
+        .el-container:nth-child(6) .el-aside {
+            line-height: 260px;
+        }
+        .el-container:nth-child(7) .el-aside {
+            line-height: 320px;
+        }
+
+        /*download button style*/
+        .forDownload{
+            width: 25rem;
+            height: 15rem;
+            display: inline-block;  /* 解决A标签无法设置宽高*/
+            text-decoration: none; /* 不加下划线*/
+            color: #303133;
+            margin-left: 15%;
+            margin-right: 5%;
+            margin-bottom: 2rem;
+            font-family: Helvetica,sans-serif;
+            padding-left: 10%;
+            padding-right: 10%;
+            /*flex:1;*/
+            border-color: #d3dce6;
+            border-width: 2px;
+            border-style: solid;
+        }
+        .forDownload:hover{
+            border-color: #ffffff;
+            border-width: 2px;
+            border-style: solid;
+            background: #dde7f1;
+        }
+        .forDownload>h2{
+            align-content: center;
+            font-size: 200%;
+        }
+        .forDownload>i{
+            font-size: 500%;
+            font-weight: lighter;
+            color: #d7b96a;
+            text-decoration: none;
+        }
+    </style>
+
+    <!-- 引入组件库 -->
+    <script src="../js/vue.js"></script>
+    <script src="../element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../element-ui/lib/theme-chalk/index.css">
+    <script src="../js/axios-0.18.0.js"></script>
+</head>
+<body>
+
+<!--Vue 控制-->
+<div id="app" >
+    <!--container布局-->
+    <el-container>
+        <!--页头，图标-->
+        <!--        <el-main >-->
+        <img src="../imgs/header.jpg" alt="heads" width="100%"  />
+        <!--        </el-main>-->
+
+        <!--导航栏-->
+        <el-header style="background-color: white"> <!--设置背景颜色 -->
+            <!--activeIndex代表当前激活的栏
+            :default-active是Vue中v-bind的一种形式，为HTML标签绑定属性值-->
+            <el-menu :default-active="activeBar" class="el-menu-demo"
+                     mode="horizontal" @select="handleSelect" >
+                <el-menu-item index="1" onclick="document.location.href='index.html'">Home</el-menu-item>
+                <el-menu-item index="2" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
+            </el-menu>
+        </el-header>
+
+        <!--3 介绍语-->
+        <el-header style="height: 10rem;">
+            <p>
+                <em style="font-size: 2rem; color: #beff72;">Step4: download the results. </em>The Basic Local Alignment Search Tool (BLAST) finds regions of local similarity between sequences. The
+                program compares nucleotide or protein sequences to sequence databases and calculates the statistical
+                significance of matches. BLAST can be used to infer functional and evolutionary relationships between
+                sequences as well as help identify members of gene families.
+            </p>
+        </el-header>
+
+        <!--4 进度条-->
+        <el-header style="background: white; height: 140%">
+            <!--:active v-bind绑定的属性 显示目前进度索引-->
+            <el-steps :active="activeStep" align-center style="padding-top: 2rem; padding-bottom: 2rem">
+                <el-step title="Step 1 Upload" icon="el-icon-upload" description="upload your file"></el-step>
+                <el-step title="Step 2 Setting" icon="el-icon-edit"
+                         description="Set the parameters of the program"></el-step>
+                <el-step title="Step 3 Tuning" icon="el-icon-refresh-right"
+                         description="Repeatedly adjust fine tuning"></el-step>
+                <el-step title="Step 4 Download" icon="el-icon-download"
+                         description="Download the required files"></el-step>
+            </el-steps>
+        </el-header>
+    </el-container>
+
+    <el-container>
+
+        <el-aside width="20%" style="background-color: #d3dce6; ">
+        </el-aside>
+
+        <el-aside width="60%">
+            <!--提供下载-->
+            <el-main style="background-color: #d3dce6; font-weight: bold; text-align: left">
+                <a :href="link1" download="" class="forDownload">
+                    <h2>Download</h2>
+                    <h3>Transfer Data1 to Your Computer </h3>
+                    <i class="el-icon-folder-opened"></i>
+                </a>
+                <a :href="link2" download="" class="forDownload">
+                    <h2>Download</h2>
+                    <h3>Transfer Data2 to Your Computer </h3>
+                    <i class="el-icon-folder-opened"></i>
+                </a>
+                <el-button
+                        style="margin-left: 40%; margin-right: 30%;"
+                        plain
+                        @click="tryAgain()">Train Again
+                </el-button>
+            </el-main>
+        </el-aside>
+
+        <el-aside width="20%" style="background-color: #d3dce6; "> <!--#e9eef3-->
+        </el-aside>
+
+    </el-container>
+
+
+
+    <!--页脚-->
+    <el-footer style="height: 120%;">
+        <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;State Key Laboratory of Tea Plant Biology and Utilization
+            <br>
+            Anhui Agricultural University, Hefei 230036, China.
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Email: yechen@ahau.edu.cn
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)888 8888
+        </div>
+    </el-footer>
+
+</div>
+
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data:function () {
+            return{
+                username:"",
+                labelPosition: 'top',
+                activeBar:"1",
+                activeStep:4,
+                link1:"",
+                link2:"",
+            }
+        },
+        /* TODO Vue 挂载完成后发送请求 后端获取Session中的URL 响应出去 前端再得到这个URL并进行动态绑定*/
+        /* WARNING 根据浏览器的政策 直接从本地的URL获取文件是不允许的 所以这里我使用了相对路径来解决*/
+        /* 在你们实际的部署中 使用服务器的路径 就可以了*/
+        mounted(){
+            axios.get("/common/giveLink").then((res)=>{
+                // 测试
+                console.log(res.data);
+                console.log(res.data.data.link1)
+                console.log(res.data.data.link2)
+
+                // 赋值
+                this.link1 = res.data.data.link1;
+                this.link2 = res.data.data.link2;
+            })
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            tryAgain(){
+                location.href = "index.html"
+            },
+        }
+    });
+</script>
+</html>

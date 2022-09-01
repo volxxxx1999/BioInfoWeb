@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>STEP1</title>
+    <style>
+        /*根节点html字体大小*/
+        html{
+            font-size:12px
+        }
+        body {
+            background-color:#f7f6f2; /*#f7f6f2  #d5d5d5*/
+            /* 针对web元素塌陷*/
+            min-width: 65rem;
+            max-width: 130rem;
+            margin: 0 auto;
+        }
+        /* 针对设备自适应自适应*/
+        #app{
+            width: 106rem;
+            margin: 0 auto;
+            box-shadow: 2rem 2rem 1rem #888888;
+        }
+        /* 手机 宽度小于768px的 */
+        @media only screen and (max-width: 768px) {
+            #app {
+                width: 100%;
+            }
+        }
+        /* 平板 宽度大于768px的*/
+        @media only screen and (min-width: 768px) {
+            #app {
+                width: 62rem;
+            }
+        }
+        /* 电脑 */
+        @media only screen and (min-width: 992px) {
+            #app {
+                width: 80rem;
+            }
+        }
+        /* web 更宽的屏幕 */
+        @media only screen and (min-width: 1200px) {
+            #app {
+                width: 97rem;
+            }
+        }
+
+        .el-header, .el-footer {
+            background-color: #20558a;
+            color: #333;
+            text-align: justify; /*设置文字 两端分布*/
+            line-height: 2rem;
+        }
+
+        /* 设置页头下元素属性*/
+        .el-header > p {
+            font-size: 140%;
+            color: whitesmoke;
+            font-family: Calibri, sans-serif
+        }
+
+        /* 设置页脚下元素属性*/
+        .el-footer > div {
+            font-size: 140%;
+            color: whitesmoke;
+            font-family: Calibri, sans-serif;
+            text-align: center;
+        }
+        /*让表单不空出来*/
+        #el-form{
+            margin-left: 0px;
+            /*margin-top: 60px;*/
+        }
+        .el-main {
+            background-color: #E9EEF3;
+            color: #333;
+            text-align: center;
+            /*line-height: 160px;*/
+            /*margin-left: 10%;*/
+            /*margin-right: 10%;*/
+        }
+        /*设置导航栏的字体*/
+        .el-menu-demo>.el-menu-item{
+            font-family: Helvetica,sans-serif;
+            font-size: 120%;
+            font-weight: bold;
+        }
+        /*设置进度条的字体*/
+        .el-steps>.el-step{
+            font-family: Arial,sans-serif;
+            font-size: 120%;
+            font-weight: bold;
+        }
+        /*设置提交表单字体*/
+        .el-form-item{
+            font-family: Helvetica,sans-serif;
+            font-size: 120%;
+        }
+
+        /*ele container setting*/
+        body > .el-container {
+            margin-bottom: 40px;
+        }
+        .el-container:nth-child(5) .el-aside,
+        .el-container:nth-child(6) .el-aside {
+            line-height: 260px;
+        }
+        .el-container:nth-child(7) .el-aside {
+            line-height: 320px;
+        }
+
+        /*download button style*/
+        .forDownload{
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-bottom: 20px;
+            font-family: Helvetica,sans-serif;
+            padding-left: 10%;
+            padding-right: 10%;
+            /*flex:1;*/
+            border-color: #d3dce6;
+            border-width: 2px;
+            border-style: solid;
+        }
+        .forDownload:hover{
+            border-color: #ffffff;
+            border-width: 2px;
+            border-style: solid;
+            background: #dde7f1;
+        }
+        .forDownload>h2{
+            align-content: center;
+            font-size: 200%;
+        }
+        .forDownload>a{
+            font-size: 500%;
+            font-weight: lighter;
+            color: #d7b96a;
+            text-decoration: none;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<!--Vue 控制-->
+<div id="app" >
+    <!--container布局-->
+    <el-container>
+        <!--页头，图标-->
+        <!--        <el-main >-->
+        <img src="../imgs/header.jpg" alt="heads" width="100%"  />
+        <!--        </el-main>-->
+
+        <!--导航栏-->
+        <el-header style="background-color: white"> <!--设置背景颜色 -->
+            <!--activeIndex代表当前激活的栏
+            :default-active是Vue中v-bind的一种形式，为HTML标签绑定属性值-->
+            <el-menu :default-active="activeBar" class="el-menu-demo"
+                     mode="horizontal" @select="handleSelect" >
+                <el-menu-item index="1" onclick="location.href='index.html'">Home</el-menu-item>
+                <el-menu-item index="2" onclick="location.href='contact.html'">Contact Us</el-menu-item>
+            </el-menu>
+        </el-header>
+        <!--介绍信息-->
+        <el-main style="font-size: 120%; font-family: Helvetica,sans-serif">
+            <em style="font-weight: bold; text-align: left">Welcome to BlastProject</em>
+            <p style="text-align: justify">
+                In bioinformatics, BLAST (basic local alignment search tool)[2] is an algorithm and program for comparing primary biological sequence information, such as the amino-acid sequences of proteins or the nucleotides of DNA and/or RNA sequences. A BLAST search enables a researcher to compare a subject protein or nucleotide sequence (called a query) with a library or database of sequences, and identify database sequences that resemble the query sequence above a certain threshold. For example, following the discovery of a previously unknown gene in the mouse, a scientist will typically perform a BLAST search of the human genome to see if humans carry a similar gene; BLAST will identify sequences in the human genome that resemble the mouse gene based on similarity of sequence.
+            </p>
+        </el-main>
+    </el-container>
+
+    <el-container>
+        <!--提交用户意见的表单的模块-->
+        <el-main style="background-color: #d3dce6; font-weight: bold; text-align: left">
+            <!-- 给表单加一个边框div-->
+            <div style="border-color: white; border-style: dashed; border-radius: 20px; padding-left: 20px;padding-right: 20px">
+                <!--表单本体-->
+                <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
+                    <el-form-item label="Name">
+                        <el-input v-model="formLabelAlign.name"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Email Address">
+                        <el-input v-model="formLabelAlign.eMail"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Suggestion">
+                        <el-input  type="textarea" v-model="formLabelAlign.advice"></el-input>
+                    </el-form-item>
+                    <el-form-item style="text-align: center">
+                        <el-button type="plain" @click="onAdviceSubmit">Submit</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+        </el-main>
+    </el-container>
+
+    <!--页脚-->
+    <el-footer style="height: 120%;">
+        <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;State Key Laboratory of Tea Plant Biology and Utilization
+            <br>
+            Anhui Agricultural University, Hefei 230036, China.
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Email: yechen@ahau.edu.cn
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)888 8888
+        </div>
+    </el-footer>
+
+</div>
+
+</body>
+
+<!-- 引入组件库 -->
+<script src="../js/vue.js"></script>
+<script src="../element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="../element-ui/lib/theme-chalk/index.css">
+<script src="../js/axios-0.18.0.js"></script>
+
+<script>
+    new Vue({
+        el:"#app",
+        data:function () {
+            return{
+                username:"",
+                labelPosition: 'top',
+                activeBar:"2",
+                formLabelAlign: {
+                    name: '',
+                    eMail: '',
+                    advice: '',
+                }
+            }
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            // TODO 邮箱发送 https://blog.csdn.net/weixin_46822367/article/details/123893527
+            onAdviceSubmit() {
+                if(this.formLabelAlign.name === ''){
+                    this.$message.warning("Please enter your name")
+                }else if(this.formLabelAlign.eMail === ''){
+                    this.$message.warning("Please enter your Email")
+                }else if(this.formLabelAlign.advice === ''){
+                    this.$message.warning("Please enter your advice")
+                }else{
+                    axios.post("/mail/simple",this.formLabelAlign).then((res)=>{
+                        this.$message({
+                            message: 'Thank you, Your comment has been successfully sent!',
+                            type: 'success'
+                        });
+                    });
+                }
+            },
+        }
+    });
+</script>
+</html>
