@@ -14,7 +14,7 @@
 3. 模型展示：使用走马灯展示你的模型，可以自己调整图片张数和内容。
 4. 训练文件上传：前端js代码对文件的文件类型（后缀判断）和文件大小进行了校验，可根据自己的需要处理。
 
-![Pasted image 20220901133632](https://user-images.githubusercontent.com/81914075/187856137-a44a2db0-adec-4e09-b60e-12e387e43e84.png)
+![image](https://user-images.githubusercontent.com/71913581/188100957-026c3f29-876d-4a5b-9b1f-545c20512642.png)
 
 
 # 2 参数调整
