@@ -179,7 +179,8 @@
         <el-header style="background: white; height: 140%">
             <!--:active v-bind绑定的属性 显示目前进度索引-->
             <el-steps :active="activeStep" align-center style="padding-top: 2rem; padding-bottom: 2rem">
-                <el-step title="Step 1 Upload" icon="el-icon-upload" description="upload your file"></el-step>
+                <el-step title="Step 1 Upload" icon="el-icon-upload"
+                         description="upload your file"></el-step>
                 <el-step title="Step 2 Setting" icon="el-icon-edit"
                          description="Set the parameters of the program"></el-step>
                 <el-step title="Step 3 Tuning" icon="el-icon-refresh-right"
@@ -295,13 +296,15 @@
 
                 let isFas = (suffixList.indexOf(suffix) !== -1);
                 let isLt2M = file.size / 1024 / 1024 < 2;
-
+                // 后缀判断
                 if (!isFas) {
                     this.$message.error('The File Format Must Be .fasta, .fas or .fa!');
-                }
-                if (!isLt2M) {
+                }else if(!isLt2M){  // 后缀正确 判断大小
                     this.$message.error('File Size Must be Less Than 2MB!');
                 }
+                /*if (!isLt2M) {
+                    this.$message.error('File Size Must be Less Than 2MB!');
+                }*/
                 console.log(isFas && isLt2M);
                 return isFas && isLt2M;
             },

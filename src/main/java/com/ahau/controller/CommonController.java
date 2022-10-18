@@ -32,25 +32,25 @@ public class CommonController {
      * @return filename
      */
     public String upload(MultipartFile file){
-            //1. 获取原始文件名
-            String originalFilename = file.getOriginalFilename();//abc.jpg
-            String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-            //2. 使用UUID重新生成文件名，防止文件名称重复造成文件覆盖
-            String fileName = UUID.randomUUID().toString() + suffix;
-            //3. 创建一个目录对象
-            File dir = new File(basedir);
-            //4. 判断当前目录是否存在
-            if(!dir.exists()){
-                //目录不存在，需要创建
-                dir.mkdirs();
-            }
-            try {
-                //5. 将临时文件转存到指定位置
-                file.transferTo(new File(basedir + fileName));
-                return fileName;
-            } catch (Exception e) {  // 上传出现问题直接抛出系统异常，不属于业务范围
-                throw new SystemException("Upload failed, please check your network", Code.SYSTEM_ERR);
-            }
+        //1. 获取原始文件名
+        String originalFilename = file.getOriginalFilename();//abc.jpg
+        String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+        //2. 使用UUID重新生成文件名，防止文件名称重复造成文件覆盖
+        String fileName = UUID.randomUUID().toString() + suffix;
+        //3. 创建一个目录对象
+        File dir = new File(basedir);
+        //4. 判断当前目录是否存在
+        if(!dir.exists()){
+            //目录不存在，需要创建
+            dir.mkdirs();
+        }
+        try {
+            //5. 将临时文件转存到指定位置
+            file.transferTo(new File(basedir + fileName));
+            return fileName;
+        } catch (Exception e) {  // 上传出现问题直接抛出系统异常，不属于业务范围
+            throw new SystemException("Upload failed, please check your network", Code.SYSTEM_ERR);
+        }
     }
 
     /**

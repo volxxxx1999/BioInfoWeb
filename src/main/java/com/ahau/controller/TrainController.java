@@ -27,7 +27,7 @@ public class TrainController {
     @GetMapping("/trainFile")
     public Result trainFile(HttpServletRequest request) {
         // 1. 从Session获取数据
-        System.out.println("=========Controller：开始训练，读取Session中文件属性===========");
+        System.out.println("=========Controller：开始训练，读取Session中，文件属性===========");
         HttpSession session = request.getSession();
         String trainUrl = (String) session.getAttribute("train_Url");
         System.out.println("trainUrl:" + trainUrl);

@@ -1,14 +1,15 @@
-# 上传文件根目录
 bio:
-  # 用户文件上传的地址
-  uploadPath: http://127.0.0.1:8887/upload/
-  # 脚本生成结果的地址
+  # 项目的根目录
+  rootPath: E:/bioResp
+  # 用户上传文件的存储地址
+  uploadPath: E:/bioResp/upload/
+  # 脚本生成的结果的存储地址
   genPath: http://127.0.0.1:8887/result/
-  # 使用文件训练的脚本地址
-  exePath: http://127.0.0.1:8887/exec/blastNew.py
-  # 使用参数训练的脚本地址
-  exeParamPath: http://127.0.0.1:8887/exec/blastNewParam.py
-  # 你的脚本执行方式
+  # 接收上传文件的脚本的位置
+  exePath: E:/bioResp/exec/blastNew.py
+  # 接收参数的脚本的位置
+  exeParamPath: E:/bioResp/exec/blastNewParam.py
+  # 启动方式 (Java/python/perl...)
   exeMethod: python
 
 

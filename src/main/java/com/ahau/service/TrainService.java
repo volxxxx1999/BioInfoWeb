@@ -24,7 +24,7 @@ public class TrainService {
     // 服务器中 用户上传文件的目录
     @Value("${bio.uploadPath}")
     private String uploadPath;
-    // 你训练脚本的语言（Ppython？Java？Perl？R？自己yml配置）
+    // 你训练脚本的语言（Python？Java？Perl？R？自己yml配置）
     @Value("${bio.exeMethod}")
     private String exeMethod;
 

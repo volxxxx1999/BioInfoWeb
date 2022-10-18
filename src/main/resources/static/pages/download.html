@@ -112,6 +112,7 @@
         }
 
         /*download button style*/
+        /*下载按钮方案1：hover出现选框颜色变淡，但是有点孬看起来*/
         .forDownload{
             width: 25rem;
             height: 15rem;
@@ -145,6 +146,114 @@
             color: #d7b96a;
             text-decoration: none;
         }
+
+        /*download按钮样式2*/
+        .forDownload2{
+            width: 25rem;
+            height: 15rem;
+            display: inline-block;  /* 解决A标签无法设置宽高*/
+            text-decoration: none; /* 不加下划线*/
+            color: #303133;
+            margin-left: 15%;
+            margin-right: 5%;
+            margin-bottom: 2rem;
+            font-family: Helvetica,sans-serif;
+            padding-left: 10%;
+            padding-right: 10%;
+            /*flex:1;*/
+            border-color: #ffffff;
+            border-width: 3px;
+            border-style: solid;
+            border-radius: 30px;
+            background-color: #dde7f1;
+        }
+        .forDownload2>h2{
+            align-content: center;
+            font-size: 200%;
+        }
+        .forDownload2>i{
+            font-size: 500%;
+            font-weight: lighter;
+            color: #d7b96a;
+            text-decoration: none;
+        }
+        .forDownload2:hover {
+            -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+            animation: heartbeat 1.5s ease-in-out infinite both;
+        }
+
+        /*动画*/
+        @-webkit-keyframes heartbeat {
+            from {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                -webkit-transform-origin: center center;
+                transform-origin: center center;
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+            10% {
+                -webkit-transform: scale(0.91);
+                transform: scale(0.91);
+                -webkit-animation-timing-function: ease-in;
+                animation-timing-function: ease-in;
+            }
+            17% {
+                -webkit-transform: scale(0.98);
+                transform: scale(0.98);
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+            33% {
+                -webkit-transform: scale(0.87);
+                transform: scale(0.87);
+                -webkit-animation-timing-function: ease-in;
+                animation-timing-function: ease-in;
+            }
+            45% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+        }
+        @keyframes heartbeat {
+            from {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                -webkit-transform-origin: center center;
+                transform-origin: center center;
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+            10% {
+                -webkit-transform: scale(0.91);
+                transform: scale(0.91);
+                -webkit-animation-timing-function: ease-in;
+                animation-timing-function: ease-in;
+            }
+            17% {
+                -webkit-transform: scale(0.98);
+                transform: scale(0.98);
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+            33% {
+                -webkit-transform: scale(0.87);
+                transform: scale(0.87);
+                -webkit-animation-timing-function: ease-in;
+                animation-timing-function: ease-in;
+            }
+            45% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+        }
+
+
+
     </style>
 
     <!-- 引入组件库 -->
@@ -218,6 +327,11 @@
                     <h3>Transfer Data2 to Your Computer </h3>
                     <i class="el-icon-folder-opened"></i>
                 </a>
+                <a :href="link3" download="" class="forDownload2">
+                    <h2>Download</h2>
+                    <h3>Transfer Data3 to Your Computer </h3>
+                    <i class="el-icon-folder-opened"></i>
+                </a>
                 <el-button
                         style="margin-left: 40%; margin-right: 30%;"
                         plain
@@ -262,6 +376,7 @@
                 activeStep:4,
                 link1:"",
                 link2:"",
+                link3:"",
             }
         },
         /* TODO Vue 挂载完成后发送请求 后端获取Session中的URL 响应出去 前端再得到这个URL并进行动态绑定*/
