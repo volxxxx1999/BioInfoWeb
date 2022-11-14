@@ -30,10 +30,11 @@ public class TrainService {
 
     /**
      * 普通方法：调用进程执行命令 返回cmd结果Vector
+     *
      * @param cmd
      * @return
      */
-    public Vector<String> train(String[] cmd){
+    public Vector<String> train(String cmd) {
         // 2. 创建进程对象
         Process process;
         // 9. 存储读取结果
@@ -62,11 +63,11 @@ public class TrainService {
             // 4. 如有必要，使当前线程等待，直到此Process对象表示的进程终止。
             process.waitFor();
         } catch (Exception e) {
-            throw  new BusinessException("Fail to generate the result, please check the format of your file", Code.TRAIN_ERR);
+            throw new BusinessException("Fail to generate the result, please check the format of your file", Code.TRAIN_ERR);
         }
         // 9. 输出这个String Vector
         System.out.println("==========Service：训练生成文件位置和可视化数据==========");
-        for(int i=0;i<execResult.size();i++){
+        for (int i = 0; i < execResult.size(); i++) {
             System.out.println(execResult.get(i));
         }
         return execResult;
@@ -79,41 +80,76 @@ public class TrainService {
      * @Param: String paramUrl 用户上传的参数文件名 UUID 唯一
      * @Return: ExecResult 对返回结果的封装
      */
-    public Vector<String> trainFile(String trainUrl, String paramUrl) {
-        trainUrl = uploadPath + trainUrl;
-        paramUrl = uploadPath + paramUrl;
+/*    public Vector<String> trainFile(String RefGenomeUrl, String HiFiUrl) {
+        RefGenomeUrl = uploadPath + RefGenomeUrl;
+        HiFiUrl = uploadPath + HiFiUrl;
         // 【约定规则】1. 使用sys args传递参数 2. 使用UUID命名文件并输出 3. 返回值都输出
         // 1. 定义命令行语句 exePath-你的可执行程序存档的地址 trainUrl，paramUrl-前端用户上传进行转存的文件
         String exe = exeMethod;
-        String[] cmd = new String[]{exe, exePath, trainUrl, paramUrl};
+        String[] cmd = new String[]{exe, exePath, RefGenomeUrl, HiFiUrl};
         System.out.println("cmd: "+ Arrays.toString(cmd));
 
         Vector<String> result = train(cmd);
         return  result;
-    }
+    }*/
+
     /**
      * 参数训练的方式 接受一个封装的BlastParam 这里我们把作为
      */
-    public Vector<String> trainParam(String trainUrl, BlastParam param){
-
-        trainUrl = uploadPath + trainUrl;
-        // 1 调用指令的方式比较单调 我们可以使用字典，也可以一个个输入
-        String param1 = param.getParam1();
-        String param2 = param.getParam2();
-        String param3 = param.getParam3();
-        String param4 = param.getParam4();
-
+    public Vector<String> trainParam(String RefGenomeUrl, String HiFiUrl, BlastParam param) {
+        RefGenomeUrl = uploadPath + RefGenomeUrl;
+        HiFiUrl = uploadPath + HiFiUrl;
         String exe = exeMethod;
-        String[] cmd = new String[]{exe, exeParamPath, trainUrl,
-                param1,
-                param2,
-                param3,
-                param4};
 
-        System.out.println("cmd: "+ Arrays.toString(cmd));
+        String length = param.getMinLength().toString();
+        String identity = param.getMinIdentity().toString();
+        String prefix = param.getPrefix();
+        String threads = param.getThreads().toString();
+        String aligner = param.getAligner();
+        String plot = param.getPlot().toString();
+        String overwrite = param.getOverwrite().toString();
+        String miniMap = param.getMiniMapOption();
+        String nucmer = param.getNucmerOption();
+        String delta = param.getDeltaFilterOption();
 
+        /*一些命令设置
+         * 1. plot和overwrite设置了store_true（话说去掉这个参数不就行了x
+         * 2. --minimapoption接收 -x ams5，需要使用=“ ”包裹参数
+         * 3. --nucmer --delta也一样*/
+        String cmd = exe + " " +
+                exeParamPath + " " +
+                "-r=" + RefGenomeUrl +" " +
+                "-q=" + HiFiUrl +" " +
+                "-l=" + length +" " +
+                "-i=" + identity +" " +
+                "-p=" + prefix +" " +
+                "-t=" + threads +" " +
+                "-a=" + aligner +" " +
+                "--plot=" + plot +" " +
+                "--overwrite=" + "\"" + overwrite + "\" " +
+                "--minimapoption=" + "\"" + miniMap + "\" " +
+                "--nucmeroption=" + "\"" + nucmer + "\" " +
+                "--deltafilteroption=" + "\"" + delta + "\" ";
+      /*  String[] cmd = new String[]{
+                exe, exeParamPath,
+                "-r", RefGenomeUrl,
+                "-q", HiFiUrl,
+                "-l", length,
+                "-i", identity,
+                "-p", prefix,
+                "-t", threads,
+                "-a", aligner,
+                "--plot", plot,
+                "--overwrite", overwrite,
+                "--minimapoption=", miniMap,
+                "--nucmeroption=", nucmer,
+                "--deltafilteroption=", delta
+                };*/
+
+        System.out.println("⭐~ trainService 调用cmd的语句：");
+        System.out.println("cmd: " + cmd);
         Vector<String> result = train(cmd);
-        return  result;
+        return result;
     }
 
     /**
@@ -122,7 +158,7 @@ public class TrainService {
      * request 和 Vector<String> Result
      */
 
-    public void setSession(HttpServletRequest request, Vector<String> trainResult){
+    public void setSession(HttpServletRequest request, Vector<String> trainResult) {
         HttpSession session = request.getSession();
 
         // 3. 把返回结果写入Session 包括结果Url、可视化结果

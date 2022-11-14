@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/mail")
+@RequestMapping("/blast/mail")
 public class MailController {
     @Autowired
     private MailService mailService;

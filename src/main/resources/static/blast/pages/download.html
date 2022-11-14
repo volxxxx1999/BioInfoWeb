@@ -257,10 +257,10 @@
     </style>
 
     <!-- 引入组件库 -->
-    <script src="../js/vue.js"></script>
-    <script src="../element-ui/lib/index.js"></script>
-    <link rel="stylesheet" href="../element-ui/lib/theme-chalk/index.css">
-    <script src="../js/axios-0.18.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
@@ -383,7 +383,7 @@
         /* WARNING 根据浏览器的政策 直接从本地的URL获取文件是不允许的 所以这里我使用了相对路径来解决*/
         /* 在你们实际的部署中 使用服务器的路径 就可以了*/
         mounted(){
-            axios.get("/common/giveLink").then((res)=>{
+            axios.get("/blast/common/giveLink").then((res)=>{
                 // 测试
                 console.log(res.data);
                 console.log(res.data.data.link1)
