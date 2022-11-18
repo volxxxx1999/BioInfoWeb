@@ -78,7 +78,7 @@
         /* 设置页脚下元素属性*/
         .el-footer > div {
             font-size: 140%;
-            color: #4d4d4d;
+            color: #f7f6f2;
             font-family: Helvetica, sans-serif;
             text-align: center;
         }
@@ -146,7 +146,6 @@
             font-size: 1.5rem;
             font-family: "Helvetica",sans-serif;
         }
-
 
         /*走马灯设置 item和主盒子要一起设置宽高*/
         /* 控制外面的大盒子*/
@@ -279,10 +278,9 @@
 </head>
 <body>
 
+<!--全覆盖条幅-->
 <div id="app">
-    <!--全覆盖条幅-->
     <!--1. 登录注册-->
-
     <div class="banner">
         <!--标题-->
         <p> Quartat </p>
@@ -293,15 +291,14 @@
         </span>
     </div>
 
-
     <!--使用container布局-->
     <el-container>
         <!--2 导航栏-->
-        <el-header style="background-color: white; margin-top: 0">
+        <el-header style="background-color: #ffffff; margin-top: 0">
             <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
             <el-menu :default-active="activeBar" class="el-menu-demo"
                      mode="horizontal" @select="handleSelect">
-                <el-menu-item index="1" onclick="document.location.href='index.html'">Home</el-menu-item>
+                <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
                     <el-menu-item index="2-1" onclick="document.location.href='index.html'">DraftBlast</el-menu-item>
@@ -309,17 +306,14 @@
                     <el-menu-item index="2-3">Tool3</el-menu-item>
                     <el-menu-item index="2-4">Tool4</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="3" onclick="document.location.href='index.html'">Document</el-menu-item>
-                <el-menu-item index="4" onclick="document.location.href='contact.html'">Download</el-menu-item>
+                <el-menu-item index="3">Document</el-menu-item>
+                <el-menu-item index="4">Download</el-menu-item>
                 <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
             </el-menu>
         </el-header>
-
     </el-container>
 
     <!--2. 栏目-->
-
-
     <div id="thinner">
         <!--3 走马灯-->
         <el-container>
@@ -327,7 +321,7 @@
                 <!-- 一个走马灯流程 可以展示你们程序的过程-->
                 <span class="demonstration">
                     <h4 class="demo">- The WorkFlow of Quartat Blast Model -</h4>
-            </span>
+                </span>
                 <el-carousel indicator-position="outside">
                     <el-carousel-item v-for="item in 4" :key="item">
                         <h3 class="small">{{ item }}</h3>
@@ -354,22 +348,22 @@
                 </div>
             </el-main>
         </el-container>
-
-        <!--5 页脚信息-->
-        <el-footer style="height: 120%;">
-            <div>
-                &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
-                <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;State Key Laboratory of Tea Plant Biology and Utilization
-                <br>
-                Anhui Agricultural University, Hefei 230036, China.
-                <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Email: yechen@ahau.edu.cn
-                <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)888 8888
-            </div>
-        </el-footer>
     </div>
+
+    <!--5 页脚信息-->
+    <el-footer style="height: 120%; background-color: #20558a">
+        <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;State Key Laboratory of Tea Plant Biology and Utilization
+            <br>
+                Anhui Agricultural University, Hefei 230036, China.
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Email: yechen@ahau.edu.cn
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)888 8888
+        </div>
+    </el-footer>
 
 </div>
 
@@ -383,7 +377,6 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script>
-
     new Vue({
         el: '#app',
         data: function () {
@@ -391,6 +384,5 @@
         },
         methods: {}
     });
-
 </script>
 </html>
