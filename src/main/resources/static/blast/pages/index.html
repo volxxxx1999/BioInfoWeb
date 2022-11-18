@@ -320,6 +320,14 @@
             font-family: Helvetica, sans-serif;
             font-size: 2rem;
         }
+
+        /*  登录注册用样式  */
+        .login-box {
+            padding: 0 10px;
+        }
+        .login-box * {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -333,8 +341,8 @@
         <p> Quartat </p>
         <!--登陆注册 使用-->
         <span class="loginDiv">
-                <el-button plain>Sign in</el-button>
-                <el-button plain>Sign up</el-button>
+                <el-button plain @click="openLogin">Sign in</el-button>
+                <el-button plain @click="openRegister">Sign up</el-button>
         </span>
     </div>
 
@@ -657,6 +665,60 @@
         </div>
     </el-footer>
 
+    <!--6 登录 Dialog    -->
+    <el-dialog
+            title="Sign in"
+            :close-on-click-modal="false"
+            :visible.sync="loginDialogVisible"
+            width="450px"
+    >
+        <div class="login-box">
+            <el-input placeholder="email" v-model="email" clearable size="20px">
+            </el-input>
+            <el-input
+                    placeholder="password"
+                    v-model="password"
+                    show-password
+            ></el-input>
+            <!-- <div class="check-box">
+              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
+              <img :src="captchaPath" @click="getCaptcha()" alt="">
+            </div> -->
+            <el-button type="success" round style="width: 100%" @click="login"
+            >Login</el-button
+            >
+        </div>
+    </el-dialog>
+    <!--7 注册 Dialog    -->
+    <el-dialog
+            title="Sign up"
+            :close-on-click-modal="false"
+            :visible.sync="registerDialogVisible"
+            width="450px"
+    >
+        <div class="login-box">
+            <el-input placeholder="email" v-model="email" clearable size="20px">
+            </el-input>
+            <el-input
+                    placeholder="password"
+                    v-model="password"
+                    show-password
+            ></el-input>
+            <el-input
+                    placeholder="password again"
+                    v-model="password2"
+                    show-password
+            ></el-input>
+            <!-- <div class="check-box">
+              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
+              <img :src="captchaPath" @click="getCaptcha()" alt="">
+            </div> -->
+            <el-button type="success" round style="width: 100%" @click="register"
+            >Register</el-button
+            >
+        </div>
+    </el-dialog>
+
 </div>
 
 </body>
@@ -666,7 +728,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
 <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+<script src="../../js/axios-0.18.0.js"></script>
 
 
 <script>
@@ -709,6 +772,12 @@
                     desc: 'The prefix used on generated files. Default: Quartat',
                 },
                 ],
+                // 登录注册用变量
+                loginDialogVisible: false,
+                registerDialogVisible: false,
+                email: "",
+                password: "",
+                password2: "",
             }
         },
 
@@ -891,7 +960,27 @@
                         type: 'warning'
                     });
                 }
-            }
+            },
+            // 登录注册用方法
+            // 打开登录对话框
+            openLogin() {
+                this.loginDialogVisible = true;
+            },
+            login() {
+                // TODO 登录逻辑
+            },
+            // 打开注册对话框
+            openRegister() {
+                this.registerDialogVisible = true;
+            },
+            register() {
+                if (this.password !== this.password2) {
+                    this.$message({
+                        message: '两次密码输入不同',
+                        type: 'warning'
+                    });
+                }
+            },
         }
     });
 </script>
