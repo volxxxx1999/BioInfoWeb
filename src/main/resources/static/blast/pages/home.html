@@ -146,6 +146,12 @@
             font-size: 1.5rem;
             font-family: "Helvetica",sans-serif;
         }
+        .loginDiv > span {
+            color: #ffffff;
+            font-size: 2rem;
+            padding-top: 1rem;
+            padding-left: 1rem;
+        }
 
         /*走马灯设置 item和主盒子要一起设置宽高*/
         /* 控制外面的大盒子*/
@@ -294,8 +300,9 @@
         <p> Quartat </p>
         <!--登陆注册 使用-->
         <span class="loginDiv">
-                <el-button plain @click="openLogin">Sign in</el-button>
-                <el-button plain @click="openRegister">Sign up</el-button>
+                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
+                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
+                <span class="username" v-show="isLogin">{{this.username}}</span>
         </span>
     </div>
 
@@ -443,11 +450,14 @@
         el: '#app',
         data: function () {
             return {
+                // 登录需要变量
                 loginDialogVisible: false,
                 registerDialogVisible: false,
                 email: "",
                 password: "",
                 password2: "",
+                isLogin: false,
+                username: "",
             }
         },
         methods: {
@@ -456,7 +466,34 @@
                 this.loginDialogVisible = true;
             },
             login() {
-                // TODO 登录逻辑
+                // 登录逻辑
+                axios.post("/blast/user/login", {
+                    "email": this.email,
+                    "password": this.password,
+                }).then(
+                    ({ data }) => {
+                        if (data.code === 10000) {
+                            this.$message({
+                                message: 'Login successful',
+                                type: 'success'
+                            });
+                            localStorage.setItem("token", data.data); // 存储一下 token
+                            this.loginDialogVisible = false;
+                        } else {
+                            this.$message({
+                                message: data.message,
+                                type: 'error'
+                            });
+                        }
+                        this.email = "";
+                        this.password = "";
+                    },
+                    err => {
+                        this.email = "";
+                        this.password = "";
+                        console.error(err)
+                    }
+                );
             },
             // 打开注册对话框
             openRegister() {
@@ -468,12 +505,63 @@
                         message: '两次密码输入不同',
                         type: 'warning'
                     });
+                    return
                 }
+                axios.post("/blast/user/register", {
+                    email: this.email,
+                    password: this.password,
+                }).then(
+                    ({ data }) => {
+                        if (data.code === 10001) {
+                            this.$message({
+                                message: 'Register successful',
+                                type: 'success'
+                            });
+                            this.registerDialogVisible = false;
+                        } else {
+                            this.$message({
+                                message: data.message,
+                                type: 'error'
+                            });
+                        }
+                        this.email = "";
+                        this.password = "";
+                        this.password2 = "";
+                    },
+                    err => {
+                        this.email = "";
+                        this.password = "";
+                        this.password2 = "";
+                        console.error(err)
+                    }
+                );
+            },
+            // 验证身份, 判断是否登录
+            verify() {
+                const token = localStorage.getItem("token");
+                // console.log(token);
+                axios.get('/blast/user/verify', {
+                    headers: {
+                        'Authorization': token
+                    }
+                }).then(
+                    ({ data }) => {
+                        if (data.code === 10002) {
+                            this.isLogin = true;
+                            this.username = data.data.email;
+                        }
+                        console.log(this.isLogin);
+                    },
+                    err => console.error(err)
+                );
             },
             // 第二部分的 TopBar 有需要这个方法，为了不报错，先声明在这里
             handleSelect() {
 
             }
+        },
+        created() {
+            this.verify();
         }
     });
 </script>

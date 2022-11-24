@@ -4,8 +4,7 @@ import com.ahau.domain.Mail;
 import com.ahau.common.Code;
 
 import com.ahau.common.Result;
-import com.ahau.exception.SystemException;
-import com.ahau.service.MailService;
+import com.ahau.service.impl.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

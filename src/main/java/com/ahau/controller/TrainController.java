@@ -3,7 +3,7 @@ package com.ahau.controller;
 import com.ahau.common.Code;
 import com.ahau.common.Result;
 import com.ahau.domain.BlastParam;
-import com.ahau.service.TrainService;
+import com.ahau.service.impl.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

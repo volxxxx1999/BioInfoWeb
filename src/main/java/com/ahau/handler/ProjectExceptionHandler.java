@@ -1,4 +1,4 @@
-package com.ahau.controller;
+package com.ahau.handler;
 
 import com.ahau.common.Result;
 import com.ahau.exception.BusinessException;
@@ -28,6 +28,6 @@ public class ProjectExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Result doException(Exception exception){
 
-        return new Result(404,null,"Sorry, our server is crashed...Please visit later");
+        return new Result(404,exception.getMessage(),"Sorry, our server is crashed...Please visit later");
     }
 }
