@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>home</title>
+    <title>Quartet</title>
     <style>
         /*根节点html字体大小*/
         html {
@@ -123,10 +123,10 @@
         /*登录+标题banner的设置*/
         .banner {
             height: 8rem;
-            background-color: #20558a;
+            background-color: #205573;
             margin: 0;
         }
-        .banner > p {
+        .banner > a {
             color: #ffffff;
             font-size: 5rem;
             font-family: Helvetica, sans-serif;
@@ -134,6 +134,7 @@
             padding-left: 1rem;
             margin: 0;
             display: inline-block;
+            text-decoration: none;
         }
 
         .loginDiv{
@@ -262,7 +263,7 @@
             font-family: "Comic Sans MS", serif;
             font-size: 20px;
             font-weight: bold;
-            background-color: #20558a;
+            background-color: #205573;
             width: 15rem;
             height: 4rem;
         }
@@ -297,7 +298,7 @@
     <!--1. 登录注册-->
     <div class="banner">
         <!--标题-->
-        <p> Quartat </p>
+        <a href="home.html"> Quartet </a>
         <!--登陆注册 使用-->
         <span class="loginDiv">
                 <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
@@ -316,13 +317,13 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='index.html'">DraftBlast</el-menu-item>
-                    <el-menu-item index="2-2">Tool2</el-menu-item>
-                    <el-menu-item index="2-3">Tool3</el-menu-item>
-                    <el-menu-item index="2-4">Tool4</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">DraftBlast</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">FillBlast</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="3">Document</el-menu-item>
-                <el-menu-item index="4">Download</el-menu-item>
+                <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
+                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
                 <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
             </el-menu>
         </el-header>
@@ -335,7 +336,7 @@
             <el-main>
                 <!-- 一个走马灯流程 可以展示你们程序的过程-->
                 <span class="demonstration">
-                    <h4 class="demo">- The WorkFlow of Quartat Blast Model -</h4>
+                    <h4 class="demo">- The WorkFlow of Quartet Blast Model -</h4>
                 </span>
                 <el-carousel indicator-position="outside">
                     <el-carousel-item v-for="item in 4" :key="item">
@@ -353,11 +354,7 @@
                     <span>
                     Publications are requested to please cite the contributing authors:
                     <a href="https://www.baidu.com" style="color: #4d4d4d ">
-                        Here is your paper
-                        Here is your paper
-                        Here is your paper
-                        Here is your paper
-                        Here is your paper
+                        Here is your article link
                     </a>
                 </span>
                 </div>
@@ -366,7 +363,7 @@
     </div>
 
     <!--5 页脚信息-->
-    <el-footer style="height: 120%; background-color: #20558a">
+    <el-footer style="height: 120%; background-color: #205573">
         <div>
             &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
             <br>
@@ -450,6 +447,7 @@
         el: '#app',
         data: function () {
             return {
+                activeBar:"1",
                 // 登录需要变量
                 loginDialogVisible: false,
                 registerDialogVisible: false,

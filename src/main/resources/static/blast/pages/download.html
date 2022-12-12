@@ -3,352 +3,433 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>download</title>
+    <title>Home - Download</title>
     <style>
         /*根节点html字体大小*/
-        html{
-            font-size:12px
+        html {
+            font-size: 12px;
         }
+
         body {
-            background-color:#f7f6f2; /*#f7f6f2  #d5d5d5*/
+            background-color: #f7f6f2; /*#f7f6f2  #d5d5d5*/
+            /* 针对web元素塌陷*/
+            /*min-width: 65rem;*/
+            /*max-width: 130rem;*/
+            margin: 0 auto;
+        }
+
+        /* 针对设备自适应自适应*/
+        #thinner {
+            width: 106rem;
+            margin: 0 auto;
+
             /* 针对web元素塌陷*/
             min-width: 65rem;
             max-width: 130rem;
-            margin: 0 auto;
+            /*border-style: solid;*/
+            /*border-color: #3e3e3e;*/
+            /*border-width: 2px;*/
+            /*box-shadow: 2rem 2rem 1rem #888888;*/
         }
-        /* 针对设备自适应自适应*/
-        #app{
-            width: 106rem;
-            margin: 0 auto;
-            box-shadow: 2rem 2rem 1rem #888888;
-        }
+
         /* 手机 宽度小于768px的 */
         @media only screen and (max-width: 768px) {
-            #app {
+            #thinner {
                 width: 100%;
             }
         }
+
         /* 平板 宽度大于768px的*/
         @media only screen and (min-width: 768px) {
-            #app {
+            #thinner {
                 width: 62rem;
             }
         }
+
         /* 电脑 */
         @media only screen and (min-width: 992px) {
-            #app {
+            #thinner {
                 width: 80rem;
             }
         }
+
         /* web 更宽的屏幕 */
         @media only screen and (min-width: 1200px) {
-            #app {
+            #thinner {
                 width: 97rem;
             }
         }
 
         .el-header, .el-footer {
-            background-color: #20558a;
+            background-color: #fefefe;
             color: #333;
             text-align: justify; /*设置文字 两端分布*/
             line-height: 2rem;
+            margin-top: 1rem;
         }
 
         /* 设置页头下元素属性*/
         .el-header > p {
             font-size: 140%;
-            color: whitesmoke;
-            font-family: Calibri, sans-serif
+            color: #4d4d4d;
+            font-family: Helvetica, sans-serif
         }
 
         /* 设置页脚下元素属性*/
         .el-footer > div {
             font-size: 140%;
-            color: whitesmoke;
-            font-family: Calibri, sans-serif;
+            color: #f7f6f2;
+            font-family: Helvetica, sans-serif;
             text-align: center;
         }
-        /*让表单不空出来*/
-        #el-form{
-            margin-left: 0px;
-            /*margin-top: 60px;*/
-        }
-        .el-main {
-            background-color: #E9EEF3;
+
+        .el-aside {
+            background-color: #f7f6f2;
             color: #333;
             text-align: center;
-            /*line-height: 160px;*/
-            /*margin-left: 10%;*/
-            /*margin-right: 10%;*/
         }
-        /*设置导航栏的字体*/
-        .el-menu-demo>.el-menu-item{
-            font-family: Helvetica,sans-serif;
-            font-size: 120%;
+
+        #el-form {
+            margin-left: 0;
+        }
+
+        .el-main {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+            margin-top: 1rem;
+            border-color: #e5e5e5;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        /*设置导航栏的字体格式*/
+        .el-menu-demo {
+            font-family: Helvetica, sans-serif;
+            font-size: 130%;
             font-weight: bold;
         }
-        /*设置进度条的字体*/
-        .el-steps>.el-step{
-            font-family: Arial,sans-serif;
-            font-size: 120%;
-            font-weight: bold;
+
+        /*登录+标题banner的设置*/
+        .banner {
+            height: 8rem;
+            background-color: #205573;
+            margin: 0;
         }
-        /*设置提交表单字体*/
-        .el-form-item{
-            font-family: Helvetica,sans-serif;
-            font-size: 120%;
+
+        .banner > a {
+            color: #ffffff;
+            font-size: 5rem;
+            font-family: Helvetica, sans-serif;
+            padding-top: 1rem;
+            padding-left: 1rem;
+            margin: 0;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .loginDiv {
+            display: inline-block;
+            float: right;
+            padding-top: 2rem;
+            padding-right: 3rem;
+        }
+
+        .loginDiv > .el-button {
+            font-size: 1.5rem;
+            font-family: "Helvetica", sans-serif;
+        }
+
+        .loginDiv > span {
+            color: #ffffff;
+            font-size: 2rem;
+            padding-top: 1rem;
+            padding-left: 1rem;
+        }
+
+        /*css Button*/
+        .btn-54,
+        .btn-54 *,
+        .btn-54 :after,
+        .btn-54 :before,
+        .btn-54:after,
+        .btn-54:before {
+            border: 0 solid;
+            box-sizing: border-box;
+        }
+
+        .btn-54 {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: button;
+            background-color: #000000;
+            background-image: none;
+            color: #fff;
+            cursor: pointer;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+            Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            font-size: 100%;
+            line-height: 1.5;
+            margin: 0;
+            -webkit-mask-image: -webkit-gradient(radial, left top, left bottom, from(green), to(pink), color-stop(0.5, #000), color-stop(50%, #ffffff));
+            padding: 0;
+        }
+
+        .btn-54:disabled {
+            cursor: default;
+        }
+
+        .btn-54:-moz-focusring {
+            outline: auto;
+        }
+
+        .btn-54 svg {
+            display: block;
+            vertical-align: middle;
+        }
+
+        .btn-54 [hidden] {
+            display: none;
+        }
+
+        .btn-54 {
+            box-sizing: border-box;
+            display: block;
+            font-weight: 900;
+            padding: 1.8rem 5rem;
+            position: relative;
+            text-transform: uppercase;
+            background: none;
+        }
+
+        .btn-54 .content,
+        .btn-54 .depth,
+        .btn-54 .shadow {
+            transition: transform 0.2s;
+        }
+
+        .btn-54 .content {
+            background: #f3eddd;
+            color: #000;
+            display: grid;
+            height: 84%;
+            left: 0;
+            place-items: center;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+
+        .btn-54 .depth {
+            background: #ccc;
+            height: 10%;
+            top: 84%;
+        }
+
+        .btn-54 .depth,
+        .btn-54 .shadow {
+            display: block;
+            left: 0;
+            position: absolute;
+            width: 100%;
+        }
+
+        .btn-54 .shadow {
+            background: #777;
+            height: 6%;
+            top: 94%;
+        }
+
+        .btn-54:hover .content {
+            transform: translateY(4%);
+        }
+
+        .btn-54:hover .shadow {
+            transform: translateY(-20%);
+        }
+
+        .btn-54:active .content {
+            transform: translateY(8%);
+        }
+
+        .btn-54:active .shadow {
+            transform: translateY(-30%);
+        }
+
+        /*下载div的格式*/
+        .download_div {
+            width: 40rem;
+            margin: auto;
+            line-height: 6rem;
+        }
+        .download_span {
+            font-size: 1.5rem;
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
         }
 
         /*ele container setting*/
         body > .el-container {
-            margin-bottom: 40px;
+            margin-bottom: 5rem;
         }
+
         .el-container:nth-child(5) .el-aside,
         .el-container:nth-child(6) .el-aside {
-            line-height: 260px;
+            line-height: 30rem;
         }
+
         .el-container:nth-child(7) .el-aside {
-            line-height: 320px;
+            line-height: 50rem;
         }
 
-        /*download button style*/
-        /*下载按钮方案1：hover出现选框颜色变淡，但是有点孬看起来*/
-        .forDownload{
-            width: 25rem;
-            height: 15rem;
-            display: inline-block;  /* 解决A标签无法设置宽高*/
-            text-decoration: none; /* 不加下划线*/
-            color: #303133;
-            margin-left: 15%;
-            margin-right: 5%;
-            margin-bottom: 2rem;
-            font-family: Helvetica,sans-serif;
-            padding-left: 10%;
-            padding-right: 10%;
-            /*flex:1;*/
-            border-color: #d3dce6;
-            border-width: 2px;
-            border-style: solid;
-        }
-        .forDownload:hover{
-            border-color: #ffffff;
-            border-width: 2px;
-            border-style: solid;
-            background: #dde7f1;
-        }
-        .forDownload>h2{
-            align-content: center;
-            font-size: 200%;
-        }
-        .forDownload>i{
-            font-size: 500%;
-            font-weight: lighter;
-            color: #d7b96a;
-            text-decoration: none;
+        /*  登录框的样式  */
+        .login-box {
+            padding: 0 10px;
         }
 
-        /*download按钮样式2*/
-        .forDownload2{
-            width: 25rem;
-            height: 15rem;
-            display: inline-block;  /* 解决A标签无法设置宽高*/
-            text-decoration: none; /* 不加下划线*/
-            color: #303133;
-            margin-left: 15%;
-            margin-right: 5%;
-            margin-bottom: 2rem;
-            font-family: Helvetica,sans-serif;
-            padding-left: 10%;
-            padding-right: 10%;
-            /*flex:1;*/
-            border-color: #ffffff;
-            border-width: 3px;
-            border-style: solid;
-            border-radius: 30px;
-            background-color: #dde7f1;
+        .login-box * {
+            margin-bottom: 10px;
         }
-        .forDownload2>h2{
-            align-content: center;
-            font-size: 200%;
-        }
-        .forDownload2>i{
-            font-size: 500%;
-            font-weight: lighter;
-            color: #d7b96a;
-            text-decoration: none;
-        }
-        .forDownload2:hover {
-            -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
-            animation: heartbeat 1.5s ease-in-out infinite both;
-        }
-
-        /*动画*/
-        @-webkit-keyframes heartbeat {
-            from {
-                -webkit-transform: scale(1);
-                transform: scale(1);
-                -webkit-transform-origin: center center;
-                transform-origin: center center;
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-            10% {
-                -webkit-transform: scale(0.91);
-                transform: scale(0.91);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-            }
-            17% {
-                -webkit-transform: scale(0.98);
-                transform: scale(0.98);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-            33% {
-                -webkit-transform: scale(0.87);
-                transform: scale(0.87);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-            }
-            45% {
-                -webkit-transform: scale(1);
-                transform: scale(1);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-        }
-        @keyframes heartbeat {
-            from {
-                -webkit-transform: scale(1);
-                transform: scale(1);
-                -webkit-transform-origin: center center;
-                transform-origin: center center;
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-            10% {
-                -webkit-transform: scale(0.91);
-                transform: scale(0.91);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-            }
-            17% {
-                -webkit-transform: scale(0.98);
-                transform: scale(0.98);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-            33% {
-                -webkit-transform: scale(0.87);
-                transform: scale(0.87);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-            }
-            45% {
-                -webkit-transform: scale(1);
-                transform: scale(1);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-        }
-
-
-
     </style>
-
-    <!-- 引入组件库 -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
 <!--Vue 控制-->
-<div id="app" >
+<div id="app">
+    <!--1. 登录注册-->
+    <div class="banner">
+        <!--标题-->
+        <a href="home.html"> Quartet </a>
+        <!--登陆注册 使用-->
+        <span class="loginDiv">
+                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
+                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
+                <span class="username" v-show="isLogin">{{this.username}}</span>
+        </span>
+    </div>
+
     <!--container布局-->
     <el-container>
-        <!--页头，图标-->
-        <!--        <el-main >-->
-        <img src="../imgs/header.jpg" alt="heads" width="100%"  />
-        <!--        </el-main>-->
-
-        <!--导航栏-->
-        <el-header style="background-color: white"> <!--设置背景颜色 -->
-            <!--activeIndex代表当前激活的栏
-            :default-active是Vue中v-bind的一种形式，为HTML标签绑定属性值-->
+        <!--2 导航栏-->
+        <el-header style="background-color: #ffffff; margin-top: 0">
+            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
             <el-menu :default-active="activeBar" class="el-menu-demo"
-                     mode="horizontal" @select="handleSelect" >
-                <el-menu-item index="1" onclick="document.location.href='index.html'">Home</el-menu-item>
-                <el-menu-item index="2" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
+                     mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">Tools</template>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">DraftBlast</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">FillBlast</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
+                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
+                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
             </el-menu>
         </el-header>
-
-        <!--3 介绍语-->
-        <el-header style="height: 10rem;">
-            <p>
-                <em style="font-size: 2rem; color: #beff72;">Step4: download the results. </em>The Basic Local Alignment Search Tool (BLAST) finds regions of local similarity between sequences. The
-                program compares nucleotide or protein sequences to sequence databases and calculates the statistical
-                significance of matches. BLAST can be used to infer functional and evolutionary relationships between
-                sequences as well as help identify members of gene families.
-            </p>
-        </el-header>
-
-        <!--4 进度条-->
-        <el-header style="background: white; height: 140%">
-            <!--:active v-bind绑定的属性 显示目前进度索引-->
-            <el-steps :active="activeStep" align-center style="padding-top: 2rem; padding-bottom: 2rem">
-                <el-step title="Step 1 Upload" icon="el-icon-upload" description="upload your file"></el-step>
-                <el-step title="Step 2 Setting" icon="el-icon-edit"
-                         description="Set the parameters of the program"></el-step>
-                <el-step title="Step 3 Tuning" icon="el-icon-refresh-right"
-                         description="Repeatedly adjust fine tuning"></el-step>
-                <el-step title="Step 4 Download" icon="el-icon-download"
-                         description="Download the required files"></el-step>
-            </el-steps>
-        </el-header>
     </el-container>
 
-    <el-container>
-
-        <el-aside width="20%" style="background-color: #d3dce6; ">
-        </el-aside>
-
-        <el-aside width="60%">
-            <!--提供下载-->
-            <el-main style="background-color: #d3dce6; font-weight: bold; text-align: left">
-                <a :href="link1" download="" class="forDownload">
-                    <h2>Download</h2>
-                    <h3>Transfer Data1 to Your Computer </h3>
-                    <i class="el-icon-folder-opened"></i>
-                </a>
-                <a :href="link2" download="" class="forDownload">
-                    <h2>Download</h2>
-                    <h3>Transfer Data2 to Your Computer </h3>
-                    <i class="el-icon-folder-opened"></i>
-                </a>
-                <a :href="link3" download="" class="forDownload2">
-                    <h2>Download</h2>
-                    <h3>Transfer Data3 to Your Computer </h3>
-                    <i class="el-icon-folder-opened"></i>
-                </a>
-                <el-button
-                        style="margin-left: 40%; margin-right: 30%;"
-                        plain
-                        @click="tryAgain()">Train Again
-                </el-button>
+    <div id="thinner">
+        <!--3. 下载说明-->
+        <el-container>
+            <el-main>
+                <div style="font-size: 120%; font-family: Helvetica,sans-serif">
+                    <h3 style="font-weight: bold; text-align: center">
+                        Download Execution Tools
+                    </h3>
+                    <p style="text-align: justify">
+                        There are four tools available in the Tools section
+                        and we have provided the downloadable files
+                        in this section, please click on the corresponding buttons
+                        to download the tools so you can run them locally.
+                        All tools are freely available to academic under MIT license, and
+                        provided
+                        <em>without any warranty</em>.
+                        If you have any questions, please feel free to
+                        <a href="contact.html" style="text-decoration: none">
+                            contact us
+                        </a>.
+                        For more recent details and understanding, Please refer to the
+                        <a href="document.html" style="text-decoration: none">
+                            document section
+                        </a>.
+                    </p>
+                </div>
             </el-main>
-        </el-aside>
+        </el-container>
 
-        <el-aside width="20%" style="background-color: #d3dce6; "> <!--#e9eef3-->
-        </el-aside>
+        <!--4. 下载按钮-->
+        <el-container>
+            <el-main>
+                <div class="download_div">
+                    <el-row :gutter="10">
+                        <el-col :xs="16" :sm="16" :md="16" lg="12" xl="12">
+                                <span class="download_span">
+                                    Draft Blast Tool
+                                    <i class="el-icon-document"></i>
+                                </span>
+                        </el-col>
+                        <el-col :xs="16" :sm="8" :md="8" lg="12" xl="12">
+                            <button class="btn-54" @click="downloadDraft">
+                                <span class="shadow"></span>
+                                <span class="depth"></span>
+                                <span class="content">Download</span>
+                            </button>
+                        </el-col>
+                    </el-row>
+                    <el-row :gutter="10">
+                        <el-col :xs="16" :sm="16" :md="16" lg="12" xl="12">
+                                <span class="download_span">
+                                    Fill Blast Tool
+                                    <i class="el-icon-document"></i>
+                                </span>
+                        </el-col>
+                        <el-col :xs="16" :sm="8" :md="8" lg="12" xl="12">
+                            <button class="btn-54">
+                                <span class="shadow"></span>
+                                <span class="depth"></span>
+                                <span class="content">Download</span>
+                            </button>
+                        </el-col>
+                    </el-row>
+                    <el-row :gutter="10">
+                        <el-col :xs="16" :sm="16" :md="16" lg="12" xl="12">
+                                <span class="download_span">
+                                    Centro Blast Tool
+                                    <i class="el-icon-document"></i>
+                                </span>
+                        </el-col>
+                        <el-col :xs="16" :sm="8" :md="8" lg="12" xl="12">
+                            <button class="btn-54">
+                                <span class="shadow"></span>
+                                <span class="depth"></span>
+                                <span class="content">Download</span>
+                            </button>
+                        </el-col>
+                    </el-row>
+                    <el-row :gutter="10">
+                        <el-col :xs="16" :sm="16" :md="16" lg="12" xl="12">
+                                <span class="download_span">
+                                    Telo Blast Tool
+                                    <i class="el-icon-document"></i>
+                                </span>
+                        </el-col>
+                        <el-col :xs="16" :sm="8" :md="8" lg="12" xl="12">
+                            <button class="btn-54">
+                                <span class="shadow"></span>
+                                <span class="depth"></span>
+                                <span class="content">Download</span>
+                            </button>
+                        </el-col>
+                    </el-row>
+                </div>
+            </el-main>
+        </el-container>
+    </div>
 
-    </el-container>
-
-
-
-    <!--页脚-->
-    <el-footer style="height: 120%;">
+    <!--5. 页脚-->
+    <el-footer style="height: 120%; background-color: #205573">
         <div>
             &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
             <br>
@@ -361,46 +442,226 @@
             &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)888 8888
         </div>
     </el-footer>
+    <!--6 登录 Dialog    -->
+    <el-dialog
+            title="Sign in"
+            :close-on-click-modal="false"
+            :visible.sync="loginDialogVisible"
+            width="450px"
+    >
+        <div class="login-box">
+            <el-input placeholder="email" v-model="email" clearable size="20px">
+            </el-input>
+            <el-input
+                    placeholder="password"
+                    v-model="password"
+                    show-password
+            ></el-input>
+            <!-- <div class="check-box">
+              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
+              <img :src="captchaPath" @click="getCaptcha()" alt="">
+            </div> -->
+            <el-button type="success" round style="width: 100%" @click="login"
+            >Login
+            </el-button
+            >
+        </div>
+    </el-dialog>
+    <!--7 注册 Dialog    -->
+    <el-dialog
+            title="Sign up"
+            :close-on-click-modal="false"
+            :visible.sync="registerDialogVisible"
+            width="450px"
+    >
+        <div class="login-box">
+            <el-input placeholder="email" v-model="email" clearable size="20px">
+            </el-input>
+            <el-input
+                    placeholder="password"
+                    v-model="password"
+                    show-password
+            ></el-input>
+            <el-input
+                    placeholder="password again"
+                    v-model="password2"
+                    show-password
+            ></el-input>
+            <!-- <div class="check-box">
+              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
+              <img :src="captchaPath" @click="getCaptcha()" alt="">
+            </div> -->
+            <el-button type="success" round style="width: 100%" @click="register"
+            >Register
+            </el-button
+            >
+        </div>
+    </el-dialog>
 
 </div>
 
 </body>
+
+<!-- 引入组件库 -->
+<!--改为cdn引入-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">
+<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+<script src="../../js/axios-0.18.0.js"></script>
 <script>
     new Vue({
-        el:"#app",
-        data:function () {
-            return{
-                username:"",
-                labelPosition: 'top',
-                activeBar:"1",
-                activeStep:4,
-                link1:"",
-                link2:"",
-                link3:"",
+        el: "#app",
+        data: function () {
+            return {
+                activeBar: "4",
+                // 登录需要变量
+                loginDialogVisible: false,
+                registerDialogVisible: false,
+                email: "",
+                password: "",
+                password2: "",
+                isLogin: false,
+                username: "",
             }
         },
-        /* TODO Vue 挂载完成后发送请求 后端获取Session中的URL 响应出去 前端再得到这个URL并进行动态绑定*/
-        /* WARNING 根据浏览器的政策 直接从本地的URL获取文件是不允许的 所以这里我使用了相对路径来解决*/
-        /* 在你们实际的部署中 使用服务器的路径 就可以了*/
-        mounted(){
-            axios.get("/blast/common/giveLink").then((res)=>{
-                // 测试
-                console.log(res.data);
-                console.log(res.data.data.link1)
-                console.log(res.data.data.link2)
 
-                // 赋值
-                this.link1 = res.data.data.link1;
-                this.link2 = res.data.data.link2;
-            })
-        },
         methods: {
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            tryAgain(){
-                location.href = "index.html"
+            downloadDraft(){
+                let draft_src = "../exec/quartet_draft.py";
+                this.downloadCommon(draft_src);
             },
+            downloadFill(){
+                let fill_src = "../exec/quartet_fill.py";
+                this.downloadCommon(fill_src);
+            },
+            downloadTelo(){
+                let telo_src = "../exec/quartet_telo.py";
+                this.downloadCommon(telo_src);
+            },
+            downloadCentro(){
+                let centro_src = "../exec/quartet_centro.py";
+                this.downloadCommon(centro_src);
+            },
+            downloadCommon(src){
+                // 创建一个a标签
+                let $a = document.createElement('a');
+                // 给标签设置 href 和 download 属性
+                $a.setAttribute("href", src);
+                $a.setAttribute("download", "");
+                // 创建单击事件
+                let eventObj = document.createEvent('MouseEvents');
+                eventObj.initMouseEvent('click', true, true, window,
+                                        0, 0, 0, 0, 0,
+                                        false, false, true, false,
+                                        0, null);
+                // 触发单击事件
+                $a.dispatchEvent(eventObj);
+            },
+            // 打开登录对话框
+            openLogin() {
+                this.loginDialogVisible = true;
+            },
+            login() {
+                // 登录逻辑
+                axios.post("/blast/user/login", {
+                    "email": this.email,
+                    "password": this.password,
+                }).then(
+                    ({ data }) => {
+                        if (data.code === 10000) {
+                            this.$message({
+                                message: 'Login successful',
+                                type: 'success'
+                            });
+                            localStorage.setItem("token", data.data); // 存储一下 token
+                            this.loginDialogVisible = false;
+                        } else {
+                            this.$message({
+                                message: data.message,
+                                type: 'error'
+                            });
+                        }
+                        this.email = "";
+                        this.password = "";
+                    },
+                    err => {
+                        this.email = "";
+                        this.password = "";
+                        console.error(err)
+                    }
+                );
+            },
+            // 打开注册对话框
+            openRegister() {
+                this.registerDialogVisible = true;
+            },
+            register() {
+                if (this.password !== this.password2) {
+                    this.$message({
+                        message: '两次密码输入不同',
+                        type: 'warning'
+                    });
+                    return
+                }
+                axios.post("/blast/user/register", {
+                    email: this.email,
+                    password: this.password,
+                }).then(
+                    ({ data }) => {
+                        if (data.code === 10001) {
+                            this.$message({
+                                message: 'Register successful',
+                                type: 'success'
+                            });
+                            this.registerDialogVisible = false;
+                        } else {
+                            this.$message({
+                                message: data.message,
+                                type: 'error'
+                            });
+                        }
+                        this.email = "";
+                        this.password = "";
+                        this.password2 = "";
+                    },
+                    err => {
+                        this.email = "";
+                        this.password = "";
+                        this.password2 = "";
+                        console.error(err)
+                    }
+                );
+            },
+            // 验证身份, 判断是否登录
+            verify() {
+                const token = localStorage.getItem("token");
+                // console.log(token);
+                axios.get('/blast/user/verify', {
+                    headers: {
+                        'Authorization': token
+                    }
+                }).then(
+                    ({ data }) => {
+                        if (data.code === 10002) {
+                            this.isLogin = true;
+                            this.username = data.data.email;
+                        }
+                        console.log(this.isLogin);
+                    },
+                    err => console.error(err)
+                );
+            },
+            // 第二部分的 TopBar 有需要这个方法，为了不报错，先声明在这里
+            handleSelect() {
+
+            },
+        },
+        created() {
+            this.verify();
         }
     });
 </script>

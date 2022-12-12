@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>DraftBlast - display</title>
+    <style>
+        /*根节点html字体大小*/
+        html {
+            font-size: 12px;
+        }
+
+        body {
+            background-color: #f7f6f2; /*#f7f6f2  #d5d5d5*/
+            /* 针对web元素塌陷*/
+            /*min-width: 65rem;*/
+            /*max-width: 130rem;*/
+            margin: 0 auto;
+        }
+
+        /* 针对设备自适应自适应*/
+        #thinner {
+            width: 106rem;
+            margin: 0 auto;
+            /* 针对web元素塌陷*/
+            min-width: 65rem;
+            max-width: 130rem;
+        }
+
+        /* 手机 宽度小于768px的 */
+        @media only screen and (max-width: 768px) {
+            #thinner {
+                width: 100%;
+            }
+        }
+
+        /* 平板 宽度大于768px的*/
+        @media only screen and (min-width: 768px) {
+            #thinner {
+                width: 62rem;
+            }
+        }
+
+        /* 电脑 */
+        @media only screen and (min-width: 992px) {
+            #thinner {
+                width: 80rem;
+            }
+        }
+
+        /* web 更宽的屏幕 */
+        @media only screen and (min-width: 1200px) {
+            #thinner {
+                width: 97rem;
+            }
+        }
+
+        /*页脚页头格式*/
+        .el-header, .el-footer {
+            background-color: #fefefe;
+            color: #333;
+            text-align: justify; /*设置文字 两端分布*/
+            line-height: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* 设置页头下p元素属性*/
+        .el-header > p {
+            font-size: 140%;
+            color: #4d4d4d;
+            font-family: Helvetica, sans-serif
+        }
+
+        /* 设置页脚下元素属性*/
+        .el-footer > div {
+            font-size: 140%;
+            color: #f7f6f2;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        /* el-aside格式*/
+        .el-aside {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+            float: left;
+        }
+
+
+        #el-form {
+            margin-left: 0;
+        }
+
+        /*主体组件el-main格式*/
+        .el-main {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+            margin-top: 1rem;
+            border-color: #e5e5e5;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        /*设置导航栏的字体格式*/
+        .el-menu-demo {
+            font-family: Helvetica, sans-serif;
+            font-size: 130%;
+            font-weight: bold;
+        }
+
+        /*登录+标题banner的设置*/
+        .banner {
+            height: 8rem;
+            background-color: #205573;
+            margin: 0;
+        }
+
+        /*banner下面那个Quartat标题的格式*/
+        .banner > p {
+            color: #ffffff;
+            font-size: 5rem;
+            font-family: Helvetica, sans-serif;
+            padding-top: 1rem;
+            padding-left: 1rem;
+            margin: 0;
+            display: inline-block;
+        }
+
+        /*登录注册的格式*/
+        .loginDiv {
+            display: inline-block;
+            float: right;
+            padding-top: 2rem;
+            padding-right: 3rem;
+        }
+
+        /*登录注册的按钮格式*/
+        .loginDiv > .el-button {
+            font-size: 1.5rem;
+            font-family: "Helvetica", sans-serif;
+        }
+
+        .loginDiv > span {
+            color: #ffffff;
+            font-size: 2rem;
+            padding-top: 1rem;
+            padding-left: 1rem;
+        }
+
+        /*下一步的按钮格式*/
+        .next-button {
+            font-family: "Comic Sans MS", serif;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #205573;
+            width: 15rem;
+            height: 4rem;
+        }
+
+        /*每个区块里面对应蓝色的标签*/
+        /*css button ψ(｀∇´)ψ*/
+        .btn-24,
+        .btn-24 *,
+        .btn-24 :after,
+        .btn-24 :before,
+        .btn-24:after,
+        .btn-24:before {
+            border: 0 solid;
+            box-sizing: border-box;
+        }
+
+        .btn-24 {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: button;
+            background-color: #000;
+            background-image: none;
+            color: #fff;
+            cursor: pointer;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+            Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            font-size: 100%;
+            font-weight: 900;
+            line-height: 1.5;
+            margin: 0;
+            -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(green), to(pink), color-stop(0.5, #000), color-stop(50%, #ffffff));
+            padding: 0;
+            text-transform: uppercase;
+        }
+
+        .btn-24:disabled {
+            cursor: default;
+        }
+
+        .btn-24:-moz-focusring {
+            outline: auto;
+        }
+
+        .btn-24 svg {
+            display: block;
+            vertical-align: middle;
+        }
+
+        .btn-24 [hidden] {
+            display: none;
+        }
+
+        .btn-24 {
+            --background: #205573;
+            background: none;
+            overflow: hidden;
+            padding: 0.8rem 3rem;
+            position: relative;
+        }
+
+        .btn-24 span {
+            display: block;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-24:after,
+        .btn-24:before {
+            --tilt: 20px;
+            background: #fff;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+            content: "";
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transition: -webkit-clip-path 0.2s ease;
+            transition: clip-path 0.2s ease;
+            transition: clip-path 0.2s ease, -webkit-clip-path 0.2s ease;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .btn-24:after {
+            --thickness: 5px;
+            background: var(--background);
+            height: calc(100% - var(--thickness) * 2);
+            left: var(--thickness);
+            top: var(--thickness);
+            width: calc(100% - var(--thickness) * 2);
+        }
+
+        .btn-24:hover span {
+            transform: translateX(-20px);
+        }
+
+        .btn-24:hover:after,
+        .btn-24:hover:before {
+            -webkit-clip-path: polygon(
+                    0 0,
+                    calc(100% - var(--tilt)) 0,
+                    100% 50%,
+                    calc(100% - var(--tilt)) 100%,
+                    0 100%
+            );
+            clip-path: polygon(
+                    0 0,
+                    calc(100% - var(--tilt)) 0,
+                    100% 50%,
+                    calc(100% - var(--tilt)) 100%,
+                    0 100%
+            );
+        }
+
+        /*ele container setting*/
+        body > .el-container {
+            margin-bottom: 5rem;
+        }
+
+        .el-container:nth-child(5) .el-aside,
+        .el-container:nth-child(6) .el-aside {
+            line-height: 30rem;
+        }
+
+        .el-container:nth-child(7) .el-aside {
+            line-height: 50rem;
+        }
+
+        /*展示图旁边放大的按钮*/
+        .zoom-out-button {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        #bigimg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            display: none;
+            z-index: 20;
+        }
+
+        /*第一个模块程序中输出的警告信息*/
+        /*框*/
+        .warning-module {
+            background-color: #ffffff;
+            border-style: solid;
+            border-width: 2px;
+            border-color: #e3e3e3;
+            margin-right: 5rem;
+            margin-top: 5rem;
+            -webkit-animation: box-shadow-drop-tr 0.6s both;
+            animation: box-shadow-drop-tr 0.6s both;
+        }
+        /*给一个加阴影的动画*/
+        @-webkit-keyframes warning-module {
+            0% {
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+            100% {
+                box-shadow: 6px -6px 18px rgba(0, 0, 0, 0.35);
+            }
+        }
+        @keyframes box-shadow-drop-tr {
+            0% {
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+            100% {
+                box-shadow: 6px -6px 18px rgba(0, 0, 0, 0.35);
+            }
+        }
+
+        /*框中的标签*/
+        .warning-module>h2{
+            font-family: Helvetica, sans-serif;
+            color: #494949;
+            font-weight: bold;
+        }
+
+        /*框中的字*/
+        .warning-module > p {
+            font-size: 1.2rem;
+            font-family: Helvetica, sans-serif;
+            color: #767676;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /*p中的warning语句*/
+        .warning-module > p > em {
+            font-size: 1rem;
+            font-family: Helvetica, sans-serif;
+            color: #e24e4e;
+        }
+
+        /*框内描述结果的文字box*/
+        .illustration-box {
+            font-size: 1.2rem;
+            color: #4d4d4d;
+            font-family: Helvetica, sans-serif;
+        }
+
+        /*两个展示表格的下载的span和按钮格式*/
+        .download-stat {
+            margin-left: 1rem;
+            float: left;
+            margin-bottom: 1rem;
+        }
+
+        .download-stat > .el-button {
+            margin: 0 0 0 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="app">
+    <!--1. 登录注册-->
+    <div class="banner">
+        <!--标题-->
+        <p> Quartat </p>
+        <!--登陆注册 使用-->
+        <span class="loginDiv">
+                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
+                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
+                <span class="username" v-show="isLogin">{{this.username}}</span>
+        </span>
+    </div>
+
+    <!--2 导航栏-->
+    <el-container>
+        <el-header style="background-color: #ffffff; margin-top: 0">
+            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
+            <el-menu :default-active="activeBar" class="el-menu-demo"
+                     mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">Tools</template>
+                    <el-menu-item index="2-1" onclick="document.location.href='index.html'">DraftBlast</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">FillBlast</el-menu-item>
+                    <el-menu-item index="2-3">Tool3</el-menu-item>
+                    <el-menu-item index="2-4">Tool4</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="3">Document</el-menu-item>
+                <el-menu-item index="4">Download</el-menu-item>
+                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
+            </el-menu>
+        </el-header>
+    </el-container>
+
+    <!--thinner div中是主体内容-->
+    <div id="thinner">
+        <!--4 区域1 展示png结果图-->
+        <el-container>
+            <el-main>
+                <!--该区域标签-->
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <i class="el-icon-picture"></i>
+                        <span>GenomeDraft Display</span>
+                    </button>
+                </div>
+
+                <!--对图的说明-->
+                <div class="illustration-box">
+                    <p>Here are some illustration about the graphs....
+                        Here are some illustration about the graphs....
+                        Here are some illustration about the graphs....
+                        Here are some illustration about the graphs....
+                        Here are some illustration about the graphs....
+                        Here are some illustration about the graphs....
+                        Here are some illustration about the graphs....</p>
+                </div>
+
+                <div>
+                    <!--侧栏 1 下载按钮-->
+                    <el-aside width="5%">
+                        <div class="zoom-out-button">
+                            <el-button circle icon="el-icon-zoom-in" @click="showImg"></el-button>
+                        </div>
+                        <div>
+                            <el-button circle type="primary" icon="el-icon-download"></el-button>
+                        </div>
+                    </el-aside>
+                    <!--侧栏 2 生成的png图片-->
+                    <el-aside width="45%">
+                        <img src="../imgs/png1.jpg">
+                    </el-aside>
+                    <!--点击放大图片-->
+                    <div id="bigimg">
+                        <img src="../imgs/png1.jpg" @click="closeImg">
+                    </div>
+                    <!--侧栏 3 程序运行中的Warnings展示-->
+                    <el-aside style="box-shadow: #4d4d4d" width="50%">
+                        <div class="warning-module">
+                            <h2>Process Result</h2>
+                            <el-result icon='warning' title='Warning!' sub-title='Some Errors Occurred During the Process'>
+                            </el-result>
+                            <!--TODO 这里应该获取到cmd的输出结果动态给出-->
+                                <p>
+                                    <em>[Warning] Chr01 failed to be mapped by any contigs.</em>
+                                </p>
+                                <p>
+                                    <em>[Warning] Chr02 failed to be mapped by any contigs.</em>
+                                </p>
+                        </div>
+                    </el-aside>
+                </div>
+            </el-main>
+        </el-container>
+
+        <!--5 区域2 展示两个pdf图结果-->
+        <el-container>
+            <el-main>
+                <!--该区域标签-->
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <i class="el-icon-picture"></i>
+                        <span>Map&Ref Display</span>
+                    </button>
+                </div>
+
+                <!--对两个图的说明-->
+                <div class="illustration-box">
+                    <p>Here are some illustration about the graphs....
+                        Here are some illustration about the graphs....
+                        Here are some illustration about the graphs....
+                        Here are some illustration about the graphs....
+                        Here are some illustration about the graphs....
+                        Here are some illustration about the graphs....</p>
+                </div>
+
+                <div>
+                    <!--侧栏1 下载按钮-->
+                    <el-aside width="5%">
+                        <div class="zoom-out-button">
+                            <el-button circle icon="el-icon-zoom-in" @click="showImg"></el-button>
+                        </div>
+                        <div>
+                            <el-button circle type="primary" icon="el-icon-download"></el-button>
+                        </div>
+                    </el-aside>
+                    <!--侧栏2 pdf图1-->
+                    <el-aside width="45%">
+                        <img src="../imgs/pdf1.jpg" height="450" width="450">
+                    </el-aside>
+                    <!--侧栏3 pdf图2-->
+                    <el-aside width="45%">
+                        <img src="../imgs/pdf2.jpg" height="450" width="450">
+                    </el-aside>
+                    <!--侧栏4 下载按钮-->
+                    <el-aside width="5%">
+                        <div class="zoom-out-button">
+                            <el-button circle icon="el-icon-zoom-in" @click="showImg"></el-button>
+                        </div>
+                        <div>
+                            <el-button circle type="primary" icon="el-icon-download"></el-button>
+                        </div>
+                    </el-aside>
+                </div>
+            </el-main>
+        </el-container>
+
+        <!--6 区域3 展示mapinfo 和 stat文件结果-->
+        <el-container>
+            <el-main>
+                <!--该区域标签-->
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <i class="el-icon-tickets"></i>
+                        <span>Statistic Information</span>
+                    </button>
+                </div>
+
+                <!--对两个表格的说明-->
+                <div class="illustration-box">
+                    <p>Here are some illustration about the tables....
+                        Here are some illustration about the tables....
+                        Here are some illustration about the tables....
+                        Here are some illustration about the tables....
+                        Here are some illustration about the tables....
+                        Here are some illustration about the tables....
+                        Here are some illustration about the tables....</p>
+                </div>
+
+                <div>
+                    <!--侧栏1 table1-->
+                    <el-aside width="50%">
+                        <span class="download-stat">
+                            <el-button icon="el-icon-download"></el-button>
+                            <el-button icon="el-icon-document"></el-button>
+                            <el-button icon="el-icon-printer"></el-button>
+                        </span>
+                        <el-table
+                                :data="statData"
+                                stripe
+                                border
+                                height="30rem"
+                                class="tableSet"
+                                style=" width: 95%;
+                                    font-size: 1.3rem;
+                                    font-family: Helvetica,sans-serif;
+                                    margin:10px 10px 10px 10px;"
+                                :header-cell-style="{'text-align':'center'}"
+                                :row-class-name="tableRowClassName">
+                            <el-table-column
+                                    prop="aID"
+                                    label="AssemblyID"
+                                    min-width="25%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="len"
+                                    label="Length"
+                                    min-width="25%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="gCount"
+                                    label="GapCount"
+                                    min-width="25%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="gLocus"
+                                    label="GapLocus"
+                                    min-width="25%">
+                            </el-table-column>
+                        </el-table>
+                    </el-aside>
+
+                    <!--侧栏2 table2-->
+                    <el-aside width="50%">
+                        <span class="download-stat">
+                            <el-button icon="el-icon-download"></el-button>
+                            <el-button icon="el-icon-document"></el-button>
+                            <el-button icon="el-icon-printer"></el-button>
+                        </span>
+                        <el-table
+                                :data="mapInfoData"
+                                stripe
+                                border
+                                style=" width: 95%;
+                                    font-size: 1.3rem;
+                                    font-family: Helvetica,sans-serif;
+                                    margin:10px 10px 10px 10px;"
+                                height="30rem"
+                                class="tableSet"
+                                :header-cell-style="{'text-align':'center'}"
+                                :row-class-name="tableRowClassName">
+                            <el-table-column
+                                    prop="cID"
+                                    label="ContigID"
+                                    min-width="30%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="cLen"
+                                    label="ContigLength"
+                                    min-width="40%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="tID"
+                                    label="TargetID"
+                                    min-width="30%">
+                            </el-table-column>
+                        </el-table>
+                    </el-aside>
+                </div>
+
+                <!--7 提供下载的FASTA和apg-->
+                <div style="margin-top: 2rem;">
+                    <el-button class="next-button" @click="downloadFasta">Download FASTA</el-button>
+                    <el-button class="next-button" type="primary" @click="downloadAGP">Download AGP</el-button>
+                </div>
+            </el-main>
+        </el-container>
+    </div>
+
+    <!--5 页脚信息-->
+    <el-footer style="height: 120%; background-color: #205573">
+        <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;State Key Laboratory of Tea Plant Biology and Utilization
+            <br>
+            Anhui Agricultural University, Hefei 230036, China.
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Email: yechen@ahau.edu.cn
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)888 8888
+        </div>
+    </el-footer>
+</div>
+</body>
+
+
+<!-- 引入组件库 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../../js/axios-0.18.0.js"></script>
+
+
+<script>
+    new Vue({
+        el: `#app`,
+        data: function () {
+            return {
+                /* 参数列表初始值：可以自己改 */
+                resultUrl: [{
+                    hifiPdf:'',
+                    genomePdf:'',
+                    genomePng:'',
+                    mapInfo:'',
+                    stat:'',
+                    fasta:'https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg                                                                 ',
+                    apg:'',
+                }], // 如果直接url访问 没有结果就是展示这个图片
+                activeBar: "2", // 导航栏激活的栏，默认为Home 话说下拉栏显示不了啊喂
+                pngUrl: "../imgs/png1.jpg",
+                pdfUrl1: '../imgs/pdf1.jpg',
+                pdfUrl2: '../imgs/pdf1.jpg',
+                statData: [{
+                    aID: 'Chr01_Qd',
+                    len: '21163354',
+                    gCount: '0',
+                    gLocus: '',
+                },
+                {
+                    aID: 'Chr02_Qd',
+                    len: '18254787',
+                    gCount: '2',
+                    gLocus: '88586-88685 192143-192242',
+                },
+                {
+                    aID: 'Chr03_Qd',
+                    len: '27829678',
+                    gCount: '0',
+                    gLocus: '',
+                }, {
+                    aID: 'Chr04_Qd',
+                    len: '14578248',
+                    gCount: '0',
+                    gLocus: '',
+                },
+                {
+                    aID: 'Chr05_Qd',
+                    len: '20590669',
+                    gCount: '1',
+                    gLocus: '200578-200677',
+                },
+                {
+                    aID: 'Chr06_Qd',
+                    len: '20077670',
+                    gCount: '0',
+                    gLocus: '',
+                },
+                {
+                    aID: 'Chr07_Qd',
+                    len: '21399341',
+                    gCount: '2',
+                    gLocus: '4425666-4425765\t4478020-4478119',
+                },
+                {
+                    aID: 'Chr08_Qd',
+                    len: '27973303',
+                    gCount: '2',
+                    gLocus: '1482724-1482823\t1572207-1572306',
+                },
+                ],
+                mapInfoData: [
+                    {
+                        cID: 'h1tg000001l',
+                        cLen: '20077670',
+                        tID: 'Chr06',
+                    },
+                    {
+                        cID: 'h1tg000002l',
+                        cLen: '19481965',
+                        tID: 'Chr15',
+                    },
+                    {
+                        cID: 'h1tg000003l',
+                        cLen: '19463801',
+                        tID: 'Chr20',
+                    }, {
+                        cID: 'h1tg000004l',
+                        cLen: '27829678',
+                        tID: 'Chr12',
+                    }, {
+                        cID: 'h1tg000005l',
+                        cLen: '20077670',
+                        tID: 'Chr06',
+                    }, {
+                        cID: 'h1tg000006l',
+                        cLen: '17153513',
+                        tID: 'Chr07',
+                    },
+                    {
+                        cID: 'h1tg000007l',
+                        cLen: '16921222',
+                        tID: 'Chr09',
+                    },
+                    {
+                        cID: 'h1tg000008l',
+                        cLen: '21493623',
+                        tID: 'Chr07',
+                    },
+                    {
+                        cID: 'h1tg000009l',
+                        cLen: '21163354',
+                        tID: 'Chr01',
+                    },
+                ]
+            }
+        },
+        mounted() {
+            axios.get("/blast/common/display").then((res) => {
+                // res 是response res.data是result res.data.data是ResultUrl
+                console.log(res.data.data)
+                this.resultUrl = res.data.data;
+            })
+        },
+
+        methods: {
+            /*TODO 点击按钮可以打开大图 点击大图可以关闭该图*/
+            showImg() {
+                var image = new Image();
+                var path = $("#image").attr("src");
+                image.src = path;
+                var width = image.width;
+                var hight = image.height;
+                $("#bigimg img").attr('src', path);
+                $("#bigimg").css({"margin-top": -hight / 2, "margin-left": -width / 2});
+                $("#bigimg").show();
+            },
+
+            closeImg() {
+                $("#bigimg img").attr('src', "");
+                $("#bigimg").hide();
+            },
+
+            // 按钮下载文件
+            downloadFasta(){
+                let src = this.resultUrl.fasta;
+                var $a = document.createElement('a');
+                $a.setAttribute("href", src);
+                $a.setAttribute("download", "");
+                var evObj = document.createEvent('MouseEvents');
+                evObj.initMouseEvent( 'click', true, true, window, 0, 0, 0, 0, 0, false, false, true, false, 0, null);
+                $a.dispatchEvent(evObj);
+            }
+        }
+
+    });
+</script>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Upload</title>
+    <title>Home - Tools - DraftBlast</title>
     <style>
         /*根节点html字体大小*/
         html {
@@ -114,11 +114,11 @@
         /*登录+标题banner的设置*/
         .banner {
             height: 8rem;
-            background-color: #20558a;
+            background-color: #205573;
             margin: 0;
         }
 
-        .banner > p {
+        .banner > a {
             color: #ffffff;
             font-size: 5rem;
             font-family: Helvetica, sans-serif;
@@ -126,6 +126,7 @@
             padding-left: 1rem;
             margin: 0;
             display: inline-block;
+            text-decoration: none;
         }
 
         .loginDiv {
@@ -152,7 +153,7 @@
             font-family: "Comic Sans MS", serif;
             font-size: 20px;
             font-weight: bold;
-            background-color: #20558a;
+            background-color: #205573;
             width: 15rem;
             height: 4rem;
         }
@@ -244,7 +245,7 @@
         }
 
         .btn-24 {
-            --background: #20558a;
+            --background: #205573;
             background: none;
             overflow: hidden;
             padding: 0.8rem 3rem;
@@ -313,6 +314,7 @@
             font-size: 1.2rem;
             font-family: "Helvetica", sans-serif;
             font-weight: bold;
+            line-height: 4.8rem;
         }
 
         /* v-loading 的样式修改*/
@@ -332,6 +334,7 @@
         .login-box {
             padding: 0 10px;
         }
+
         .login-box * {
             margin-bottom: 10px;
         }
@@ -345,7 +348,7 @@
     <!--1. 登录注册-->
     <div class="banner">
         <!--标题-->
-        <p> Quartat </p>
+        <a href="home.html"> Quartet </a>
         <!--登陆注册 使用-->
         <span class="loginDiv">
                 <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
@@ -354,9 +357,8 @@
         </span>
     </div>
 
-    <!--使用container布局-->
+    <!--2 导航栏-->
     <el-container>
-        <!--2 导航栏-->
         <el-header style="background-color: #ffffff; margin-top: 0">
             <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
             <el-menu :default-active="activeBar" class="el-menu-demo"
@@ -364,8 +366,8 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='index.html'">DraftBlast</el-menu-item>
-                    <el-menu-item index="2-2">Tool2</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">DraftBlast</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">FillBlast</el-menu-item>
                     <el-menu-item index="2-3">Tool3</el-menu-item>
                     <el-menu-item index="2-4">Tool4</el-menu-item>
                 </el-submenu>
@@ -377,21 +379,21 @@
     </el-container>
 
     <div id="thinner">
-        <!--6 上传文件-->
+        <!--3 上传文件-->
         <el-container>
             <el-main>
-
+                <!--该模块小标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <i class="el-icon-upload"></i>
                         <span>Upload FASTA Sequence</span>
                     </button>
                 </div>
-
                 <div>
+                    <!--第一个上传文件-->
                     <el-aside width="50%">
                         <div class="upload1">
-                            <!-- 功能提示 -->
+                            <!--上传说明-->
                             <el-popover
                                     style="font-size: 2rem"
                                     placement="top-start"
@@ -404,12 +406,11 @@
                                 <el-button
                                         slot="reference"
                                         style="margin-bottom: 5%;
-                                       margin-top: 5%;
-                                font-size: 1.5rem">
+                                        margin-top: 5%;
+                                        font-size: 1.3rem">
                                     Upload Reference Genome
                                 </el-button>
                             </el-popover>
-
                             <el-upload
                                     class="upload-demo"
                                     drag
@@ -435,13 +436,12 @@
                                     Reference Genome File (FASTA format)
                                 </div>
                             </el-upload>
-
                         </div>
                     </el-aside>
-
+                    <!--第二个上传文件-->
                     <el-aside width="50%">
                         <div class="upload2">
-                            <!-- 功能提示 -->
+                            <!-- 上传提示 -->
                             <el-popover
                                     placement="top-start"
                                     title="HiFi Contigs or Scaffolds"
@@ -453,7 +453,7 @@
                                 <el-button slot="reference"
                                            style="margin-bottom: 5%;
                                           margin-top: 5%;
-                                          font-size: 1.5rem">
+                                          font-size: 1.3rem">
                                     Upload HiFi Contigs or Scaffolds
                                 </el-button>
                             </el-popover>
@@ -485,13 +485,12 @@
                         </div>
                     </el-aside>
                 </div>
-
-
             </el-main>
         </el-container>
 
-        <!--设置setting-->
+        <!--4 设置setting-->
         <el-container>
+            <!--该模块标签-->
             <el-main>
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
@@ -500,7 +499,7 @@
                     </button>
                 </div>
                 <div>
-                    <!--参数描述表格 border-radius: 20px; height="40rem"-->
+                    <!--参数描述列表-->
                     <el-aside width="50%">
                         <el-table
                                 :data="tableData"
@@ -516,22 +515,49 @@
                             <el-table-column
                                     prop="param"
                                     label="Parameter"
-                                    min-width="30%">
+                                    min-width="40%">
                             </el-table-column>
                             <el-table-column
                                     prop="desc"
                                     label="Description"
-                                    min-width="70%">
+                                    min-width="60%">
                             </el-table-column>
                         </el-table>
                     </el-aside>
                     <!--参数设置-->
                     <el-aside width="50%">
                         <el-main id="param-form">
-                            <!--7 参数表单-->
-                            <div class="paramForm" style="line-height: 4rem">
+                            <div class="paramForm">
                                 <!--使用bootstrap栏栅布局实现input自适应-->
-                                <!--整型数据 有上下限-->
+                                <!--4.1 整型数据 有上下限-->
+                                <el-row :gutter="10">
+                                    <el-col :xs="16" :sm="16" :md="8" lg="8" xl="10">
+                                        Min Contigs Length:
+                                    </el-col>
+                                    <el-col :xs="16" :sm="8" :md="16" lg="16" xl="16">
+                                        <el-slider v-model="formData.minContig"
+                                                   show-input
+                                                   :step="5000"
+                                                   max="100000">
+                                        </el-slider>
+                                    </el-col>
+                                </el-row>
+
+                                <!--4.2 整数型 必须是正整数且不能0开头-->
+                                <el-row :gutter="10">
+                                    <el-col :xs="16" :sm="16" :md="8" lg="8" xl="10">
+                                        Min Alignment Length:
+                                    </el-col>
+                                    <el-col :xs="16" :sm="8" :md="16" lg="16" xl="16">
+                                        <el-slider v-model="formData.minAlign"
+                                                   show-input
+                                                   :step="5000"
+                                                   max="100000">
+                                        </el-slider>
+                                    </el-col>
+                                </el-row>
+
+                                <!--增加 百分比 必须是正整数且不能0开头-->
                                 <el-row :gutter="10">
                                     <el-col :xs="16" :sm="16" :md="8" lg="8" xl="10">
                                         Min Alignment Identity:
@@ -539,30 +565,13 @@
                                     <el-col :xs="16" :sm="8" :md="16" lg="16" xl="16">
                                         <el-slider v-model="formData.minIdentity"
                                                    show-input
-                                                   :step="10"
-                                                   show-stops></el-slider>
-                                    </el-col>
-                                </el-row>
-
-                                <!--整数型 必须是正整数且不能0开头-->
-                                <el-row :gutter="10">
-
-                                    <el-col :xs="16" :sm="16" :md="8" lg="8" xl="10">
-                                        Min Alignment Length:
-                                    </el-col>
-                                    <el-col :xs="16" :sm="8" :md="16" lg="16" xl="16">
-                                        <el-slider v-model="formData.minLength"
-                                                   show-input
-                                                   :step="1000"
-                                                   show-stops
-                                                   max="100000"
-                                                   @change="onEdgeWarning"
-                                                   @input="onEdgeWarning">
+                                                   :step="5"
+                                                   max="100">
                                         </el-slider>
                                     </el-col>
                                 </el-row>
 
-                                <!--下拉框 二选一-->
+                                <!--4.3 下拉框 二选一-->
                                 <el-row :gutter="10">
                                     <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
                                         Aligner:
@@ -578,53 +587,7 @@
                                     </el-col>
                                 </el-row>
 
-                                <!--几个Option都删除了不要了-->
-                                <!--miniMapOption 文本输入 TODO: 只允许英文数字符号-->
-                                <!--  <div id="SelectOne">
-                                      <el-row :gutter="10">
-                                          <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
-                                              miniMapOption:
-                                          </el-col>
-                                          <el-col :xs="8" :sm="10" :md="10" :lg="9" :xl="14">
-                                              <el-input v-model="formData.miniMapOption" ></el-input>
-                                          </el-col>
-                                      </el-row>
-                                  </div>-->
-
-                                <!--选择触发-->
-                                <!-- <div id="SelectTwo" style="display: none">
-                                     &lt;!&ndash;nucmerOption 文本输入  TODO: 只允许英文数字符号&ndash;&gt;
-                                     <el-row :gutter="10">
-                                         <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
-                                             nucmerOption:
-                                         </el-col>
-                                         <el-col :xs="8" :sm="10" :md="10" :lg="9" :xl="14">
-                                             <el-input v-model="formData.nucmerOption" ></el-input>
-                                         </el-col>
-                                     </el-row>
-                                     &lt;!&ndash;DeltaFilterOption &ndash;&gt;
-                                     <el-row :gutter="10">
-                                         <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
-                                             DeltaFilterOption:
-                                         </el-col>
-                                         <el-col :xs="8" :sm="10" :md="10" :lg="9" :xl="14">
-                                             <el-input v-model="formData.deltaFilterOption"></el-input>
-                                         </el-col>
-                                     </el-row>
-                                 </div>-->
-
-
-                                <!--线程数 不给改 默认1 【删除了不要了】-->
-                                <!--<el-row :gutter="10">
-                                    <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
-                                        Threads:
-                                    </el-col>
-                                    <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="3">
-                                        <el-input v-model="formData.threads" :disabled="true" ></el-input>
-                                    </el-col>
-                                </el-row>-->
-
-                                <!--是否画图-->
+                                <!--4.4 是否画图-->
                                 <el-row :gutter="10">
                                     <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
                                         Plot:
@@ -634,18 +597,19 @@
                                     </el-col>
                                 </el-row>
 
-                                <!--Prefix 文本输入  TODO: 防注入不允许违法文件名-->
+                                <!--4.5 Prefix 文本输入  TODO: 防注入不允许违法文件名-->
                                 <el-row :gutter="10">
                                     <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
-                                        Prefix:
+                                        Filename:
                                     </el-col>
                                     <el-col :xs="8" :sm="10" :md="8" :lg="9" :xl="14">
-                                        <el-input v-model="formData.prefix"></el-input>
+                                        <el-input v-model="formData.prefix"
+                                                  @input="onNameWarning"></el-input>
                                     </el-col>
                                 </el-row>
-
                             </div>
 
+                            <!-- 5 下一步的按钮-->
                             <div style="margin-top: 5%;">
                                 <el-button class="next-button" @click="resetForm">RESET</el-button>
                                 <el-button class="next-button" type="primary" @click="onParamSubmit">RUN</el-button>
@@ -656,10 +620,43 @@
             </el-main>
         </el-container>
 
+        <el-container>
+            <el-main>
+                <!--4.1 整型数据 有上下限-->
+                <el-row :gutter="10">
+                    <el-col :xs="16" :sm="16" :md="8" lg="8" xl="10">
+                        test1:
+                    </el-col>
+                    <el-col :xs="16" :sm="8" :md="16" lg="16" xl="16">
+                        <el-slider v-model="test1"
+                                   show-input
+                                   :step="5000"
+                                   max="100000">
+                        </el-slider>
+                    </el-col>
+                </el-row>
+
+                <!--4.2 整数型 必须是正整数且不能0开头-->
+                <el-row :gutter="10">
+                    <el-col :xs="16" :sm="16" :md="8" lg="8" xl="10">
+                        test2:
+                    </el-col>
+                    <el-col :xs="16" :sm="8" :md="12" lg="16" xl="16">
+                        <el-slider v-model="test2"
+                                   :step="5">
+                        </el-slider>
+                    </el-col>
+                    <el-col :xs="16" :sm="8" :md="4" lg="16" xl="16">
+                        <el-input-number v-model="test2" :step="5"></el-input-number>
+                    </el-col>
+                </el-row>
+            </el-main>
+        </el-container>
+
     </div>
 
     <!--5 页脚信息-->
-    <el-footer style="height: 120%; background-color: #20558a">
+    <el-footer style="height: 120%; background-color: #205573">
         <div>
             &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
             <br>
@@ -673,7 +670,7 @@
         </div>
     </el-footer>
 
-    <!--6 登录 Dialog    -->
+    <!--6 登录 Dialog-->
     <el-dialog
             title="Sign in"
             :close-on-click-modal="false"
@@ -693,7 +690,8 @@
               <img :src="captchaPath" @click="getCaptcha()" alt="">
             </div> -->
             <el-button type="success" round style="width: 100%" @click="login"
-            >Login</el-button
+            >Login
+            </el-button
             >
         </div>
     </el-dialog>
@@ -722,11 +720,11 @@
               <img :src="captchaPath" @click="getCaptcha()" alt="">
             </div> -->
             <el-button type="success" round style="width: 100%" @click="register"
-            >Register</el-button
+            >Register
+            </el-button
             >
         </div>
     </el-dialog>
-
 </div>
 
 </body>
@@ -747,37 +745,38 @@
         el: `#app`,
         data: function () {
             return {
-                activeBar: "1", // 导航栏激活的栏，默认为Home
-                activeStep: 0, // 设置step的激活值 默认为0 意味着step1正在进行中
+                activeBar: "2", // 导航栏激活的栏，默认为Home
                 uploadSeqFile: 0,
                 uploadHiFiFile: 0,
+                //test
+                test1:"",
+                test2:20,
                 formData: {
-                    minLength: 50000,
+                    minAlign: 50000,
+                    minContig: 50000,
                     minIdentity: 90,
-                    prefix: 'Quartat',
-                    // threads: 1,
+                    prefix: 'Quartet',
                     aligner: 'minimap2',
-                    // miniMapOption: '-x asm5',
-                    // nucmerOption: '',
-                    // deltaFilterOption: '',
                     plot: false,
-                    overwrite: false, /*脚本设置了store_true*/
                 },
                 tableData: [{
-                    param: 'Min Alignment Identity',
-                    desc: 'The min alignment identity to be select. Default: 90',
+                    param: 'Min Contigs Length',
+                    desc: 'Remove contigs shorter than INT (bp), default: 50000',
                 }, {
+                    param: 'Min Alignment Length',
+                    desc: 'The min alignment length to be select (bp), default: 5000',
+                }, {
+                    param: 'Min Alignment Identity',
+                    desc: 'The min alignment identity to be select (%%), default: 90',
+                },{
                     param: 'Aligner',
                     desc: 'Specify alignment program (support minimap2 and mummer). Default: minimap2',
                 }, {
-                    param: 'Min Alignment Length',
-                    desc: 'The min alignment length to be select. Default: 50000',
-                }, {
                     param: 'Plot',
-                    desc: 'Plot a co-linearity graph for alignments',
+                    desc: 'Plot a co-linearity graph for alignments. (will cost more time)',
                 }, {
-                    param: 'Prefix',
-                    desc: 'The prefix used on generated files. Default: Quartat',
+                    param: 'FileName',
+                    desc: 'The name used on your generated files. Default: Quartet',
                 },
                 ],
                 // 登录注册用变量
@@ -798,34 +797,28 @@
 
         methods: {
             /* 上传文件的钩子函数*/
-
-            /* TODO 1 文件列表只允许上传一个文件*/
+            /* 文件列表只允许上传一个文件*/
             handleExceed(files, fileList) {
                 this.$message.error(`Limit ONE File Only, You Have To Remove the Current File!`);
             },
-            /* TODO 2 文件的后缀和大小限制*/
+            /* 文件的后缀和大小限制*/
             beforeUpload(file) {
                 let filename = file.name.toString();
                 console.log(filename);
                 let suffix = filename.substring(filename.indexOf(".") + 1);
                 console.log(suffix);
                 let suffixList = ["fasta", "fas", "fa", "FASTA", "FA", "FAS"];
-
                 let isFas = (suffixList.indexOf(suffix) !== -1);
-                let isLt2M = file.size / 1024 / 1024 < 2;
+                let isLt2M = file.size / 1024 / 1024 < 20;
                 // 后缀判断
                 if (!isFas) {
                     this.$message.error('The File Format Must Be .FASTA, .FAS or .FA!');
                 } else if (!isLt2M) {  // 后缀正确 判断大小
-                    this.$message.error('File Size Must be Less Than 2MB!');
+                    this.$message.error('File Size Must be Less Than 20MB!');
                 }
-                /*if (!isLt2M) {
-                    this.$message.error('File Size Must be Less Than 2MB!');
-                }*/
-                console.log(isFas && isLt2M);
                 return isFas && isLt2M;
             },
-            // TODO 3 文件的移除
+            // 文件的移除
             beforeRemove(file, fileList) {
                 if (file && file.status === "success") {
                     //移除方法
@@ -840,7 +833,6 @@
             handleRemove(file, fileList) {
                 if (file && file.status === "success") {
                     this.uploadSeqFile = 0;
-                    this.activeStep = 0;
                     this.$message.info("Removed Successfully");
                 }
             },
@@ -854,10 +846,11 @@
                 }
             },
 
+            // 参数文件上传的相关钩子函数
             handleExceed2(files, fileList) {
                 this.$message.error(`Limit ONE File Only, You Have To Remove the Current File!`);
             },
-            /* TODO 2 文件的后缀和规格限制*/
+            /* 文件的后缀和规格限制*/
             beforeUpload2(file) {
                 let filename = file.name.toString();
                 console.log(filename);
@@ -866,20 +859,16 @@
                 let suffixList = ["fasta", "fas", "fa", "FASTA", "FA", "FAS"];
 
                 let isFas = (suffixList.indexOf(suffix) !== -1);
-                let isLt2M = file.size / 1024 / 1024 < 2;
+                let isLt2M = file.size / 1024 / 1024 < 20;
                 // 后缀判断
                 if (!isFas) {
                     this.$message.error('The File Format Must Be .FASTA, .FAS or .FA!');
                 } else if (!isLt2M) {  // 后缀正确 判断大小
-                    this.$message.error('File Size Must be Less Than 2MB!');
+                    this.$message.error('File Size Must be Less Than 20MB!');
                 }
-                /*if (!isLt2M) {
-                    this.$message.error('File Size Must be Less Than 2MB!');
-                }*/
-                console.log(isFas && isLt2M);
                 return isFas && isLt2M;
             },
-            // TODO 3 文件的移除
+            // 文件的移除
             beforeRemove2(file, fileList) {
                 if (file && file.status === "success") {
                     //移除方法
@@ -894,7 +883,6 @@
             handleRemove2(file, fileList) {
                 if (file && file.status === "success") {
                     this.uploadHiFiFile = 0;
-                    this.activeStep = 0;
                     this.$message.info("Removed Successfully");
                 }
             },
@@ -907,70 +895,65 @@
                 }
             },
 
-            // 网页跳转
-            /*onRedirect() {
-                if (this.activeStep === 0) {
-                    this.$message.error("Please Upload Your File First !")
-                } else {
-                    document.location.href = "setting.html";
-                }
-            },*/
-
             // 重置参数表单
             resetForm() {
                 this.formData = {
-                    minLength: 50000,
-                    minIdentity: 90,
-                    prefix: 'Quartat',
-                    // threads: 1,
+                    minAlign: 5000,
+                    minContig: 50000,
+                    prefix: 'Quartet',
                     aligner: 'minimap2',
-                    // miniMapOption: '-x asm5',
-                    // nucmerOption: '',
-                    // deltaFilterOption: '',
                     plot: false,
-                    overwrite: false, /*脚本设置了store_true*/
                 }
             },
 
-            // 根据Aligner变化参数变化
-            /*currentStateChange(val) {
-                console.log('currentStateChange', val)
-                if (val === 'minimap2') {
-                    /!* 修改select1为看不见 select2为看见*!/
-                    document.getElementById("SelectOne").style.display = '';
-                    document.getElementById("SelectTwo").style.display = 'none';
-                } else {
-                    /!* 修改select2为看不见 select1为看见*!/
-                    document.getElementById("SelectOne").style.display = 'none';
-                    document.getElementById("SelectTwo").style.display = '';
+            // 对文件名进行正则校验
+            onNameWarning(val) {
+                let reg = /.*[/\\:*?|].*/;
+                // 存在返回true
+                if (reg.test(val)) {
+                    this.$message.error("FileName includes illegal characters!");
+                    this.formData.prefix = '';
                 }
-            },*/
+            },
 
             // 参数提交训练
             onParamSubmit() {
-                const loading1 = this.$loading({
-                    lock: true,
-                    text: 'Program is running and will take approximately 15 to 20 minutes. Please DO NOT refresh or leave the page.',
-                    spinner: 'el-icon-loading',
-                    background: 'rgba(2,1,1,0.7)'
-                });
-                console.log(this.formData)
-                axios.post("/blast/exec/trainParam", this.formData).then((res) => {
-                    loading1.close();
-                    document.location.href = "display.html";
-                });
-            },
-
-            // Min Alignment Length超过70000报错
-            onEdgeWarning(val) {
-                // console.log(val)
-                if (val > 70000) {
-                    this.$message({
-                        message: 'More than ' + val + ' may not generate a satisfied result!',
+                // 训练前判断一下：
+                // 1. 如果参数违规 提示用户可能得不到好的结果
+                if (this.formData.minContig > 70000) {
+                    this.$confirm('Min Contig Length more than 70000 may not generate a satisfied result', 'Warning', {
+                        confirmButtonText: 'Confirm',
+                        cancelButtonText: 'Cancel',
                         type: 'warning'
+                    }).then(() => { // 仍然确定的话
+                        this.trainModule1()
+                    })
+                } else { // 参数正常
+                    this.trainModule1();
+                }
+            },
+            trainModule1() {
+                // 训练前先判断一下是否Required的文件
+                if (this.uploadSeqFile === 0) {
+                    this.$message.error("Reference Genome File is REQUIRED");
+                }else if(this.uploadHiFiFile === 0){
+                    this.$message.error("HiFi Contigs or Scaffolds File is REQUIRED");
+                }else{
+                    const loading1 = this.$loading({
+                        lock: true,
+                        text: 'Program is running and will take approximately 15 to 20 minutes. Please DO NOT refresh or leave the page.',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(2,1,1,0.7)'
+                    });
+                    console.log(this.formData)
+                    axios.post("/blast/exec/trainParam", this.formData).then((res) => {
+                        loading1.close();
+                        document.location.href = "display1.html";
                     });
                 }
             },
+
+
             // 登录注册用方法
             // 打开登录对话框
             openLogin() {
@@ -982,7 +965,7 @@
                     "email": this.email,
                     "password": this.password,
                 }).then(
-                    ({ data }) => {
+                    ({data}) => {
                         if (data.code === 10000) {
                             this.$message({
                                 message: 'Login successful',
@@ -1022,7 +1005,7 @@
                     email: this.email,
                     password: this.password,
                 }).then(
-                    ({ data }) => {
+                    ({data}) => {
                         if (data.code === 10001) {
                             this.$message({
                                 message: 'Register successful',
@@ -1056,7 +1039,7 @@
                         'Authorization': token
                     }
                 }).then(
-                    ({ data }) => {
+                    ({data}) => {
                         if (data.code === 10002) {
                             this.isLogin = true;
                             this.username = data.data.email;

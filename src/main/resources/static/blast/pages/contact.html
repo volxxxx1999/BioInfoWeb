@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>STEP1</title>
+    <title>Home - Contact - Quartet</title>
     <style>
         /*根节点html字体大小*/
         html{
@@ -12,60 +12,78 @@
         body {
             background-color:#f7f6f2; /*#f7f6f2  #d5d5d5*/
             /* 针对web元素塌陷*/
-            min-width: 65rem;
-            max-width: 130rem;
+            /*min-width: 65rem;*/
+            /*max-width: 130rem;*/
             margin: 0 auto;
         }
         /* 针对设备自适应自适应*/
-        #app{
+        #thinner {
             width: 106rem;
             margin: 0 auto;
-            box-shadow: 2rem 2rem 1rem #888888;
+
+            /* 针对web元素塌陷*/
+            min-width: 65rem;
+            max-width: 130rem;
+            /*border-style: solid;*/
+            /*border-color: #3e3e3e;*/
+            /*border-width: 2px;*/
+            /*box-shadow: 2rem 2rem 1rem #888888;*/
         }
+
         /* 手机 宽度小于768px的 */
         @media only screen and (max-width: 768px) {
-            #app {
+            #thinner {
                 width: 100%;
             }
         }
+
         /* 平板 宽度大于768px的*/
         @media only screen and (min-width: 768px) {
-            #app {
+            #thinner {
                 width: 62rem;
             }
         }
+
         /* 电脑 */
         @media only screen and (min-width: 992px) {
-            #app {
+            #thinner {
                 width: 80rem;
             }
         }
+
         /* web 更宽的屏幕 */
         @media only screen and (min-width: 1200px) {
-            #app {
+            #thinner {
                 width: 97rem;
             }
         }
 
         .el-header, .el-footer {
-            background-color: #20558a;
+            background-color: #fefefe;
             color: #333;
             text-align: justify; /*设置文字 两端分布*/
             line-height: 2rem;
+            margin-top: 1rem;
         }
 
         /* 设置页头下元素属性*/
         .el-header > p {
             font-size: 140%;
-            color: whitesmoke;
-            font-family: Calibri, sans-serif
+            color: #4d4d4d;
+            font-family: Helvetica, sans-serif
         }
 
         /* 设置页脚下元素属性*/
         .el-footer > div {
             font-size: 140%;
-            color: whitesmoke;
-            font-family: Calibri, sans-serif;
+            color: #f7f6f2;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        .el-aside {
+            background-color: #f7f6f2;
+            color: #333;
             text-align: center;
         }
         /*让表单不空出来*/
@@ -74,24 +92,61 @@
             /*margin-top: 60px;*/
         }
         .el-main {
-            background-color: #E9EEF3;
+            background-color: #ffffff;
             color: #333;
             text-align: center;
-            /*line-height: 160px;*/
-            /*margin-left: 10%;*/
-            /*margin-right: 10%;*/
+            margin-top: 1rem;
+            border-color: #e5e5e5;
+            border-width: 1px;
+            border-style: solid;
         }
         /*设置导航栏的字体*/
-        .el-menu-demo>.el-menu-item{
+        .el-menu-demo{
             font-family: Helvetica,sans-serif;
-            font-size: 120%;
+            font-size: 130%;
             font-weight: bold;
         }
-        /*设置进度条的字体*/
-        .el-steps>.el-step{
-            font-family: Arial,sans-serif;
-            font-size: 120%;
-            font-weight: bold;
+
+        /*登录+标题banner的设置*/
+        .banner {
+            height: 8rem;
+            background-color: #205573;
+            margin: 0;
+        }
+        .banner > a {
+            color: #ffffff;
+            font-size: 5rem;
+            font-family: Helvetica, sans-serif;
+            padding-top: 1rem;
+            padding-left: 1rem;
+            margin: 0;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .loginDiv{
+            display: inline-block;
+            float: right;
+            padding-top: 2rem;
+            padding-right: 3rem;
+        }
+        .loginDiv>.el-button{
+            font-size: 1.5rem;
+            font-family: "Helvetica",sans-serif;
+        }
+        .loginDiv > span {
+            color: #ffffff;
+            font-size: 2rem;
+            padding-top: 1rem;
+            padding-left: 1rem;
+        }
+
+        /*  登录框的样式  */
+        .login-box {
+            padding: 0 10px;
+        }
+        .login-box * {
+            margin-bottom: 10px;
         }
         /*设置提交表单字体*/
         .el-form-item{
@@ -110,96 +165,85 @@
         .el-container:nth-child(7) .el-aside {
             line-height: 320px;
         }
-
-        /*download button style*/
-        .forDownload{
-            margin-left: 20%;
-            margin-right: 20%;
-            margin-bottom: 20px;
-            font-family: Helvetica,sans-serif;
-            padding-left: 10%;
-            padding-right: 10%;
-            /*flex:1;*/
-            border-color: #d3dce6;
-            border-width: 2px;
-            border-style: solid;
-        }
-        .forDownload:hover{
-            border-color: #ffffff;
-            border-width: 2px;
-            border-style: solid;
-            background: #dde7f1;
-        }
-        .forDownload>h2{
-            align-content: center;
-            font-size: 200%;
-        }
-        .forDownload>a{
-            font-size: 500%;
-            font-weight: lighter;
-            color: #d7b96a;
-            text-decoration: none;
-        }
-
-
     </style>
 </head>
 <body>
 
 <!--Vue 控制-->
 <div id="app" >
-    <!--container布局-->
-    <el-container>
-        <!--页头，图标-->
-        <!--        <el-main >-->
-        <img src="../imgs/header.jpg" alt="heads" width="100%"  />
-        <!--        </el-main>-->
+    <!--1. 登录注册-->
+    <div class="banner">
+        <!--标题-->
+        <a href="home.html"> Quartet </a>
+        <!--登陆注册 使用-->
+        <span class="loginDiv">
+                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
+                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
+                <span class="username" v-show="isLogin">{{this.username}}</span>
+        </span>
+    </div>
 
-        <!--导航栏-->
-        <el-header style="background-color: white"> <!--设置背景颜色 -->
-            <!--activeIndex代表当前激活的栏
-            :default-active是Vue中v-bind的一种形式，为HTML标签绑定属性值-->
+    <!--使用container布局-->
+    <el-container>
+        <!--2 导航栏-->
+        <el-header style="background-color: #ffffff; margin-top: 0">
+            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
             <el-menu :default-active="activeBar" class="el-menu-demo"
-                     mode="horizontal" @select="handleSelect" >
-                <el-menu-item index="1" onclick="location.href='index.html'">Home</el-menu-item>
-                <el-menu-item index="2" onclick="location.href='contact.html'">Contact Us</el-menu-item>
+                     mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">Tools</template>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">DraftBlast</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">FillBlast</el-menu-item>
+                    <el-menu-item index="2-3">Tool3</el-menu-item>
+                    <el-menu-item index="2-4">Tool4</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="3">Document</el-menu-item>
+                <el-menu-item index="4">Download</el-menu-item>
+                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
             </el-menu>
         </el-header>
+    </el-container>
+
+
+    <div id="thinner">
         <!--介绍信息-->
-        <el-main style="font-size: 120%; font-family: Helvetica,sans-serif">
-            <em style="font-weight: bold; text-align: left">Welcome to BlastProject</em>
-            <p style="text-align: justify">
-                In bioinformatics, BLAST (basic local alignment search tool)[2] is an algorithm and program for comparing primary biological sequence information, such as the amino-acid sequences of proteins or the nucleotides of DNA and/or RNA sequences. A BLAST search enables a researcher to compare a subject protein or nucleotide sequence (called a query) with a library or database of sequences, and identify database sequences that resemble the query sequence above a certain threshold. For example, following the discovery of a previously unknown gene in the mouse, a scientist will typically perform a BLAST search of the human genome to see if humans carry a similar gene; BLAST will identify sequences in the human genome that resemble the mouse gene based on similarity of sequence.
-            </p>
-        </el-main>
-    </el-container>
+        <el-container>
+            <el-main style="font-size: 120%; font-family: Helvetica,sans-serif">
+                <h3 style="font-weight: bold; text-align: center">Welcome to Quartet Project</h3>
+                <p style="text-align: justify">
+                    In bioinformatics, BLAST (basic local alignment search tool)[2] is an algorithm and program for comparing primary biological sequence information, such as the amino-acid sequences of proteins or the nucleotides of DNA and/or RNA sequences. A BLAST search enables a researcher to compare a subject protein or nucleotide sequence (called a query) with a library or database of sequences, and identify database sequences that resemble the query sequence above a certain threshold. For example, following the discovery of a previously unknown gene in the mouse, a scientist will typically perform a BLAST search of the human genome to see if humans carry a similar gene; BLAST will identify sequences in the human genome that resemble the mouse gene based on similarity of sequence.
+                </p>
+            </el-main>
+        </el-container>
 
-    <el-container>
-        <!--提交用户意见的表单的模块-->
-        <el-main style="background-color: #d3dce6; font-weight: bold; text-align: left">
-            <!-- 给表单加一个边框div-->
-            <div style="border-color: white; border-style: dashed; border-radius: 20px; padding-left: 20px;padding-right: 20px">
-                <!--表单本体-->
-                <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
-                    <el-form-item label="Name">
-                        <el-input v-model="formLabelAlign.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="Email Address">
-                        <el-input v-model="formLabelAlign.eMail"></el-input>
-                    </el-form-item>
-                    <el-form-item label="Suggestion">
-                        <el-input  type="textarea" v-model="formLabelAlign.advice"></el-input>
-                    </el-form-item>
-                    <el-form-item style="text-align: center">
-                        <el-button type="plain" @click="onAdviceSubmit">Submit</el-button>
-                    </el-form-item>
-                </el-form>
-            </div>
-        </el-main>
-    </el-container>
+        <el-container>
+            <!--提交用户意见的表单的模块-->
+            <el-main style="font-weight: bold; text-align: left">
+                <!-- 给表单加一个边框div-->
+                <div style="border-color: white; border-style: dashed; border-radius: 20px; padding-left: 20px;padding-right: 20px">
+                    <!--表单本体-->
+                    <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
+                        <el-form-item label="Name">
+                            <el-input v-model="formLabelAlign.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="Email Address">
+                            <el-input v-model="formLabelAlign.eMail"></el-input>
+                        </el-form-item>
+                        <el-form-item label="Suggestion">
+                            <el-input  type="textarea" v-model="formLabelAlign.advice"></el-input>
+                        </el-form-item>
+                        <el-form-item style="text-align: center">
+                            <el-button type="primary" @click="onAdviceSubmit">Submit</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
+            </el-main>
+        </el-container>
+    </div>
 
-    <!--页脚-->
-    <el-footer style="height: 120%;">
+    <!--5 页脚信息-->
+    <el-footer style="height: 120%; background-color: #205573">
         <div>
             &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
             <br>
@@ -213,16 +257,71 @@
         </div>
     </el-footer>
 
+    <!--6 登录 Dialog    -->
+    <el-dialog
+            title="Sign in"
+            :close-on-click-modal="false"
+            :visible.sync="loginDialogVisible"
+            width="450px"
+    >
+        <div class="login-box">
+            <el-input placeholder="email" v-model="email" clearable size="20px">
+            </el-input>
+            <el-input
+                    placeholder="password"
+                    v-model="password"
+                    show-password
+            ></el-input>
+            <!-- <div class="check-box">
+              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
+              <img :src="captchaPath" @click="getCaptcha()" alt="">
+            </div> -->
+            <el-button type="success" round style="width: 100%" @click="login"
+            >Login</el-button
+            >
+        </div>
+    </el-dialog>
+    <!--7 注册 Dialog    -->
+    <el-dialog
+            title="Sign up"
+            :close-on-click-modal="false"
+            :visible.sync="registerDialogVisible"
+            width="450px"
+    >
+        <div class="login-box">
+            <el-input placeholder="email" v-model="email" clearable size="20px">
+            </el-input>
+            <el-input
+                    placeholder="password"
+                    v-model="password"
+                    show-password
+            ></el-input>
+            <el-input
+                    placeholder="password again"
+                    v-model="password2"
+                    show-password
+            ></el-input>
+            <!-- <div class="check-box">
+              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
+              <img :src="captchaPath" @click="getCaptcha()" alt="">
+            </div> -->
+            <el-button type="success" round style="width: 100%" @click="register"
+            >Register</el-button
+            >
+        </div>
+    </el-dialog>
+
 </div>
 
 </body>
 
 <!-- 引入组件库 -->
+<!--改为cdn引入-->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+<script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">
+<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+<script src="../../js/axios-0.18.0.js"></script>
 <script>
     new Vue({
         el:"#app",
@@ -230,7 +329,7 @@
             return{
                 username:"",
                 labelPosition: 'top',
-                activeBar:"2",
+                activeBar:"5",
                 formLabelAlign: {
                     name: '',
                     eMail: '',
