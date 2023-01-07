@@ -209,7 +209,7 @@
         }
 
         .btn-54 .content {
-            background: #f3eddd;
+            background: #f6f1ea;
             color: #000;
             display: grid;
             height: 84%;
@@ -221,7 +221,7 @@
         }
 
         .btn-54 .depth {
-            background: #ccc;
+            background: #cccccc;
             height: 10%;
             top: 84%;
         }
@@ -308,7 +308,6 @@
         </span>
     </div>
 
-    <!--container布局-->
     <el-container>
         <!--2 导航栏-->
         <el-header style="background-color: #ffffff; margin-top: 0">
@@ -318,10 +317,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">DraftBlast</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">FillBlast</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssembleBlast</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFillBlast</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -431,15 +430,15 @@
     <!--5. 页脚-->
     <el-footer style="height: 120%; background-color: #205573">
         <div>
-            &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
+            &nbsp;&nbsp;&nbsp;&nbsp;Junyang Yue, Professor
             <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;State Key Laboratory of Tea Plant Biology and Utilization
+            &nbsp;&nbsp;&nbsp;&nbsp;School of Horticulture
             <br>
-            Anhui Agricultural University, Hefei 230036, China.
+            Anhui Agricultural University Hefei 230036 China.
             <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Email: yechen@ahau.edu.cn
+            &nbsp;&nbsp;&nbsp;&nbsp;Email: yuejy@ahau.edu.cn
             <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)888 8888
+            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)6578 6185
         </div>
     </el-footer>
     <!--6 登录 Dialog    -->
@@ -508,7 +507,7 @@
 <script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
 <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">
 <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<script src="../../js/axios-0.18.0.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
 <script>
     new Vue({
         el: "#app",
@@ -531,19 +530,19 @@
                 console.log(key, keyPath);
             },
             downloadDraft(){
-                let draft_src = "../exec/quartet_draft.py";
+                let draft_src = "../exeFiles/quartet_draft.py";
                 this.downloadCommon(draft_src);
             },
             downloadFill(){
-                let fill_src = "../exec/quartet_fill.py";
+                let fill_src = "../exeFiles/quartet_fill.py";
                 this.downloadCommon(fill_src);
             },
             downloadTelo(){
-                let telo_src = "../exec/quartet_telo.py";
+                let telo_src = "../exeFiles/quartet_telo.py";
                 this.downloadCommon(telo_src);
             },
             downloadCentro(){
-                let centro_src = "../exec/quartet_centro.py";
+                let centro_src = "../exeFiles/quartet_centro.py";
                 this.downloadCommon(centro_src);
             },
             downloadCommon(src){

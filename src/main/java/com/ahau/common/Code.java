@@ -5,11 +5,13 @@ public class Code {
     public final static Integer UPLOAD_OK = 20011;
     public final static Integer TRAIN_OK = 20021;
     public final static Integer SEND_OK = 20031;
+    public final static Integer REMOVE_OK = 20041;
 
     // 发送相关
     public final static Integer UPLOAD_ERR = 20010;
     public final static Integer TRAIN_ERR = 20020;
     public final static Integer SEND_ERR = 20030;
+    public final static  Integer REMOVE_ERR = 20040;
 
     //异常相关
     public final static Integer SYSTEM_ERR = 50001;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Home - Tools - DraftBlast</title>
+    <title>Home - Tools - AssembleBlast</title>
     <style>
         /*根节点html字体大小*/
         html {
@@ -357,8 +357,8 @@
         </span>
     </div>
 
-    <!--2 导航栏-->
     <el-container>
+        <!--2 导航栏-->
         <el-header style="background-color: #ffffff; margin-top: 0">
             <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
             <el-menu :default-active="activeBar" class="el-menu-demo"
@@ -366,13 +366,13 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">DraftBlast</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">FillBlast</el-menu-item>
-                    <el-menu-item index="2-3">Tool3</el-menu-item>
-                    <el-menu-item index="2-4">Tool4</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssembleBlast</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFillBlast</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="3">Document</el-menu-item>
-                <el-menu-item index="4">Download</el-menu-item>
+                <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
+                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
                 <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
             </el-menu>
         </el-header>
@@ -390,7 +390,7 @@
                     </button>
                 </div>
                 <div>
-                    <!--第一个上传文件-->
+                    <!--第一个上传文件 Reference Genome Files-->
                     <el-aside width="50%">
                         <div class="upload1">
                             <!--上传说明-->
@@ -400,9 +400,11 @@
                                     title="Reference Genome File:"
                                     width="300"
                                     trigger="hover"
-                                    content="It automatically determines the format of the input.
-                                     To allow this feature, certain conventions are required
-                                     with regard to the input of identifiers.">
+                                    content="A reference genome (also known as a reference assembly)
+                                    is a digital nucleic acid sequence database,
+                                    assembled by scientists as a representative
+                                    example of the set of genes in one idealized
+                                    individual organism of a species.">
                                 <el-button
                                         slot="reference"
                                         style="margin-bottom: 5%;
@@ -438,7 +440,7 @@
                             </el-upload>
                         </div>
                     </el-aside>
-                    <!--第二个上传文件-->
+                    <!--上传HiFi Contigs文件-->
                     <el-aside width="50%">
                         <div class="upload2">
                             <!-- 上传提示 -->
@@ -542,7 +544,6 @@
                                         </el-slider>
                                     </el-col>
                                 </el-row>
-
                                 <!--4.2 整数型 必须是正整数且不能0开头-->
                                 <el-row :gutter="10">
                                     <el-col :xs="16" :sm="16" :md="8" lg="8" xl="10">
@@ -556,7 +557,6 @@
                                         </el-slider>
                                     </el-col>
                                 </el-row>
-
                                 <!--增加 百分比 必须是正整数且不能0开头-->
                                 <el-row :gutter="10">
                                     <el-col :xs="16" :sm="16" :md="8" lg="8" xl="10">
@@ -570,7 +570,6 @@
                                         </el-slider>
                                     </el-col>
                                 </el-row>
-
                                 <!--4.3 下拉框 二选一-->
                                 <el-row :gutter="10">
                                     <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
@@ -586,7 +585,6 @@
                                         </el-select>
                                     </el-col>
                                 </el-row>
-
                                 <!--4.4 是否画图-->
                                 <el-row :gutter="10">
                                     <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
@@ -608,7 +606,6 @@
                                     </el-col>
                                 </el-row>
                             </div>
-
                             <!-- 5 下一步的按钮-->
                             <div style="margin-top: 5%;">
                                 <el-button class="next-button" @click="resetForm">RESET</el-button>
@@ -619,54 +616,21 @@
                 </div>
             </el-main>
         </el-container>
-
-        <el-container>
-            <el-main>
-                <!--4.1 整型数据 有上下限-->
-                <el-row :gutter="10">
-                    <el-col :xs="16" :sm="16" :md="8" lg="8" xl="10">
-                        test1:
-                    </el-col>
-                    <el-col :xs="16" :sm="8" :md="16" lg="16" xl="16">
-                        <el-slider v-model="test1"
-                                   show-input
-                                   :step="5000"
-                                   max="100000">
-                        </el-slider>
-                    </el-col>
-                </el-row>
-
-                <!--4.2 整数型 必须是正整数且不能0开头-->
-                <el-row :gutter="10">
-                    <el-col :xs="16" :sm="16" :md="8" lg="8" xl="10">
-                        test2:
-                    </el-col>
-                    <el-col :xs="16" :sm="8" :md="12" lg="16" xl="16">
-                        <el-slider v-model="test2"
-                                   :step="5">
-                        </el-slider>
-                    </el-col>
-                    <el-col :xs="16" :sm="8" :md="4" lg="16" xl="16">
-                        <el-input-number v-model="test2" :step="5"></el-input-number>
-                    </el-col>
-                </el-row>
-            </el-main>
-        </el-container>
-
     </div>
+
 
     <!--5 页脚信息-->
     <el-footer style="height: 120%; background-color: #205573">
         <div>
-            &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
+            &nbsp;&nbsp;&nbsp;&nbsp;Junyang Yue, Professor
             <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;State Key Laboratory of Tea Plant Biology and Utilization
+            &nbsp;&nbsp;&nbsp;&nbsp;School of Horticulture
             <br>
-            Anhui Agricultural University, Hefei 230036, China.
+            Anhui Agricultural University Hefei 230036 China.
             <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Email: yechen@ahau.edu.cn
+            &nbsp;&nbsp;&nbsp;&nbsp;Email: yuejy@ahau.edu.cn
             <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)888 8888
+            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)6578 6185
         </div>
     </el-footer>
 
@@ -726,7 +690,6 @@
         </div>
     </el-dialog>
 </div>
-
 </body>
 
 <!-- 引入组件库 -->
@@ -735,7 +698,7 @@
 <script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
 <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">
 <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<script src="../../js/axios-0.18.0.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
 
 
 <script>
@@ -745,12 +708,12 @@
         el: `#app`,
         data: function () {
             return {
-                activeBar: "2", // 导航栏激活的栏，默认为Home
+                // 导航栏激活的栏，默认为Home
+                activeBar: "2",
+                // 两个文件flag 都上传了才给训练
                 uploadSeqFile: 0,
                 uploadHiFiFile: 0,
-                //test
-                test1:"",
-                test2:20,
+                // 参数表单
                 formData: {
                     minAlign: 50000,
                     minContig: 50000,
@@ -759,18 +722,19 @@
                     aligner: 'minimap2',
                     plot: false,
                 },
+                // 参数描述表格
                 tableData: [{
                     param: 'Min Contigs Length',
                     desc: 'Remove contigs shorter than INT (bp), default: 50000',
                 }, {
                     param: 'Min Alignment Length',
-                    desc: 'The min alignment length to be select (bp), default: 5000',
+                    desc: 'The min alignment length to be select (bp), default: 50000',
                 }, {
                     param: 'Min Alignment Identity',
                     desc: 'The min alignment identity to be select (%%), default: 90',
-                },{
+                }, {
                     param: 'Aligner',
-                    desc: 'Specify alignment program (support minimap2 and mummer). Default: minimap2',
+                    desc: 'Specify alignment program (support minimap2 and mummer), default: minimap2',
                 }, {
                     param: 'Plot',
                     desc: 'Plot a co-linearity graph for alignments. (will cost more time)',
@@ -789,19 +753,48 @@
                 username: "",
             }
         },
-
-        // TODO new 用户离开页面 提示内容未保存
-        beforeDestroy() {
-            alert("Are you sure to leave? Your data will be missing!")
-        },
-
         methods: {
-            /* 上传文件的钩子函数*/
-            /* 文件列表只允许上传一个文件*/
+            // TODO 测试中：若参数超出某一阈值，给用户发出不自动消失的notification
+            outOfExceed(value) {
+                if (value > 100) {
+                    this.$notify({
+                        title: 'Warning',
+                        message: 'Your input have exceeded the recommended threshold, which may not generate a satisfied result',
+                        type: 'warning',
+                        position: 'bottom-right',
+                        duration: 0,
+                    });
+                }
+            },
+
+            /*重置参数表单*/
+            resetForm() {
+                this.formData = {
+                    minAlign: 50000,
+                    minContig: 50000,
+                    minIdentity: 90,
+                    prefix: 'Quartet',
+                    aligner: 'minimap2',
+                    plot: false,
+                }
+            },
+
+            /*对文件名进行正则校验，不允许输入违法文件名*/
+            onNameWarning(val) {
+                let reg = /.*[/\\:*?|].*/;
+                // 存在返回true
+                if (reg.test(val)) {
+                    this.$message.error("FileName includes illegal characters!");
+                    this.formData.prefix = '';
+                }
+            },
+
+            /* 上传基因组文件的钩子函数*/
+            // FASTA文件列表只允许上传一个文件
             handleExceed(files, fileList) {
                 this.$message.error(`Limit ONE File Only, You Have To Remove the Current File!`);
             },
-            /* 文件的后缀和大小限制*/
+            // 文件的后缀和大小限制 更新：不需要大小限制了（随便吧！
             beforeUpload(file) {
                 let filename = file.name.toString();
                 console.log(filename);
@@ -809,14 +802,10 @@
                 console.log(suffix);
                 let suffixList = ["fasta", "fas", "fa", "FASTA", "FA", "FAS"];
                 let isFas = (suffixList.indexOf(suffix) !== -1);
-                let isLt2M = file.size / 1024 / 1024 < 20;
-                // 后缀判断
                 if (!isFas) {
                     this.$message.error('The File Format Must Be .FASTA, .FAS or .FA!');
-                } else if (!isLt2M) {  // 后缀正确 判断大小
-                    this.$message.error('File Size Must be Less Than 20MB!');
                 }
-                return isFas && isLt2M;
+                return isFas;
             },
             // 文件的移除
             beforeRemove(file, fileList) {
@@ -829,7 +818,7 @@
                     });
                 }
             },
-            // 删除后 重新设置
+            // 删除后 重新设置一下文件的状态flag
             handleRemove(file, fileList) {
                 if (file && file.status === "success") {
                     this.uploadSeqFile = 0;
@@ -840,33 +829,25 @@
             handleUploadSuccess() {
                 this.$message.success("Upload Successfully");
                 this.uploadSeqFile = 1;
-                /* 如果HiFi文件也上传成功了 */
-                if (this.uploadHiFiFile === 1) {
-                    this.activeStep = 1
-                }
             },
 
-            // 参数文件上传的相关钩子函数
+            /* 上传参数基因组文件的钩子函数*/
+            // 超出一个文件限制
             handleExceed2(files, fileList) {
                 this.$message.error(`Limit ONE File Only, You Have To Remove the Current File!`);
             },
-            /* 文件的后缀和规格限制*/
+            // 文件的后缀和规格限制 不需要了
             beforeUpload2(file) {
                 let filename = file.name.toString();
                 console.log(filename);
                 let suffix = filename.substring(filename.indexOf(".") + 1);
                 console.log(suffix);
                 let suffixList = ["fasta", "fas", "fa", "FASTA", "FA", "FAS"];
-
                 let isFas = (suffixList.indexOf(suffix) !== -1);
-                let isLt2M = file.size / 1024 / 1024 < 20;
-                // 后缀判断
                 if (!isFas) {
                     this.$message.error('The File Format Must Be .FASTA, .FAS or .FA!');
-                } else if (!isLt2M) {  // 后缀正确 判断大小
-                    this.$message.error('File Size Must be Less Than 20MB!');
                 }
-                return isFas && isLt2M;
+                return isFas;
             },
             // 文件的移除
             beforeRemove2(file, fileList) {
@@ -895,31 +876,10 @@
                 }
             },
 
-            // 重置参数表单
-            resetForm() {
-                this.formData = {
-                    minAlign: 5000,
-                    minContig: 50000,
-                    prefix: 'Quartet',
-                    aligner: 'minimap2',
-                    plot: false,
-                }
-            },
-
-            // 对文件名进行正则校验
-            onNameWarning(val) {
-                let reg = /.*[/\\:*?|].*/;
-                // 存在返回true
-                if (reg.test(val)) {
-                    this.$message.error("FileName includes illegal characters!");
-                    this.formData.prefix = '';
-                }
-            },
-
             // 参数提交训练
             onParamSubmit() {
-                // 训练前判断一下：
-                // 1. 如果参数违规 提示用户可能得不到好的结果
+                // 训练前判断一下
+                // 1. 如果参数违规 提示用户可能得不到好的结果 TODO 这里他们要求改了
                 if (this.formData.minContig > 70000) {
                     this.$confirm('Min Contig Length more than 70000 may not generate a satisfied result', 'Warning', {
                         confirmButtonText: 'Confirm',
@@ -933,26 +893,29 @@
                 }
             },
             trainModule1() {
-                // 训练前先判断一下是否Required的文件
+                // 训练前先判断一下是否Required的文件都已经上传
                 if (this.uploadSeqFile === 0) {
                     this.$message.error("Reference Genome File is REQUIRED");
-                }else if(this.uploadHiFiFile === 0){
+                } else if (this.uploadHiFiFile === 0) {
                     this.$message.error("HiFi Contigs or Scaffolds File is REQUIRED");
-                }else{
+                } else {
                     const loading1 = this.$loading({
                         lock: true,
                         text: 'Program is running and will take approximately 15 to 20 minutes. Please DO NOT refresh or leave the page.',
                         spinner: 'el-icon-loading',
                         background: 'rgba(2,1,1,0.7)'
                     });
-                    console.log(this.formData)
-                    axios.post("/blast/exec/trainParam", this.formData).then((res) => {
+                    console.log(this.formData)  // /blast/common/uploadHiFi
+                    axios.post("/blast/exec/draftBlast", this.formData).then((res) => {
                         loading1.close();
-                        document.location.href = "display1.html";
+                        if(res.data.code ===  '20020'){
+                            document.location.href = "displayErr.html";
+                        }else{
+                            document.location.href = "display1.html";
+                        }
                     });
                 }
             },
-
 
             // 登录注册用方法
             // 打开登录对话框

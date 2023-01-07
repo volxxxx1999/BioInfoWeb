@@ -2,7 +2,11 @@ package com.ahau.service.impl;
 
 
 import com.ahau.common.Code;
-import com.ahau.domain.BlastParam;
+import com.ahau.domain.DraftParam;
+import com.ahau.domain.ProcessWarning;
+import com.ahau.domain.gapFill.GapContigs;
+import com.ahau.domain.gapFill.GapParam;
+import com.ahau.domain.telo.TeloParam;
 import com.ahau.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,32 +19,29 @@ import java.util.*;
 @Service
 public class TrainService {
 
-    //  服务器中 使用文件上传方式 训练脚本的位置
-    @Value("${bio.exePath}")
-    private String exePath;
     // 服务器中 使用参数设置方式 训练脚本的位置
-    @Value("${bio.exeParamPath}")
-    private String exeParamPath;
+    @Value("${bio.draftPath}")
+    private String draftExePath;
     // 服务器中 用户上传文件的目录
     @Value("${bio.uploadPath}")
     private String uploadPath;
-    // 你训练脚本的语言（Python？Java？Perl？R？自己yml配置）
+    // 训练脚本的语言
     @Value("${bio.exeMethod}")
     private String exeMethod;
 
     /**
-     * 普通方法：调用进程执行命令 返回cmd结果Vector
-     *
-     * @param cmd
-     * @return
+     * @Description: 普通方法：调用进程执行命令 返回cmd打印结果
+     * @Param: String cmd
+     * @Return: Vector<String> execResult
      */
+
     public Vector<String> train(String cmd) {
-        // 2. 创建进程对象
+        System.out.println("=========TrainService -> train 通用调用进程执行命令===========");
+        // 1. 创建进程对象
         Process process;
-        // 9. 存储读取结果
+        // 2. 存储命令行打印的读取结果
         Vector<String> execResult = new Vector<>();
         try {
-            System.out.println("==========Service：调用外部训练脚本==========");
             // 3. 使用Runtime.getRuntime()创建一个本地进程
             process = Runtime.getRuntime().exec(cmd);
             // 5. 定义脚本的输出
@@ -66,107 +67,313 @@ public class TrainService {
             throw new BusinessException("Fail to generate the result, please check the format of your file", Code.TRAIN_ERR);
         }
         // 9. 输出这个String Vector
-        System.out.println("==========Service：训练生成文件位置和可视化数据==========");
-        for (int i = 0; i < execResult.size(); i++) {
-            System.out.println(execResult.get(i));
+        System.out.println("------》 打印cmd Result结果地址：");
+        for (String s : execResult) {
+            System.out.println(s);
         }
         return execResult;
-
     }
 
     /**
-     * @Description: 接受两个文件的地址，传入本地python脚本并执行，返回结果和可展示数据
-     * @Param: String trainUrl 用户上传的训练文件名 UUID 唯一
-     * @Param: String paramUrl 用户上传的参数文件名 UUID 唯一
-     * @Return: ExecResult 对返回结果的封装
+     * @Description: DraftBlast的trainService
+     * @Param: String RefGenomeUrl, String HiFiUrl, DraftParam param
+     * @Return: Vector<String> execResult
      */
-/*    public Vector<String> trainFile(String RefGenomeUrl, String HiFiUrl) {
-        RefGenomeUrl = uploadPath + RefGenomeUrl;
-        HiFiUrl = uploadPath + HiFiUrl;
-        // 【约定规则】1. 使用sys args传递参数 2. 使用UUID命名文件并输出 3. 返回值都输出
-        // 1. 定义命令行语句 exePath-你的可执行程序存档的地址 trainUrl，paramUrl-前端用户上传进行转存的文件
-        String exe = exeMethod;
-        String[] cmd = new String[]{exe, exePath, RefGenomeUrl, HiFiUrl};
-        System.out.println("cmd: "+ Arrays.toString(cmd));
+    public Vector<String> trainDraft(String RefGenomeUrl, String HiFiUrl, DraftParam param) {
+        System.out.println("=========TrainService - trainDraft 参数的处理+命令的拼接===========");
 
-        Vector<String> result = train(cmd);
-        return  result;
-    }*/
-
-    /**
-     * 参数训练的方式 接受一个封装的BlastParam 这里我们把作为
-     */
-    public Vector<String> trainParam(String RefGenomeUrl, String HiFiUrl, BlastParam param) {
-        RefGenomeUrl = uploadPath + RefGenomeUrl;
-        HiFiUrl = uploadPath + HiFiUrl;
+        // 1 获取两个必要的训练FASTA文件 和 训练语言
+       /* RefGenomeUrl = uploadPath + RefGenomeUrl;
+        HiFiUrl = uploadPath + HiFiUrl;*/
         String exe = exeMethod;
 
-        String length = param.getMinLength().toString();
-        String identity = param.getMinIdentity().toString();
+        // 2 获取前端的参数类中的各个值
+        String minAlign = param.getMinAlign().toString();
+        String minContig = param.getMinContig().toString();
+        String minIdentity = param.getMinIdentity().toString();
         String prefix = param.getPrefix();
-        String threads = param.getThreads().toString();
         String aligner = param.getAligner();
-        String plot = param.getPlot().toString();
-        String overwrite = param.getOverwrite().toString();
-        String miniMap = param.getMiniMapOption();
-        String nucmer = param.getNucmerOption();
-        String delta = param.getDeltaFilterOption();
+        Boolean plot = param.getPlot();
 
-        /*一些命令设置
-         * 1. plot和overwrite设置了store_true（话说去掉这个参数不就行了x
-         * 2. --minimapoption接收 -x ams5，需要使用=“ ”包裹参数
-         * 3. --nucmer --delta也一样*/
+        // 3 plot是store_true属性 需要特殊处理下
+        String plotArg;
+        if (plot) {
+            plotArg = "--plot";
+        } else {
+            plotArg = "";
+        }
+
+        // 4 prefix传入到脚本中，是最终出来文件的前缀 脚本添加不了UUID 我来处理
+        prefix = prefix + "_" + UUID.randomUUID().toString();
+        System.out.println("------》new UUID prefix:" + prefix);
+        // 5 拼接cmd指令
         String cmd = exe + " " +
-                exeParamPath + " " +
-                "-r=" + RefGenomeUrl +" " +
-                "-q=" + HiFiUrl +" " +
-                "-l=" + length +" " +
-                "-i=" + identity +" " +
-                "-p=" + prefix +" " +
-                "-t=" + threads +" " +
-                "-a=" + aligner +" " +
-                "--plot=" + plot +" " +
-                "--overwrite=" + "\"" + overwrite + "\" " +
-                "--minimapoption=" + "\"" + miniMap + "\" " +
-                "--nucmeroption=" + "\"" + nucmer + "\" " +
-                "--deltafilteroption=" + "\"" + delta + "\" ";
-      /*  String[] cmd = new String[]{
-                exe, exeParamPath,
-                "-r", RefGenomeUrl,
-                "-q", HiFiUrl,
-                "-l", length,
-                "-i", identity,
-                "-p", prefix,
-                "-t", threads,
-                "-a", aligner,
-                "--plot", plot,
-                "--overwrite", overwrite,
-                "--minimapoption=", miniMap,
-                "--nucmeroption=", nucmer,
-                "--deltafilteroption=", delta
-                };*/
+                draftExePath + " " +
+                "-r=" + RefGenomeUrl + " " +
+                "-q=" + HiFiUrl + " " +
+                "-a=" + aligner + " " +
+                "-c=" + minContig + " " +
+                "-l=" + minAlign + " " +
+                "-i=" + minIdentity + " " +
+                "-p=" + prefix + " " +
+                plotArg;
+        System.out.println("------》调用cmd的语句：");
+        System.out.println("------》cmd: " + cmd);
 
-        System.out.println("⭐~ trainService 调用cmd的语句：");
-        System.out.println("cmd: " + cmd);
-        Vector<String> result = train(cmd);
-        return result;
+        // 6 把训练结果返回
+        return train(cmd);
     }
 
     /**
-     * common方法
-     * 写Session 属性
-     * request 和 Vector<String> Result
+     * @Description: 把控制台打印的结果文件路径设置到Session中
+     * @Param: HttpServletRequest request, Vector<String> trainResult
+     * @Return: void
      */
-
-    public void setSession(HttpServletRequest request, Vector<String> trainResult) {
+    public Boolean setSession(HttpServletRequest request, Vector<String> trainResult) {
+        System.out.println("=========TrainService：setSession 把训练的结果设置到session中===========");
         HttpSession session = request.getSession();
-
-        // 3. 把返回结果写入Session 包括结果Url、可视化结果
-        session.setAttribute("resultUrl_1", trainResult.get(0));
-        session.setAttribute("resultUrl_2", trainResult.get(1));
-        session.setAttribute("imgUrl", trainResult.get(2));
-
+        // 1 对每一条命令过滤Warnings和不同的Result文件信息
+        Vector<ProcessWarning> warningInfo = new Vector<>();
+        // 🐎 plot flag
+        boolean plotFlag = false;
+        // 🐎 warning count
+        int wCount = 0;
+        for (String str : trainResult) {
+            // 2 Warnings 最终需要在页面展示
+            if (str.contains("[Warning]")) {
+                wCount += 1;
+                ProcessWarning pw = new ProcessWarning();
+                pw.setWID(wCount);
+                pw.setWarning(str);
+                warningInfo.add(pw);
+                System.out.println("----》" + str);
+            }
+            // 3 Errors 需要提示用户训练发生未知错误
+            if (str.contains("[Error]")) {
+                return false;
+            }
+            // 4 正常的Result文件
+            if (str.contains("contig_map_ref.png")) {
+                session.setAttribute("hifi_ref_url", str);
+                System.out.println("----》hifi_ref_url: " + str);
+            }
+            // TODO genomeRef是选择了plot才有滴！
+            if (str.contains("genome_map_ref.png")) {
+                session.setAttribute("genome_ref_url", str);
+                plotFlag = true;
+            }
+            if (str.contains("draftgenome.png")) {
+                session.setAttribute("genome_png", str);
+            }
+            if (str.contains("mapinfo")) {
+                session.setAttribute("mapinfo", str);
+            }
+            if (str.contains("stat")) {
+                session.setAttribute("stat", str);
+            }
+            if (str.contains("fasta")) {
+                session.setAttribute("fasta", str);
+            }
+            if (str.contains("agp")) {
+                session.setAttribute("agp", str);
+            }
+        }
+        // 🐎 循环结束 看看是否选择plot 如果没有plot，给前端处理下
+        if (!plotFlag) {
+            session.setAttribute("genome_ref_url", "NotPlot");
+        }
+        // 4 Warnings是一个String数组的形式设置为Session
+        session.setAttribute("warnings", warningInfo);
+        return true;
     }
+
+
+    @Value("${bio.fillPath}")
+    private String fillExePath;
+
+    /**
+     * @Description: module2-gapfill 的 训练函数
+     * @Param: 两个文件Url+参数对象 组合为一个命令行语句
+     * @Return: execResult Vector包含着命令行每行数据结果的队列
+     */
+    public Vector<String> trainGapFill(String fillGenomeUrl, ArrayList<GapContigs> fillContigsUrl, GapParam gapParam) {
+        System.out.println("=========TrainService - trainGapFill 参数的处理+命令的拼接===========");
+        // 1 获取两个必要的训练FASTA文件 和 训练语言
+        String exe = exeMethod;
+
+        // 2 获取前端的参数类中的各个值
+        String minAlignLength = gapParam.getMinAlignLength().toString();
+        String minAlignIdentity = gapParam.getMinAlignIdentity().toString();
+        String flankLength = gapParam.getFlankLength().toString();
+        String maxFillingLength = gapParam.getMaxFillingLength().toString();
+        String prefix = gapParam.getPrefix();
+
+        // 3 获取所有contigs文件url
+        StringBuilder allFillContugsUrl = new StringBuilder();
+        for (GapContigs gapContigs : fillContigsUrl) {
+            String uuidName = gapContigs.getUuidName() + " ";
+            allFillContugsUrl.append(uuidName);
+        }
+        System.out.println("------> all contig filename " + allFillContugsUrl);
+
+        // 4 prefix传入到脚本中，是最终出来文件的前缀 脚本添加不了UUID 我来处理
+        prefix = prefix + "_" + UUID.randomUUID().toString();
+        System.out.println("------》new UUID prefix:" + prefix);
+
+        // 5 拼接cmd指令
+//        String cmd = exe + " " +
+//                fillExePath + " " +
+//                "-d=" + fillGenomeUrl + " " +
+//                "-g=" + allFillContugsUrl + " " +
+//                "-f=" + flankLength + " " +
+//                "-l=" + minAlignLength + " " +
+//                "-i=" + minAlignIdentity + " " +
+//                "-m=" + maxFillingLength + " " +
+//                "-p=" + prefix + " ";
+        String cmd = exe + " " +
+                fillExePath + " " +
+                "-d " + fillGenomeUrl + " " +
+                "-g " + allFillContugsUrl + " " +
+                "-f " + flankLength + " " +
+                "-l " + minAlignLength + " " +
+                "-i " + minAlignIdentity + " " +
+                "-m " + maxFillingLength + " " +
+                "-p " + prefix + " ";
+        System.out.println("------》调用cmd的语句：");
+        System.out.println("------》cmd: " + cmd);
+
+        // 6 把训练结果返回
+        return train(cmd);
+    }
+
+
+    /**
+     * @Description: fill的setSesssion
+     * @Param: request Vector execResult
+     * @Return: Boolean
+     */
+    public Boolean fillSetSession(HttpServletRequest request, Vector<String> trainResult) {
+        System.out.println("=========TrainService：fillSetSession 把训练的结果设置到session中===========");
+        HttpSession session = request.getSession();
+        // 1 对每一条命令过滤Warnings和不同的Result文件信息
+        Vector<ProcessWarning> warningInfo = new Vector<>();
+        // 🐎 warning count
+        int wCount = 0;
+        for (String str : trainResult) {
+            // 2 Warnings 最终需要在页面展示
+            if (str.contains("[Warning]")) {
+                wCount += 1;
+                ProcessWarning pw = new ProcessWarning();
+                pw.setWID(wCount);
+                pw.setWarning(str);
+                warningInfo.add(pw);
+                System.out.println("----》" + str);
+            }
+            // 3 Errors 需要提示用户训练发生未知错误
+            if (str.contains("[Error]")) {
+                return false;
+            }
+            // 4 正常的Result文件
+            if (str.contains("png")) {
+                session.setAttribute("fillPng", str);
+            }
+            if (str.contains("stat")) {
+                session.setAttribute("fillStat", str);
+            }
+            if (str.contains("fasta")) {
+                session.setAttribute("fillFasta", str);
+            }
+            if (str.contains("detail")) {
+                session.setAttribute("fillDetail", str);
+            }
+        }
+        // 4 Warnings是一个String数组的形式设置为Session
+        session.setAttribute("fillWarnings", warningInfo);
+        return true;
+    }
+
+
+    @Value("${bio.teloPath}")
+    private String teloExePath;
+
+
+    /**
+     * @Description: module 3 telo的训练函数
+     * @Param: HttpRequest TeloParam
+     * @Return: execResult
+     */
+    public Vector<String> trainTelo(String teloGenomeUrl, TeloParam teloParam) {
+        System.out.println("=========TrainService - trainTelo 参数的处理+命令的拼接===========");
+        // 1 获取两个必要的训练FASTA文件 和 训练语言
+        String exe = exeMethod;
+
+        // 2 获取前端的参数类中的各个值
+        String clade = teloParam.getClade();
+        String minRepeatTime = teloParam.getMinRepeatTime().toString();
+        String prefix = teloParam.getPrefix();
+
+        // 4 prefix传入到脚本中，是最终出来文件的前缀 脚本添加不了UUID 我来处理
+        prefix = prefix + "_" + UUID.randomUUID().toString();
+        System.out.println("------》new UUID prefix:" + prefix);
+
+        //  5 拼接cmd指令
+        String cmd = exe + " " +
+                teloExePath + " " +
+                "-i=" + teloGenomeUrl + " " +
+                "-c=" + clade + " " +
+                "-m=" + minRepeatTime + " " +
+                "-p=" + prefix;
+
+        System.out.println("------》调用cmd的语句：");
+        System.out.println("------》cmd: " + cmd);
+
+        // 6 把训练结果返回
+        return train(cmd);
+    }
+
+
+    /**
+    * @Description: teloBlast 的 setSession
+    * @Param: HttpServletRequest Vector trainResult
+    * @Return: boolean Boolean用于看命令行中是否出现[error]
+    */
+    public Boolean teloSetSession(HttpServletRequest request, Vector<String> trainResult){
+        System.out.println("=========TrainService：teloSetSession 把训练的结果设置到session中===========");
+        HttpSession session = request.getSession();
+        // 1 对每一条命令过滤Warnings和不同的Result文件信息
+        Vector<ProcessWarning> warningInfo = new Vector<>();
+        // 🐎 warning count
+        int wCount = 0;
+        for (String str : trainResult) {
+            // 2 Warnings 最终需要在页面展示
+            if (str.contains("[Warning]")) {
+                wCount += 1;
+                ProcessWarning pw = new ProcessWarning();
+                pw.setWID(wCount);
+                pw.setWarning(str);
+                warningInfo.add(pw);
+                System.out.println("----》" + str);
+            }
+            // 3 Errors 需要提示用户训练发生未知错误
+            if (str.contains("[Error]")) {
+                return false;
+            }
+            // 4 正常的Result文件
+            if (str.contains("png")) {
+                session.setAttribute("teloPng", str);
+            }
+            if (str.contains("info")) {
+                session.setAttribute("infoUrl", str);
+            }
+        }
+        // 4 Warnings是一个String数组的形式设置为Session
+        session.setAttribute("teloWarnings", warningInfo);
+        return true;
+    }
+
+
+
+
 }
 
 

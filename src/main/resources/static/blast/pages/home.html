@@ -317,10 +317,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">DraftBlast</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">FillBlast</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssembleBlast</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFillBlast</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -365,15 +365,15 @@
     <!--5 页脚信息-->
     <el-footer style="height: 120%; background-color: #205573">
         <div>
-            &nbsp;&nbsp;&nbsp;&nbsp;XXX, Professor
+            &nbsp;&nbsp;&nbsp;&nbsp;Junyang Yue, Professor
             <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;State Key Laboratory of Tea Plant Biology and Utilization
+            &nbsp;&nbsp;&nbsp;&nbsp;School of Horticulture
             <br>
-                Anhui Agricultural University, Hefei 230036, China.
+            Anhui Agricultural University Hefei 230036 China.
             <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Email: yechen@ahau.edu.cn
+            &nbsp;&nbsp;&nbsp;&nbsp;Email: yuejy@ahau.edu.cn
             <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)888 8888
+            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)6578 6185
         </div>
     </el-footer>
 
@@ -382,8 +382,7 @@
             title="Sign in"
             :close-on-click-modal="false"
             :visible.sync="loginDialogVisible"
-            width="450px"
-    >
+            width="450px">
         <div class="login-box">
             <el-input placeholder="email" v-model="email" clearable size="20px">
             </el-input>
@@ -406,8 +405,7 @@
             title="Sign up"
             :close-on-click-modal="false"
             :visible.sync="registerDialogVisible"
-            width="450px"
-    >
+            width="450px">
         <div class="login-box">
             <el-input placeholder="email" v-model="email" clearable size="20px">
             </el-input>
