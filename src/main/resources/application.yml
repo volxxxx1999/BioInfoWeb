@@ -13,6 +13,8 @@ bio:
   fillPath: E:/bioResp/exec/simulatedServer/quartet_gapfill_server.py
   # telo的脚本位置
   teloPath: E:/bioResp/exec/simulatedServer/quartet_telo_server.py
+  # centro的脚本位置
+  centroPath: E:/bioResp/exec/simulatedServer/quartet_centro_server.py
   # 脚本 的 启动方式 (Java/python/perl...)
   exeMethod: python
 

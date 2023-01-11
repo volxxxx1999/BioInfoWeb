@@ -4,6 +4,7 @@ package com.ahau.service.impl;
 import com.ahau.common.Code;
 import com.ahau.domain.DraftParam;
 import com.ahau.domain.ProcessWarning;
+import com.ahau.domain.centro.CentroParam;
 import com.ahau.domain.gapFill.GapContigs;
 import com.ahau.domain.gapFill.GapParam;
 import com.ahau.domain.telo.TeloParam;
@@ -333,11 +334,11 @@ public class TrainService {
 
 
     /**
-    * @Description: teloBlast 的 setSession
-    * @Param: HttpServletRequest Vector trainResult
-    * @Return: boolean Boolean用于看命令行中是否出现[error]
-    */
-    public Boolean teloSetSession(HttpServletRequest request, Vector<String> trainResult){
+     * @Description: teloBlast 的 setSession
+     * @Param: HttpServletRequest Vector trainResult
+     * @Return: boolean Boolean用于看命令行中是否出现[error]
+     */
+    public Boolean teloSetSession(HttpServletRequest request, Vector<String> trainResult) {
         System.out.println("=========TrainService：teloSetSession 把训练的结果设置到session中===========");
         HttpSession session = request.getSession();
         // 1 对每一条命令过滤Warnings和不同的Result文件信息
@@ -368,6 +369,112 @@ public class TrainService {
         }
         // 4 Warnings是一个String数组的形式设置为Session
         session.setAttribute("teloWarnings", warningInfo);
+        return true;
+    }
+
+
+    @Value("${bio.centroPath}")
+    private String centroExePath;
+
+
+    /**
+     * @Description: centroBlast的训练
+     * @Param: CentroGenomeUrl TEAnnotationRUrl CentroParam
+     * @Return: execResult
+     */
+    public Vector<String> trainCentro(String centroGenomeUrl, String centroTEurl, CentroParam centroParam) {
+        System.out.println("=========TrainService - trainCentro 参数的处理+命令的拼接===========");
+        // 1 获取两个必要的训练FASTA文件 和 训练语言
+        String exe = exeMethod;
+
+        // 2 获取前端的参数类中的各个值
+        String minPeriod = centroParam.getMinPeriod().toString();
+        String maxPeriod = centroParam.getMaxPeriod().toString();
+        String maxGap = centroParam.getMaxGap().toString();
+        String minLength = centroParam.getMinLength().toString();
+        String prefix = centroParam.getPrefix();
+
+        // 4 prefix传入到脚本中，是最终出来文件的前缀 脚本添加不了UUID 我来处理
+        prefix = prefix + "_" + UUID.randomUUID().toString();
+        System.out.println("------》new UUID prefix:" + prefix);
+
+        //  5 拼接cmd指令
+        // 因为这里TEannotation是从Session中获取的，如果用户没有上传这个文件，那从Session得到的就是null，转化为了String类型
+        // TODO 另外 如果用户上传了，又删除了，这里删除也要真的从Session中移除掉
+        System.out.println("------》是否上传了TE annotation:" + centroTEurl);
+        String cmd;
+        if (centroTEurl == null) {
+            cmd = exe + " " +
+                    centroExePath + " " +
+                    "-i=" + centroGenomeUrl + " " +
+                    "-n=" + minPeriod + " " +
+                    "-m=" + maxPeriod + " " +
+                    "-g=" + maxGap + " " +
+                    "-l=" + minLength + " " +
+                    "-p=" + prefix;
+        } else {
+            cmd = exe + " " +
+                    centroExePath + " " +
+                    "-i=" + centroGenomeUrl + " " +
+                    "--TE=" + centroTEurl + " " +
+                    "-n=" + minPeriod + " " +
+                    "-m=" + maxPeriod + " " +
+                    "-g=" + maxGap + " " +
+                    "-l=" + minLength + " " +
+                    "-p=" + prefix;
+        }
+        System.out.println("------》调用cmd的语句：");
+        System.out.println("------》cmd: " + cmd);
+        // 6 把训练结果返回
+        return train(cmd);
+    }
+
+
+    /**
+    * @Description: centroBlast 的setSession
+    * @Param: execResult request
+    * @Return: Boolean
+    */
+    public Boolean centroSetSession(HttpServletRequest request, Vector<String> trainResult) {
+        System.out.println("=========TrainService：centroSetSession 把训练的结果设置到session中===========");
+        HttpSession session = request.getSession();
+        // 1 对每一条命令过滤Warnings和不同的Result文件信息
+        Vector<ProcessWarning> warningInfo = new Vector<>();
+        // 🐎 warning count
+        int wCount = 0;
+        for (String str : trainResult) {
+            // 2 Warnings 最终需要在页面展示
+            if (str.contains("[Warning]")) {
+                wCount += 1;
+                ProcessWarning pw = new ProcessWarning();
+                pw.setWID(wCount);
+                pw.setWarning(str);
+                warningInfo.add(pw);
+                System.out.println("----》" + str);
+            }
+            // 3 Errors 需要提示用户训练发生未知错误
+            if (str.contains("[Error]")) {
+                return false;
+            }
+            // 4 正常的Result文件
+            if (str.contains("png")) {
+                session.setAttribute("centroPng", str);
+            }
+            if (str.contains("best.candidate")) {
+                session.setAttribute("candidateUrl", str);
+            }
+            if (str.contains("TRgff3")) {
+                session.setAttribute("gff3ZipUrl", str);
+            }
+            if (str.contains("TRfasta")) {
+                session.setAttribute("fastaZipUrl", str);
+            }
+            if (str.contains("candidate.zip")) {
+                session.setAttribute("candidateZipUrl", str);
+            }
+        }
+        // 4 Warnings是一个String数组的形式设置为Session
+        session.setAttribute("centroWarnings", warningInfo);
         return true;
     }
 

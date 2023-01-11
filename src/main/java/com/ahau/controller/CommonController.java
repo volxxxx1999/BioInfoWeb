@@ -6,6 +6,8 @@ import com.ahau.domain.DraftMapInfo;
 import com.ahau.domain.DraftResultUrl;
 import com.ahau.domain.DraftStat;
 import com.ahau.domain.ProcessWarning;
+import com.ahau.domain.centro.CentroCandidate;
+import com.ahau.domain.centro.CentroResultUrl;
 import com.ahau.domain.gapFill.GapContigs;
 import com.ahau.domain.gapFill.GapDetail;
 import com.ahau.domain.gapFill.GapResultUrl;
@@ -15,6 +17,7 @@ import com.ahau.domain.telo.TeloResultUrl;
 import com.ahau.exception.BusinessException;
 import com.ahau.exception.SystemException;
 import com.ahau.service.impl.CommonService;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -362,5 +365,82 @@ public class CommonController {
             throw new BusinessException("Fail to generate the result, please check the format of your file", Code.BUSINESS_ERR);
         }
     }
+
+
+    /**
+    * @Description: Centro Module4的Genome上传
+    * @Param: request MultiPartFile
+    * @Return: Result
+    */
+    @PostMapping("/centroGenome")
+    public Result uploadCentroGenome(HttpServletRequest request, MultipartFile file){
+        System.out.println("=============CommonController: CentroGenome==============");
+        String fileName = upload(file);
+        System.out.println("----> upload->CentroGenome_Url:" + fileName);
+        // 把文件名存到Session
+        HttpSession session = request.getSession();
+        session.setAttribute("centroGenome_Url", fileName);
+        return new Result(Code.UPLOAD_OK, "success");
+    }
+
+
+    /**
+    * @Description: Centro Module的TE annnotation上传
+    * @Param: request MultiPartFile
+    * @Return: Result
+    */
+        @PostMapping("/centroTE")
+    public Result uploadTEGenome(HttpServletRequest request, MultipartFile file){
+        System.out.println("=============CommonController: CentroTE==============");
+        String fileName = upload(file);
+        System.out.println("----> upload->CentroTE_Url:" + fileName);
+        // 把文件名存到Session
+        HttpSession session = request.getSession();
+        session.setAttribute("centroTE_Url", fileName);
+        return new Result(Code.UPLOAD_OK, "success");
+    }
+
+
+    /**
+    * @Description: Centro Module的display
+    * @Param: request
+    * @Return: ResultUrl
+    */
+    @GetMapping("/centroDisplay")
+    public Result centroDisplay(HttpServletRequest request){
+        try {
+            System.out.println("=============CommonController: centroDisplay==============");
+            HttpSession session = request.getSession();
+            // 1. 从Session获取数据 return给用户
+            String centroPng = genPath + session.getAttribute("centroPng");
+            String gff3ZipUrl = genPath + session.getAttribute("gff3ZipUrl");
+            String fastaZipUrl = genPath + session.getAttribute("fastaZipUrl");
+            String candidateZipUrl = genPath + session.getAttribute("candidateZipUrl");
+            // warnings
+            Vector<ProcessWarning> warnings = (Vector<ProcessWarning>) session.getAttribute("fillWarnings");
+            // 2. candidate URL
+            String candidateUrl =  (String) session.getAttribute("candidateUrl");
+            // 3. 表格读取出来展示
+            ArrayList<CentroCandidate> centroCandidates = commonService.centroReadCandidate(candidateUrl);
+            // 4. 作为结果传递给前端
+            CentroResultUrl centroResultUrl = new CentroResultUrl();
+            centroResultUrl.setGenomePng(centroPng);
+            centroResultUrl.setCandidateZipUrl(candidateZipUrl);
+            centroResultUrl.setFastaZipUrl(fastaZipUrl);
+            centroResultUrl.setGff3ZipUrl(gff3ZipUrl);
+            // 表格数据
+            candidateUrl = genPath + candidateUrl;
+            centroResultUrl.setCandidateUrl(candidateUrl);
+            centroResultUrl.setCandidate(centroCandidates);
+            System.out.println(centroResultUrl);
+            return new Result(Code.TRAIN_OK, "success", centroResultUrl);
+        } catch (Exception e) {
+            throw new BusinessException("Fail to generate the result, please check the format of your file", Code.BUSINESS_ERR);
+        }
+    }
+
+
+
+
 
 }
