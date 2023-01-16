@@ -3,6 +3,8 @@ package com.ahau;
 import com.ahau.common.Code;
 import com.ahau.domain.DraftMapInfo;
 import com.ahau.domain.DraftStat;
+import com.ahau.domain.centro.CentroCandidate;
+import com.ahau.domain.centro.CentroSubCan;
 import com.ahau.domain.gapFill.GapDetail;
 import com.ahau.domain.gapFill.GapStat;
 import com.ahau.domain.telo.TeloInfo;
@@ -179,8 +181,8 @@ class YuanyiDemoApplicationTests {
             if (!line.contains("#")) {
                 GapDetail gapDetail = new GapDetail();
                 String[] split = line.split("\t");
-                for(int i = 0;i<split.length;i++){
-                    switch (i){
+                for (int i = 0; i < split.length; i++) {
+                    switch (i) {
                         case 0:
                             gapDetail.setSID(split[i]);
                             break;
@@ -231,8 +233,8 @@ class YuanyiDemoApplicationTests {
             if (!line.contains("#")) {
                 GapStat gapStat = new GapStat();
                 String[] split = line.split("\t");
-                for(int i=0;i<split.length;i++){
-                    switch (i){
+                for (int i = 0; i < split.length; i++) {
+                    switch (i) {
                         case 0:
                             gapStat.setCID(split[i]);
                             break;
@@ -245,7 +247,7 @@ class YuanyiDemoApplicationTests {
                         case 3:
                             // 可能有多个
                             StringBuilder gLocus = new StringBuilder();
-                            for(int j=i; j<split.length;j++){
+                            for (int j = i; j < split.length; j++) {
                                 gLocus.append(split[j]).append("\t");
                             }
                             gapStat.setGLocus(gLocus.toString());
@@ -257,7 +259,7 @@ class YuanyiDemoApplicationTests {
             line = reader.readLine();
         }
         reader.close();
-        for(GapStat gapStat:gapStats){
+        for (GapStat gapStat : gapStats) {
             System.out.println(gapStat);
         }
     }
@@ -276,8 +278,8 @@ class YuanyiDemoApplicationTests {
             if (!line.contains("#")) {
                 TeloInfo teloInfo = new TeloInfo();
                 String[] split = line.split("\t");
-                for(int i = 0;i<split.length;i++){
-                    switch (i){
+                for (int i = 0; i < split.length; i++) {
+                    switch (i) {
                         case 0:
                             teloInfo.setChrID(split[i]);
                             break;
@@ -309,6 +311,221 @@ class YuanyiDemoApplicationTests {
         for (TeloInfo teloInfo : teloInfos) {
             System.out.println(teloInfo);
         }
+    }
+
+    @Test
+    void centroReader() throws IOException {
+        String candidateUrl = "simu.candidate";
+        String transPath = "E:/bioResp/result/epResult/Centro/";
+        ArrayList<CentroCandidate> centroCandidates = new ArrayList<>();
+        BufferedReader reader;
+        candidateUrl = transPath + candidateUrl;
+        System.out.println("-----> candidateUrl : " + candidateUrl);
+        reader = new BufferedReader(new FileReader(candidateUrl));
+        String line = reader.readLine();
+        // 如果没有读到结尾
+        while (line != null) {
+            // 过滤掉头部的信息
+            if (!line.startsWith("#")) {
+                // 如果该行是主行
+                if (!line.startsWith("\t")) {
+                    // 创建主行对象 设置各个属性
+                    CentroCandidate centroCandidate = new CentroCandidate();
+                    System.out.println("mainLine---》" + line);
+                    String[] split = line.split("\t");
+                    // 设置主属性
+                    for (int i = 0; i < split.length; i++) {
+                        switch (i) {
+                            case 0:
+                                centroCandidate.setChr(split[i]);
+                                break;
+                            case 1:
+                                centroCandidate.setStart(split[i]);
+                                break;
+                            case 2:
+                                centroCandidate.setEnd(split[i]);
+                                break;
+                            case 3:
+                                centroCandidate.setLength(split[i]);
+                                break;
+                            case 4:
+                                centroCandidate.setTRLength(split[i]);
+                                break;
+                            case 5:
+                                centroCandidate.setTRCoverage(split[i]);
+                                break;
+                            case 6:
+                                centroCandidate.setTELength(split[i]);
+                                break;
+                            case 7:
+                                centroCandidate.setTECoverage(split[i]);
+                                break;
+                            case 8:
+                                centroCandidate.setGeneLength(split[i]);
+                                break;
+                            case 9:
+                                centroCandidate.setGeneCoverage(split[i]);
+                                break;
+                            case 10:
+                                centroCandidate.setRegionScore(split[i]);
+                                break;
+                        }
+                    }
+                    // 构建一个子行数组Vector，存放子行对象
+                    Vector<CentroSubCan> centroSubCans = new Vector<>();
+                    // 这里开始往下继续读
+                    line = reader.readLine();
+                    while ((line != null) && line.startsWith("\t")) {
+                        System.out.println("SubLine---》" + line);
+                        // 对于每一行，创建子行对象
+                        CentroSubCan centroSubCan = new CentroSubCan();
+                        String[] splitSub = line.split("\t");
+                        // 设置子属性
+                        for (int j = 0; j < splitSub.length; j++) {
+                            switch (j) {
+                                case 1:
+                                    centroSubCan.setSubTR(splitSub[j]);
+                                    break;
+                                case 2:
+                                    centroSubCan.setPeriod(splitSub[j]);
+                                    break;
+                                case 3:
+                                    centroSubCan.setSubTRLength(splitSub[j]);
+                                    break;
+                                case 4:
+                                    centroSubCan.setSubTRCoverage(splitSub[j]);
+                                    break;
+                                case 5:
+                                    centroSubCan.setPattern(splitSub[j]);
+                                    break;
+                            }
+                        }
+                        // 把对象加到数组中
+                        centroSubCans.add(centroSubCan);
+                        // 主要是这个往下读的动作已经做了
+                        line = reader.readLine();
+                    }
+                    // 循环结束，下一行是主行 这里的line有两种可能，一种是读完了，一种是主行 但是没有利用
+                    // 把子行数组作为subInfo设置给主行对象
+                    centroCandidate.setSubInfo(centroSubCans);
+                    // 主行对象设置完毕，存放到主行数组中
+                    centroCandidates.add(centroCandidate);
+                }
+                // 这里结束 line已经是在下一个主行了
+                System.out.println("PastLine--->"+line);
+            }
+            line = reader.readLine();
+        }
+        reader.close();
+        // 输出一下看看是否读的正确
+//        for (CentroCandidate centroCandidate : centroCandidates) {
+//            System.out.println(centroCandidate);
+//        }
+    }
+
+    @Test
+    void centroReader2() throws IOException {
+        String candidateUrl = "simu.candidate";
+        String transPath = "E:/bioResp/result/epResult/Centro/";
+        ArrayList<CentroCandidate> centroCandidates = new ArrayList<>();
+        BufferedReader reader;
+        candidateUrl = transPath + candidateUrl;
+        System.out.println("-----> candidateUrl : " + candidateUrl);
+        reader = new BufferedReader(new FileReader(candidateUrl));
+        String line = reader.readLine();
+        // 如果没有读到结尾
+        while (line != null) {
+            if(line.startsWith("#")){
+                line = reader.readLine();
+            }else if(!line.startsWith("\t")){
+                // 创建主行对象 设置各个属性
+                CentroCandidate centroCandidate = new CentroCandidate();
+                System.out.println("mainLine---》" + line);
+                String[] split = line.split("\t");
+                // 设置主属性
+                for (int i = 0; i < split.length; i++) {
+                    switch (i) {
+                        case 0:
+                            centroCandidate.setChr(split[i]);
+                            break;
+                        case 1:
+                            centroCandidate.setStart(split[i]);
+                            break;
+                        case 2:
+                            centroCandidate.setEnd(split[i]);
+                            break;
+                        case 3:
+                            centroCandidate.setLength(split[i]);
+                            break;
+                        case 4:
+                            centroCandidate.setTRLength(split[i]);
+                            break;
+                        case 5:
+                            centroCandidate.setTRCoverage(split[i]);
+                            break;
+                        case 6:
+                            centroCandidate.setTELength(split[i]);
+                            break;
+                        case 7:
+                            centroCandidate.setTECoverage(split[i]);
+                            break;
+                        case 8:
+                            centroCandidate.setGeneLength(split[i]);
+                            break;
+                        case 9:
+                            centroCandidate.setGeneCoverage(split[i]);
+                            break;
+                        case 10:
+                            centroCandidate.setRegionScore(split[i]);
+                            break;
+                    }
+                }
+                // 构建一个子行数组Vector，存放子行对象
+                Vector<CentroSubCan> centroSubCans = new Vector<>();
+                // 这里开始往下继续读
+                line = reader.readLine();
+                while ((line != null) && line.startsWith("\t")) {
+                    System.out.println("SubLine---》" + line);
+                    // 对于每一行，创建子行对象
+                    CentroSubCan centroSubCan = new CentroSubCan();
+                    String[] splitSub = line.split("\t");
+                    // 设置子属性
+                    for (int j = 0; j < splitSub.length; j++) {
+                        switch (j) {
+                            case 1:
+                                centroSubCan.setSubTR(splitSub[j]);
+                                break;
+                            case 2:
+                                centroSubCan.setPeriod(splitSub[j]);
+                                break;
+                            case 3:
+                                centroSubCan.setSubTRLength(splitSub[j]);
+                                break;
+                            case 4:
+                                centroSubCan.setSubTRCoverage(splitSub[j]);
+                                break;
+                            case 5:
+                                centroSubCan.setPattern(splitSub[j]);
+                                break;
+                        }
+                    }
+                    // 把对象加到数组中
+                    centroSubCans.add(centroSubCan);
+                    // 主要是这个往下读的动作已经做了
+                    line = reader.readLine();
+                }
+                // 循环结束，下一行是主行 这里的line有两种可能，一种是读完了，一种是主行 但是没有利用
+                // 把子行数组作为subInfo设置给主行对象
+                centroCandidate.setSubInfo(centroSubCans);
+                // 主行对象设置完毕，存放到主行数组中
+                centroCandidates.add(centroCandidate);
+            }
+        }
+        reader.close();
+        // 输出一下看看是否读的正确
+//        for (CentroCandidate centroCandidate : centroCandidates) {
+//            System.out.println(centroCandidate);
+//        }
     }
 
 

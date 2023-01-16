@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>teloBlast - display</title>
+    <style>
+        /*根节点html字体大小*/
+        html {
+            font-size: 12px;
+        }
+
+        body {
+            background-color: #f7f6f2; /*#f7f6f2  #d5d5d5*/
+            /* 针对web元素塌陷*/
+            /*min-width: 65rem;*/
+            /*max-width: 130rem;*/
+            margin: 0 auto;
+        }
+
+        /* 针对设备自适应自适应*/
+        #thinner {
+            width: 106rem;
+            margin: 0 auto;
+            /* 针对web元素塌陷*/
+            min-width: 65rem;
+            max-width: 130rem;
+        }
+
+        /* 手机 宽度小于768px的 */
+        @media only screen and (max-width: 768px) {
+            #thinner {
+                width: 100%;
+            }
+        }
+
+        /* 平板 宽度大于768px的*/
+        @media only screen and (min-width: 768px) {
+            #thinner {
+                width: 62rem;
+            }
+        }
+
+        /* 电脑 */
+        @media only screen and (min-width: 992px) {
+            #thinner {
+                width: 80rem;
+            }
+        }
+
+        /* web 更宽的屏幕 */
+        @media only screen and (min-width: 1200px) {
+            #thinner {
+                width: 97rem;
+            }
+        }
+
+        /*页脚页头格式*/
+        .el-header, .el-footer {
+            background-color: #fefefe;
+            color: #333;
+            text-align: justify; /*设置文字 两端分布*/
+            line-height: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* 设置页头下p元素属性*/
+        .el-header > p {
+            font-size: 140%;
+            color: #4d4d4d;
+            font-family: Helvetica, sans-serif
+        }
+
+        /* 设置页脚下元素属性*/
+        .el-footer > div {
+            font-size: 140%;
+            color: #f7f6f2;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        /* el-aside格式*/
+        .el-aside {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+            float: left;
+        }
+
+        #el-form {
+            margin-left: 0;
+        }
+
+        /*主体组件el-main格式*/
+        .el-main {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+            margin-top: 1rem;
+            border-color: #e5e5e5;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        /*设置导航栏的字体格式*/
+        .el-menu-demo {
+            font-family: Helvetica, sans-serif;
+            font-size: 130%;
+            font-weight: bold;
+        }
+
+        /*登录+标题banner的设置*/
+        .banner {
+            height: 8rem;
+            background-color: #205573;
+            margin: 0;
+        }
+
+        /*banner下面那个Quartet标题的格式*/
+        .banner > a {
+            color: #ffffff;
+            font-size: 5rem;
+            font-family: Helvetica, sans-serif;
+            padding-top: 1rem;
+            padding-left: 1rem;
+            margin: 0;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        /*登录注册的格式*/
+        .loginDiv {
+            display: inline-block;
+            float: right;
+            padding-top: 2rem;
+            padding-right: 3rem;
+        }
+
+        /*登录注册的按钮格式*/
+        .loginDiv > .el-button {
+            font-size: 1.5rem;
+            font-family: "Helvetica", sans-serif;
+        }
+
+        .loginDiv > span {
+            color: #ffffff;
+            font-size: 2rem;
+            padding-top: 1rem;
+            padding-left: 1rem;
+        }
+
+        /*下一步的按钮格式*/
+        .next-button {
+            font-family: "Comic Sans MS", serif;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #205573;
+            width: 15rem;
+            height: 4rem;
+        }
+
+        /*每个区块里面对应蓝色的标签*/
+        /*css button ψ(｀∇´)ψ*/
+        .btn-24,
+        .btn-24 *,
+        .btn-24 :after,
+        .btn-24 :before,
+        .btn-24:after,
+        .btn-24:before {
+            border: 0 solid;
+            box-sizing: border-box;
+        }
+
+        .btn-24 {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: button;
+            background-color: #000;
+            background-image: none;
+            color: #fff;
+            cursor: pointer;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+            Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            font-size: 100%;
+            font-weight: 900;
+            line-height: 1.5;
+            margin: 0;
+            -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(green), to(pink), color-stop(0.5, #000), color-stop(50%, #ffffff));
+            padding: 0;
+            text-transform: uppercase;
+        }
+
+        .btn-24:disabled {
+            cursor: default;
+        }
+
+        .btn-24:-moz-focusring {
+            outline: auto;
+        }
+
+        .btn-24 svg {
+            display: block;
+            vertical-align: middle;
+        }
+
+        .btn-24 [hidden] {
+            display: none;
+        }
+
+        .btn-24 {
+            --background: #205573;
+            background: none;
+            overflow: hidden;
+            padding: 0.8rem 3rem;
+            position: relative;
+        }
+
+        .btn-24 span {
+            display: block;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-24:after,
+        .btn-24:before {
+            --tilt: 20px;
+            background: #fff;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+            content: "";
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transition: -webkit-clip-path 0.2s ease;
+            transition: clip-path 0.2s ease;
+            transition: clip-path 0.2s ease, -webkit-clip-path 0.2s ease;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .btn-24:after {
+            --thickness: 5px;
+            background: var(--background);
+            height: calc(100% - var(--thickness) * 2);
+            left: var(--thickness);
+            top: var(--thickness);
+            width: calc(100% - var(--thickness) * 2);
+        }
+
+        .btn-24:hover span {
+            transform: translateX(-20px);
+        }
+
+        .btn-24:hover:after,
+        .btn-24:hover:before {
+            -webkit-clip-path: polygon(
+                    0 0,
+                    calc(100% - var(--tilt)) 0,
+                    100% 50%,
+                    calc(100% - var(--tilt)) 100%,
+                    0 100%
+            );
+            clip-path: polygon(
+                    0 0,
+                    calc(100% - var(--tilt)) 0,
+                    100% 50%,
+                    calc(100% - var(--tilt)) 100%,
+                    0 100%
+            );
+        }
+
+        /*ele container setting*/
+        body > .el-container {
+            margin-bottom: 5rem;
+        }
+
+        .el-container:nth-child(5) .el-aside,
+        .el-container:nth-child(6) .el-aside {
+            line-height: 30rem;
+        }
+
+        .el-container:nth-child(7) .el-aside {
+            line-height: 50rem;
+        }
+
+        /*展示图旁边放大的按钮*/
+        .zoom-out-button {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        #bigimg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            display: none;
+            z-index: 20;
+        }
+
+        /*第一个模块程序中输出的警告信息*/
+        /*框*/
+        .result-module {
+            display: none;
+            background-color: #ffffff;
+            border-style: solid;
+            border-width: 2px;
+            border-color: #e3e3e3;
+            margin-right: 5rem;
+            margin-top: 5rem;
+            -webkit-animation: box-shadow-drop-tr 0.6s both;
+            animation: box-shadow-drop-tr 0.6s both;
+        }
+
+        /*框中的标签*/
+        .result-module > h3 {
+            font-family: Helvetica, sans-serif;
+            color: #494949;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        /*给框一个加阴影的动画*/
+        @-webkit-keyframes result-module {
+            0% {
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+            100% {
+                box-shadow: 6px -6px 18px rgba(0, 0, 0, 0.35);
+            }
+        }
+
+        @keyframes box-shadow-drop-tr {
+            0% {
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+            100% {
+                box-shadow: 6px -6px 18px rgba(0, 0, 0, 0.35);
+            }
+        }
+
+        /*框内描述结果的文字box*/
+        .illustration-box {
+            font-size: 1.2rem;
+            color: #4d4d4d;
+            font-family: Helvetica, sans-serif;
+        }
+
+        /*两个展示表格上面的下载的按钮格式*/
+        .download-stat {
+            margin-left: 1rem;
+            float: left;
+            margin-bottom: 1rem;
+        }
+
+        .download-stat > .el-button {
+            margin: 0 0 0 0;
+        }
+
+        /*点击放大*/
+        /* 1. 整个的遮罩*/
+        .shade {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+            /*使得遮罩能在页面最上方*/
+            z-index: 999;
+        }
+
+        /* 2. 放大图片后：包含图片的div*/
+        .show-bigImg {
+            width: 100rem;
+            height: auto;
+            /*实现div永远居中*/
+            margin: auto;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        /* 3. 放大后的图片*/
+        .show-bigImg img {
+            /*width: 66rem;*/
+            /*height: 66rem;*/
+            max-width: 90rem;
+            max-height: 90rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!--1. 登录注册-->
+    <div class="banner">
+        <!--标题-->
+        <a href="home.html"> Quartet </a>
+        <!--登陆注册 使用-->
+        <span class="loginDiv">
+                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
+                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
+                <span class="username" v-show="isLogin">{{this.username}}</span>
+        </span>
+    </div>
+
+    <!--使用container布局-->
+    <el-container>
+        <!--2 导航栏-->
+        <el-header style="background-color: #ffffff; margin-top: 0">
+            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
+            <el-menu :default-active="activeBar" class="el-menu-demo"
+                     mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">Tools</template>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssembleBlast</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFillBlast</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
+                    <el-menu-item index="2-5" onclick="document.location.href='module5.html'">AGCTBlast</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
+                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
+                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
+            </el-menu>
+        </el-header>
+    </el-container>
+    <div id="thinner">
+        <!--3 区域1 展示png结果图-->
+        <el-container>
+            <el-main>
+                <!--3.0 [放大的图片]-->
+                <!-- 1 整个的遮罩,点击黑色遮罩也可以关闭这个div-->
+                <div class="shade" @click="closeImg">
+                    <!-- 2 包含放大后图片的div-->
+                    <div class="show-bigImg">
+                        <img
+                                v-bind:src="this.bigPng"
+                                alt="bigger img"
+                                @click="closeImg">
+                    </div>
+                </div>
+                <!--3.1 该区域标签-->
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <i class="el-icon-picture"></i>
+                        <span>GenomeDraft Display</span>
+                    </button>
+                </div>
+                <!--3.2 对该图的说明-->
+                <div class="illustration-box">
+                    <p>
+                        Here are some illustration about the graphs....
+                    </p>
+                </div>
+                <!--3.3 主体内容-->
+                <div>
+                    <!--侧栏 1 按钮-->
+                    <el-aside width="5%">
+                        <!--放大按钮-->
+                        <div class="zoom-out-button">
+                            <el-button
+                                    circle
+                                    icon="el-icon-zoom-in"
+                                    @click="ClickBig">
+                            </el-button>
+                        </div>
+                        <!--下载按钮-->
+                        <div>
+                            <el-button
+                                    circle
+                                    type="primary"
+                                    icon="el-icon-download"
+                                    @click="downloadPng">
+                            </el-button>
+                        </div>
+                    </el-aside>
+                    <!--侧栏 2 生成的png图片-->
+                    <el-aside width="50%">
+                        <!--限制原图的外部div-->
+                        <div
+                                style="width: 500px;
+                            height: 450px;
+                            overflow: hidden">
+                            <!--[原图]-->
+                            <img
+                                    v-bind:src="this.genomePng"
+                                    alt="plot of genome result"
+                                    style="width: 550px;
+                                height: 600px">
+                        </div>
+                    </el-aside>
+                    <!--侧栏 3 程序运行中的Warnings展示-->
+                    <el-aside
+                            style="box-shadow: #4d4d4d"
+                            width="45%">
+                        <!--默认为正常的Result div,block-->
+                        <div
+                                class="result-module"
+                                style="display: block"
+                                id="withCorrect">
+                            <h3>
+                                Process Result
+                            </h3>
+                            <el-result
+                                    icon='success'
+                                    title='Combo!'
+                                    sub-title='No Errors Occur During the Process'>
+                            </el-result>
+                        </div>
+                        <!--不显示的,根据display请求改变的出错的div-->
+                        <div
+                                class="result-module"
+                                style="display: none"
+                                id="withWarnings">
+                            <h3>
+                                Process Result
+                            </h3>
+                            <el-result
+                                    icon='warning'
+                                    title='Warning!'
+                                    sub-title='There are some conditions encountered during process'>
+                            </el-result>
+                            <el-table
+                                    :data="warnings"
+                                    class="tableSet"
+                                    style=" width: 95%;
+                                    font-size: 1.1rem;
+                                    font-family: Helvetica,sans-serif;
+                                    margin:10px 10px 10px 10px;"
+                                    stripe
+                                    border
+                                    height="10rem"
+                                    :row-class-name="tableRowClassName"
+                                    :cell-style="cellStyle">
+                                <el-table-column
+                                        prop="wid"
+                                        label="ID"
+                                        min-width="30%">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="warning"
+                                        label="warning"
+                                        min-width="70%">
+                                </el-table-column>
+                            </el-table>
+                        </div>
+                    </el-aside>
+                </div>
+            </el-main>
+        </el-container>
+        <el-container>
+            <el-main>
+                <!--4.1 该区域标签-->
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <i class="el-icon-tickets"></i>
+                        <span>Statistic Information</span>
+                    </button>
+                </div>
+                <!--4.2 对两个表格的说明-->
+                <div class="illustration-box">
+                    <p>
+                        Here are some illustration about the tables....
+                    </p>
+                </div>
+                <!--4.3 stat-->
+                <div>
+                    <!--下载按钮-->
+                    <span class="download-stat">
+                        <el-button icon="el-icon-download" @click="downloadInfo"></el-button>
+                    </span>
+                    <!--表格-->
+                    <el-table
+                            :data="teloInfo"
+                            stripe
+                            border
+                            height="30rem"
+                            class="tableSet"
+                            style=" width: 95%;
+                            font-size: 1.3rem;
+                            font-family: Helvetica,sans-serif;
+                            margin:10px 10px 10px 10px;"
+                            :header-cell-style="{'text-align':'center'}"
+                            :row-class-name="tableRowClassName">
+                        <el-table-column
+                                prop="chrID"
+                                label="ChrID"
+                                min-width="25%">
+                        </el-table-column>
+                        <el-table-column
+                                prop="leftNum"
+                                label="LeftNum"
+                                min-width="25%">
+                        </el-table-column>
+                        <el-table-column
+                                prop="leftStart"
+                                label="LeftStart"
+                                min-width="25%">
+                        </el-table-column>
+                        <el-table-column
+                                prop="leftEnd"
+                                label="LeftEnd"
+                                min-width="25%">
+                        </el-table-column>
+                        <el-table-column
+                                prop="rightNum"
+                                label="RightNum"
+                                min-width="25%">
+                        </el-table-column>
+                        <el-table-column
+                                prop="rightStart"
+                                label="RightStart"
+                                min-width="25%">
+                        </el-table-column>
+                        <el-table-column
+                                prop="rightEnd"
+                                label="RightEnd"
+                                min-width="25%">
+                        </el-table-column>
+                    </el-table>
+                </div>
+            </el-main>
+        </el-container>
+
+    </div>
+
+    <!--6 页脚信息-->
+    <el-footer style="height: 120%; background-color: #205573">
+        <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;Junyang Yue, Professor
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;School of Horticulture
+            <br>
+            Anhui Agricultural University Hefei 230036 China.
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Email: yuejy@ahau.edu.cn
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)6578 6185
+        </div>
+    </el-footer>
+</div>
+
+</body>
+<!-- 引入组件库 -->
+<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+
+<script>
+    new Vue({
+        el: `#app`,
+        data: function () {
+            return {
+                activeBar: "2", // 导航栏激活的栏，默认为Home 话说下拉栏显示不了啊喂
+                genomePng: '../imgs/empty.jpg',
+                bigPng: '',
+                infoUrl: '',
+                teloInfo: [],
+                warnings: [],
+            }
+        },
+        mounted() {
+            axios.get("/blast/common/teloDisplay").then((res) => {
+                // res->response res.data->响应体(Result) res.data.data->FillResultUrl
+                let resultUrl = res.data.data;
+                console.log(resultUrl)
+                // 1. 常规信息
+                this.genomePng = resultUrl.genomePng;
+                this.infoUrl = resultUrl.infoUrl;
+                // 2. 展示信息
+                this.teloInfo = resultUrl.teloInfo;
+                this.warnings = resultUrl.warnings;
+                // 3. Warnings的结果展示
+                if (this.warnings.length !== 0) {
+                    // 把正确的div取消
+                    $("#withCorrect").css("display", "none");
+                    // 展示错误的div
+                    $("#withWarnings").css("display", "block");
+                }
+            })
+        },
+
+        methods: {
+            /*点击放大图片*/
+            // 1. 点击隐藏大图
+            closeImg() {
+                $(".shade").css("display", "none");
+            },
+            // 点击原图变大
+            ClickBig() {
+                // 1. 把原图的src给放大图的div 设置放大图的css可见
+                this.bigPng = this.genomePng;
+                // 2. 展示遮罩
+                $(".shade").css('display', 'block');
+            },
+            // 下载
+            /*点击按钮下载文件*/
+            downloadCommon(src) {
+                // 创建一个a标签
+                let $a = document.createElement('a');
+                // 给标签设置 href 和 download 属性
+                $a.setAttribute("href", src);
+                $a.setAttribute("download", "");
+                // 创建单击事件
+                let eventObj = document.createEvent('MouseEvents');
+                eventObj.initMouseEvent('click', true, true, window,
+                    0, 0, 0, 0, 0,
+                    false, false, true, false,
+                    0, null);
+                // 触发单击事件
+                $a.dispatchEvent(eventObj);
+            },
+            // 下载图片
+            downloadPng(){
+                let src = this.genomePng;
+                this.downloadCommon(src);
+            },
+            // 下载stat
+            downloadInfo(){
+                let src = this.infoUrl;
+                this.downloadCommon(src);
+            },
+            /*修改表格单元格样式*/
+            cellStyle({row, column, rowIndex, columnIndex}) {
+                if (column.property === 'warning') {
+                    return {
+                        color: '#dc3636',
+                    }
+                }
+            },
+
+        }
+
+    });
+</script>
+</html>
