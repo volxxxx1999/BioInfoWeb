@@ -1,5 +1,6 @@
-package com.ahau.domain;
+package com.ahau.domain.assemble;
 
+import com.ahau.domain.ProcessWarning;
 import lombok.Data;
 
 import java.util.Vector;
@@ -10,7 +11,8 @@ import java.util.Vector;
 public class DraftResultUrl {
     // 基本信息
     private String hifiRefUrl;
-    private String genomeRefUrl;
+    // genomeRef默认是不画的
+    private String genomeRefUrl="NotPlot";
     private String genomePng;
     private String mapInfoUrl;
     private String statUrl;

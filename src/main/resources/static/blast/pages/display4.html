@@ -421,11 +421,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssembleBlast</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFillBlast</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
-                    <el-menu-item index="2-5" onclick="document.location.href='module5.html'">AGCTBlast</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">Assemble</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFill</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">Centro</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">Telo</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -531,29 +530,31 @@
                                     title='Warning!'
                                     sub-title='There are some conditions encountered during process'>
                             </el-result>
-                            <el-table
-                                    :data="warnings"
-                                    class="tableSet"
-                                    style=" width: 95%;
-                                    font-size: 1.1rem;
-                                    font-family: Helvetica,sans-serif;
-                                    margin:10px 10px 10px 10px;"
-                                    stripe
-                                    border
-                                    height="10rem"
-                                    :row-class-name="tableRowClassName"
-                                    :cell-style="cellStyle">
-                                <el-table-column
-                                        prop="wid"
-                                        label="ID"
-                                        min-width="30%">
-                                </el-table-column>
-                                <el-table-column
-                                        prop="warning"
-                                        label="warning"
-                                        min-width="70%">
-                                </el-table-column>
-                            </el-table>
+                            <el-button type="text" @click="dialogTableVisible = true">Show Details</el-button>
+                            <el-dialog title="Warning Infos" :visible.sync="dialogTableVisible">
+                                <el-table :data="warnings"
+                                          class="tableSet"
+                                          style="width: 95%;
+                                                font-size: 1.1rem;
+                                                font-family: Helvetica,sans-serif;
+                                                margin:10px 10px 10px 10px;"
+                                          stripe
+                                          border
+                                          height="20rem"
+                                          :row-class-name="tableRowClassName"
+                                          :cell-style="cellStyle">
+                                    <el-table-column
+                                            prop="wid"
+                                            label="ID"
+                                            min-width="30%">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="warning"
+                                            label="warning"
+                                            min-width="70%">
+                                    </el-table-column>
+                                </el-table>
+                            </el-dialog>
                         </div>
                     </el-aside>
                 </div>
@@ -632,7 +633,7 @@
                                             align='center'
                                             prop="pattern"
                                             label="pattern"
-                                            width="920">
+                                            width="680">
                                     </el-table-column>
                                 </el-table>
                             </template>
@@ -647,19 +648,19 @@
                         <el-table-column
                                 align='center'
                                 prop="start"
-                                label="start"
+                                label="Start"
                                 width="120">
                         </el-table-column>
                         <el-table-column
                                 align='center'
                                 prop="end"
-                                label="end"
+                                label="End"
                                 width="120">
                         </el-table-column>
                         <el-table-column
                                 align='center'
                                 prop="length"
-                                label="length"
+                                label="Length"
                                 width="120">
                         </el-table-column>
                         <el-table-column
@@ -688,31 +689,156 @@
                         </el-table-column>
                         <el-table-column
                                 align='center'
-                                prop="geneLength"
-                                label="geneLength"
+                                prop="regionScore"
+                                label="RegionScore"
+                                width="200">
+                        </el-table-column>
+                        <!--TODO SHOW MORE 使用Dialog嵌套实现-->
+                        <el-table-column
+                                align='center'
+                                prop="detail"
+                                label="Detail"
+                                width="120">
+                            <template slot-scope="scope">
+                                <el-button
+                                        size="mini"
+                                        @click="handleShowMore(scope.$index, scope.row)">
+                                    Show More
+                                </el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </div>
+
+                <!--SHOW MORE的表格-->
+                <el-dialog
+                        title="Details"
+                        :visible.sync="showMoreDialogTableVisible"
+                        width="80%">
+                    <el-table
+                            :data="showMoreTableData"
+                            class="tableSet"
+                            stripe
+                            border
+                            fit
+                            style="font-size: 1.3rem;
+                            font-family: Helvetica,sans-serif;
+                            margin:10px 10px 10px 10px;"
+                            :header-cell-style="{'text-align':'center'}"
+                            height="40rem"
+                            width="100rem">
+                        <!--主表expand-->
+                        <el-table-column type="expand">
+                            <template slot-scope="props">
+                                <!--二级子表-->
+                                <el-table
+                                        :data="props.row.subInfo"
+                                        style="width: 100%;
+                                         color:#205573;
+                                         font-family:Georgia,serif">
+                                    <!-- 子表列-->
+                                    <el-table-column
+                                            align='center'
+                                            prop="subTR"
+                                            label="subTR"
+                                            width="170">
+                                    </el-table-column>
+                                    <el-table-column
+                                            align='center'
+                                            prop="period"
+                                            label="period"
+                                            width="150">
+                                    </el-table-column>
+                                    <el-table-column
+                                            align='center'
+                                            prop="subTRLength"
+                                            label="subTRlength"
+                                            width="150">
+                                    </el-table-column>
+                                    <el-table-column
+                                            align='center'
+                                            prop="subTRCoverage"
+                                            label="subTRcoverage"
+                                            width="150">
+                                    </el-table-column>
+                                    <el-table-column
+                                            align='center'
+                                            prop="pattern"
+                                            label="pattern"
+                                            width="680">
+                                    </el-table-column>
+                                </el-table>
+                            </template>
+                        </el-table-column>
+                        <!--主表列-->
+                        <el-table-column
+                                align='center'
+                                prop="chr"
+                                label="Chr"
+                                width="120">
+                        </el-table-column>
+                        <el-table-column
+                                align='center'
+                                prop="start"
+                                label="Start"
+                                width="120">
+                        </el-table-column>
+                        <el-table-column
+                                align='center'
+                                prop="end"
+                                label="End"
+                                width="120">
+                        </el-table-column>
+                        <el-table-column
+                                align='center'
+                                prop="length"
+                                label="Length"
+                                width="120">
+                        </el-table-column>
+                        <el-table-column
+                                align='center'
+                                prop="TRLength"
+                                label="TRlength"
+                                width="120">
+                        </el-table-column>
+                        <el-table-column
+                                align='center'
+                                prop="TRCoverage"
+                                label="TRcoverage"
                                 width="150">
                         </el-table-column>
                         <el-table-column
                                 align='center'
-                                prop="geneCoverage"
-                                label="geneCoverage"
+                                prop="TELength"
+                                label="TElength"
+                                width="120">
+                        </el-table-column>
+                        <el-table-column
+                                align='center'
+                                prop="TECoverage"
+                                label="TEcoverage"
                                 width="150">
                         </el-table-column>
                         <el-table-column
                                 align='center'
                                 prop="regionScore"
-                                label="regionScore"
+                                label="RegionScore"
                                 width="200">
                         </el-table-column>
                     </el-table>
-                </div>
+                </el-dialog>
+
 
                 <!--5 区域3 3个下载ZIP文件-->
+                <!--TODO 单独的Candidate下载，并且有candidate说明-->
+                <div>
+                    <p style="font-family: Helvetica, sans-serif">DESCRIPTION</p>
+                    <el-button class="next-button" type="success" @click="downloadCandidateZip">Download candidate
+                    </el-button>
+                </div>
                 <div style="margin-top: 3rem;">
                     <el-button class="next-button" type="primary" @click="downloadGFF3Zip">Download TRgff3</el-button>
                     <el-button class="next-button" type="primary" @click="downloadFastaZip">Download TRfasta</el-button>
-                    <el-button class="next-button" type="primary" @click="downloadCandidateZip">Download candidate
-                    </el-button>
                 </div>
             </el-main>
         </el-container>
@@ -753,7 +879,12 @@
         el: `#app`,
         data: function () {
             return {
-                activeBar: "2", // 导航栏激活的栏，默认为Home 话说下拉栏显示不了啊喂
+                // 警告表格
+                dialogTableVisible: false,
+                // show more表格
+                showMoreDialogTableVisible: false,
+                showMoreTableData: [],
+                activeBar: "2", // 导航栏激活的栏，默认为Home
                 genomePng: '../imgs/empty.jpg',
                 bigPng: '',
                 fastaZipUrl: '',
@@ -770,8 +901,6 @@
                     TRCoverage: '5.17%',
                     TELength: '0',
                     TECoverage: '0.0%',
-                    geneLength: '0',
-                    geneCoverage: '0.0%',
                     regionScore: '0.051696924961522756',
                     subInfo: [{
                         subTR: 'Chr01_Qd@TR_00136',
@@ -786,7 +915,7 @@
                         subTRCoverage: '4.26%',
                         pattern: 'CTTGTATTTAACTACACAAGATATATATACATGTATGTAGAGAGAGTACCCGACGGCCACTGTTGATCGAGATGGAACGGTCTCCGGTGAGAGAGTTATCAAAAATGTTCCGGCGTTCCGCTGCTCTAACAACGAAGGAAAAATGGAGAGAGAGAGATTTCAATTTTTTCCTTCATAT',
                     },]
-                },{
+                }, {
                     chr: 'Chr01_Qd',
                     start: '5288587',
                     end: '5543283',
@@ -795,8 +924,6 @@
                     TRCoverage: '5.17%',
                     TELength: '0',
                     TECoverage: '0.0%',
-                    geneLength: '0',
-                    geneCoverage: '0.0%',
                     regionScore: '0.051696924961522756',
                     subInfo: [{
                         subTR: 'Chr01_Qd@TR_00136',
@@ -816,6 +943,8 @@
             }
         },
         mounted() {
+            // show more数据源模拟
+            this.showMoreTableData = this.candidate;
             axios.get("/blast/common/centroDisplay").then((res) => {
                 // res->response res.data->响应体(Result) res.data.data->FillResultUrl
                 let resultUrl = res.data.data;
@@ -851,6 +980,25 @@
                     }
                 }
             },
+
+            // show more 点击链接到candidate下面的文件 TODO：showmore的画测试脚本也要改变
+            handleShowMore(index, row) {
+                let chr = row.chr;
+                console.log("chr");
+                console.log(chr);
+                // 该行第一列.candidate
+                let fileName = chr + ".candidate";
+                console.log("filename:" + fileName);
+                // 1. 使show more表格可视化
+                this.showMoreDialogTableVisible = true;
+                axios.get("/blast/common/centroShowMore/" + fileName).then((res) => {
+                    // res 就是那个复合表格的数据源
+                    // 2. 设置表格数据源
+                    console.log(res.data.data);
+                    this.showMoreTableData = res.data.data;
+                });
+            },
+
 
             /*点击放大图片*/
             // 1. 点击隐藏大图

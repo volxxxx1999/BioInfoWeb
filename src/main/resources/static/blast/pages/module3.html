@@ -356,11 +356,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssembleBlast</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFillBlast</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
-                    <el-menu-item index="2-5" onclick="document.location.href='module5.html'">AGCTBlast</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">Assemble</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFill</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">Centro</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">Telo</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -401,7 +400,7 @@
                     <el-upload
                             class="upload-demo"
                             drag
-                            action="/blast/common/teloGenome"
+                            action="/blast/common/uploadTeloGenome"
                             :on-success="handleUploadSuccess"
                             :on-remove="handleRemove"
                             :before-remove="beforeRemove"
@@ -693,12 +692,31 @@
                         clade: this.formData.clade,
                         prefix: this.formData.prefix,
                     };
-                    const loading1 = this.$loading({
-                        lock: true,
-                        text: 'Program is running and will take approximately 15 to 20 minutes. Please DO NOT refresh or leave the page.',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(2,1,1,0.7)'
-                    });
+                    // 提示用户留下邮箱
+                    this.$prompt('The program may take a long time to run. ' +
+                        'Please leave your email address and' +
+                        ' we will send the results to your email after running.', 'Reminder', {
+                        confirmButtonText: 'Confirm',
+                        cancelButtonText: 'Cancel',
+                        inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+                        inputErrorMessage: 'Incorrect mailbox format'
+                    }).then(({value}) => {
+                        // 把email存储进session
+                        console.log(value)
+                        axios.get("/blast/common/setEmail/"+value).then((res) => {
+                            console.log(res)
+                            this.$message({
+                                type: 'success',
+                                message: 'Your email is: ' + value
+                            });
+                        });
+                        // 开始运行
+                        const loading1 = this.$loading({
+                            lock: true,
+                            text: 'Program is running and will take approximately 15 to 20 minutes. Please DO NOT refresh or leave the page.',
+                            spinner: 'el-icon-loading',
+                            background: 'rgba(2,1,1,0.7)'
+                        });
                     console.log(trainParam)
                     axios.post("/blast/exec/teloBlast", trainParam).then((res) => {
                         loading1.close();
@@ -708,16 +726,22 @@
                             document.location.href = "display3.html";
                         }
                     });
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: 'Cancel input'
+                        });
+                    });
                 }
             },
 
 
             // 不允许输入违规文件名
             onNameWarning(val) {
-                let reg = /.*[/\\:*?|].*/;
+                let reg = /[^\w]/g;
                 // 存在返回true
                 if (reg.test(val)) {
-                    this.$message.error("FileName includes illegal characters!");
+                    this.$message.error("Filename can only consist of numbers, letters and underscores!");
                     this.formData.prefix = '';
                 }
             },
@@ -728,7 +752,7 @@
             },
             beforeUpload(file) {
                 let filename = file.name.toString();
-                let suffix = filename.substring(filename.indexOf(".") + 1);
+                let suffix = filename.substring(filename.lastIndexOf(".") + 1);
                 let suffixList = ["fasta", "fas", "fa", "FASTA", "FA", "FAS"];
                 let isFas = (suffixList.indexOf(suffix) !== -1);
                 // 后缀判断
@@ -750,8 +774,12 @@
             // 删除后 重新设置
             handleRemove(file, fileList) {
                 if (file && file.status === "success") {
-                    this.uploadGenomeFile = 0;
-                    this.$message.info("Removed Successfully");
+                    let filename = file.name;
+                    console.log("deleteFile:" + filename);
+                    axios.get("/blast/common/removeTeloGenome").then((res) => {
+                        this.uploadGenomeFile = 0;
+                        this.$message.info("Removed Successfully");
+                    });
                 }
             },
             // 上传成功提示

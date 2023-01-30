@@ -1,4 +1,4 @@
-package com.ahau.domain;
+package com.ahau.domain.assemble;
 
 import lombok.Data;
 

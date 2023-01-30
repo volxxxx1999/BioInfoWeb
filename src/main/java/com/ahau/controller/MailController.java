@@ -20,7 +20,7 @@ public class MailController {
 
     @PostMapping("/simple")
     public Result SendSimpleMessage(@RequestBody Mail mail) {
-            mailService.sendSimpleMail(mail);
-            return new Result(Code.SEND_OK,"success");
+        mailService.sendSimpleMail(mail);
+        return new Result(Code.SEND_OK, "success");
     }
 }

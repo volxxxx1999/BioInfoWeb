@@ -6,12 +6,18 @@ public class Code {
     public final static Integer TRAIN_OK = 20021;
     public final static Integer SEND_OK = 20031;
     public final static Integer REMOVE_OK = 20041;
+    // 搜索相关（对应不同模块的结果）
+    public final static Integer ASSEMBLE_SEARCH_OK = 20051;
+    public final static Integer GAPFILL_SEARCH_OK = 20052;
+    public final static Integer TELO_SEARCH_OK = 20053;
+    public final static Integer CENTRO_SEARCH_OK = 20054;
 
     // 发送相关
     public final static Integer UPLOAD_ERR = 20010;
     public final static Integer TRAIN_ERR = 20020;
     public final static Integer SEND_ERR = 20030;
     public final static  Integer REMOVE_ERR = 20040;
+    public final static Integer SEARCH_ERR = 20050;
 
     //异常相关
     public final static Integer SYSTEM_ERR = 50001;

@@ -1,21 +1,20 @@
-bio:
-  # 项目 的 根目录
-  rootPath: E:/bioResp
-  # 用户上传文件 的 存储地址
-  uploadPath: E:/bioResp/upload/
-  # 啊啊啊啊
-  transPath: E:/bioResp/result/genResult/
-  # 脚本生成的结果 的 存储地址
-  genPath: http://127.0.0.1:8887/result/genResult/
-  # draftBlast 的 脚本的位置
-  draftPath: E:/bioResp/exec/simulatedServer/draftBlast.py
-  # fill的脚本位置
-  fillPath: E:/bioResp/exec/simulatedServer/quartet_gapfill_server.py
-  # telo的脚本位置
-  teloPath: E:/bioResp/exec/simulatedServer/quartet_telo_server.py
-  # centro的脚本位置
-  centroPath: E:/bioResp/exec/simulatedServer/quartet_centro_server.py
-  # 脚本 的 启动方式 (Java/python/perl...)
+pathConfig:
+  # 根目录 存放存储目录和项目（针对浏览器访问）
+  rootPath: http://127.0.0.1:8887/
+  # 展示目录 user_dir的绝对路径 给图片和下载链接展示使用
+  displayPath: http://127.0.0.1:8887/bioRepository/user_dir/
+  # 对于本项目，进行读写的目录
+  rwRootPath: ../../bioRepository/user_dir/
+  # 对于本项目，上传文件的地址
+  uploadPath: ../../bioRepository/user_dir/upload/
+  # 对于taskDir的工作目录，上传文件的路径（用于获取 -r Genome文件 HiFi文件等
+  taskUploadPath: ../../upload/
+  # 对于本项目，脚本目录的相对路径
+  assemblePath: ../../../simulatedExec/quartet_assemble_server.py
+  fillPath: ../../../simulatedExec/quartet_gapfill_server.py
+  teloPath: ../../../simulatedExec/quartet_telo_server.py
+  centroPath: ../../../simulatedExec/quartet_centro_server.py
+  # 脚本启动方式
   exeMethod: python
 
 
@@ -25,11 +24,11 @@ server:
   port: 8080
 
 ---
-# 设置session的过期时间为120min 过了120min后自动销毁session
+# 设置session的过期时间为240min 过了后自动销毁session
 server:
   servlet:
     session:
-      timeout: 120
+      timeout: 240
 
 ---
 
@@ -37,8 +36,8 @@ server:
 spring:
   mail:
     host: smtp.qq.com
-    username: 123456@qq.com # 发给谁 需要用自己的qq设置
-    password: abcdef # 授权码
+    username: 812139685@qq.com
+    password: xxlxhgjdpzrpbfef
     port: 587 # 端口号
     default-encoding: utf-8
     properties:

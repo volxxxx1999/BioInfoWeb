@@ -289,6 +289,30 @@
         .login-box * {
             margin-bottom: 10px;
         }
+
+        /*搜索框的样式*/
+        .searchDiv{
+            font-size: 1.5rem;
+            font-family: Helvetica, sans-serif;
+            color: #575d66;
+            font-weight: bold;
+        }
+        .searchDiv p{
+            margin-bottom: 10%;
+            margin-left: 5%;
+        }
+        /* v-loading 的样式修改*/
+        /* 修改动画的大小  给文字加粗效果*/
+        .el-loading-spinner {
+            font-size: 8rem;
+            /*font-weight: bold;*/
+        }
+
+        /* 文字大小修改*/
+        .el-loading-mask .el-loading-spinner .el-loading-text {
+            font-family: Helvetica, sans-serif;
+            font-size: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -317,11 +341,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssembleBlast</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFillBlast</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
-                    <el-menu-item index="2-5" onclick="document.location.href='module5.html'">AGCTBlast</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">Assemble</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFill</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">Centro</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">Telo</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -332,12 +355,32 @@
 
     <!--2. 栏目-->
     <div id="thinner">
+        <!--TODO 新增 搜索功能-->
+        <el-container>
+            <el-main>
+                <div class="searchDiv">
+                    <el-row :gutter="10">
+                        <el-col style="margin-top: 1rem;"
+                                :xs="4" :sm="4" :md="4" lg="4" xl="4">
+                           <span> Query ID: </span>
+                        </el-col>
+                        <el-col :xs="16" :sm="16" :md="16" :lg="16" :xl="16">
+                            <el-input v-model="taskID" placeholder="Please input the query ID"></el-input>
+                        </el-col>
+                        <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
+                            <el-button  type="primary" @click="searchResult">Search</el-button>
+                        </el-col>
+                    </el-row>
+                </div>
+            </el-main>
+        </el-container>
+
         <!--3 走马灯-->
         <el-container>
             <el-main>
                 <!-- 一个走马灯流程 可以展示你们程序的过程-->
                 <span class="demonstration">
-                    <h4 class="demo">- The WorkFlow of Quartet Blast Model -</h4>
+                    <h4 class="demo">- The WorkFlow of Quartet Model -</h4>
                 </span>
                 <el-carousel indicator-position="outside">
                     <el-carousel-item v-for="item in 4" :key="item">
@@ -350,6 +393,7 @@
         <!--4 Citation-->
         <el-container>
             <el-main>
+
                 <div class="citationFormat">
                     <i class="el-icon-collection"></i>
                     <span>
@@ -440,12 +484,16 @@
 <script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
 <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">
 <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<script src="../../js/axios-0.18.0.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+
+
 <script>
     new Vue({
         el: '#app',
         data: function () {
             return {
+                // 用户搜索的taskID
+                taskID:'',
                 activeBar:"1",
                 // 登录需要变量
                 loginDialogVisible: false,
@@ -458,6 +506,40 @@
             }
         },
         methods: {
+            // 搜索之前的结果
+            searchResult(){
+                const loading1 = this.$loading({
+                    lock: true,
+                    text: 'Wait a moment......',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(2,1,1,0.7)'
+                });
+                axios.get("/blast/search/resultSearch/"+this.taskID).then((res)=>{
+                    loading1.close();
+                    console.log(res.data.data)
+                    switch (res.data.code){
+                        case 20050:
+                            this.$message.error("No related record with this Query ID was found in the database");
+                            break;
+                        case 20051:
+                            document.location.href = "display1.html";
+                            break;
+                        case 20052:
+                            document.location.href = "display2.html";
+                            break;
+                        case 20053:
+                            document.location.href = "display3.html";
+                            break;
+                        case 20054:
+                            document.location.href = "display4.html";
+                            break;
+                        case '20055':
+                            document.location.href = "display5.html";
+                            break;
+                    }
+                })
+            },
+
             // 打开登录对话框
             openLogin() {
                 this.loginDialogVisible = true;

@@ -361,11 +361,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssembleBlast</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFillBlast</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
-                    <el-menu-item index="2-5" onclick="document.location.href='module5.html'">AGCTBlast</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">Assemble</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFill</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">Centro</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">Telo</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -411,7 +410,7 @@
                             <el-upload
                                     class="upload-demo"
                                     drag
-                                    action="/blast/common/centroGenome"
+                                    action="/blast/common/uploadCentroGenome"
                                     :on-success="handleUploadSuccess"
                                     :on-remove="handleRemove"
                                     :before-remove="beforeRemove"
@@ -458,7 +457,7 @@
                             <el-upload
                                     class="upload-demo"
                                     drag
-                                    action="/blast/common/centroTE"
+                                    action="/blast/common/uploadCentroTE"
                                     :on-success="handleUploadSuccess2"
                                     :on-remove="handleRemove2"
                                     :before-remove="beforeRemove2"
@@ -835,7 +834,7 @@
             },
             beforeUpload(file) {
                 let filename = file.name.toString();
-                let suffix = filename.substring(filename.length - 5);
+                let suffix = filename.substring(filename.indexOf(".") + 1);
                 let suffixList = ["fasta", "fas", "fa", "FASTA", "FA", "FAS"];
                 let isFas = (suffixList.indexOf(suffix) !== -1);
                 // 后缀判断
@@ -856,8 +855,12 @@
             },
             handleRemove(file, fileList) {
                 if (file && file.status === "success") {
-                    this.uploadGenomeFile = 0;
-                    this.$message.info("Removed Successfully");
+                    let filename = file.name;
+                    console.log("deleteFile:" + filename);
+                    axios.get("/blast/common/removeCentroGenome").then((res) => {
+                        this.uploadGenomeFile = 0;
+                        this.$message.info("Removed Successfully");
+                    });
                 }
             },
             handleUploadSuccess() {
@@ -873,7 +876,7 @@
             beforeUpload2(file) {
                 let filename = file.name.toString();
                 console.log(filename);
-                let suffix = filename.substring(filename.length - 4);
+                let suffix = filename.substring(filename.lastIndexOf(".") + 1);
                 console.log(suffix);
                 let suffixList = ["gff3", "GFF3"];
                 let isFas = (suffixList.indexOf(suffix) !== -1);
@@ -895,7 +898,9 @@
             },
             handleRemove2(file, fileList) {
                 if (file && file.status === "success") {
-                    this.$message.info("Removed Successfully");
+                    axios.get("/blast/common/removeCentroTE").then((res) => {
+                        this.$message.info("Removed Successfully");
+                    });
                 }
             },
             handleUploadSuccess2() {
@@ -918,33 +923,58 @@
                 if (this.uploadGenomeFile === 0) {
                     this.$message.error("Genome File is REQUIRED");
                 } else {
-                    const loading1 = this.$loading({
-                        lock: true,
-                        text: 'Program is running and will take approximately 15 to 20 minutes. Please DO NOT refresh or leave the page.',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(2,1,1,0.7)'
-                    });
-                    console.log(this.formData)
-                    // 范围slider数据格式和CentroParam不同
+                    // 重新组合一下训练参数
                     let centroParam = {
                         maxPeriod: this.maxPeriod,
                         minPeriod: this.minPeriod,
                         minLength: this.formData.minLength,
                         maxGap: this.formData.maxGap,
                         prefix: this.formData.prefix,
-                    }
+                    };
+                    // 提示用户留下邮箱
+                    this.$prompt('The program may take a long time to run. ' +
+                        'Please leave your email address and' +
+                        ' we will send the results to your email after running.', 'Reminder', {
+                        confirmButtonText: 'Confirm',
+                        cancelButtonText: 'Cancel',
+                        inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+                        inputErrorMessage: 'Incorrect mailbox format'
+                    }).then(({value}) => {
+                        // 把email存储进session
+                        console.log(value)
+                        axios.get("/blast/common/setEmail/"+value).then((res) => {
+                            console.log(res)
+                            this.$message({
+                                type: 'success',
+                                message: 'Your email is: ' + value
+                            });
+                        });
+                        // 开始运行
+                    const loading1 = this.$loading({
+                        lock: true,
+                        text: 'Program is running and will take approximately 15 to 20 minutes. Please DO NOT refresh or leave the page.',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(2,1,1,0.7)'
+                    });
+                    // 范围slider数据格式和CentroParam不同
                     axios.post("/blast/exec/centroBlast", centroParam).then((res) => {
                         loading1.close();
                         document.location.href = "display4.html";
+                    });
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: 'Cancel input'
+                        });
                     });
                 }
             },
             // 不允许违规文件名
             onNameWarning(val) {
-                let reg = /.*[/\\:*?|].*/;
+                let reg = /[^\w]/g;
                 // 存在返回true
                 if (reg.test(val)) {
-                    this.$message.error("FileName includes illegal characters!");
+                    this.$message.error("Filename can only consist of numbers, letters and underscores!");
                     this.formData.prefix = '';
                 }
             },

@@ -2,9 +2,8 @@ package com.ahau.controller;
 
 import com.ahau.common.Code;
 import com.ahau.common.Result;
-import com.ahau.domain.DraftParam;
+import com.ahau.domain.assemble.DraftParam;
 import com.ahau.domain.centro.CentroParam;
-import com.ahau.domain.gapFill.GapContigs;
 import com.ahau.domain.gapFill.GapParam;
 import com.ahau.domain.telo.TeloParam;
 import com.ahau.service.impl.TrainService;
@@ -12,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.Vector;
 
 @RestController
@@ -26,31 +23,22 @@ public class TrainController {
 
     /**
      * @Description: 对应前端DraftBlast的训练请求
-     * @Param: HttpServletRequest request, @RequestBody DraftParam draftParam
+     * @Param: HttpServletRequest request
+     * @Param: DraftParam draftParam
      * @Return: Result
      */
-    @PostMapping("/draftBlast")
-    public Result draftBlast(HttpServletRequest request, @RequestBody DraftParam draftParam) {
-        System.out.println("=========TrainController--->AssembleBlast:参数指令开始训练，读取Session中文件属性===========");
-
-        // 1. 从Session获取数据 获取训练的文件名称
-        HttpSession session = request.getSession();
-        String RefGenomeUrl = (String) session.getAttribute("RefGenome_Url");
-        String HiFiUrl = (String) session.getAttribute("HiFi_Url");
-
-        System.out.println("------》用户上传的文件名，转存时已加上UUID：");
-        System.out.println(RefGenomeUrl);
-        System.out.println(HiFiUrl);
-        System.out.println("------》用户输入的参数列表");
-        System.out.println(draftParam.toString());
-
-        // 2. 接受返回数据
-        Vector<String> trainResult = trainService.trainDraft(RefGenomeUrl, HiFiUrl, draftParam);
-
-        // 3. 把生成的结果存储在Session中 该部分会检验每一个打印语句
-        Boolean err = trainService.setSession(request, trainResult);
-        if (!err) {
-            return new Result(Code.TRAIN_ERR, "Unexpected error occurred", null);
+    @PostMapping("/assembleBlast")
+    public Result assembleBlast(HttpServletRequest request, @RequestBody DraftParam draftParam) {
+        System.out.println("===》TrainController--->AssembleBlast:参数指令开始训练，读取Session中文件属性......");
+        // 1. 接受返回数据
+        String catalogue = "Assemble/";
+        Vector<String> trainResult = trainService.trainAssemble(request, draftParam, catalogue);
+        // 2. 把生成的结果存储在Session中 该部分会检验每一个打印语句
+        Boolean err = trainService.assembleSetSession(request, trainResult);
+        // 3. 发邮件给用户
+        trainService.sendEmail(request);
+        if (err) {
+            return new Result(Code.TRAIN_ERR, "wrong");
         } else {
             return new Result(Code.TRAIN_OK, "success", null);
         }
@@ -58,30 +46,21 @@ public class TrainController {
 
 
     /**
-     * @Description: module2 gapfill训练
-     * @Param: request 参数列表
+     * @Description: module2 gapFill训练
+     * @Param: HttpServletRequest request
+     * @Param: GapParam gapParam
      * @Return: Result
      */
     @PostMapping("/fillBlast")
     public Result fillBlast(HttpServletRequest request, @RequestBody GapParam gapParam) {
-        System.out.println("=========TrainController---->gapFillBlast ：参数指令开始训练，读取Session中文件属性===========");
-
-        // 1. 从Session获取数据 获取训练的文件名称
-        HttpSession session = request.getSession();
-        String fillGenomeUrl = (String) session.getAttribute("fillGenome_Url");
-        ArrayList<GapContigs> fillContigsUrl = (ArrayList<GapContigs>) session.getAttribute("fillContig_Url");
-
-        System.out.println("------》用户上传的文件名，转存时已加上UUID：");
-        System.out.println(fillGenomeUrl);
-        System.out.println(fillContigsUrl);
-        System.out.println("------》用户输入的参数列表");
-        System.out.println(gapParam.toString());
-
-        // 2. 接受返回数据
-        Vector<String> trainResult = trainService.trainGapFill(fillGenomeUrl, fillContigsUrl, gapParam);
-
-        // 3. 把生成的结果存储在Session中 该部分会检验每一个打印语句
+        System.out.println("===》TrainController---->gapFillBlast ：参数指令开始训练，读取Session中文件属性......");
+        // 1. 接受返回数据
+        String catalogue = "GapFill/";
+        Vector<String> trainResult = trainService.trainGapFill(request, gapParam, catalogue);
+        // 2. 把生成的结果存储在Session中 该部分会检验每一个打印语句
         Boolean err = trainService.fillSetSession(request, trainResult);
+        // 3. 发邮件给用户
+        trainService.sendEmail(request);
         if (!err) {
             return new Result(Code.TRAIN_ERR, "Unexpected error occurred", null);
         } else {
@@ -91,30 +70,21 @@ public class TrainController {
 
 
     /**
-     * @Description: teloBlast训练 module3
-     * @Param: 参数列表teloParam HTTPServletRequest
+     * @Description: teloBlast训练
+     * @Param: HttpServletRequest
+     * @Param: TeloParam
      * @Return: Result
      */
     @PostMapping("/teloBlast")
     public Result teloBlast(HttpServletRequest request, @RequestBody TeloParam teloParam) {
-        System.out.println("=========TrainController---->TeloBlast ：参数指令开始训练，读取Session中文件属性===========");
-
-        // 1. 从Session获取数据 获取训练的文件名称
-        HttpSession session = request.getSession();
-        String teloGenomeUrl = (String) session.getAttribute("teloGenome_Url");
-
-        System.out.println("------》用户上传的文件名，转存时已加上UUID：");
-        System.out.println(teloGenomeUrl);
-
-        System.out.println("------》用户输入的参数列表");
-        System.out.println(teloParam.toString());
-
-        // 2. 接受返回数据
-        Vector<String> trainResult = trainService.trainTelo(teloGenomeUrl, teloParam);
-
-        // 3. 把生成的结果存储在Session中 该部分会检验每一个打印语句
+        System.out.println("===》TrainController---->TeloBlast ：参数指令开始训练，读取Session中文件属性......");
+        // 1. 接受返回数据
+        String catalogue = "Telo/";
+        Vector<String> trainResult = trainService.trainTelo(request, teloParam, catalogue);
+        // 2. 把生成的结果存储在Session中 该部分会检验每一个打印语句
         Boolean err = trainService.teloSetSession(request, trainResult);
-
+        // 3. 发邮件给用户
+        trainService.sendEmail(request);
         if (!err) {
             return new Result(Code.TRAIN_ERR, "Unexpected error occurred", null);
         } else {
@@ -124,39 +94,25 @@ public class TrainController {
 
 
     /**
-    * @Description: Centro Module的blast
-    * @Param: request CentroParam
-    * @Return: Result
-    */
+     * @Description: Centro Module的blast
+     * @Param: HttpServletRequest
+     * @Param: CentroParam
+     * @Return: Result
+     */
     @PostMapping("/centroBlast")
     public Result centroBlast(HttpServletRequest request, @RequestBody CentroParam centroParam) {
-        System.out.println("=========TrainController---->CentroBlast ：参数指令开始训练，读取Session中文件属性===========");
-
-        // 1. 从Session获取数据 获取训练的文件名称
-        HttpSession session = request.getSession();
-        String centroGenomeUrl = (String) session.getAttribute("centroGenome_Url");
-        String centroTEUrlrl = (String) session.getAttribute("centroTE_Url");
-
-        System.out.println("------》用户上传的文件名，转存时已加上UUID：");
-        System.out.println(centroGenomeUrl);
-        System.out.println(centroTEUrlrl);
-
-        System.out.println("------》用户输入的参数列表");
-        System.out.println(centroParam.toString());
-
-        // 2. 接受返回数据
-        Vector<String> trainResult = trainService.trainCentro(centroGenomeUrl, centroTEUrlrl, centroParam);
-
-        // 3. 把生成的结果存储在Session中 该部分会检验每一个打印语句
+        System.out.println("===》TrainController---->CentroBlast ：参数指令开始训练，读取Session中文件属性......");
+        // 1. 接受返回数据
+        String catalogue = "Centro/";
+        Vector<String> trainResult = trainService.trainCentro(request, centroParam, catalogue);
+        // 2. 把生成的结果存储在Session中 该部分会检验每一个打印语句
         Boolean err = trainService.centroSetSession(request, trainResult);
-
+        // 3. 发邮件给用户
+        trainService.sendEmail(request);
         if (!err) {
             return new Result(Code.TRAIN_ERR, "Unexpected error occurred", null);
         } else {
             return new Result(Code.TRAIN_OK, "success", null);
         }
     }
-
-
-
 }

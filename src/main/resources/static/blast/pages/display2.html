@@ -420,11 +420,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssembleBlast</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFillBlast</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
-                    <el-menu-item index="2-5" onclick="document.location.href='module5.html'">AGCTBlast</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">Assemble</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFill</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">Centro</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">Telo</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -530,29 +529,31 @@
                                     title='Warning!'
                                     sub-title='There are some conditions encountered during process'>
                             </el-result>
-                            <el-table
-                                    :data="warnings"
-                                    class="tableSet"
-                                    style=" width: 95%;
-                                    font-size: 1.1rem;
-                                    font-family: Helvetica,sans-serif;
-                                    margin:10px 10px 10px 10px;"
-                                    stripe
-                                    border
-                                    height="10rem"
-                                    :row-class-name="tableRowClassName"
-                                    :cell-style="cellStyle">
-                                <el-table-column
-                                        prop="wid"
-                                        label="ID"
-                                        min-width="30%">
-                                </el-table-column>
-                                <el-table-column
-                                        prop="warning"
-                                        label="warning"
-                                        min-width="70%">
-                                </el-table-column>
-                            </el-table>
+                            <el-button type="text" @click="dialogTableVisible = true">Show Details</el-button>
+                            <el-dialog title="Warning Infos" :visible.sync="dialogTableVisible">
+                                <el-table :data="warnings"
+                                          class="tableSet"
+                                          style="width: 95%;
+                                                font-size: 1.1rem;
+                                                font-family: Helvetica,sans-serif;
+                                                margin:10px 10px 10px 10px;"
+                                          stripe
+                                          border
+                                          height="20rem"
+                                          :row-class-name="tableRowClassName"
+                                          :cell-style="cellStyle">
+                                    <el-table-column
+                                            prop="wid"
+                                            label="ID"
+                                            min-width="30%">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="warning"
+                                            label="warning"
+                                            min-width="70%">
+                                    </el-table-column>
+                                </el-table>
+                            </el-dialog>
                         </div>
                     </el-aside>
                 </div>
@@ -741,6 +742,8 @@
                 gapDetail: [],
                 gapStat: [],
                 warnings: [],
+                // 警告表格
+                dialogTableVisible: false,
             }
         },
         mounted() {
