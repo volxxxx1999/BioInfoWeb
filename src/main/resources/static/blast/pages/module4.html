@@ -959,7 +959,11 @@
                     // 范围slider数据格式和CentroParam不同
                     axios.post("/blast/exec/centroBlast", centroParam).then((res) => {
                         loading1.close();
-                        document.location.href = "display4.html";
+                        if(res.data.code ===  20020) {
+                            document.location.href = "displayErr.html";
+                        }else{
+                            document.location.href = "display4.html";
+                        }
                     });
                     }).catch(() => {
                         this.$message({

@@ -959,7 +959,7 @@
                         console.log(trainParam)
                         axios.post("/blast/exec/fillBlast", trainParam).then((res) => {
                             loading1.close();
-                            if(res.data.code ===  '20020'){
+                            if(res.data.code ===  20020){
                                 document.location.href = "displayErr.html";
                             }else{
                                 document.location.href = "display2.html";
