@@ -101,7 +101,7 @@ public class TrainService {
                     "# please contact us at:  yuejy@ahau.edu.cn " + "\n" +
                     "# ----------------------------------------------" + "\n" +
                     "# You can search the full results by click:" + "\n" +
-                    "# http://localhost:8080/blast/pages/home.html");
+                    "# https://www.atcgn.com:8080/blast/pages/home.html");
             message.setSentDate(new Date());
             // 发送
             javaMailSender.send(message);

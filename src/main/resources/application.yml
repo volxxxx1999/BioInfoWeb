@@ -78,10 +78,23 @@ spring:
         loginUsername: admin
         loginPassword: admin
 
+
+---
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+---
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      # 单次上传文件大小
+      max-file-size: 4000MB
+      # 总上传文件大小（对应多个文件上传）
+      max-request-size: 10000MB
 
 
 

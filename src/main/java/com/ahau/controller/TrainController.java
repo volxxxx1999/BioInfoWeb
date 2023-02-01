@@ -36,7 +36,7 @@ public class TrainController {
         // 2. 把生成的结果存储在Session中 该部分会检验每一个打印语句
         Boolean err = trainService.assembleSetSession(request, trainResult);
         System.out.println("------> 是否发生err: ");
-        if (err) {
+        if (!err) {
             System.out.println("发生错误");
             return new Result(Code.TRAIN_ERR, "wrong");
         } else {
