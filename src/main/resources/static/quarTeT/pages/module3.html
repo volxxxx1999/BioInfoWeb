@@ -400,7 +400,7 @@
                     <el-upload
                             class="upload-demo"
                             drag
-                            action="/blast/common/uploadTeloGenome"
+                            action="/quarTeT/common/uploadTeloGenome"
                             :on-success="handleUploadSuccess"
                             :on-remove="handleRemove"
                             :before-remove="beforeRemove"
@@ -606,7 +606,7 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!--Axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../js/axios-0.18.0.js"></script>
+<script src="../../js/axios-0.18.0.js"></script>
 
 <script>
     // import fa from "../element-ui/src/locale/lang/fa";
@@ -706,7 +706,7 @@
                     }).then(({value}) => {
                         // 把email存储进session
                         console.log(value)
-                        axios.get("/blast/common/setEmail/"+value).then((res) => {
+                        axios.get("/quarTeT/common/setEmail/"+value).then((res) => {
                             console.log(res)
                             this.$message({
                                 type: 'success',
@@ -721,7 +721,7 @@
                             background: 'rgba(2,1,1,0.7)'
                         });
                     console.log(trainParam)
-                    axios.post("/blast/exec/teloBlast", trainParam).then((res) => {
+                    axios.post("/quarTeT/exec/teloBlast", trainParam).then((res) => {
                         loading1.close();
                         if(res.data.code ===  20020) {
                             document.location.href = "displayErr.html";
@@ -779,7 +779,7 @@
                 if (file && file.status === "success") {
                     let filename = file.name;
                     console.log("deleteFile:" + filename);
-                    axios.get("/blast/common/removeTeloGenome").then((res) => {
+                    axios.get("/quarTeT/common/removeTeloGenome").then((res) => {
                         this.uploadGenomeFile = 0;
                         this.$message.info("Removed Successfully");
                     });
@@ -798,7 +798,7 @@
             },
             login() {
                 // 登录逻辑
-                axios.post("/blast/user/login", {
+                axios.post("/quarTeT/user/login", {
                     "email": this.email,
                     "password": this.password,
                 }).then(
@@ -838,7 +838,7 @@
                     });
                     return
                 }
-                axios.post("/blast/user/register", {
+                axios.post("/quarTeT/user/register", {
                     email: this.email,
                     password: this.password,
                 }).then(
@@ -871,7 +871,7 @@
             verify() {
                 const token = localStorage.getItem("token");
                 // console.log(token);
-                axios.get('/blast/user/verify', {
+                axios.get('/quarTeT/user/verify', {
                     headers: {
                         'Authorization': token
                     }

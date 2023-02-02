@@ -410,7 +410,7 @@
                             <el-upload
                                     class="upload-demo"
                                     drag
-                                    action="/blast/common/uploadCentroGenome"
+                                    action="/quarTeT/common/uploadCentroGenome"
                                     :on-success="handleUploadSuccess"
                                     :on-remove="handleRemove"
                                     :before-remove="beforeRemove"
@@ -457,7 +457,7 @@
                             <el-upload
                                     class="upload-demo"
                                     drag
-                                    action="/blast/common/uploadCentroTE"
+                                    action="/quarTeT/common/uploadCentroTE"
                                     :on-success="handleUploadSuccess2"
                                     :on-remove="handleRemove2"
                                     :before-remove="beforeRemove2"
@@ -720,7 +720,7 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!--Axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../js/axios-0.18.0.js"></script>
+<script src="../../js/axios-0.18.0.js"></script>
 
 <script>
     // import fa from "../element-ui/src/locale/lang/fa";
@@ -861,7 +861,7 @@
                 if (file && file.status === "success") {
                     let filename = file.name;
                     console.log("deleteFile:" + filename);
-                    axios.get("/blast/common/removeCentroGenome").then((res) => {
+                    axios.get("/quarTeT/common/removeCentroGenome").then((res) => {
                         this.uploadGenomeFile = 0;
                         this.$message.info("Removed Successfully");
                     });
@@ -902,7 +902,7 @@
             },
             handleRemove2(file, fileList) {
                 if (file && file.status === "success") {
-                    axios.get("/blast/common/removeCentroTE").then((res) => {
+                    axios.get("/quarTeT/common/removeCentroTE").then((res) => {
                         this.$message.info("Removed Successfully");
                     });
                 }
@@ -946,7 +946,7 @@
                     }).then(({value}) => {
                         // 把email存储进session
                         console.log(value)
-                        axios.get("/blast/common/setEmail/"+value).then((res) => {
+                        axios.get("/quarTeT/common/setEmail/"+value).then((res) => {
                             console.log(res)
                             this.$message({
                                 type: 'success',
@@ -961,7 +961,7 @@
                         background: 'rgba(2,1,1,0.7)'
                     });
                     // 范围slider数据格式和CentroParam不同
-                    axios.post("/blast/exec/centroBlast", centroParam).then((res) => {
+                    axios.post("/quarTeT/exec/centroBlast", centroParam).then((res) => {
                         loading1.close();
                         if(res.data.code ===  20020) {
                             document.location.href = "displayErr.html";
@@ -993,7 +993,7 @@
             },
             login() {
                 // 登录逻辑
-                axios.post("/blast/user/login", {
+                axios.post("/quarTeT/user/login", {
                     "email": this.email,
                     "password": this.password,
                 }).then(
@@ -1033,7 +1033,7 @@
                     });
                     return
                 }
-                axios.post("/blast/user/register", {
+                axios.post("/quarTeT/user/register", {
                     email: this.email,
                     password: this.password,
                 }).then(
@@ -1066,7 +1066,7 @@
             verify() {
                 const token = localStorage.getItem("token");
                 // console.log(token);
-                axios.get('/blast/user/verify', {
+                axios.get('/quarTeT/user/verify', {
                     headers: {
                         'Authorization': token
                     }

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/blast/common") // 对应前端的格式
+@RequestMapping("/quarTeT/common") // 对应前端的格式
 public class CommonController {
 
 

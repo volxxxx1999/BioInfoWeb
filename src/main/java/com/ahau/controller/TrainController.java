@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Vector;
 
 @RestController
-@RequestMapping("/blast/exec")
+@RequestMapping("/quarTeT/exec")
 public class TrainController {
 
     // 调用trainService

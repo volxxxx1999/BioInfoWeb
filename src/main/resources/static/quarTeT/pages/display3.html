@@ -660,7 +660,7 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!--Axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../js/axios-0.18.0.js"></script>
+<script src="../../js/axios-0.18.0.js"></script>
 
 <script>
     new Vue({
@@ -678,7 +678,7 @@
             }
         },
         mounted() {
-            axios.get("/blast/common/teloDisplay").then((res) => {
+            axios.get("/quarTeT/common/teloDisplay").then((res) => {
                 // res->response res.data->响应体(Result) res.data.data->FillResultUrl
                 let resultUrl = res.data.data;
                 console.log(resultUrl)

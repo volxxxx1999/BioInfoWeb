@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/blast/user")
+@RequestMapping("/quarTeT/user")
 public class UserController {
     @Autowired
     UserService userService;

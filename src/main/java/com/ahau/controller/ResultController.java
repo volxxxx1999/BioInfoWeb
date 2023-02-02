@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
-@RequestMapping("/blast/search")
+@RequestMapping("/quarTeT/search")
 public class ResultController {
 
     @Autowired

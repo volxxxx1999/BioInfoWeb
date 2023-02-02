@@ -1144,7 +1144,7 @@
 <script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
 <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../js/axios-0.18.0.js"></script>
+<script src="../../js/axios-0.18.0.js"></script>
 
 <script>
     new Vue({
@@ -1182,7 +1182,7 @@
             }
         },
         mounted() {
-            axios.get("/blast/common/draftDisplay").then((res) => {
+            axios.get("/quarTeT/common/draftDisplay").then((res) => {
                 // res 是response res.data是result res.data.data是ResultUrl
                 console.log(res.data.data)
                 let resultUrl = res.data.data;
@@ -1248,7 +1248,7 @@
             },
             // TODO 测试2下载 后端设置
             backendSetDownload(){
-                axios.get("/blast/common/testDownload").then((res) => {
+                axios.get("/quarTeT/common/testDownload").then((res) => {
                     let ele = document.createElement('a');
                     ele.download = "";
                     ele.style.display = 'none';

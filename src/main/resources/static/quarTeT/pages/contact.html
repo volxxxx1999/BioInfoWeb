@@ -324,7 +324,7 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!--Axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../js/axios-0.18.0.js"></script>
+<script src="../../js/axios-0.18.0.js"></script>
 <script>
     new Vue({
         el:"#app",
@@ -353,7 +353,7 @@
                 }else if(this.formLabelAlign.advice === ''){
                     this.$message.warning("Please enter your advice")
                 }else{
-                    axios.post("/mail/simple",this.formLabelAlign).then((res)=>{
+                    axios.post("/quarTeT/mail/simple",this.formLabelAlign).then((res)=>{
                         this.$message({
                             message: 'Thank you, Your comment has been successfully sent!',
                             type: 'success'

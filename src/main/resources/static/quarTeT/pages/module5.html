@@ -567,7 +567,7 @@
 <script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
 <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">
 <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<script src="../js/axios-0.18.0.js"></script>
+<script src="../../js/axios-0.18.0.js"></script>
 <script>
     new Vue({
         el: `#app`,
@@ -587,7 +587,7 @@
             },
             login() {
                 // 登录逻辑
-                axios.post("/blast/user/login", {
+                axios.post("/quarTeT/user/login", {
                     "email": this.email,
                     "password": this.password,
                 }).then(
@@ -627,7 +627,7 @@
                     });
                     return
                 }
-                axios.post("/blast/user/register", {
+                axios.post("/quarTeT/user/register", {
                     email: this.email,
                     password: this.password,
                 }).then(
@@ -660,7 +660,7 @@
             verify() {
                 const token = localStorage.getItem("token");
                 // console.log(token);
-                axios.get('/blast/user/verify', {
+                axios.get('/quarTeT/user/verify', {
                     headers: {
                         'Authorization': token
                     }

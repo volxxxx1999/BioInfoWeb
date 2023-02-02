@@ -872,7 +872,7 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!--Axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../js/axios-0.18.0.js"></script>
+<script src="../../js/axios-0.18.0.js"></script>
 
 <script>
     new Vue({
@@ -945,7 +945,7 @@
         mounted() {
             // show more数据源模拟
             this.showMoreTableData = this.candidate;
-            axios.get("/blast/common/centroDisplay").then((res) => {
+            axios.get("/quarTeT/common/centroDisplay").then((res) => {
                 // res->response res.data->响应体(Result) res.data.data->FillResultUrl
                 let resultUrl = res.data.data;
                 console.log(resultUrl)
@@ -991,7 +991,7 @@
                 console.log("filename:" + fileName);
                 // 1. 使show more表格可视化
                 this.showMoreDialogTableVisible = true;
-                axios.get("/blast/common/centroShowMore/" + fileName).then((res) => {
+                axios.get("/quarTeT/common/centroShowMore/" + fileName).then((res) => {
                     // res 就是那个复合表格的数据源
                     // 2. 设置表格数据源
                     console.log(res.data.data);

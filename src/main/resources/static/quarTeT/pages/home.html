@@ -488,7 +488,7 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!--Axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../js/axios-0.18.0.js"></script>
+<script src="../../js/axios-0.18.0.js"></script>
 
 
 <script>
@@ -518,7 +518,7 @@
                     spinner: 'el-icon-loading',
                     background: 'rgba(2,1,1,0.7)'
                 });
-                axios.get("/blast/search/resultSearch/"+this.taskID).then((res)=>{
+                axios.get("/quarTeT/search/resultSearch/"+this.taskID).then((res)=>{
                     loading1.close();
                     console.log(res.data.data)
                     switch (res.data.code){
@@ -550,7 +550,7 @@
             },
             login() {
                 // 登录逻辑
-                axios.post("/blast/user/login", {
+                axios.post("/quarTeT/user/login", {
                     "email": this.email,
                     "password": this.password,
                 }).then(
@@ -590,7 +590,7 @@
                     });
                     return
                 }
-                axios.post("/blast/user/register", {
+                axios.post("/quarTeT/user/register", {
                     email: this.email,
                     password: this.password,
                 }).then(
@@ -623,7 +623,7 @@
             verify() {
                 const token = localStorage.getItem("token");
                 // console.log(token);
-                axios.get('/blast/user/verify', {
+                axios.get('/quarTeT/user/verify', {
                     headers: {
                         'Authorization': token
                     }

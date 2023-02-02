@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/blast/mail")
+@RequestMapping("/quarTeT/mail")
 public class MailController {
     @Autowired
     private MailService mailService;
