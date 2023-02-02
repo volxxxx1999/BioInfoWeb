@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home - Tools - CentroBlast</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Home - Tools - AssembleBlast</title>
     <style>
         /*根节点html字体大小*/
         html {
@@ -166,6 +167,7 @@
             margin-left: 5rem;
             margin-right: 2rem;
             padding-bottom: 4rem;
+
             font-size: 2rem;
         }
 
@@ -173,10 +175,11 @@
             border-style: dotted;
             border-color: #a5aeb6;
             border-width: 3px;
-            background-color: #fbfffa;
+            background-color: #ecf7f8;
             margin-right: 5rem;
             margin-left: 2rem;
             padding-bottom: 4rem;
+
             font-size: 2rem;
         }
 
@@ -311,6 +314,7 @@
             font-size: 1.2rem;
             font-family: "Helvetica", sans-serif;
             font-weight: bold;
+            line-height: 4.8rem;
         }
 
         /* v-loading 的样式修改*/
@@ -338,6 +342,7 @@
 </head>
 <body>
 
+
 <!--全覆盖条幅-->
 <div id="app">
     <!--1. 登录注册-->
@@ -361,10 +366,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">Assemble</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFill</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">Centro</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">Telo</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFiller</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroMiner</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -377,40 +382,37 @@
         <!--3 上传文件-->
         <el-container>
             <el-main>
-                <!--3.1 小标签-->
+                <!--该模块小标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <i class="el-icon-upload"></i>
-                        <span>Upload Files</span>
+                        <span>Upload FASTA Sequence</span>
                     </button>
                 </div>
                 <div>
-                    <!--3.2 上传genome文件-->
+                    <!--第一个上传文件 Reference Genome Files-->
                     <el-aside width="50%">
                         <div class="upload1">
-                            <!-- 功能提示 -->
+                            <!--上传说明-->
                             <el-popover
                                     style="font-size: 2rem"
                                     placement="top-start"
-                                    title="Genome File:"
+                                    title="Reference Genome File:"
                                     width="300"
                                     trigger="hover"
-                                    content="It automatically determines the format of the input.
-                                     To allow this feature, certain conventions are required
-                                     with regard to the input of identifiers.">
+                                    content="A reference genome of close related species.">
                                 <el-button
                                         slot="reference"
                                         style="margin-bottom: 5%;
-                                       margin-top: 5%;
-                                font-size: 1.5rem">
-                                    Upload Genome File
+                                        margin-top: 5%;
+                                        font-size: 1.3rem">
+                                    Upload Reference Genome
                                 </el-button>
                             </el-popover>
-                            <!--上传组件-->
                             <el-upload
                                     class="upload-demo"
                                     drag
-                                    action="/blast/common/uploadCentroGenome"
+                                    action="/blast/common/uploadAssembleGenome"
                                     :on-success="handleUploadSuccess"
                                     :on-remove="handleRemove"
                                     :before-remove="beforeRemove"
@@ -429,41 +431,41 @@
                                 <div class="el-upload__tip"
                                      slot="tip"
                                      style="font-size: 1.5rem">
-                                    Genome File (FASTA Format)
+                                    Reference Genome File (FASTA format)
                                 </div>
                             </el-upload>
                         </div>
                     </el-aside>
-                    <!--3.3 上传gff3 TE annotation文件-->
+                    <!--上传HiFi Contigs文件-->
                     <el-aside width="50%">
                         <div class="upload2">
+                            <!-- 上传提示 -->
                             <el-popover
-                                    style="font-size: 2rem"
                                     placement="top-start"
-                                    title="Annotation File:"
+                                    title="Contigs"
                                     width="300"
                                     trigger="hover"
-                                    content="It is an optional step, annotation
-                                            files help to xxx,">
-                                <el-button
-                                        slot="reference"
-                                        style="margin-bottom: 5%;
-                                       margin-top: 5%;
-                                font-size: 1.5rem">
-                                    Upload Annotation File (Optional)
+                                    content="Haplotype solved contigs.">
+                                <el-button slot="reference"
+                                           style="margin-bottom: 5%;
+                                          margin-top: 5%;
+                                          font-size: 1.3rem">
+                                    Upload Contigs
                                 </el-button>
                             </el-popover>
-                            <!--上传组件-->
+                            <!-- 测试：
+                            https://jsonplaceholder.typicode.com/posts/
+                            -->
                             <el-upload
                                     class="upload-demo"
                                     drag
-                                    action="/blast/common/uploadCentroTE"
+                                    action="/blast/common/uploadAssembleHiFi"
                                     :on-success="handleUploadSuccess2"
                                     :on-remove="handleRemove2"
                                     :before-remove="beforeRemove2"
                                     :before-upload="beforeUpload2"
                                     :on-exceed="handleExceed2"
-                                    :file-list="fileList2"
+                                    :file-list="fileList"
                                     :show-file-list="true"
                                     :limit="1"
                                     ref="upload">
@@ -476,7 +478,7 @@
                                 <div class="el-upload__tip"
                                      slot="tip"
                                      style="font-size: 1.5rem">
-                                    TE Annotation File (GFF3 Format)
+                                    Contigs (FASTA format)
                                 </div>
                             </el-upload>
                         </div>
@@ -487,8 +489,8 @@
 
         <!--4 设置setting-->
         <el-container>
+            <!--该模块标签-->
             <el-main>
-                <!--4.1 小标题-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <i class="el-icon-edit"></i>
@@ -496,7 +498,7 @@
                     </button>
                 </div>
                 <div>
-                    <!--4.2 参数描述表格-->
+                    <!--参数描述列表-->
                     <el-aside width="50%">
                         <el-table
                                 :data="tableData"
@@ -505,7 +507,7 @@
                                 style=" width: 95%;
                                 font-size: 1.3rem;
                                 font-family: Helvetica,sans-serif;
-                                margin:10px 10px 10px 10px"
+                                margin:10px 10px 10px 10px;"
                                 class="tableSet"
                                 :header-cell-style="{'text-align':'center'}"
                                 :row-class-name="tableRowClassName">
@@ -521,113 +523,110 @@
                             </el-table-column>
                         </el-table>
                     </el-aside>
-                    <!--4.3 参数设置-->
+                    <!--参数设置-->
                     <el-aside width="50%">
                         <el-main id="param-form">
-                            <!--1. Period min:0 max:500 default:100~200 step:25-->
-                            <div class="paramForm" style="line-height: 5rem">
+                            <div class="paramForm">
+                                <!--使用bootstrap栏栅布局实现input自适应-->
+                                <!--4.1 整型数据 有上下限-->
                                 <el-row :gutter="10">
-                                    <el-col :xs="12" :sm="12" :md="6" lg="9" xl="10">
-                                        Period:
+                                    <el-col :xs="16" :sm="16" :md="9" lg="8" xl="10">
+                                        Min Contigs Length:
                                     </el-col>
-                                    <!--滑条-->
-                                    <el-col style="margin-top: 10px"
-                                            :xs="12" :sm="12" :md="14" lg="15" xl="14">
-                                        <el-slider v-model="formData.period"
-                                                   :step="25"
-                                                   range
-                                                   max="500"
-                                                   @change="handleSliderChange">
-                                        </el-slider>
-                                    </el-col>
-                                </el-row>
-                                <!--input框 TODO: 注意范围选择滑条和show-input不兼容,需要自己解决-->
-                                <el-row :gutter="10">
-                                    <!--留空-->
-                                    <el-col :xs="12" :sm="12" :md="6" lg="9" xl="10">
-                                        <p></p>
-                                    </el-col>
-                                    <!--计数器 minPeriod-->
-                                    <el-col :xs="12" :sm="5" :md="5" lg="15" xl="14">
-                                        <el-input-number
-                                                v-model="minPeriod"
-                                                controls-position="right"
-                                                :min="0"
-                                                :max="maxPeriod"
-                                                :step="25"
-                                                size="mini"
-                                                @change="handleMinPeriodChange"></el-input-number>
-                                    </el-col>
-                                    <!--杠杠-->
-                                    <el-col :xs="12" :sm="5" :md="4" lg="15" xl="14">
-                                        <span style="margin-left:25px;color: #409eff">—</span>
-                                    </el-col>
-                                    <!--计数器 maxPeriod-->
-                                    <el-col :xs="12" :sm="5" :md="5" lg="15" xl="14">
-                                        <el-input-number
-                                                v-model="maxPeriod"
-                                                controls-position="right"
-                                                :min="minPeriod"
-                                                :step="25"
-                                                size="mini"
-                                                @change="handleMaxPeriodChange"></el-input-number>
-                                    </el-col>
-                                </el-row>
-                                <!--2. max gap default:50000 max:100000 step:5000 -->
-                                <el-row :gutter="10">
-                                    <el-col :xs="12" :sm="12" :md="6" lg="9" xl="10">
-                                        Max Gap:
-                                    </el-col>
-                                    <el-col
-                                            style="margin-top: 10px"
-                                            :xs="12" :sm="12" :md="9" lg="15" xl="16">
-                                        <el-slider v-model="formData.maxGap"
+                                    <el-col :xs="16" :sm="8" :md="8" lg="16" xl="16">
+                                        <el-slider v-model="formData.minContig"
                                                    :step="5000"
-                                                   v-bind:max="maxMaxGap"
-                                                   @change="onGapSliderChange">
+                                                   v-bind:max="maxMinContig"
+                                                   @change="onMinContigSliderChange"
+                                                   max="100000">
                                         </el-slider>
                                     </el-col>
-                                    <el-col :xs="12" :sm="12" :md="9" lg="9" xl="10">
-                                        <el-input-number v-model="customMaxGap"
-                                                         @change="onGapInputChange"
+                                    <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
+                                        <el-input-number v-model="customMinContig"
+                                                         @change="onMinContigInputChange"
                                                          :step="5000"
                                                          size="mini">
                                         </el-input-number>
                                     </el-col>
                                 </el-row>
-                                <!--3. min  length default:100000 max 500000 step:25000-->
+                                <!--4.2 整数型 必须是正整数且不能0开头-->
                                 <el-row :gutter="10">
-                                    <el-col :xs="12" :sm="12" :md="6" lg="9" xl="10">
-                                        Min Length:
+                                    <el-col :xs="16" :sm="16" :md="9" lg="8" xl="10">
+                                        Min Alignment Length:
                                     </el-col>
-                                    <el-col style="margin-top: 10px"
-                                            :xs="12" :sm="12" :md="9" lg="15" xl="14">
-                                        <el-slider v-model="formData.minLength"
-                                                   :step="25000"
-                                                   v-bind:max="maxMinLength"
-                                                   @change="onMinLengthSliderChange"
-                                                   max="500000"></el-slider>
+                                    <el-col :xs="16" :sm="8" :md="8" lg="16" xl="16">
+                                        <el-slider v-model="formData.minAlign"
+                                                   :step="5000"
+                                                   v-bind:max="maxMinLen"
+                                                   @change="onMinLenSliderChange"
+                                                   max="100000">
+                                        </el-slider>
                                     </el-col>
-                                    <el-col :xs="12" :sm="12" :md="9" lg="9" xl="10">
-                                        <el-input-number v-model="customMinLength"
-                                                         @change="onMinLengthInputChange"
-                                                         :step="25000"
+                                    <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
+                                        <el-input-number v-model="customMinLen"
+                                                         @change="onMinLenInputChange"
+                                                         :step="5000"
                                                          size="mini">
                                         </el-input-number>
                                     </el-col>
                                 </el-row>
-                                <!--4. Prefix 文本输入-->
+                                <!--增加 百分比 必须是正整数且不能0开头-->
                                 <el-row :gutter="10">
-                                    <el-col :xs="12" :sm="12" :md="6" lg="9" xl="10">
+                                    <el-col :xs="16" :sm="16" :md="9" lg="8" xl="10">
+                                        Min Alignment Identity:
+                                    </el-col>
+                                    <el-col :xs="16" :sm="8" :md="8" lg="16" xl="16">
+                                        <el-slider v-model="formData.minIdentity"
+                                                   :step="5"
+                                                   v-bind:max="maxMinIdentity"
+                                                   max="100">
+                                        </el-slider>
+                                    </el-col>
+                                    <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
+                                        <el-input-number v-model="formData.minIdentity"
+                                                         :step="5"
+                                                         v-bind:max="maxMinIdentity"
+                                                         size="mini">
+                                        </el-input-number>
+                                    </el-col>
+                                </el-row>
+                                <!--4.3 下拉框 二选一-->
+                                <el-row :gutter="10">
+                                    <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
+                                        Aligner:
+                                    </el-col>
+                                    <el-col :xs="6" :sm="10" :md="8" :lg="6" :xl="6">
+                                        <el-select
+                                                v-model="formData.aligner"
+                                                placeholder="Please choose the alignment program:"
+                                                @change="currentStateChange">
+                                            <el-option label="minimap2" value="minimap2"></el-option>
+                                            <el-option label="mummer" value="mummer"></el-option>
+                                        </el-select>
+                                    </el-col>
+                                </el-row>
+                                <!--4.4 是否画图-->
+                                <el-row :gutter="10">
+                                    <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
+                                        Plot:
+                                    </el-col>
+                                    <el-col :xs="8" :sm="6" :md="3" :lg="2" :xl="1">
+                                        <el-switch v-model="formData.plot"></el-switch>
+                                    </el-col>
+                                </el-row>
+
+                                <!--4.5 Prefix 文本输入 -->
+                                <el-row :gutter="10">
+                                    <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
                                         Filename:
                                     </el-col>
-                                    <el-col :xs="12" :sm="12" :md="15" :lg="9" :xl="14">
+                                    <el-col :xs="8" :sm="10" :md="8" :lg="9" :xl="14">
                                         <el-input v-model="formData.prefix"
                                                   @input="onNameWarning"></el-input>
                                     </el-col>
                                 </el-row>
                             </div>
-                            <!--5. 功能按钮-->
+                            <!-- 5 下一步的按钮-->
                             <div style="margin-top: 5%;">
                                 <el-button class="next-button" @click="resetForm">RESET</el-button>
                                 <el-button class="next-button" type="primary" @click="onParamSubmit">RUN</el-button>
@@ -638,6 +637,7 @@
             </el-main>
         </el-container>
     </div>
+
 
     <!--5 页脚信息-->
     <el-footer style="height: 120%; background-color: #205573">
@@ -654,12 +654,13 @@
         </div>
     </el-footer>
 
-    <!--6 登录 Dialog    -->
+    <!--6 登录 Dialog-->
     <el-dialog
             title="Sign in"
             :close-on-click-modal="false"
             :visible.sync="loginDialogVisible"
-            width="450px">
+            width="450px"
+    >
         <div class="login-box">
             <el-input placeholder="email" v-model="email" clearable size="20px">
             </el-input>
@@ -683,7 +684,8 @@
             title="Sign up"
             :close-on-click-modal="false"
             :visible.sync="registerDialogVisible"
-            width="450px">
+            width="450px"
+    >
         <div class="login-box">
             <el-input placeholder="email" v-model="email" clearable size="20px">
             </el-input>
@@ -722,6 +724,7 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../js/axios-0.18.0.js"></script>
 
+
 <script>
     // import fa from "../element-ui/src/locale/lang/fa";
 
@@ -731,41 +734,46 @@
             return {
                 // 导航栏激活的栏，默认为Home
                 activeBar: "2",
-                uploadGenomeFile: 0,
-                // Period的客制化值
-                minPeriod: 100,
-                maxPeriod: 200,
-                // Period的最大值
-                maxMaxPeriod: 500,
+                // 两个文件flag 都上传了才给训练
+                uploadSeqFile: 0,
+                uploadHiFiFile: 0,
+                // Min Contigs Length 滑块和输入框相关
+                maxMinContig: 100000,
+                customMinContig: 50000,
+                // min alignment length 滑块和输入框相关
+                maxMinLen: 100000,
+                customMinLen: 10000,
+                // min alignment identity 滑块和输入框相关(不用超出值)
+                maxMinIdentity: 100,
+
+                // 参数表单
                 formData: {
-                    period: [10, 20],
-                    minLength: 100000,
-                    maxGap: 50000,
+                    minAlign: 10000,
+                    minContig: 50000,
+                    minIdentity: 90,
                     prefix: 'Quartet',
+                    aligner: 'minimap2',
+                    plot: false,
                 },
-                // maxGap的最大值
-                maxMaxGap: 100000,
-                // maxGap的客制化值
-                customMaxGap: 50000,
-                // minLength的最大值
-                maxMinLength: 500000,
-                // minLength的客制化值
-                customMinLength: 100000,
+                // 参数描述表格
                 tableData: [{
-                    param: 'Min Period',
-                    desc: 'Min period to be consider as centromere repeat monomer. Default: 100',
+                    param: 'Min Contigs Length',
+                    desc: 'Remove contigs shorter than INT (bp), default: 50000',
                 }, {
-                    param: 'Max Period',
-                    desc: 'Max period to be consider as centromere repeat monomer. Default: 200',
+                    param: 'Min Alignment Length',
+                    desc: 'The min alignment length to be select (bp), default: 50000',
                 }, {
-                    param: 'Max Gap',
-                    desc: 'Max allowed gap size between two tandem repeats to be considered as in one tandem repeat region. Default: 50000',
+                    param: 'Min Alignment Identity',
+                    desc: 'The min alignment identity to be select (%%), default: 90',
                 }, {
-                    param: 'Min Length',
-                    desc: 'Min size of tandem repeat region to be selected as candidate. Default: 100000',
+                    param: 'Aligner',
+                    desc: 'Specify alignment program (support minimap2 and mummer), default: minimap2',
+                }, {
+                    param: 'Plot',
+                    desc: 'Plot a co-linearity graph for alignments. (will cost more time)',
                 }, {
                     param: 'FileName',
-                    desc: 'The prefix used on generated files. Default: Quartet',
+                    desc: 'The name used on your generated files. Default: Quartet',
                 },
                 ],
                 // 登录注册用变量
@@ -778,77 +786,86 @@
                 username: "",
             }
         },
-        mounted() {
-            this.formData.period = [this.minPeriod, this.maxPeriod];
-        },
         methods: {
-            // Period滑块和输入框相关
-            handleMinPeriodChange(value) {
-                this.formData.period = [this.minPeriod, this.maxPeriod];
-            },
-            handleMaxPeriodChange(value){
-               if(value>this.maxMaxPeriod){
-                   this.formData.period = [this.minPeriod, this.maxMaxPeriod];
-                   this.sendNotify();
-               }else{
-                   this.formData.period = [this.minPeriod, this.maxPeriod];
-               }
-            },
-            handleSliderChange(value) {
-                this.minPeriod = value[0];
-                this.maxPeriod = value[1];
-            },
             // 超出范围通用的通知
-            sendNotify(){
+            sendNotify() {
                 this.$notify({
                     title: 'Reminder',
-                    message: 'The value has exceeded the Recommended range, may not achieve satisfactory results',
+                    message: 'The value has exceeded the Recommended Range, may not achieve satisfactory results.',
                     type: 'warning',
                     duration: 0,
                     position: 'bottom-right',
                 });
             },
-            // MaxGap滑块和输入框相关
-            onGapSliderChange(value){
-                this.customMaxGap = value;
+            // min contigs length 滑块和输入框相关
+            onMinContigSliderChange(value) {
+                this.customMinContig = value;
             },
-            onGapInputChange(value){
-                if(value>this.maxMaxGap){
-                    this.formData.maxGap = this.maxMaxGap;
+            onMinContigInputChange(value) {
+                if (value > this.maxMinContig) {
+                    this.formData.minContig = this.maxMinContig;
                     this.sendNotify();
-                }else {
-                    this.formData.maxGap = value;
+                } else {
+                    this.formData.minContig = value;
                 }
             },
-            // MinLength滑块和输入框相关
-            onMinLengthSliderChange(value){
-                this.customMinLength = value;
+            // min align length 滑块和输入框相关
+            onMinLenSliderChange(value) {
+                this.customMinLen = value;
             },
-            onMinLengthInputChange(value){
-                if(value>this.maxMinLength){
-                    this.formData.minLength = this.maxMinLength;
+            onMinLenInputChange(value) {
+                if (value > this.maxMinLen) {
+                    this.formData.minAlign = this.maxMinLen;
                     this.sendNotify();
-                }else {
-                    this.formData.minLength = value;
+                } else {
+                    this.formData.minAlign = value;
                 }
             },
-            /* 上传文件的钩子函数*/
+
+            /*重置参数表单*/
+            resetForm() {
+                this.formData = {
+                    minAlign: 50000,
+                    minContig: 50000,
+                    minIdentity: 90,
+                    prefix: 'Quartet',
+                    aligner: 'minimap2',
+                    plot: false,
+                }
+            },
+            /*对文件名进行正则校验，不允许输入违法文件名 /[^\w]/g*/
+            onNameWarning(val) {
+                // let reg = /.*[/\\:*?|].*/;
+                // 存在返回true
+                let reg = /[^\w]/g;
+                if (reg.test(val)) {
+                    this.$message.error("Filename can only consist of numbers, letters and underscores!");
+                    this.formData.prefix = '';
+                }
+            },
+
+            /* 上传基因组文件的钩子函数*/
+            // FASTA文件列表只允许上传一个文件
             handleExceed(files, fileList) {
                 this.$message.error(`Limit ONE File Only, You Have To Remove the Current File!`);
             },
+            // 文件的后缀和大小限制 更新：不需要大小限制了（随便吧！
             beforeUpload(file) {
                 let filename = file.name.toString();
-                let suffix = filename.substring(filename.indexOf(".") + 1);
+                console.log(filename);
+                let suffix = filename.substring(filename.lastIndexOf(".") + 1);
+                console.log(suffix);
                 let suffixList = ["fasta", "fas", "fa", "FASTA", "FA", "FAS"];
                 let isFas = (suffixList.indexOf(suffix) !== -1);
-                // 后缀判断
                 if (!isFas) {
-                    this.$message.error('The File Format Must Be FASTA');
+                    this.$message.error('The File Format Must Be .FASTA, .FAS or .FA!');
                 }
                 return isFas;
             },
+            // 文件的移除
             beforeRemove(file, fileList) {
                 if (file && file.status === "success") {
+                    console.log(file)
                     //移除方法
                     return this.$confirm(`Are You Confirm to Remove ${file.name}？`, '(＃°Д°)', {
                         confirmButtonText: 'Yes',
@@ -857,83 +874,88 @@
                     });
                 }
             },
+            // 删除后 重新设置一下文件的状态flag
             handleRemove(file, fileList) {
                 if (file && file.status === "success") {
                     let filename = file.name;
                     console.log("deleteFile:" + filename);
-                    axios.get("/blast/common/removeCentroGenome").then((res) => {
-                        this.uploadGenomeFile = 0;
+                    axios.get("/blast/common/removeAssembleGenome").then((res) => {
+                        this.uploadSeqFile = 0;
                         this.$message.info("Removed Successfully");
                     });
                 }
             },
+            // 上传成功提示
             handleUploadSuccess() {
                 this.$message.success("Upload Successfully");
-                this.uploadGenomeFile = 1;
+                this.uploadSeqFile = 1;
             },
 
-            // TE file上传相关函数
+            /* 上传参数基因组文件的钩子函数*/
+            // 超出一个文件限制
             handleExceed2(files, fileList) {
                 this.$message.error(`Limit ONE File Only, You Have To Remove the Current File!`);
             },
-            // 文件上传前的检查 TODO 后缀检验应该从后面开始不应该从前面
+            // 文件的后缀和规格限制 不需要了
             beforeUpload2(file) {
                 let filename = file.name.toString();
                 console.log(filename);
                 let suffix = filename.substring(filename.lastIndexOf(".") + 1);
                 console.log(suffix);
-                let suffixList = ["gff3", "GFF3"];
+                let suffixList = ["fasta", "fas", "fa", "FASTA", "FA", "FAS"];
                 let isFas = (suffixList.indexOf(suffix) !== -1);
-                // 后缀判断
                 if (!isFas) {
-                    this.$message.error('The File Format Must Be .GFF3 or .gff3!');
+                    this.$message.error('The File Format Must Be .FASTA, .FAS or .FA!');
                 }
                 return isFas;
             },
+            // 文件的移除
             beforeRemove2(file, fileList) {
                 if (file && file.status === "success") {
                     //移除方法
-                    return this.$confirm(`Are You Confirm to Remove ${file.name}？`, 'Σ(っ °Д °;)っ', {
+                    return this.$confirm(`Are You Confirm to Remove ${file.name}？`, 'Warning', {
                         confirmButtonText: 'Yes',
                         cancelButtonText: 'No',
                         type: 'warning'
                     });
                 }
             },
+            // 删除后 重新设置
             handleRemove2(file, fileList) {
                 if (file && file.status === "success") {
-                    axios.get("/blast/common/removeCentroTE").then((res) => {
+                    let filename = file.name;
+                    console.log("deleteFile:" + filename);
+                    axios.get("/blast/common/removeAssembleHiFi").then((res) => {
+                        this.uploadHiFiFile = 0;
                         this.$message.info("Removed Successfully");
                     });
                 }
             },
+            // 上传成功提示
             handleUploadSuccess2() {
                 this.$message.success("Upload Successfully");
-            },
-            // 重置参数表单
-            resetForm() {
-                this.formData = {
-                    period: [100, 200],
-                    minLength: 100000,
-                    maxGap: 50000,
-                    prefix: 'Quartet',
+                this.uploadHiFiFile = 1;
+                if (this.uploadSeqFile === 1) {
+                    this.activeStep = 1;
                 }
-                this.minPeriod = 100;
-                this.maxPeriod = 200;
             },
+
             // 参数提交训练
             onParamSubmit() {
-                // 1. 判断是否已经上传了genome file
-                if (this.uploadGenomeFile === 0) {
-                    this.$message.error("Genome File is REQUIRED");
+                // 训练前先判断一下是否Required的文件都已经上传
+                if (this.uploadSeqFile === 0) {
+                    this.$message.error("Reference Genome File is REQUIRED");
+                } else if (this.uploadHiFiFile === 0) {
+                    this.$message.error("HiFi Contigs or Scaffolds File is REQUIRED");
                 } else {
                     // 重新组合一下训练参数
-                    let centroParam = {
-                        maxPeriod: this.maxPeriod,
-                        minPeriod: this.minPeriod,
-                        minLength: this.formData.minLength,
-                        maxGap: this.formData.maxGap,
+                    let trainParam = {
+                        minAlign: this.customMinLen,
+                        minContig: this.customMinContig,
+                        minIdentity: this.formData.minIdentity,
                         prefix: this.formData.prefix,
+                        aligner: this.formData.aligner,
+                        plot: this.formData.plot,
                     };
                     // 提示用户留下邮箱
                     this.$prompt('The program may take a long time to run. ' +
@@ -954,21 +976,21 @@
                             });
                         });
                         // 开始运行
-                    const loading1 = this.$loading({
-                        lock: true,
-                        text: 'Program is running and will take approximately 15 to 20 minutes. Please DO NOT refresh or leave the page.',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(2,1,1,0.7)'
-                    });
-                    // 范围slider数据格式和CentroParam不同
-                    axios.post("/blast/exec/centroBlast", centroParam).then((res) => {
-                        loading1.close();
-                        if(res.data.code ===  20020) {
-                            document.location.href = "displayErr.html";
-                        }else{
-                            document.location.href = "display4.html";
-                        }
-                    });
+                        const loading1 = this.$loading({
+                            lock: true,
+                            text: 'Program is running and will take approximately 15 to 20 minutes. Please DO NOT refresh or leave the page.',
+                            spinner: 'el-icon-loading',
+                            background: 'rgba(2,1,1,0.7)'
+                        });
+                        console.log(trainParam)
+                        axios.post("/blast/exec/assembleBlast", trainParam).then((res) => {
+                            loading1.close();
+                            if (res.data.code === 20020) {
+                                document.location.href = "displayErr.html";
+                            } else {
+                                document.location.href = "display1.html";
+                            }
+                        });
                     }).catch(() => {
                         this.$message({
                             type: 'info',
@@ -977,15 +999,8 @@
                     });
                 }
             },
-            // 不允许违规文件名
-            onNameWarning(val) {
-                let reg = /[^\w]/g;
-                // 存在返回true
-                if (reg.test(val)) {
-                    this.$message.error("Filename can only consist of numbers, letters and underscores!");
-                    this.formData.prefix = '';
-                }
-            },
+
+
             // 登录注册用方法
             // 打开登录对话框
             openLogin() {
@@ -1087,5 +1102,4 @@
         }
     });
 </script>
-
 </html>

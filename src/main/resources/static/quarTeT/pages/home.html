@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home - Tools - AGCTBlast</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Quartet</title>
     <style>
         /*根节点html字体大小*/
         html {
@@ -83,10 +84,9 @@
         }
 
         .el-aside {
-            background-color: #ffffff;
+            background-color: #f7f6f2;
             color: #333;
             text-align: center;
-            float: left;
         }
 
         #el-form {
@@ -109,6 +109,16 @@
             font-size: 130%;
             font-weight: bold;
         }
+        /* TODO: submenu的设置 hover变色*/
+
+        /* 引用Demo的设置*/
+        .citationFormat {
+            font-family: Helvetica, sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4b4b4b;
+            margin: 1rem 1rem 1rem 1rem;
+        }
 
         /*登录+标题banner的设置*/
         .banner {
@@ -116,7 +126,6 @@
             background-color: #205573;
             margin: 0;
         }
-
         .banner > a {
             color: #ffffff;
             font-size: 5rem;
@@ -128,23 +137,125 @@
             text-decoration: none;
         }
 
-        .loginDiv {
+        .loginDiv{
             display: inline-block;
             float: right;
             padding-top: 2rem;
             padding-right: 3rem;
         }
-
-        .loginDiv > .el-button {
+        .loginDiv>.el-button{
             font-size: 1.5rem;
-            font-family: "Helvetica", sans-serif;
+            font-family: "Helvetica",sans-serif;
         }
-
         .loginDiv > span {
             color: #ffffff;
             font-size: 2rem;
             padding-top: 1rem;
             padding-left: 1rem;
+        }
+
+        /*走马灯设置 item和主盒子要一起设置宽高*/
+        /* 控制外面的大盒子*/
+        .el-carousel__container {
+            height: 40rem !important;
+            width: 80rem;
+        }
+
+        .el-carousel {
+            height: 43rem;
+            width: 80rem;
+            margin-left: 5.5rem;
+        }
+
+        /*下面的指示灯*/
+        .el-carousel__indicators--horizontal {
+            position: absolute;
+            left: auto;
+            right: 10px;
+            bottom: 10px;
+            text-align: right;
+        }
+
+        .el-carousel__indicator--horizontal button {
+            width: 8px;
+            height: 8px;
+            background: #41555f;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .el-carousel__indicator--horizontal.is-active button {
+            width: 24px;
+            height: 8px;
+            background: #ffffff;
+            opacity: 0.5;
+            border-radius: 10px;
+        }
+
+        /*小标题 图标*/
+        .el-carousel__item h3 {
+            color: #ffffff;
+            font-size: 2rem;
+            opacity: 1;
+            /*line-height: 3rem;*/
+        }
+
+        /*修改幻灯片的小箭头大小*/
+        .el-carousel__arrow i {
+            font-size: 2rem;
+            width: 2rem;
+        }
+
+        /*幻灯片的图片 单双设置*/
+        .el-carousel__item:nth-child(2n) {
+            height: 40rem;
+            background-image: url("https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-018-04369-4/MediaObjects/41467_2018_4369_Fig1_HTML.jpg?as=webp"); /**/
+            background-size: 100%;
+        }
+
+        .el-carousel__item:nth-child(2n+1) {
+            height: 40rem;
+            background-image: url("https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-018-04369-4/MediaObjects/41467_2018_4369_Fig3_HTML.jpg?as=webp");
+            background-size: 100%;
+        }
+
+        /*走马灯标题*/
+        .demo {
+            font-size: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: #565c65;
+            font-family: "Arial", sans-serif;
+
+            -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+            animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+        }
+
+        /*标题的动画*/
+        @-webkit-keyframes tracking-in-expand {
+            0% {
+                letter-spacing: -0.5em;
+                opacity: 0;
+            }
+            40% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes tracking-in-expand {
+            0% {
+                letter-spacing: -0.5em;
+                opacity: 0;
+            }
+            40% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 1;
+            }
         }
 
         /*下一步按钮*/
@@ -155,29 +266,6 @@
             background-color: #205573;
             width: 15rem;
             height: 4rem;
-        }
-
-        /*下载区域*/
-        .upload1 {
-            border-style: dotted;
-            border-color: #a5aeb6;
-            border-width: 3px;
-            background-color: #ecf7f8;
-            margin-left: 5rem;
-            margin-right: 2rem;
-            padding-bottom: 4rem;
-            font-size: 2rem;
-        }
-
-        .upload2 {
-            border-style: dotted;
-            border-color: #a5aeb6;
-            border-width: 3px;
-            background-color: #ecf7f8;
-            margin-right: 5rem;
-            margin-left: 2rem;
-            padding-bottom: 4rem;
-            font-size: 2rem;
         }
 
         /*ele container setting*/
@@ -194,125 +282,25 @@
             line-height: 50rem;
         }
 
-        /*css button ψ(｀∇´)ψ*/
-        .btn-24,
-        .btn-24 *,
-        .btn-24 :after,
-        .btn-24 :before,
-        .btn-24:after,
-        .btn-24:before {
-            border: 0 solid;
-            box-sizing: border-box;
+        /*  登录框的样式  */
+        .login-box {
+            padding: 0 10px;
+        }
+        .login-box * {
+            margin-bottom: 10px;
         }
 
-        .btn-24 {
-            -webkit-tap-highlight-color: transparent;
-            -webkit-appearance: button;
-            background-color: #000;
-            background-image: none;
-            color: #fff;
-            cursor: pointer;
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-            Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-            font-size: 100%;
-            font-weight: 900;
-            line-height: 1.5;
-            margin: 0;
-            -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(green), to(pink), color-stop(0.5, #000), color-stop(50%, #ffffff));
-            padding: 0;
-            text-transform: uppercase;
-        }
-
-        .btn-24:disabled {
-            cursor: default;
-        }
-
-        .btn-24:-moz-focusring {
-            outline: auto;
-        }
-
-        .btn-24 svg {
-            display: block;
-            vertical-align: middle;
-        }
-
-        .btn-24 [hidden] {
-            display: none;
-        }
-
-        .btn-24 {
-            --background: #205573;
-            background: none;
-            overflow: hidden;
-            padding: 0.8rem 3rem;
-            position: relative;
-        }
-
-        .btn-24 span {
-            display: block;
-            position: relative;
-            transition: transform 0.2s ease;
-        }
-
-        .btn-24:after,
-        .btn-24:before {
-            --tilt: 20px;
-            background: #fff;
-            -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
-            content: "";
-            display: block;
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
-            transition: -webkit-clip-path 0.2s ease;
-            transition: clip-path 0.2s ease;
-            transition: clip-path 0.2s ease, -webkit-clip-path 0.2s ease;
-            width: 100%;
-            z-index: -1;
-        }
-
-        .btn-24:after {
-            --thickness: 5px;
-            background: var(--background);
-            height: calc(100% - var(--thickness) * 2);
-            left: var(--thickness);
-            top: var(--thickness);
-            width: calc(100% - var(--thickness) * 2);
-        }
-
-        .btn-24:hover span {
-            transform: translateX(-20px);
-        }
-
-        .btn-24:hover:after,
-        .btn-24:hover:before {
-            -webkit-clip-path: polygon(
-                    0 0,
-                    calc(100% - var(--tilt)) 0,
-                    100% 50%,
-                    calc(100% - var(--tilt)) 100%,
-                    0 100%
-            );
-            clip-path: polygon(
-                    0 0,
-                    calc(100% - var(--tilt)) 0,
-                    100% 50%,
-                    calc(100% - var(--tilt)) 100%,
-                    0 100%
-            );
-        }
-
-        /*setting 搬来的*/
-        /*表单格式设置*/
-        .paramForm {
-            font-size: 1.2rem;
-            font-family: "Helvetica", sans-serif;
+        /*搜索框的样式*/
+        .searchDiv{
+            font-size: 1.5rem;
+            font-family: Helvetica, sans-serif;
+            color: #575d66;
             font-weight: bold;
         }
-
+        .searchDiv p{
+            margin-bottom: 10%;
+            margin-left: 5%;
+        }
         /* v-loading 的样式修改*/
         /* 修改动画的大小  给文字加粗效果*/
         .el-loading-spinner {
@@ -325,27 +313,12 @@
             font-family: Helvetica, sans-serif;
             font-size: 2rem;
         }
-
-        /*  登录注册用样式  */
-        .login-box {
-            padding: 0 10px;
-        }
-        .login-box * {
-            margin-bottom: 10px;
-        }
-
-        /*上传格式*/
-        .commonUpload{
-            margin-top: 3rem;
-            margin-bottom: 3rem;
-            height: 5rem;
-        }
     </style>
 </head>
 <body>
 
+<!--全覆盖条幅-->
 <div id="app">
-
     <!--1. 登录注册-->
     <div class="banner">
         <!--标题-->
@@ -358,8 +331,9 @@
         </span>
     </div>
 
-    <!--2 导航栏-->
+    <!--使用container布局-->
     <el-container>
+        <!--2 导航栏-->
         <el-header style="background-color: #ffffff; margin-top: 0">
             <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
             <el-menu :default-active="activeBar" class="el-menu-demo"
@@ -367,11 +341,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssembleBlast</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFillBlast</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroBlast</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloBlast</el-menu-item>
-                    <el-menu-item index="2-5" onclick="document.location.href='module5.html'">AGCTBlast</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFiller</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroMiner</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -380,116 +353,56 @@
         </el-header>
     </el-container>
 
-    <!--3 上传文件-->
+    <!--2. 栏目-->
     <div id="thinner">
+        <!--TODO 新增 搜索功能-->
         <el-container>
             <el-main>
-                <!--3.0 该部分的小标签-->
-                <div style="margin:1rem 1rem 1rem 1rem">
-                    <button class="btn-24">
-                        <i class="el-icon-upload"></i>
-                        <span>Upload Files</span>
-                    </button>
-                </div>
-
-                <!--3.1 上传Reference Genome-->
-
-                <div class="commonUpload">
-                    <el-upload
-                            class="upload-demo"
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            :on-preview="handlePreview"
-                            :on-remove="handleRemove"
-                            :before-remove="beforeRemove"
-                            multiple
-                            :limit="1"
-                            :on-exceed="handleExceed"
-                            :file-list="fileList">
-                        <el-button size="small" type="primary">Upload Reference Genome</el-button>
-                        <div slot="tip" class="el-upload__tip">Reference Genome File (FASTA Format)</div>
-                    </el-upload>
-                </div>
-
-                <!--3.2 上传HiFi Contigs-->
-
-                <div class="commonUpload">
-                    <el-upload
-                            class="upload-demo"
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            :on-preview="handlePreview"
-                            :on-remove="handleRemove"
-                            :before-remove="beforeRemove"
-                            multiple
-                            :limit="1"
-                            :on-exceed="handleExceed"
-                            :file-list="fileList">
-                        <el-button size="small" type="primary">Upload HiFi Contigs File</el-button>
-                        <div slot="tip" class="el-upload__tip">Contigs File (FASTA Format)</div>
-                    </el-upload>
-                </div>
-
-
-                <!--3.3 上传GapCloser-->
-
-                <div class="commonUpload">
-                    <el-upload
-                            class="upload-demo"
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            :on-preview="handlePreview"
-                            :on-remove="handleRemove"
-                            :before-remove="beforeRemove"
-                            multiple
-                            :limit="3"
-                            :on-exceed="handleExceed"
-                            :file-list="fileList">
-                        <el-button size="small" type="primary">Upload GapCloser Files</el-button>
-                        <div slot="tip" class="el-upload__tip">GapCloser File (Support Multiple Files, FASTA Format)</div>
-                    </el-upload>
-                </div>
-
-
-                <!--3.4 上传TE annotation-->
-                <div class="commonUpload">
-                    <el-upload
-                            class="upload-demo"
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            :on-preview="handlePreview"
-                            :on-remove="handleRemove"
-                            :before-remove="beforeRemove"
-                            multiple
-                            :limit="1"
-                            :on-exceed="handleExceed"
-                            :file-list="fileList">
-                        <el-button size="small" type="primary">Upload TE annotation</el-button>
-                        <div slot="tip" class="el-upload__tip">TE annotation File (GFF3 Format)</div>
-                    </el-upload>
-                </div>
-
-                <!--3.5 结果名字-->
-                <div style="font-size: 1.3rem;
-                                font-family: Helvetica,sans-serif;">
+                <div class="searchDiv">
                     <el-row :gutter="10">
-                        <el-col :xs="12" :sm="12" :md="4" lg="9" xl="10">
-                            <p>&nbsp;</p>
+                        <el-col style="margin-top: 1rem;"
+                                :xs="4" :sm="4" :md="4" lg="4" xl="4">
+                           <span> Query ID: </span>
                         </el-col>
-                        <el-col style="margin-top: 10px; margin-left: 10px" :xs="12" :sm="12" :md="4" lg="9" xl="10">
-                            Filename:
+                        <el-col :xs="16" :sm="16" :md="16" :lg="16" :xl="16">
+                            <el-input v-model="taskID" placeholder="Please input the query ID"></el-input>
                         </el-col>
-                        <el-col :xs="12" :sm="12" :md="10" :lg="9" :xl="14">
-                            <el-input v-model="prefix"
-                                      @input="onNameWarning">{{this.prefix}}</el-input>
-                        </el-col>
-                        <el-col :xs="12" :sm="12" :md="6" lg="9" xl="10">
-                            <p>&nbsp;</p>
+                        <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
+                            <el-button  type="primary" @click="searchResult">Search</el-button>
                         </el-col>
                     </el-row>
                 </div>
+            </el-main>
+        </el-container>
 
-                <!--3.6 运行-->
-                <div style="margin-top: 5%;">
-                    <el-button class="next-button"  @click="onParamSubmit">RUN</el-button>
+        <!--3 走马灯-->
+        <el-container>
+            <el-main>
+                <!-- 一个走马灯流程 可以展示你们程序的过程-->
+                <span class="demonstration">
+                    <h4 class="demo">- The WorkFlow of quarTeT -</h4>
+                </span>
+                <el-carousel indicator-position="outside">
+                    <el-carousel-item v-for="item in 4" :key="item">
+                        <h3 class="small">{{ item }}</h3>
+                    </el-carousel-item>
+                </el-carousel>
+            </el-main>
+        </el-container>
+
+        <!--4 Citation-->
+        <el-container>
+            <el-main>
+
+                <div class="citationFormat">
+                    <i class="el-icon-collection"></i>
+                    <span>
+                    Publications are requested to please cite the contributing authors:
+                    <a href="https://www.baidu.com" style="color: #4d4d4d ">
+                        Here is your article link
+                    </a>
+                </span>
                 </div>
-
             </el-main>
         </el-container>
     </div>
@@ -508,6 +421,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)6578 6185
         </div>
     </el-footer>
+
     <!--6 登录 Dialog    -->
     <el-dialog
             title="Sign in"
@@ -546,9 +460,9 @@
                     show-password
             ></el-input>
             <el-input
-                    placeholder="password again"
-                    v-model="password2"
-                    show-password
+                placeholder="password again"
+                v-model="password2"
+                show-password
             ></el-input>
             <!-- <div class="check-box">
               <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
@@ -561,27 +475,75 @@
     </el-dialog>
 
 </div>
+
 </body>
 
-<!--改为cdn引入-->
+<!-- 引入组件库 -->
+<!--JQuery-->
+<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<!--Vue-->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
-<link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">
-<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+<!--ElementUI index.css index.js-->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--Axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../js/axios-0.18.0.js"></script>
+
+
 <script>
     new Vue({
-        el: `#app`,
+        el: '#app',
         data: function () {
             return {
-                prefix:'Quartet',
+                // 用户搜索的taskID
+                taskID:'',
+                activeBar:"1",
+                // 登录需要变量
+                loginDialogVisible: false,
+                registerDialogVisible: false,
+                email: "",
+                password: "",
+                password2: "",
+                isLogin: false,
+                username: "",
             }
         },
-        methods:{
-            onParamSubmit(){
-                document.location.href = "display5.html";
+        methods: {
+            // 搜索之前的结果
+            searchResult(){
+                const loading1 = this.$loading({
+                    lock: true,
+                    text: 'Wait a moment......',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(2,1,1,0.7)'
+                });
+                axios.get("/blast/search/resultSearch/"+this.taskID).then((res)=>{
+                    loading1.close();
+                    console.log(res.data.data)
+                    switch (res.data.code){
+                        case 20050:
+                            this.$message.error("No related record with this Query ID was found in the database");
+                            break;
+                        case 20051:
+                            document.location.href = "display1.html";
+                            break;
+                        case 20052:
+                            document.location.href = "display2.html";
+                            break;
+                        case 20053:
+                            document.location.href = "display3.html";
+                            break;
+                        case 20054:
+                            document.location.href = "display4.html";
+                            break;
+                        case '20055':
+                            document.location.href = "display5.html";
+                            break;
+                    }
+                })
             },
-            // 登录注册用方法
+
             // 打开登录对话框
             openLogin() {
                 this.loginDialogVisible = true;
@@ -676,12 +638,14 @@
                     err => console.error(err)
                 );
             },
+            // 第二部分的 TopBar 有需要这个方法，为了不报错，先声明在这里
+            handleSelect() {
+
+            }
         },
         created() {
             this.verify();
         }
     });
 </script>
-
-
 </html>

@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FillGapBlast - display</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>AssembleBlast - display</title>
     <style>
         /*根节点html字体大小*/
         html {
@@ -319,7 +320,7 @@
             margin-bottom: 0;
         }
 
-        /*给框一个加阴影的动画*/
+        /*给一个加阴影的动画*/
         @-webkit-keyframes result-module {
             0% {
                 box-shadow: 0 0 0 rgba(0, 0, 0, 0);
@@ -340,12 +341,12 @@
 
         /*框内描述结果的文字box*/
         .illustration-box {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #4d4d4d;
             font-family: Helvetica, sans-serif;
         }
 
-        /*两个展示表格上面的下载的按钮格式*/
+        /*两个展示表格的下载的span和按钮格式*/
         .download-stat {
             margin-left: 1rem;
             float: left;
@@ -357,7 +358,7 @@
         }
 
         /*点击放大*/
-        /* 1. 整个的遮罩*/
+        /*整个的遮罩*/
         .shade {
             position: fixed;
             left: 0;
@@ -370,7 +371,7 @@
             z-index: 999;
         }
 
-        /* 2. 放大图片后：包含图片的div*/
+        /*放大图片后：包含图片的div*/
         .show-bigImg {
             width: 100rem;
             height: auto;
@@ -386,17 +387,26 @@
             transform: translate(-50%, -50%);
         }
 
-        /* 3. 放大后的图片*/
+        /*放大后的图片*/
         .show-bigImg img {
             /*width: 66rem;*/
             /*height: 66rem;*/
             max-width: 90rem;
             max-height: 90rem;
         }
+
+        /*  登录框的样式  */
+        .login-box {
+            padding: 0 10px;
+        }
+
+        .login-box * {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
-<body>
 
+<body>
 <div id="app">
     <!--1. 登录注册-->
     <div class="banner">
@@ -412,7 +422,6 @@
 
     <!--2 导航栏-->
     <el-container>
-        <!--2 导航栏-->
         <el-header style="background-color: #ffffff; margin-top: 0">
             <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
             <el-menu :default-active="activeBar" class="el-menu-demo"
@@ -420,10 +429,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">Assemble</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFill</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">Centro</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">Telo</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFiller</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroMiner</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -434,93 +443,88 @@
 
     <!--thinner div中是主体内容-->
     <div id="thinner">
+
         <!--3 区域1 展示png结果图-->
         <el-container>
             <el-main>
-                <!--3.0 [放大的图片]-->
-                <!-- 1 整个的遮罩,点击黑色遮罩也可以关闭这个div-->
+                <!--[放大的图片 只要src变就可以了~]-->
                 <div class="shade" @click="closeImg">
-                    <!-- 2 包含放大后图片的div-->
                     <div class="show-bigImg">
                         <img
-                                v-bind:src="bigPng"
+                                v-bind:src="this.bigPng"
                                 alt="bigger img"
                                 @click="closeImg">
                     </div>
                 </div>
-                <!--3.1 该区域标签-->
+                <!-- 3.1 该区域标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <i class="el-icon-picture"></i>
-                        <span>GenomeDraft Display</span>
+                        <span>Process Result</span>
                     </button>
                 </div>
-                <!--3.2 对该图的说明-->
+                <!--3.2对图的说明-->
                 <div class="illustration-box">
                     <p>
                         Here are some illustration about the graphs....
                     </p>
                 </div>
-                <!--3.3 主体内容-->
+                <!-- 3.3 -->
                 <div>
-                    <!--侧栏 1 按钮-->
+                    <!--侧栏 1 下载+放大按钮-->
                     <el-aside width="5%">
-                        <!--放大按钮-->
                         <div class="zoom-out-button">
                             <el-button
-                                    circle
-                                    icon="el-icon-zoom-in"
-                                    @click="ClickBig">
+                                circle
+                                icon="el-icon-zoom-in"
+                                @click="genomeClickBig">
                             </el-button>
                         </div>
-                        <!--下载按钮-->
                         <div>
                             <el-button
-                                    circle
-                                    type="primary"
-                                    icon="el-icon-download"
-                                    @click="downloadPng">
+                                circle
+                                type="primary"
+                                icon="el-icon-download"
+                                @click="downloadDraftGenomePng">
                             </el-button>
                         </div>
                     </el-aside>
-                    <!--侧栏 2 生成的png图片-->
+                    <!-- 侧栏 2 png图片-->
                     <el-aside width="50%">
-                        <!--限制原图的外部div-->
+                        <!--TODO 原始图片一个长条 加个div和hidden给整整 放大里面的图片 限制div大小-->
                         <div
-                                style="width: 500px;
+                            style="width: 500px;
                             height: 450px;
                             overflow: hidden">
                             <!--[原图]-->
                             <img
-                                    v-bind:src="genomePng"
-                                    alt="plot of genome result"
-                                    style="width: 550px;
-                                height: 600px">
+                                v-bind:src="this.genomePng"
+                                alt="plot of genome result"
+                                style="width: 550px;
+                                       height: 600px">
                         </div>
                     </el-aside>
-                    <!--侧栏 3 程序运行中的Warnings展示-->
+                    <!-- 侧栏 3 程序运行中的Warnings展示-->
                     <el-aside
-                            style="box-shadow: #4d4d4d"
-                            width="45%">
-                        <!--默认为正常的Result div,block-->
+                        style="box-shadow: #4d4d4d"
+                        width="45%">
                         <div
-                                class="result-module"
-                                style="display: block"
-                                id="withCorrect">
+                            class="result-module"
+                            style="display: block"
+                            id="withCorrect">
                             <h3>
                                 Process Result
                             </h3>
                             <el-result
-                                    icon='success'
-                                    title='Combo!'
-                                    sub-title='No Errors Occur During the Process'>
+                                icon='success'
+                                title='Combo!'
+                                sub-title='No Errors Occur During the Process'>
                             </el-result>
                         </div>
-                        <!--不显示的,根据display请求改变的出错的div-->
                         <div
-                                class="result-module"
-                                style="display: none"
-                                id="withWarnings">
+                            class="result-module"
+                            style="display: none"
+                            id="withWarnings">
                             <h3>
                                 Process Result
                             </h3>
@@ -560,38 +564,125 @@
             </el-main>
         </el-container>
 
-        <!--4 区域3 展示detail 和 stat文件结果-->
+        <!--4 区域2 展示两个pdf图结果-->
         <el-container>
             <el-main>
-                <!--4.1 该区域标签-->
+                <!-- 4.1 该区域标签-->
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <i class="el-icon-picture"></i>
+                        <span>Plot Display</span>
+                    </button>
+                </div>
+                <!-- 4.2 对两个图的说明-->
+                <div class="illustration-box">
+                    <p>
+                        Here are some illustration about the graphs....
+                    </p>
+                </div>
+                <!-- 4.3 -->
+                <div>
+                    <!--侧栏1  TODO 该模块是选择plot才显示的 下载+放大按钮-->
+                    <div id="doPlot" style="display: none">
+                        <el-aside width="5%">
+                            <div class="zoom-out-button">
+                                <el-button circle icon="el-icon-zoom-in" @click="GenRefClickBig"></el-button>
+                            </div>
+                            <div>
+                                <el-button circle type="primary" icon="el-icon-download"
+                                           @click="downloadDraftGenomeRef"></el-button>
+                            </div>
+                        </el-aside>
+                        <!--侧栏2 pdf图1-->
+                        <el-aside width="45%">
+                            <!--[原图]-->
+                            <img
+                                    v-bind:src="this.genomeRefUrl"
+                                    alt="plot of genome result"
+                                    style="width: 410px; height: 410px"
+                            >
+                        </el-aside>
+                    </div>
+
+                    <!--侧栏3 pdf图2-->
+                    <div>
+                        <!--填充 让图片居中-->
+                        <el-aside width="27%">
+                            <div id="leftPadding"
+                                 style="height: 10rem">
+                            </div>
+                        </el-aside>
+                        <!--图片和按钮-->
+                        <div>
+                            <el-aside width="45%">
+                                <img
+                                    v-bind:src="this.hifiRefUrl"
+                                    alt="plot of genome result"
+                                    style="width: 410px;
+                                           height: 410px">
+                            </el-aside>
+                            <!--侧栏4 下载按钮-->
+                            <el-aside width="5%">
+                                <div class="zoom-out-button">
+                                    <el-button
+                                        circle
+                                        icon="el-icon-zoom-in"
+                                        @click="HiFiRefClickBig">
+                                    </el-button>
+                                </div>
+                                <div>
+                                    <el-button
+                                        circle
+                                        type="primary"
+                                        icon="el-icon-download"
+                                       @click="downloadDraftHiFiRef">
+                                    </el-button>
+                                </div>
+                            </el-aside>
+                        </div>
+                        <!--填充 让图片居中-->
+                        <el-aside width="23%">
+                            <div id="rightPadding" style="height: 10rem"></div>
+                        </el-aside>
+                    </div>
+                </div>
+            </el-main>
+        </el-container>
+
+        <!--5 区域3 展示mapinfo 和 stat文件结果-->
+        <el-container>
+            <el-main>
+                <!--5.1 该区域标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <i class="el-icon-tickets"></i>
-                        <span>Statistic Information</span>
+                        <span>Statistic DataGrid</span>
                     </button>
                 </div>
-                <!--4.2 对两个表格的说明-->
+                <!--5.2 对两个表格的说明-->
                 <div class="illustration-box">
                     <p>
                         Here are some illustration about the tables....
                     </p>
                 </div>
-                <!--4.3 stat-->
+                <!--5.3-->
                 <div>
-                    <!--小标题-->
-                    <h3
+                    <!--侧栏1 table1-->
+                    <el-aside width="50%">
+                        <h3
                             style="font-family: Helvetica,sans-serif;
                                    font-size: 1.3rem;
                                    color:#666666">
-                        Statistic Information
-                    </h3>
-                    <!--下载按钮-->
-                    <span class="download-stat">
-                        <el-button icon="el-icon-download" @click="downloadStat"></el-button>
-                    </span>
-                    <!--表格-->
-                    <el-table
-                            :data="gapStat"
+                            Statistic Information
+                        </h3>
+                        <span class="download-stat">
+                            <el-button
+                                icon="el-icon-download"
+                                @click="downloadDraftMapInfo">
+                            </el-button>
+                        </span>
+                        <el-table
+                            :data="draftStat"
                             stripe
                             border
                             height="30rem"
@@ -602,44 +693,44 @@
                             margin:10px 10px 10px 10px;"
                             :header-cell-style="{'text-align':'center'}"
                             :row-class-name="tableRowClassName">
-                        <el-table-column
-                                prop="cID"
-                                label="ChrID"
+                            <el-table-column
+                                prop="assemblyID"
+                                label="AssemblyID"
                                 min-width="25%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="len"
+                            </el-table-column>
+                            <el-table-column
+                                prop="length"
                                 label="Length"
                                 min-width="25%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="gCount"
+                            </el-table-column>
+                            <el-table-column
+                                prop="gapCount"
                                 label="GapCount"
                                 min-width="25%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="gLocus"
+                            </el-table-column>
+                            <el-table-column
+                                prop="gapLocus"
                                 label="GapLocus"
                                 min-width="25%">
-                        </el-table-column>
-                    </el-table>
-                </div>
-                <!--4.4 detail-->
-                <div>
-                    <!--小标题-->
-                    <h3
+                            </el-table-column>
+                        </el-table>
+                    </el-aside>
+                    <!--侧栏2 table2-->
+                    <el-aside width="50%">
+                        <h3
                             style="font-family: Helvetica,sans-serif;
-                                   font-size: 1.3rem;
-                                   color:#666666">
-                        Detail Information
-                    </h3>
-                    <!--按钮-->
-                    <span class="download-stat">
-                        <el-button icon="el-icon-download" @click="downloadDetail"></el-button>
-                    </span>
-                    <!--表格-->
-                    <el-table
-                            :data="gapDetail"
+                            font-size: 1.3rem;
+                            color:#666666">
+                            Map Information
+                        </h3>
+                        <span class="download-stat">
+                            <el-button
+                                icon="el-icon-download"
+                                @click="downloadDraftStat">
+                            </el-button>
+                        </span>
+                        <el-table
+                            :data="draftMapInfo"
                             stripe
                             border
                             style=" width: 95%;
@@ -650,57 +741,43 @@
                             class="tableSet"
                             :header-cell-style="{'text-align':'center'}"
                             :row-class-name="tableRowClassName">
-                        <el-table-column
-                                prop="sID"
-                                label="SequenceID"
-                                min-width="15%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="gIdentify"
-                                label="GapIdentify"
-                                min-width="15%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="status"
-                                label="Status"
-                                min-width="10%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="cTigID"
-                                label="CloserTigID"
-                                min-width="20%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="cRange"
-                                label="CloserRange"
-                                min-width="15%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="cLen"
-                                label="CloserLength"
-                                min-width="20%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="cStrand"
-                                label="CloserStrand"
-                                min-width="15%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="cScore"
-                                label="CloserScore"
-                                min-width="20%">
-                        </el-table-column>
-                    </el-table>
+                            <el-table-column
+                                prop="contigID"
+                                label="ContigID"
+                                min-width="30%">
+                            </el-table-column>
+                            <el-table-column
+                                prop="contigLength"
+                                label="ContigLength"
+                                min-width="40%">
+                            </el-table-column>
+                            <el-table-column
+                                prop="targetID"
+                                label="TargetID"
+                                min-width="30%">
+                            </el-table-column>
+                        </el-table>
+                    </el-aside>
                 </div>
-                <!--5 提供下载的FASTA和apg-->
-                <div style="margin-top: 3rem;">
-                    <el-button class="next-button" type="primary" @click="downloadFasta">Download FASTA</el-button>
+                <!--6 提供下载的FASTA和apg-->
+                <div style="margin-top: 2rem;">
+                    <el-button
+                        class="next-button"
+                        @click="downloadDraftFasta">
+                        Download FASTA
+                    </el-button>
+                    <el-button
+                        class="next-button"
+                        type="primary"
+                        @click="downloadDraftAGP">
+                        Download AGP
+                    </el-button>
                 </div>
             </el-main>
         </el-container>
     </div>
 
-    <!--6 页脚信息-->
+    <!--7 页脚信息-->
     <el-footer style="height: 120%; background-color: #205573">
         <div>
             &nbsp;&nbsp;&nbsp;&nbsp;Junyang Yue, Professor
@@ -718,54 +795,84 @@
 </body>
 
 <!-- 引入组件库 -->
-<!--JQuery-->
 <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-<!--Vue-->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<!--ElementUI index.css index.js-->
 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-<!--Axios-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/element-ui/2.6.1/index.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.4.5/theme-chalk/index.css">-->
+
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../js/axios-0.18.0.js"></script>
+
 
 <script>
     new Vue({
         el: `#app`,
         data: function () {
             return {
-                activeBar: "2", // 导航栏激活的栏，默认为Home 话说下拉栏显示不了啊喂
-                genomePng: '../imgs/empty.jpg',
-                bigPng: '',
-                fastaUrl: '',
-                detailUrl: '',
+                // 导航栏激活的栏
+                activeBar: "2",
+                // 登录需要变量
+                loginDialogVisible: false,
+                registerDialogVisible: false,
+                email: "",
+                password: "",
+                password2: "",
+                isLogin: false,
+                username: "",
+                /* 展示数据 */
+                // 两个展示数据的表格
+                draftStat: [],
+                draftMapInfo: [],
+                // 三张图片Url
+                hifiRefUrl: '../imgs/pdf2.jpg',
+                genomeRefUrl: '../imgs/pdf1.jpg',
+                genomePng: 'http://192.168.101.8:8887/draftgenome.png',
+                // 表格展示下载链接
+                mapInfoUrl: '',
                 statUrl: '',
-                gapDetail: [],
-                gapStat: [],
-                warnings: [],
+                // 两个主要结果下载链接
+                fastaUrl: '../exeFiles/quartet_centro.py',
+                agpUrl: 'http://192.168.101.8:8887/Genome.fasta',
+                // 警告信息：
+                warnings: [{wID: '1', warning: 'aaaaa'}],
                 // 警告表格
                 dialogTableVisible: false,
+                // 放大DIV
+                bigPng: '',
             }
         },
         mounted() {
-            axios.get("/blast/common/fillDisplay").then((res) => {
-                // res->response res.data->响应体(Result) res.data.data->FillResultUrl
+            axios.get("/blast/common/draftDisplay").then((res) => {
+                // res 是response res.data是result res.data.data是ResultUrl
+                console.log(res.data.data)
                 let resultUrl = res.data.data;
-                // 1. 常规信息
+                this.hifiRefUrl = resultUrl.hifiRefUrl;
+                this.genomeRefUrl = resultUrl.genomeRefUrl;
+                // TODO 如果勾选了Plot 就展示那个模块
+                if (this.genomeRefUrl !== "NotPlot") {
+                    console.log('genomeRefUrl')
+                    console.log(this.genomeRefUrl)
+                    // 显示这个div
+                    $("#doPlot").css('display', 'block');
+                    // 隐藏两个div
+                    $("#rightPadding").css('height', 0);
+                    $("#leftPadding").css('height', 0);
+                }
                 this.genomePng = resultUrl.genomePng;
-                this.fastaUrl = resultUrl.fastaUrl;
+                this.mapInfoUrl = resultUrl.mapInfoUrl;
                 this.statUrl = resultUrl.statUrl;
-                this.detailUrl = resultUrl.detailUrl;
-                // 2. 展示信息
-                this.gapDetail = resultUrl.gapDetail;
-                this.gapStat = resultUrl.gapStat;
+                this.fastaUrl = resultUrl.fastaUrl;
+                this.agpUrl = resultUrl.agpUrl;
+                this.draftStat = resultUrl.draftStat;
+                console.log(this.draftStat)
+                this.draftMapInfo = resultUrl.draftMapInfo;
                 this.warnings = resultUrl.warnings;
-                console.log(resultUrl)
-                console.log(resultUrl.gapStat);
-                console.log(this.gapStat);
-                console.log(this.warnings)
-                // 3. Warnings的结果展示
-                if (this.warnings.length !== 0) {
+                // TODO 如果训练过程中存在Warnings的话
+                if (this.warnings.length!==0) {
                     // 把正确的div取消
                     $("#withCorrect").css("display", "none");
                     // 展示错误的div
@@ -773,21 +880,7 @@
                 }
             })
         },
-
         methods: {
-            /*点击放大图片*/
-            // 1. 点击隐藏大图
-            closeImg() {
-                $(".shade").css("display", "none");
-            },
-            // 点击原图变大
-            ClickBig() {
-                // 1. 把原图的src给放大图的div 设置放大图的css可见
-                this.bigPng = this.genomePng;
-                // 2. 展示遮罩
-                $(".shade").css('display', 'block');
-            },
-            // 下载
             /*点击按钮下载文件*/
             downloadCommon(src) {
                 // 创建一个a标签
@@ -804,37 +897,97 @@
                 // 触发单击事件
                 $a.dispatchEvent(eventObj);
             },
-            // 下载图片
-            downloadPng(){
-                let src = this.genomePng;
+            downloadDraftFasta() {
+                let src = this.fastaUrl;
                 this.downloadCommon(src);
             },
-            // 下载stat
-            downloadStat(){
+            // TODO 测试1下下载
+            notOpenDownload(url){
+              let a = document.createElement('a');
+              a.href = url;
+              a.style.display='none';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            },
+            // TODO 测试2下载 后端设置
+            backendSetDownload(){
+                axios.get("/blast/common/testDownload").then((res) => {
+                    let ele = document.createElement('a');
+                    ele.download = "";
+                    ele.style.display = 'none';
+                    console.log(res.data);
+                    ele.href = res.data;
+                    // 触发点击
+                    document.body.appendChild(ele);
+                    ele.click();
+                    // 移除元素
+                    document.body.removeChild(ele);
+                })
+            },
+            downloadDraftAGP() {
+                let src = this.agpUrl;
+                // this.backendSetDownload();
+                // this.notOpenDownload(src);
+                this.downloadCommon(src);
+            },
+            downloadDraftStat() {
                 let src = this.statUrl;
                 this.downloadCommon(src);
             },
-            // 下载detail
-            downloadDetail(){
-                let src = this.detailUrl;
+            downloadDraftMapInfo() {
+                let src = this.mapInfoUrl;
                 this.downloadCommon(src);
             },
-            // 下载fasta
-            downloadFasta(){
-                let src = this.fastaUrl;
+            downloadDraftGenomePng() {
+                let src = this.genomePng;
                 this.downloadCommon(src);
+            },
+            downloadDraftGenomeRef() {
+                let src = this.genomeRefUrl;
+                this.downloadCommon(src);
+            },
+            downloadDraftHiFiRef() {
+                let src = this.hifiRefUrl;
+                this.downloadCommon(src);
+            },
+
+            /*点击放大图片*/
+            // 点击原图变大
+            commonClickBig(oriSrc) {
+                // 1. 把原图的src给放大图的div 设置放大图的css可见
+                this.bigPng = oriSrc;
+                // 2. 展示遮罩
+                $(".shade").css('display', 'block');
+            },
+            closeImg() {
+                $(".shade").css("display", "none");
+            },
+            genomeClickBig() {
+                let oriSrc = this.genomePng;
+                this.commonClickBig(oriSrc);
+            },
+            GenRefClickBig() {
+                let oriSrc = this.genomeRefUrl;
+                this.commonClickBig(oriSrc);
+            },
+            HiFiRefClickBig() {
+                let oriSrc = this.hifiRefUrl;
+                this.commonClickBig(oriSrc);
             },
 
             /*修改表格单元格样式*/
             cellStyle({row, column, rowIndex, columnIndex}) {
                 if (column.property === 'warning') {
                     return {
+                        // background:'#f7f8e4',
                         color: '#dc3636',
                     }
                 }
-            },
+            }
 
-        }
+        },
+
 
     });
 </script>

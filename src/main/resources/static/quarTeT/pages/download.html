@@ -317,10 +317,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">Assemble</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFill</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">Centro</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">Telo</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFiller</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroMiner</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -335,14 +335,10 @@
             <el-main>
                 <div style="font-size: 120%; font-family: Helvetica,sans-serif">
                     <h3 style="font-weight: bold; text-align: center">
-                        Download Execution Tools
+                        Download quarTeT CLI Tools
                     </h3>
                     <p style="text-align: justify">
-                        There are four tools available in the Tools section
-                        and we have provided the downloadable files
-                        in this section, please click on the corresponding buttons
-                        to download the tools so you can run them locally.
-                        All tools are freely available to academic under MIT license, and
+                        quarTeT is freely available to academic under MIT license, and
                         provided
                         <em>without any warranty</em>.
                         If you have any questions, please feel free to
@@ -365,57 +361,12 @@
                     <el-row :gutter="10">
                         <el-col :xs="16" :sm="16" :md="16" lg="12" xl="12">
                                 <span class="download_span">
-                                    Draft Blast Tool
+                                    quarTeT
                                     <i class="el-icon-document"></i>
                                 </span>
                         </el-col>
                         <el-col :xs="16" :sm="8" :md="8" lg="12" xl="12">
-                            <button class="btn-54" @click="downloadDraft">
-                                <span class="shadow"></span>
-                                <span class="depth"></span>
-                                <span class="content">Download</span>
-                            </button>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="10">
-                        <el-col :xs="16" :sm="16" :md="16" lg="12" xl="12">
-                                <span class="download_span">
-                                    Fill Blast Tool
-                                    <i class="el-icon-document"></i>
-                                </span>
-                        </el-col>
-                        <el-col :xs="16" :sm="8" :md="8" lg="12" xl="12">
-                            <button class="btn-54">
-                                <span class="shadow"></span>
-                                <span class="depth"></span>
-                                <span class="content">Download</span>
-                            </button>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="10">
-                        <el-col :xs="16" :sm="16" :md="16" lg="12" xl="12">
-                                <span class="download_span">
-                                    Centro Blast Tool
-                                    <i class="el-icon-document"></i>
-                                </span>
-                        </el-col>
-                        <el-col :xs="16" :sm="8" :md="8" lg="12" xl="12">
-                            <button class="btn-54">
-                                <span class="shadow"></span>
-                                <span class="depth"></span>
-                                <span class="content">Download</span>
-                            </button>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="10">
-                        <el-col :xs="16" :sm="16" :md="16" lg="12" xl="12">
-                                <span class="download_span">
-                                    Telo Blast Tool
-                                    <i class="el-icon-document"></i>
-                                </span>
-                        </el-col>
-                        <el-col :xs="16" :sm="8" :md="8" lg="12" xl="12">
-                            <button class="btn-54">
+                            <button class="btn-54" @click="downloadquartet">
                                 <span class="shadow"></span>
                                 <span class="depth"></span>
                                 <span class="content">Download</span>
@@ -535,21 +486,9 @@
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            downloadDraft(){
-                let draft_src = "../exeFiles/quartet_draft.py";
-                this.downloadCommon(draft_src);
-            },
-            downloadFill(){
-                let fill_src = "../exeFiles/quartet_fill.py";
-                this.downloadCommon(fill_src);
-            },
-            downloadTelo(){
-                let telo_src = "../exeFiles/quartet_telo.py";
-                this.downloadCommon(telo_src);
-            },
-            downloadCentro(){
-                let centro_src = "../exeFiles/quartet_centro.py";
-                this.downloadCommon(centro_src);
+            downloadquartet(){
+                let quartet_src = "../bioRepository/exec/quartet.tar.gz";
+                this.downloadCommon(quartet_src);
             },
             downloadCommon(src){
                 // 创建一个a标签

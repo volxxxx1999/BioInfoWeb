@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Tools - TeloBlast</title>
+    <style>
+        /*根节点html字体大小*/
+        html {
+            font-size: 12px;
+        }
+
+        body {
+            background-color: #f7f6f2; /*#f7f6f2  #d5d5d5*/
+            /* 针对web元素塌陷*/
+            /*min-width: 65rem;*/
+            /*max-width: 130rem;*/
+            margin: 0 auto;
+        }
+
+        /* 针对设备自适应自适应*/
+        #thinner {
+            width: 106rem;
+            margin: 0 auto;
+
+            /* 针对web元素塌陷*/
+            min-width: 65rem;
+            max-width: 130rem;
+            /*border-style: solid;*/
+            /*border-color: #3e3e3e;*/
+            /*border-width: 2px;*/
+            /*box-shadow: 2rem 2rem 1rem #888888;*/
+        }
+
+        /* 手机 宽度小于768px的 */
+        @media only screen and (max-width: 768px) {
+            #thinner {
+                width: 100%;
+            }
+        }
+
+        /* 平板 宽度大于768px的*/
+        @media only screen and (min-width: 768px) {
+            #thinner {
+                width: 62rem;
+            }
+        }
+
+        /* 电脑 */
+        @media only screen and (min-width: 992px) {
+            #thinner {
+                width: 80rem;
+            }
+        }
+
+        /* web 更宽的屏幕 */
+        @media only screen and (min-width: 1200px) {
+            #thinner {
+                width: 97rem;
+            }
+        }
+
+        .el-header, .el-footer {
+            background-color: #fefefe;
+            color: #333;
+            text-align: justify; /*设置文字 两端分布*/
+            line-height: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* 设置页头下元素属性*/
+        .el-header > p {
+            font-size: 140%;
+            color: #4d4d4d;
+            font-family: Helvetica, sans-serif
+        }
+
+        /* 设置页脚下元素属性*/
+        .el-footer > div {
+            font-size: 140%;
+            color: #f7f6f2;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        .el-aside {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+            float: left;
+        }
+
+        #el-form {
+            margin-left: 0;
+        }
+
+        .el-main {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+            margin-top: 1rem;
+            border-color: #e5e5e5;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        /*设置导航栏的字体格式*/
+        .el-menu-demo {
+            font-family: Helvetica, sans-serif;
+            font-size: 130%;
+            font-weight: bold;
+        }
+
+        /*登录+标题banner的设置*/
+        .banner {
+            height: 8rem;
+            background-color: #205573;
+            margin: 0;
+        }
+
+        .banner > a {
+            color: #ffffff;
+            font-size: 5rem;
+            font-family: Helvetica, sans-serif;
+            padding-top: 1rem;
+            padding-left: 1rem;
+            margin: 0;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .loginDiv {
+            display: inline-block;
+            float: right;
+            padding-top: 2rem;
+            padding-right: 3rem;
+        }
+
+        .loginDiv > .el-button {
+            font-size: 1.5rem;
+            font-family: "Helvetica", sans-serif;
+        }
+
+        .loginDiv > span {
+            color: #ffffff;
+            font-size: 2rem;
+            padding-top: 1rem;
+            padding-left: 1rem;
+        }
+
+        /*下一步按钮*/
+        .next-button {
+            font-family: "Comic Sans MS", serif;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #205573;
+            width: 15rem;
+            height: 4rem;
+        }
+
+        /*下载区域*/
+        .upload1 {
+            width: 40rem;
+            border-style: dotted;
+            border-color: #a5aeb6;
+            border-width: 3px;
+            background-color: #ecf7f8;
+            margin: auto;
+            padding-bottom: 4rem;
+            font-size: 2rem;
+        }
+
+
+        /*ele container setting*/
+        body > .el-container {
+            margin-bottom: 5rem;
+        }
+
+        .el-container:nth-child(5) .el-aside,
+        .el-container:nth-child(6) .el-aside {
+            line-height: 30rem;
+        }
+
+        .el-container:nth-child(7) .el-aside {
+            line-height: 50rem;
+        }
+
+        /*css button ψ(｀∇´)ψ*/
+        .btn-24,
+        .btn-24 *,
+        .btn-24 :after,
+        .btn-24 :before,
+        .btn-24:after,
+        .btn-24:before {
+            border: 0 solid;
+            box-sizing: border-box;
+        }
+
+        .btn-24 {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: button;
+            background-color: #000;
+            background-image: none;
+            color: #fff;
+            cursor: pointer;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+            Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            font-size: 100%;
+            font-weight: 900;
+            line-height: 1.5;
+            margin: 0;
+            -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(green), to(pink), color-stop(0.5, #000), color-stop(50%, #ffffff));
+            padding: 0;
+            text-transform: uppercase;
+        }
+
+        .btn-24:disabled {
+            cursor: default;
+        }
+
+        .btn-24:-moz-focusring {
+            outline: auto;
+        }
+
+        .btn-24 svg {
+            display: block;
+            vertical-align: middle;
+        }
+
+        .btn-24 [hidden] {
+            display: none;
+        }
+
+        .btn-24 {
+            --background: #205573;
+            background: none;
+            overflow: hidden;
+            padding: 0.8rem 3rem;
+            position: relative;
+        }
+
+        .btn-24 span {
+            display: block;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-24:after,
+        .btn-24:before {
+            --tilt: 20px;
+            background: #fff;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+            content: "";
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transition: -webkit-clip-path 0.2s ease;
+            transition: clip-path 0.2s ease;
+            transition: clip-path 0.2s ease, -webkit-clip-path 0.2s ease;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .btn-24:after {
+            --thickness: 5px;
+            background: var(--background);
+            height: calc(100% - var(--thickness) * 2);
+            left: var(--thickness);
+            top: var(--thickness);
+            width: calc(100% - var(--thickness) * 2);
+        }
+
+        .btn-24:hover span {
+            transform: translateX(-20px);
+        }
+
+        .btn-24:hover:after,
+        .btn-24:hover:before {
+            -webkit-clip-path: polygon(
+                    0 0,
+                    calc(100% - var(--tilt)) 0,
+                    100% 50%,
+                    calc(100% - var(--tilt)) 100%,
+                    0 100%
+            );
+            clip-path: polygon(
+                    0 0,
+                    calc(100% - var(--tilt)) 0,
+                    100% 50%,
+                    calc(100% - var(--tilt)) 100%,
+                    0 100%
+            );
+        }
+
+        /*setting 搬来的*/
+        /*表单格式设置*/
+        .paramForm {
+            font-size: 1.2rem;
+            font-family: "Helvetica", sans-serif;
+            font-weight: bold;
+        }
+
+        /* v-loading 的样式修改*/
+        /* 修改动画的大小  给文字加粗效果*/
+        .el-loading-spinner {
+            font-size: 8rem;
+            /*font-weight: bold;*/
+        }
+
+        /* 文字大小修改*/
+        .el-loading-mask .el-loading-spinner .el-loading-text {
+            font-family: Helvetica, sans-serif;
+            font-size: 2rem;
+        }
+
+        /*  登录注册用样式  */
+        .login-box {
+            padding: 0 10px;
+        }
+
+        .login-box * {
+            margin-bottom: 10px;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+<!--全覆盖条幅-->
+<div id="app">
+    <!--1. 登录注册-->
+    <div class="banner">
+        <!--标题-->
+        <a href="home.html"> Quartet </a>
+        <!--登陆注册 使用-->
+        <span class="loginDiv">
+                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
+                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
+                <span class="username" v-show="isLogin">{{this.username}}</span>
+        </span>
+    </div>
+
+    <!--使用container布局-->
+    <el-container>
+        <!--2 导航栏-->
+        <el-header style="background-color: #ffffff; margin-top: 0">
+            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
+            <el-menu :default-active="activeBar" class="el-menu-demo"
+                     mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">Tools</template>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFiller</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroMiner</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
+                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
+                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
+            </el-menu>
+        </el-header>
+    </el-container>
+
+    <div id="thinner">
+        <!--3 上传文件-->
+        <el-container>
+            <el-main>
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <i class="el-icon-upload"></i>
+                        <span>Upload FASTA Files</span>
+                    </button>
+                </div>
+                <div class="upload1">
+                    <!-- 功能提示 -->
+                    <el-popover
+                            style="font-size: 2rem"
+                            placement="top-start"
+                            title="Genome File:"
+                            width="300"
+                            trigger="hover"
+                            content="It automatically determines the format of the input.
+                             To allow this feature, certain conventions are required
+                             with regard to the input of identifiers.">
+                        <el-button
+                                slot="reference"
+                                style="margin-bottom: 5%;
+                                margin-top: 5%;
+                        font-size: 1.5rem">
+                            Upload Genome File
+                        </el-button>
+                    </el-popover>
+                    <el-upload
+                            class="upload-demo"
+                            drag
+                            action="/blast/common/uploadTeloGenome"
+                            :on-success="handleUploadSuccess"
+                            :on-remove="handleRemove"
+                            :before-remove="beforeRemove"
+                            :before-upload="beforeUpload"
+                            :on-exceed="handleExceed"
+                            :file-list="fileList"
+                            :show-file-list="true"
+                            :limit="1"
+                            ref="upload">
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text"
+                             style="font-size: 1.5rem">
+                            Drag your file here, or
+                            <em>click to upload</em>
+                        </div>
+                        <div class="el-upload__tip"
+                             slot="tip"
+                             style="font-size: 1.5rem">
+                            Telo Genome File (FASTA Format)
+                        </div>
+                    </el-upload>
+                </div>
+            </el-main>
+        </el-container>
+        <!--4 设置参数-->
+        <el-container>
+            <el-main>
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <i class="el-icon-edit"></i>
+                        <span>Setting Algorithm Parameters</span>
+                    </button>
+                </div>
+                <div>
+                    <!--参数描述表格 border-radius: 20px; height="40rem"-->
+                    <el-aside width="50%">
+                        <el-table
+                                :data="tableData"
+                                stripe
+                                border
+                                style=" width: 95%;
+                                font-size: 1.3rem;
+                                font-family: Helvetica,sans-serif;
+                                margin:10px 10px 10px 10px"
+                                class="tableSet"
+                                :header-cell-style="{'text-align':'center'}"
+                                :row-class-name="tableRowClassName">
+                            <el-table-column
+                                    prop="param"
+                                    label="Parameter"
+                                    min-width="40%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="desc"
+                                    label="Description"
+                                    min-width="60%">
+                            </el-table-column>
+                        </el-table>
+                    </el-aside>
+                    <!--参数设置-->
+                    <el-aside width="50%">
+                        <el-main id="param-form">
+                            <!--4 参数表单-->
+                            <div class="paramForm" style="line-height: 5rem">
+                                <!--4.1 min repeat times range:0~500 step:25 default:100-->
+                                <el-row :gutter="10">
+                                    <el-col :xs="12" :sm="12" :md="8" lg="9" xl="10">
+                                        Min Repeat Times:
+                                    </el-col>
+                                    <el-col
+                                            style="margin-top: 10px"
+                                            :xs="12" :sm="12" :md="7" lg="15" xl="16">
+                                        <el-slider
+                                                v-model="formData.minRepeatTime"
+                                                :step="25"
+                                                v-bind:max="maxMinRepeatTime"
+                                                @change="onSliderChange">
+                                        </el-slider>
+                                    </el-col>
+                                    <el-col :xs="12" :sm="12" :md="9" lg="9" xl="10">
+                                        <el-input-number v-model="customMinRepeatTime"
+                                                         @change="onInputChange"
+                                                         :step="25"
+                                                         size="mini">
+                                        </el-input-number>
+                                    </el-col>
+                                </el-row>
+                                <!-- 4.2 下拉框三选一-->
+                                <el-row :gutter="10">
+                                    <el-col :xs="16" :sm="14" :md="9" lg="9" xl="10">
+                                        Clade:
+                                    </el-col>
+                                    <el-col :xs="6" :sm="10" :md="8" :lg="6" :xl="6">
+                                        <el-select
+                                                v-model="formData.clade"
+                                                placeholder="Please choose the alignment program:"
+                                                @change="currentStateChange">
+                                            <el-option label="plant" value="plant"></el-option>
+                                            <el-option label="animal" value="animal"></el-option>
+                                            <el-option label="other" value="other"></el-option>
+                                        </el-select>
+                                    </el-col>
+                                </el-row>
+                                <!--4.3 Prefix 文本输入  TODO: 防注入不允许违法文件名-->
+                                <el-row :gutter="10">
+                                    <el-col :xs="12" :sm="12" :md="9" lg="9" xl="10">
+                                        Filename:
+                                    </el-col>
+                                    <el-col :xs="12" :sm="12" :md="15" :lg="9" :xl="14">
+                                        <el-input v-model="formData.prefix"
+                                                  @input="onNameWarning"></el-input>
+                                    </el-col>
+                                </el-row>
+                            </div>
+                            <div style="margin-top: 5%;">
+                                <el-button class="next-button" @click="resetForm">RESET</el-button>
+                                <el-button class="next-button" type="primary" @click="onParamSubmit">RUN</el-button>
+                            </div>
+                        </el-main>
+                    </el-aside>
+                </div>
+            </el-main>
+        </el-container>
+    </div>
+
+    <el-footer style="height: 120%; background-color: #205573">
+        <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;Junyang Yue, Professor
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;School of Horticulture
+            <br>
+            Anhui Agricultural University Hefei 230036 China.
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Email: yuejy@ahau.edu.cn
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)6578 6185
+        </div>
+    </el-footer>
+
+    <!--6 登录 Dialog    -->
+    <el-dialog
+            title="Sign in"
+            :close-on-click-modal="false"
+            :visible.sync="loginDialogVisible"
+            width="450px">
+        <div class="login-box">
+            <el-input placeholder="email" v-model="email" clearable size="20px">
+            </el-input>
+            <el-input
+                    placeholder="password"
+                    v-model="password"
+                    show-password
+            ></el-input>
+            <!-- <div class="check-box">
+              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
+              <img :src="captchaPath" @click="getCaptcha()" alt="">
+            </div> -->
+            <el-button type="success" round style="width: 100%" @click="login"
+            >Login
+            </el-button
+            >
+        </div>
+    </el-dialog>
+    <!--7 注册 Dialog    -->
+    <el-dialog
+            title="Sign up"
+            :close-on-click-modal="false"
+            :visible.sync="registerDialogVisible"
+            width="450px">
+        <div class="login-box">
+            <el-input placeholder="email" v-model="email" clearable size="20px">
+            </el-input>
+            <el-input
+                    placeholder="password"
+                    v-model="password"
+                    show-password
+            ></el-input>
+            <el-input
+                    placeholder="password again"
+                    v-model="password2"
+                    show-password
+            ></el-input>
+            <!-- <div class="check-box">
+              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
+              <img :src="captchaPath" @click="getCaptcha()" alt="">
+            </div> -->
+            <el-button type="success" round style="width: 100%" @click="register"
+            >Register
+            </el-button
+            >
+        </div>
+    </el-dialog>
+</div>
+</body>
+
+<!-- 引入组件库 -->
+<!--JQuery-->
+<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<!--Vue-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!--ElementUI index.css index.js-->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!--Axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+
+<script>
+    // import fa from "../element-ui/src/locale/lang/fa";
+
+    new Vue({
+        el: `#app`,
+        data: function () {
+            return {
+                /*iconStatus: "el-icon-circle-plus-outline",*/
+                // 导航栏激活的栏，默认为Home
+                activeBar: "2",
+                // 是否上传了必须文件的flag
+                uploadGenomeFile: 0,
+                // 自定义的范围外minRepeatTimes
+                customMinRepeatTime: 100,
+                // 最大的minRepeatTimes
+                maxMinRepeatTime: 500,
+                // 参数表单
+                formData: {
+                    clade: 'other',
+                    minRepeatTime: 100,
+                    prefix: 'Quartet',
+                },
+                // 参数表格
+                tableData: [{
+                    param: 'Min Repeat Times',
+                    desc: 'The min repeat times to be reported, default: 100',
+                }, {
+                    param: 'Clade',
+                    desc: 'Specify clade of this genome. Plant will search TTTAGGG, animal will search TTAGGG, other will use tidk explore\'s suggestion default: other',
+                }, {
+                    param: 'FileName',
+                    desc: 'The prefix used on generated files, default: Quartet',
+                },],
+                // 登录注册用变量
+                loginDialogVisible: false,
+                registerDialogVisible: false,
+                email: "",
+                password: "",
+                password2: "",
+                isLogin: false,
+                username: "",
+            }
+        },
+        methods: {
+            // 滑条改变值
+            onSliderChange(value){
+                /*console.log(value)*/
+                this.customMinRepeatTime = value;
+            },
+            // 自定义输入框改变值
+            onInputChange(value){
+                /*console.log(value)*/
+                // 如果自定义值超出阈值，给出warning通知
+                if(value>this.maxMinRepeatTime){
+                    this.formData.minRepeatTime = this.maxMinRepeatTime;
+                        this.$notify({
+                        title: 'Reminder',
+                        message: 'The value has exceeded the Recommended range, may not achieve satisfactory results',
+                        type: 'warning',
+                        duration: 0,
+                        position: 'bottom-right',
+                    });
+                }else{
+                    this.formData.minRepeatTime = value;
+                }
+            },
+            // 重置参数表单
+            resetForm() {
+                this.formData = {
+                    clade: 'other',
+                    minRepeatTime: 100,
+                    prefix: 'Quartet',
+                }
+            },
+            // 参数提交训练
+            onParamSubmit() {
+                // 训练前先判断一下是否Required的文件都已经上传
+                if (this.uploadGenomeFile === 0){
+                    this.$message.error("Genome File is REQUIRED");
+                }else{
+                    // 重新组合一下训练参数
+                    let trainParam = {
+                        // 因为customValue会跟着滑条改变，也可以输入滑条外的值
+                        minRepeatTime: this.customMinRepeatTime,
+                        clade: this.formData.clade,
+                        prefix: this.formData.prefix,
+                    };
+                    // 提示用户留下邮箱
+                    this.$prompt('The program may take a long time to run. ' +
+                        'Please leave your email address and' +
+                        ' we will send the results to your email after running.', 'Reminder', {
+                        confirmButtonText: 'Confirm',
+                        cancelButtonText: 'Cancel',
+                        inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+                        inputErrorMessage: 'Incorrect mailbox format'
+                    }).then(({value}) => {
+                        // 把email存储进session
+                        console.log(value)
+                        axios.get("/blast/common/setEmail/"+value).then((res) => {
+                            console.log(res)
+                            this.$message({
+                                type: 'success',
+                                message: 'Your email is: ' + value
+                            });
+                        });
+                        // 开始运行
+                        const loading1 = this.$loading({
+                            lock: true,
+                            text: 'Program is running and will take approximately 15 to 20 minutes. Please DO NOT refresh or leave the page.',
+                            spinner: 'el-icon-loading',
+                            background: 'rgba(2,1,1,0.7)'
+                        });
+                    console.log(trainParam)
+                    axios.post("/blast/exec/teloBlast", trainParam).then((res) => {
+                        loading1.close();
+                        if(res.data.code ===  20020) {
+                            document.location.href = "displayErr.html";
+                        }else{
+                            document.location.href = "display3.html";
+                        }
+                    });
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: 'Cancel input'
+                        });
+                    });
+                }
+            },
+
+
+            // 不允许输入违规文件名
+            onNameWarning(val) {
+                let reg = /[^\w]/g;
+                // 存在返回true
+                if (reg.test(val)) {
+                    this.$message.error("Filename can only consist of numbers, letters and underscores!");
+                    this.formData.prefix = '';
+                }
+            },
+
+            /* 上传文件的钩子函数*/
+            handleExceed(files, fileList) {
+                this.$message.error(`Limit ONE File Only, You Have To Remove the Current File!`);
+            },
+            beforeUpload(file) {
+                let filename = file.name.toString();
+                let suffix = filename.substring(filename.lastIndexOf(".") + 1);
+                let suffixList = ["fasta", "fas", "fa", "FASTA", "FA", "FAS"];
+                let isFas = (suffixList.indexOf(suffix) !== -1);
+                // 后缀判断
+                if (!isFas) {
+                    this.$message.error('The File Format Must Be .FASTA, .FAS or .FA!');
+                }
+                return isFas;
+            },
+            beforeRemove(file, fileList) {
+                if (file && file.status === "success") {
+                    //移除方法
+                    return this.$confirm(`Are You Confirm to Remove ${file.name}？`, '(＃°Д°)', {
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: 'No',
+                        type: 'error'
+                    });
+                }
+            },
+            // 删除后 重新设置
+            handleRemove(file, fileList) {
+                if (file && file.status === "success") {
+                    let filename = file.name;
+                    console.log("deleteFile:" + filename);
+                    axios.get("/blast/common/removeTeloGenome").then((res) => {
+                        this.uploadGenomeFile = 0;
+                        this.$message.info("Removed Successfully");
+                    });
+                }
+            },
+            // 上传成功提示
+            handleUploadSuccess() {
+                this.$message.success("Upload Successfully");
+                this.uploadGenomeFile = 1;
+            },
+
+            // 登录注册用方法
+            // 打开登录对话框
+            openLogin() {
+                this.loginDialogVisible = true;
+            },
+            login() {
+                // 登录逻辑
+                axios.post("/blast/user/login", {
+                    "email": this.email,
+                    "password": this.password,
+                }).then(
+                    ({data}) => {
+                        if (data.code === 10000) {
+                            this.$message({
+                                message: 'Login successful',
+                                type: 'success'
+                            });
+                            localStorage.setItem("token", data.data); // 存储一下 token
+                            this.loginDialogVisible = false;
+                        } else {
+                            this.$message({
+                                message: data.message,
+                                type: 'error'
+                            });
+                        }
+                        this.email = "";
+                        this.password = "";
+                    },
+                    err => {
+                        this.email = "";
+                        this.password = "";
+                        console.error(err)
+                    }
+                );
+            },
+            // 打开注册对话框
+            openRegister() {
+                this.registerDialogVisible = true;
+            },
+            register() {
+                if (this.password !== this.password2) {
+                    this.$message({
+                        message: '两次密码输入不同',
+                        type: 'warning'
+                    });
+                    return
+                }
+                axios.post("/blast/user/register", {
+                    email: this.email,
+                    password: this.password,
+                }).then(
+                    ({data}) => {
+                        if (data.code === 10001) {
+                            this.$message({
+                                message: 'Register successful',
+                                type: 'success'
+                            });
+                            this.registerDialogVisible = false;
+                        } else {
+                            this.$message({
+                                message: data.message,
+                                type: 'error'
+                            });
+                        }
+                        this.email = "";
+                        this.password = "";
+                        this.password2 = "";
+                    },
+                    err => {
+                        this.email = "";
+                        this.password = "";
+                        this.password2 = "";
+                        console.error(err)
+                    }
+                );
+            },
+            // 验证身份, 判断是否登录
+            verify() {
+                const token = localStorage.getItem("token");
+                // console.log(token);
+                axios.get('/blast/user/verify', {
+                    headers: {
+                        'Authorization': token
+                    }
+                }).then(
+                    ({data}) => {
+                        if (data.code === 10002) {
+                            this.isLogin = true;
+                            this.username = data.data.email;
+                        }
+                        console.log(this.isLogin);
+                    },
+                    err => console.error(err)
+                );
+            },
+        },
+        created() {
+            this.verify();
+        }
+    });
+</script>
+
+
+</html>
