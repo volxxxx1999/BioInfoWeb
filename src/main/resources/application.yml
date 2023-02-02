@@ -37,7 +37,7 @@ spring:
   mail:
     host: smtp.gmail.com
     username: t2t.quartet@gmail.com
-    password: baso4233
+    password: T2TtT2Tt
     port: 587 # 端口号
     default-encoding: utf-8
     properties:
