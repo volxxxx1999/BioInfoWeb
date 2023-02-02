@@ -38,7 +38,7 @@ spring:
     host: smtp.gmail.com
     username: t2t.quartet@gmail.com
     password: T2TtT2Tt
-    port: 587 # 端口号
+    port: 465 # 端口号
     default-encoding: utf-8
     properties:
       mail:
@@ -47,8 +47,12 @@ spring:
           ssl:
             enable: true
             required: true
+            auth: true
           #开启debug模式，这样邮件发送过程的日志会在控制台打印出来，方便排查错误
         debug: true
+        socketFactory:
+          port: 465
+          class: javax.net.ssl.SSLSocketFactory
   datasource:
     url: jdbc:mysql://localhost:3306/bio_info?rewriteBatchedStatements=true&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
