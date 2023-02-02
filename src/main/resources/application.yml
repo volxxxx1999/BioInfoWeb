@@ -1,21 +1,21 @@
 pathConfig:
   # 根目录 存放存储目录和项目（针对浏览器访问）
-  rootPath: http://127.0.0.1:8887/
+  rootPath: https://www.atcgn.com/t2t/
   # 展示目录 user_dir的绝对路径 给图片和下载链接展示使用
-  displayPath: http://127.0.0.1:8887/bioRepository/user_dir/
+  displayPath: https://www.atcgn.com/t2t/bioRepository/user_dir/
   # 对于本项目，进行读写的目录
-  rwRootPath: ../../bioRepository/user_dir/
+  rwRootPath: ../bioRepository/user_dir/
   # 对于本项目，上传文件的地址
-  uploadPath: ../../bioRepository/user_dir/upload/
-  # 对于taskDir的工作目录，上传文件的路径（用于获取 -r Genome文件 HiFi文件等
+  uploadPath: ../bioRepository/user_dir/upload/
+  # 对于taskDir，上传文件的路径（用于获取 -r Genome文件 HiFi文件等
   taskUploadPath: ../../upload/
-  # 对于本项目，脚本目录的相对路径
-  assemblePath: ../../../simulatedExec/quartet_assemble_server.py
-  fillPath: ../../../simulatedExec/quartet_gapfill_server.py
-  teloPath: ../../../simulatedExec/quartet_telo_server.py
-  centroPath: ../../../simulatedExec/quartet_centro_server.py
+  # 对于taskDir，脚本目录的相对路径
+  assemblePath: ../../../exec/server/quartet_assemble_server.py
+  fillPath: ../../../exec/server/quartet_gapfill_server.py
+  teloPath: ../../../exec/server/quartet_telo_server.py
+  centroPath: ../../../exec/server/quartet_centro_server.py
   # 脚本启动方式
-  exeMethod: python
+  exeMethod: python3
 
 
 
@@ -35,9 +35,9 @@ server:
 # mail配置
 spring:
   mail:
-    host: smtp.qq.com
-    username: 812139685@qq.com
-    password: xxlxhgjdpzrpbfef
+    host: smtp.gmail.com
+    username: t2t.quartet@gmail.com
+    password: baso4233
     port: 587 # 端口号
     default-encoding: utf-8
     properties:
@@ -45,9 +45,8 @@ spring:
         #配置SSL 加密工厂
         smtp:
           ssl:
-            #本地测试，先放开ssl
-            enable: false
-            required: false
+            enable: true
+            required: true
           #开启debug模式，这样邮件发送过程的日志会在控制台打印出来，方便排查错误
         debug: true
   datasource:
