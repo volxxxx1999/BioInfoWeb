@@ -400,11 +400,7 @@
                                     title="Reference Genome File:"
                                     width="300"
                                     trigger="hover"
-                                    content="A reference genome (also known as a reference assembly)
-                                    is a digital nucleic acid sequence database,
-                                    assembled by scientists as a representative
-                                    example of the set of genes in one idealized
-                                    individual organism of a species.">
+                                    content="A reference genome of close related species.">
                                 <el-button
                                         slot="reference"
                                         style="margin-bottom: 5%;
@@ -446,17 +442,15 @@
                             <!-- 上传提示 -->
                             <el-popover
                                     placement="top-start"
-                                    title="HiFi Contigs or Scaffolds"
+                                    title="Contigs"
                                     width="300"
                                     trigger="hover"
-                                    content="HiFi reads are produced using circular consensus sequencing (CCS)
-                                     mode on PacBio long-read systems. HiFi reads provide base-level
-                                     resolution with 99.9% single-molecule read accuracy.">
+                                    content="Haplotype solved contigs.">
                                 <el-button slot="reference"
                                            style="margin-bottom: 5%;
                                           margin-top: 5%;
                                           font-size: 1.3rem">
-                                    Upload HiFi Contigs or Scaffolds
+                                    Upload Contigs
                                 </el-button>
                             </el-popover>
                             <!-- 测试：
@@ -484,7 +478,7 @@
                                 <div class="el-upload__tip"
                                      slot="tip"
                                      style="font-size: 1.5rem">
-                                    Hi-Fi Assembled Contigs or Scaffolds File (FASTA format)
+                                    Contigs (FASTA format)
                                 </div>
                             </el-upload>
                         </div>
