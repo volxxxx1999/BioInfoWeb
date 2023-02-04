@@ -35,9 +35,9 @@ server:
 # mail配置
 spring:
   mail:
-    host: smtp.gmail.com
-    username: t2t.quartet@gmail.com
-    password: T2TtT2Tt
+    host: smtp.163.com
+    username: t2t_quartet@163.com
+    password: XNCYMYQBUWKODVBU
     port: 465 # 端口号
     default-encoding: utf-8
     properties:
