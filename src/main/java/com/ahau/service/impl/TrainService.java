@@ -127,7 +127,7 @@ public class TrainService {
             // 发给谁（这里可以转发多个邮箱 使用setCc）
             message.setTo(mail);
             // 主题
-            message.setSubject("【QuartetProject】 Your task results ");
+            message.setSubject("【quarTeT】 Your task results ");
             // 内容+发送时间 TasKID: Telo/uuid/ ---> Telo_uuid /改为_ 去掉后面的/
             message.setText(content.toString());
             message.setSentDate(new Date());
