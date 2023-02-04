@@ -98,13 +98,11 @@ public class TrainService {
             taskID = taskID.substring(0, taskID.length() - 1);
             System.out.println("---》 任务序列号：" + taskID);
             // 邮件内容
-            content = new StringBuilder("# Your Query ID was:" + taskID + "\n" +
-                    "# Please find your search results below." + "\n" +
-                    "# If you have any comments or questions about this service," + "\n" +
-                    "# please contact us at:  yuejy@ahau.edu.cn " + "\n" +
+            content = new StringBuilder("# Your task is completed. Your Query ID is:" + taskID + "\n" +
+                    "# Please access your result at https://www.atcgn.com:8080/quarTeT/pages/home.html" + "\n" +
                     "# ----------------------------------------------" + "\n" +
-                    "# You can search the full results by click:" + "\n" +
-                    "# https://www.atcgn.com:8080/blast/pages/home.html");
+                    "# If you have any comments or questions about this service," + "\n" +
+                    "# please contact us at:  t2t_quartet@163.com ");
             // 返回的Result
         } else { // 发生了错误
             System.out.println("发生错误");
@@ -115,7 +113,8 @@ public class TrainService {
             for (ProcessError pr : processErrors) {
                 content.append("# ").append(pr.getError()).append("\n");
             }
-            content.append("# You can have another try by click https://www.atcgn.com:8080/blast/pages/home.html");
+            content.append("# You can have another try by click https://www.atcgn.com:8080/quarTeT/pages/home.html" + "\n" +
+                           "# or contact us with the error log for help at: t2t_quartet@163.com ");
             // 修改Result状态
             result.setCode(Code.TRAIN_ERR);
             result.setMessage("Error occurred!");
