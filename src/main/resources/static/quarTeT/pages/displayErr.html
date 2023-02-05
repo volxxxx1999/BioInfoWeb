@@ -405,7 +405,18 @@
             max-width: 100rem;
             max-height: 100rem;
         }
+        /*Logs提示*/
+        .text {
+            font-size: 14px;
+        }
 
+        .item {
+            padding: 10px 0;
+        }
+        .box-card {
+            width: 480px;
+            margin: auto;
+        }
     </style>
 </head>
 <body>
@@ -447,31 +458,13 @@
     <div id="thinner">
         <el-container>
             <el-main>
-                <el-empty description="Ops...Some Errors Occurred During the Process!">
-                    <template>
-                        <el-table
-                                :data="processErrors"
-                                class="tableSet"
-                                style="
-                                    font-size: 1.1rem;
-                                    font-family: Helvetica,sans-serif;
-                                    margin:10px 10px 10px 10px;"
-                                stripe
-                                border>
-                            <el-table-column
-                                    prop="eid"
-                                    label="ID"
-                                    width="60">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="error"
-                                    label="ERROR"
-                                    width="360">
-                            </el-table-column>
-                        </el-table>
-                    </template>
+                <el-empty description="Sorry...Some Errors Occurred During the Process. Here is the Log:">
                 </el-empty>
-
+                <el-card class="box-card">
+                    <div v-for="o in processLogs.length" :key="o" class="text item">
+                        {{processLogs[o-1]}}
+                    </div>
+                </el-card>
             </el-main>
         </el-container>
     </div>
@@ -503,23 +496,24 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!--Axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../js/axios-0.18.0.js"></script>
+<script src="../../js/axios-0.18.0.js"></script>
 
 <script>
     new Vue({
         el: `#app`,
         data: function () {
             return {
-                activeBar: "2", // 导航栏激活的栏，默认为Home 话说下拉栏显示不了啊喂
-                processErrors:[
-                    {'eid':1, 'error':'uncaught errors'},]
+                activeBar: "2", // 导航栏激活的栏，默认为Home
+                processLogs:['Quartet.Quartet.telo.info',
+                            '[Error] Unexpected error happened.'],
             }
         },
         /*这里需要mounted读errors*/
         mounted(){
             axios.get("/quarTeT/common/errDisplay").then((res) => {
                 console.log(res);
-                this.processErrors = res.data.data;
+                console.log(res.data.data)
+                this.processLogs = res.data.data;
                 this.$message.error(res.data.message);
             });
         },

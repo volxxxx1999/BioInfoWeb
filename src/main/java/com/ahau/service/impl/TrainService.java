@@ -107,11 +107,11 @@ public class TrainService {
         } else { // 发生了错误
             System.out.println("发生错误");
             // 获取Errors
-            String paramType = catalogue + "Errors";
-            Vector<ProcessError> processErrors = (Vector<ProcessError>) session.getAttribute(paramType);
+            String paramType = catalogue + "Log";
+            Vector<String> processLogs = (Vector<String>) session.getAttribute(paramType);
             content = new StringBuilder("# There are some errors occurred during the process:" + "\n");
-            for (ProcessError pr : processErrors) {
-                content.append("# ").append(pr.getError()).append("\n");
+            for (String log : processLogs) {
+                content.append("# ").append(log).append("\n");
             }
             content.append("# You can have another try by click https://www.atcgn.com:8080/quarTeT/pages/home.html" + "\n" +
                            "# or contact us with the error log for help at: t2t_quartet@163.com ");
@@ -198,12 +198,8 @@ public class TrainService {
         HttpSession session = request.getSession();
         // 1 存储Warning信息
         Vector<ProcessWarning> warningInfo = new Vector<>();
-        // 存储Error的信息
-        Vector<ProcessError> errorInfo = new Vector<>();
         // warning count
         int wCount = 0;
-        // error count
-        int eCount = 0;
         for (String str : trainResult) {
             // 2 Warnings 最终需要在页面展示
             if (str.contains("[Warning]")) {
@@ -217,24 +213,17 @@ public class TrainService {
             // 3 Errors 需要提示用户训练发生未知错误 Error也是有不同类型的
             if (str.contains("[Error]")) {
                 // 3.1 session要设置一下Error
-                eCount += 1;
-                ProcessError pr = new ProcessError();
-                pr.setEID(eCount);
-                pr.setError(str);
-                errorInfo.add(pr);
                 System.out.println("error------>\t" + str);
+                String errorParam = paramType + "Log";
+                session.setAttribute(errorParam, trainResult);
+                return false;
             }
         }
         // 4 Warnings是一个String数组的形式设置为Session
-        if (errorInfo.size() > 0) {
-            String errorParam = paramType + "Errors";
-            session.setAttribute(errorParam, errorInfo);
-            return false;
-        } else {
-            String warningParam = paramType + "Warnings";
-            session.setAttribute(warningParam, warningInfo);
-            return true;
-        }
+        String warningParam = paramType + "Warnings";
+        session.setAttribute(warningParam, warningInfo);
+        return true;
+
     }
 
 
