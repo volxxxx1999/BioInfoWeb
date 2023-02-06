@@ -209,13 +209,13 @@
         /*幻灯片的图片 单双设置*/
         .el-carousel__item:nth-child(2n) {
             height: 40rem;
-            background-image: url("https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-018-04369-4/MediaObjects/41467_2018_4369_Fig1_HTML.jpg?as=webp"); /**/
+            background-image: url("https://www.atcgn.com/t2t/bioRepository/img/fig1.png");
             background-size: 100%;
         }
 
         .el-carousel__item:nth-child(2n+1) {
             height: 40rem;
-            background-image: url("https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-018-04369-4/MediaObjects/41467_2018_4369_Fig3_HTML.jpg?as=webp");
+            background-image: url("https://www.atcgn.com/t2t/bioRepository/img/fig2.png");
             background-size: 100%;
         }
 
@@ -322,13 +322,13 @@
     <!--1. 登录注册-->
     <div class="banner">
         <!--标题-->
-        <a href="home.html"> Quartet </a>
-        <!--登陆注册 使用-->
-        <span class="loginDiv">
+        <a href="home.html"> quarTeT </a>
+        <!--登陆注册 使用 暂弃-->
+        <!-- <span class="loginDiv">
                 <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
                 <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
                 <span class="username" v-show="isLogin">{{this.username}}</span>
-        </span>
+        </span> -->
     </div>
 
     <!--使用container布局-->
@@ -348,7 +348,7 @@
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
-                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
+                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
             </el-menu>
         </el-header>
     </el-container>
@@ -365,10 +365,10 @@
                            <span> Query ID: </span>
                         </el-col>
                         <el-col :xs="16" :sm="16" :md="16" :lg="16" :xl="16">
-                            <el-input v-model="taskID" placeholder="Please input the query ID"></el-input>
+                            <el-input v-model="taskID" placeholder="Access your result with query ID"></el-input>
                         </el-col>
                         <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
-                            <el-button  type="primary" @click="searchResult">Search</el-button>
+                            <el-button  type="primary" @click="searchResult">Access</el-button>
                         </el-col>
                     </el-row>
                 </div>
@@ -397,7 +397,8 @@
                 <div class="citationFormat">
                     <i class="el-icon-collection"></i>
                     <span>
-                    Publications are requested to please cite the contributing authors:
+                    If you find quarTeT useful, please cite:
+                    <!--TODO: replace link after publish-->
                     <a href="https://www.baidu.com" style="color: #4d4d4d ">
                         Here is your article link
                     </a>
@@ -410,15 +411,7 @@
     <!--5 页脚信息-->
     <el-footer style="height: 120%; background-color: #205573">
         <div>
-            &nbsp;&nbsp;&nbsp;&nbsp;Junyang Yue, Professor
-            <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;School of Horticulture
-            <br>
-            Anhui Agricultural University Hefei 230036 China.
-            <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Email: yuejy@ahau.edu.cn
-            <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)6578 6185
+            Powered by <a href="https://www.atcgn.com/">ATCG</a>
         </div>
     </el-footer>
 
