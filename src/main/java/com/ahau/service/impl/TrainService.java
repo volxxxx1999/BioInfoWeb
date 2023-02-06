@@ -99,7 +99,7 @@ public class TrainService {
             System.out.println("---》 任务序列号：" + taskID);
             // 邮件内容
             content = new StringBuilder("# Your task is completed. Your Query ID is:" + taskID + "\n" +
-                    "# Please access your result at https://www.atcgn.com/quarTeT/pages/home.html" + "\n" +
+                    "# Please access your result at http://www.atcgn.com:8080/quarTeT/pages/home.html" + "\n" +
                     "# ----------------------------------------------" + "\n" +
                     "# If you have any comments or questions about this service," + "\n" +
                     "# please contact us at:  t2t_quartet@163.com ");
@@ -113,7 +113,7 @@ public class TrainService {
             for (String log : processLogs) {
                 content.append("# ").append(log).append("\n");
             }
-            content.append("# You can have another try by click https://www.atcgn.com/quarTeT/pages/home.html" + "\n" +
+            content.append("# You can have another try by click http://www.atcgn.com:8080/quarTeT/pages/home.html" + "\n" +
                            "# or contact us with the error log for help at: t2t_quartet@163.com ");
             // 修改Result状态
             result.setCode(Code.TRAIN_ERR);
