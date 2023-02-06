@@ -209,13 +209,13 @@
         /*幻灯片的图片 单双设置*/
         .el-carousel__item:nth-child(2n) {
             height: 40rem;
-            background-image: url("https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-018-04369-4/MediaObjects/41467_2018_4369_Fig1_HTML.jpg?as=webp"); /**/
+            background-image: url("https://www.atcgn.com/t2t/bioRepository/img/fig1.png");
             background-size: 100%;
         }
 
         .el-carousel__item:nth-child(2n+1) {
             height: 40rem;
-            background-image: url("https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-018-04369-4/MediaObjects/41467_2018_4369_Fig3_HTML.jpg?as=webp");
+            background-image: url("https://www.atcgn.com/t2t/bioRepository/img/fig2.png");
             background-size: 100%;
         }
 
@@ -365,10 +365,10 @@
                            <span> Query ID: </span>
                         </el-col>
                         <el-col :xs="16" :sm="16" :md="16" :lg="16" :xl="16">
-                            <el-input v-model="taskID" placeholder="Please input the query ID"></el-input>
+                            <el-input v-model="taskID" placeholder="Access your result with query ID"></el-input>
                         </el-col>
                         <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
-                            <el-button  type="primary" @click="searchResult">Search</el-button>
+                            <el-button  type="primary" @click="searchResult">Access</el-button>
                         </el-col>
                     </el-row>
                 </div>
