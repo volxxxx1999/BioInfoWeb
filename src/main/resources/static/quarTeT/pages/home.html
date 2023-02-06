@@ -512,36 +512,42 @@
         methods: {
             // 搜索之前的结果
             searchResult(){
-                const loading1 = this.$loading({
-                    lock: true,
-                    text: 'Wait a moment......',
-                    spinner: 'el-icon-loading',
-                    background: 'rgba(2,1,1,0.7)'
-                });
-                axios.get("/quarTeT/search/resultSearch/"+this.taskID).then((res)=>{
-                    loading1.close();
-                    console.log(res.data.data)
-                    switch (res.data.code){
-                        case 20050:
-                            this.$message.error("No related record with this Query ID was found in the database");
-                            break;
-                        case 20051:
-                            document.location.href = "display1.html";
-                            break;
-                        case 20052:
-                            document.location.href = "display2.html";
-                            break;
-                        case 20053:
-                            document.location.href = "display3.html";
-                            break;
-                        case 20054:
-                            document.location.href = "display4.html";
-                            break;
-                        case '20055':
-                            document.location.href = "display5.html";
-                            break;
-                    }
-                })
+                // 先对输入的内容进行初步鉴定 字母开头 下划线 字母数字连接符结尾
+                let reg = /^[a-zA-Z]{3,10}_[-a-zA-Z0-9]{36}$/;
+                if (!reg.test(this.taskID)) {
+                    this.$message.error("Incorrect Query ID. Please Check Your Input.");
+                }else{
+                    const loading1 = this.$loading({
+                        lock: true,
+                        text: 'Wait a moment......',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(2,1,1,0.7)'
+                    });
+                    axios.get("/quarTeT/search/resultSearch/"+this.taskID).then((res)=>{
+                        loading1.close();
+                        console.log(res.data.data)
+                        switch (res.data.code){
+                            case 20050:
+                                this.$message.error("No related record with this Query ID was found in the database");
+                                break;
+                            case 20051:
+                                document.location.href = "display1.html";
+                                break;
+                            case 20052:
+                                document.location.href = "display2.html";
+                                break;
+                            case 20053:
+                                document.location.href = "display3.html";
+                                break;
+                            case 20054:
+                                document.location.href = "display4.html";
+                                break;
+                            case '20055':
+                                document.location.href = "display5.html";
+                                break;
+                        }
+                    })
+                }
             },
 
             // 打开登录对话框
