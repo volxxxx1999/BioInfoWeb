@@ -39,31 +39,31 @@
         </dependency>
 
         <!--   MySQL相关依赖     -->
-        <dependency>
+      <!--  <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.26</version>
-        </dependency>
+        </dependency>-->
         <!--    druid 连接池 -->
-        <dependency>
+       <!-- <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.23</version>
-        </dependency>
+        </dependency>-->
         <!--    MBP 及场景启动器  -->
         <!--  Mybatis-plus -->
-        <dependency>
+      <!--  <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>
             <version>3.5.2</version>
-        </dependency>
+        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.baomidou/mybatisplus-spring-boot-starter -->
-        <dependency>
+  <!--      <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.4.0</version>
-        </dependency>
+        </dependency>-->
 
         <!--  JWT 库  -->
         <dependency>
