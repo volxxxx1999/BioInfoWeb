@@ -98,7 +98,7 @@ public class TrainService {
             taskID = taskID.substring(0, taskID.length() - 1);
             System.out.println("---》 任务序列号：" + taskID);
             // 邮件内容
-            content = new StringBuilder("# Your task is completed. Your Query ID is:" + taskID + "\n" +
+            content = new StringBuilder("# Your task is completed. Your Query ID is: " + taskID + "\n" +
                     "# Please access your result at http://www.atcgn.com:8080/quarTeT/pages/home.html" + "\n" +
                     "# ----------------------------------------------" + "\n" +
                     "# If you have any comments or questions about this service," + "\n" +
