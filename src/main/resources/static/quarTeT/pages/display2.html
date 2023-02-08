@@ -434,7 +434,7 @@
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
-                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
+                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
             </el-menu>
         </el-header>
     </el-container>
@@ -459,13 +459,13 @@
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <i class="el-icon-picture"></i>
-                        <span>GenomeDraft Display</span>
+                        <span>Genome Overview</span>
                     </button>
                 </div>
                 <!--3.2 对该图的说明-->
                 <div class="illustration-box">
                     <p>
-                        Here are some illustration about the graphs....
+                        Here is an overview of this gap-filled genome.
                     </p>
                 </div>
                 <!--3.3 主体内容-->
@@ -519,7 +519,7 @@
                             </h3>
                             <el-result
                                     icon='success'
-                                    title='Combo!'
+                                    title='Success!'
                                     sub-title='No Errors Occur During the Process'>
                             </el-result>
                         </div>
@@ -534,7 +534,7 @@
                             <el-result
                                     icon='warning'
                                     title='Warning!'
-                                    sub-title='There are some conditions encountered during process'>
+                                    sub-title='Process is completed, but here are some warning'>
                             </el-result>
                             <el-button type="text" @click="dialogTableVisible = true">Show Details</el-button>
                             <el-dialog title="Warning Infos" :visible.sync="dialogTableVisible">
@@ -574,13 +574,13 @@
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <i class="el-icon-tickets"></i>
-                        <span>Statistic Information</span>
+                        <span>Statistic</span>
                     </button>
                 </div>
                 <!--4.2 对两个表格的说明-->
                 <div class="illustration-box">
                     <p>
-                        Here are some illustration about the tables....
+                        Here are some statistic data of this gap-filled genome.
                     </p>
                 </div>
                 <!--4.3 stat-->
@@ -590,7 +590,7 @@
                             style="font-family: Helvetica,sans-serif;
                                    font-size: 1.3rem;
                                    color:#666666">
-                        Statistic Information
+                        Genome Statistic
                     </h3>
                     <!--统计数据-->
                     <div class="statFont">
@@ -646,7 +646,7 @@
                             style="font-family: Helvetica,sans-serif;
                                    font-size: 1.3rem;
                                    color:#666666">
-                        Detail Information
+                        Gap Filling Detail
                     </h3>
                     <!--统计数据-->
                     <div class="statFont">
@@ -720,7 +720,7 @@
                 </div>
                 <!--5 提供下载的FASTA和apg-->
                 <div style="margin-top: 3rem;">
-                    <el-button class="next-button" type="primary" @click="downloadFasta">Download FASTA</el-button>
+                    <el-button class="next-button" type="primary" @click="downloadFasta">Download Genome</el-button>
                 </div>
             </el-main>
         </el-container>
@@ -729,15 +729,7 @@
     <!--6 页脚信息-->
     <el-footer style="height: 120%; background-color: #205573">
         <div>
-            &nbsp;&nbsp;&nbsp;&nbsp;Junyang Yue, Professor
-            <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;School of Horticulture
-            <br>
-            Anhui Agricultural University Hefei 230036 China.
-            <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Email: yuejy@ahau.edu.cn
-            <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)6578 6185
+            Powered by <a href="https://www.atcgn.com/" style="color: #ffffff ">ATCG</a>
         </div>
     </el-footer>
 </div>
