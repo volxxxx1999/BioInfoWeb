@@ -939,7 +939,7 @@
                 if (this.uploadSeqFile === 0) {
                     this.$message.error("Reference Genome File is REQUIRED");
                 } else if (this.uploadHiFiFile === 0) {
-                    this.$message.error("HiFi Contigs or Scaffolds File is REQUIRED");
+                    this.$message.error("Contigs File is REQUIRED");
                 } else {
                     // 重新组合一下训练参数
                     let trainParam = {
@@ -951,9 +951,9 @@
                         plot: this.formData.plot,
                     };
                     // 提示用户留下邮箱
-                    this.$prompt('The program may take a long time to run. ' +
+                    this.$prompt('The program may run for a while. ' +
                         'Please leave your email address and' +
-                        ' we will send the results to your email after running.', 'Reminder', {
+                        ' we will send the query ID to your email once completed.', 'Reminder', {
                         confirmButtonText: 'Confirm',
                         cancelButtonText: 'Cancel',
                         inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
@@ -971,7 +971,7 @@
                         // 开始运行
                         const loading1 = this.$loading({
                             lock: true,
-                            text: 'Program is running.<br>You can wait here or access the result later by task query ID.<br> Query ID will be sent to your e-mail once task is completed.',
+                            text: 'Program is running. You can wait here or access the result later by task query ID. Query ID will be sent to your e-mail once task is completed.',
                             spinner: 'el-icon-loading',
                             background: 'rgba(2,1,1,0.7)'
                         });
