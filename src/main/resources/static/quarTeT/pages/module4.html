@@ -368,7 +368,7 @@
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
-                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact Us</el-menu-item>
+                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
             </el-menu>
         </el-header>
     </el-container>
@@ -381,7 +381,7 @@
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <i class="el-icon-upload"></i>
-                        <span>Upload Files</span>
+                        <span>Uploading Files</span>
                     </button>
                 </div>
                 <div>
@@ -392,18 +392,16 @@
                             <el-popover
                                     style="font-size: 2rem"
                                     placement="top-start"
-                                    title="Genome File:"
+                                    title="Genome:"
                                     width="300"
                                     trigger="hover"
-                                    content="It automatically determines the format of the input.
-                                     To allow this feature, certain conventions are required
-                                     with regard to the input of identifiers.">
+                                    content="Your final genome.">
                                 <el-button
                                         slot="reference"
                                         style="margin-bottom: 5%;
                                        margin-top: 5%;
                                 font-size: 1.5rem">
-                                    Upload Genome File
+                                    Upload Genome
                                 </el-button>
                             </el-popover>
                             <!--上传组件-->
@@ -440,17 +438,16 @@
                             <el-popover
                                     style="font-size: 2rem"
                                     placement="top-start"
-                                    title="Annotation File:"
+                                    title="TE Annotation:"
                                     width="300"
                                     trigger="hover"
-                                    content="It is an optional step, annotation
-                                            files help to xxx,">
+                                    content="Annotation of transposable element.">
                                 <el-button
                                         slot="reference"
                                         style="margin-bottom: 5%;
                                        margin-top: 5%;
                                 font-size: 1.5rem">
-                                    Upload Annotation File (Optional)
+                                    Upload Annotation (Optional)
                                 </el-button>
                             </el-popover>
                             <!--上传组件-->
@@ -642,15 +639,7 @@
     <!--5 页脚信息-->
     <el-footer style="height: 120%; background-color: #205573">
         <div>
-            &nbsp;&nbsp;&nbsp;&nbsp;Junyang Yue, Professor
-            <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;School of Horticulture
-            <br>
-            Anhui Agricultural University Hefei 230036 China.
-            <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Email: yuejy@ahau.edu.cn
-            <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;Tel/Fax: +86 (0551)6578 6185
+            Powered by <a href="https://www.atcgn.com/" style="color: #ffffff ">ATCG</a>
         </div>
     </el-footer>
 
@@ -936,9 +925,9 @@
                         prefix: this.formData.prefix,
                     };
                     // 提示用户留下邮箱
-                    this.$prompt('The program may take a long time to run. ' +
-                        'Please leave your email address and' +
-                        ' we will send the results to your email after running.', 'Reminder', {
+                    this.$prompt('The program may run for a while. ' +
+                    'Please leave your email address and' +
+                    ' we will send the query ID to your email once completed.', 'Reminder', {
                         confirmButtonText: 'Confirm',
                         cancelButtonText: 'Cancel',
                         inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
@@ -956,7 +945,7 @@
                         // 开始运行
                     const loading1 = this.$loading({
                         lock: true,
-                        text: 'Program is running and will take approximately 15 to 20 minutes. Please DO NOT refresh or leave the page.',
+                        text: 'Program is running. You can wait here or access the result later via task query ID. Query ID will be sent to your e-mail once task is completed.',
                         spinner: 'el-icon-loading',
                         background: 'rgba(2,1,1,0.7)'
                     });
