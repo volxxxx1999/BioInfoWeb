@@ -447,7 +447,7 @@
                                         style="margin-bottom: 5%;
                                        margin-top: 5%;
                                 font-size: 1.5rem">
-                                    Upload Annotation (Optional)
+                                    Upload TE Annotation (Optional)
                                 </el-button>
                             </el-popover>
                             <!--上传组件-->
@@ -741,11 +741,8 @@
                 // minLength的客制化值
                 customMinLength: 100000,
                 tableData: [{
-                    param: 'Min Period',
-                    desc: 'Min period to be consider as centromere repeat monomer. Default: 100',
-                }, {
-                    param: 'Max Period',
-                    desc: 'Max period to be consider as centromere repeat monomer. Default: 200',
+                    param: 'Period',
+                    desc: 'Period (monomer length) range to be consider as centromere repeat monomer. Default: 100~200',
                 }, {
                     param: 'Max Gap',
                     desc: 'Max allowed gap size between two tandem repeats to be considered as in one tandem repeat region. Default: 50000',
