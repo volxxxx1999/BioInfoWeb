@@ -258,6 +258,7 @@
 
         /*下载div的格式*/
         .download_div {
+            height: 22rem;
             width: 40rem;
             margin: auto;
             line-height: 6rem;
@@ -337,7 +338,7 @@
                     <h3 style="font-weight: bold; text-align: center">
                         Download quarTeT CLI Tools
                     </h3>
-                    <p style="text-align: justify">
+                    <p style="text-align: center">
                         quarTeT CLI toolkit is freely available to academic under MIT license, and
                         provided
                         <em>without any warranty</em>.<br>
@@ -349,7 +350,6 @@
                         <a href="contact.html" style="text-decoration: none">
                             contact us
                         </a>.
-
                     </p>
                 </div>
             </el-main>
@@ -359,32 +359,36 @@
         <el-container>
             <el-main>
                 <div class="download_div">
-                    <el-row :gutter="10">
-                        <el-col :xs="16" :sm="16" :md="16" lg="12" xl="12">
-                                <span class="download_span">
-                                    quarTeT
-                                    <i class="el-icon-document"></i>
-                                </span>
-                        </el-col>
-                        <el-col :xs="16" :sm="8" :md="8" lg="12" xl="12">
-                            <button class="btn-54" @click="downloadquartet">
-                                <span class="shadow"></span>
-                                <span class="depth"></span>
-                                <span class="content">Download</span>
-                            </button>
-                        </el-col>
-                    </el-row>
+                    <div style="padding-top: 6rem">
+                        <el-row :gutter="10">
+                            <el-col :xs="16" :sm="16" :md="16" lg="12" xl="12">
+                                    <span class="download_span">
+                                        quarTeT
+                                        <i class="el-icon-document"></i>
+                                    </span>
+                            </el-col>
+                            <el-col :xs="16" :sm="8" :md="8" lg="12" xl="12">
+                                <button class="btn-54" @click="downloadquartet">
+                                    <span class="shadow"></span>
+                                    <span class="depth"></span>
+                                    <span class="content">Download</span>
+                                </button>
+                            </el-col>
+                        </el-row>
+                    </div>
                 </div>
             </el-main>
         </el-container>
     </div>
 
     <!--5. 页脚-->
-    <el-footer style="height: 120%; background-color: #205573">
+    <el-footer style="height:6rem; background-color: #205573">
         <div>
+            <br/>
             Powered by <a href="https://www.atcgn.com/" style="color: #ffffff ">ATCG</a>
         </div>
     </el-footer>
+
     <!--6 登录 Dialog    -->
     <el-dialog
             title="Sign in"
