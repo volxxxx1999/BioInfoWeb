@@ -74,7 +74,8 @@ You should upload 2 files in this section.
 - Alignment information  
   This table gives the destination of each contig. Total discarded size are given above the table.
 - Download  
-  Click `Download Assembly` buttom to get the assembled genome. Click `Download AGP` to get the detailed assembly information.
+  Click `Download Assembly` buttom to get the assembled genome.  
+  Click `Download AGP` to get the detailed assembly information.
 
 ## GapFiller
 GapFiller is a long-reads based gapfilling tool.
@@ -137,11 +138,15 @@ You should upload at least 1 file in this section.
   The name (prefix) used on your generated files. Default: quarTeT
 
 ### Result
-- Genome overview  
-  This plot gives an overview of the genome relative length and remaining gap distribution.
-- Genome statistic  
-  This table gives the length and gap remaining location of each chromosome. Genome total size and GC content are given above the table.
-- Gap filling detail  
-  This table gives information about how the gaps are closed. Gap closed/remaining count and total filled length are given above the table.
-- Download genome  
-  Click `Download Genome` buttom to get the gap-filled genome.  
+- Centromere overview  
+  This plot gives an overview of the genome relative length and predicted best centromere location alongside gap distribution.
+- Centromere candidates statistic  
+  This table gives the location and detailed information of best centromere candidate for each chromosome.  
+  Click `>` at the left will expand a secondory table of main monomer information.
+  Click `Show More` at the right will open a sub table of other candidates for this chromosome.
+- Download  
+  Click `Download candidates data` to get an archive of all centromere candidates information for each chromosome. This is the same as the table in `Show More`.  
+  Click `Download TR annotation` to get an archive of all tandem repeat annotation for each chromosome.
+  Click `Download TR sequence` to get an archive of all tandem repeat monomer sequence.
+
+## TeloExplorer
