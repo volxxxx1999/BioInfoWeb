@@ -843,23 +843,27 @@ public class CommonService {
      * @Return: CentroResultUrl
      */
     public ArrayList<CentroCandidate> centroShowMore(HttpServletRequest request, String fileName) {  // fileName: chrID.candiate
-        System.out.println("---commonService:centroShowMore......");
+        System.out.println("--->commonService:centroShowMore......");
         // 1. 获取存储路径
         HttpSession session = request.getSession();
         String taskID = (String) session.getAttribute("TaskID"); // Centro/uuid/
+        System.out.println("------>TaskID 为 :\t" + taskID);
         String candidatePath = rwRootPath + taskID + "candidate/"; // ../../bioRepository/user_dir/Centro/uuid/candidate/
+        System.out.println("------>candidate文件的存放的路径为 :\t" + candidatePath);
         File candidateFile = new File(candidatePath);
         File[] files = candidateFile.listFiles();
         if (!candidateFile.exists() || files == null) {
+            System.out.println("------>该路径不存在，或文件夹内容为空！");
             return null;
         } else {
+            System.out.println();
             // 2. 获取Prefix  prefix.chrid.candidate
             String prefix = files[0].getName();
             prefix = prefix.substring(0, prefix.lastIndexOf("."));  // prefix.chrID
             prefix = prefix.substring(0, prefix.lastIndexOf(".") + 1); // prefix.
+            System.out.println("------>prefix 为 :\t" + prefix);
             String showMorePath = candidatePath + prefix + fileName;
-            System.out.println("------>showMorePath:\t");
-
+            System.out.println("------>Show More 文件的路径为 :\t" +  showMorePath);
             // 3. 读表格
             ArrayList<CentroCandidate> centroCandidates = new ArrayList<>();
             try {
@@ -867,6 +871,8 @@ public class CommonService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("------>Show More表格内容 :\t");
+            System.out.println(centroCandidates);
             return centroCandidates;
         }
     }

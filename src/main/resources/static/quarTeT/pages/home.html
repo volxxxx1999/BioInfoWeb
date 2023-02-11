@@ -378,15 +378,24 @@
         <!--3 走马灯-->
         <el-container>
             <el-main>
-                <!-- 一个走马灯流程 可以展示你们程序的过程-->
+                <!--展示框架的图片-->
                 <span class="demonstration">
+                    <h4 class="demo">- The WorkFlow of quarTeT -</h4>
+                </span>
+                <el-image
+                        style="margin-top: 2rem"
+                        :src="displayImg"
+                        :fit="fitStyle">
+                </el-image>
+                <!-- 一个走马灯流程 可以展示你们程序的过程-->
+             <!--   <span class="demonstration">
                     <h4 class="demo">- The WorkFlow of quarTeT -</h4>
                 </span>
                 <el-carousel indicator-position="outside">
                     <el-carousel-item v-for="item in 4" :key="item">
                         <h3 class="small">{{ item }}</h3>
                     </el-carousel-item>
-                </el-carousel>
+                </el-carousel>-->
             </el-main>
         </el-container>
 
@@ -500,6 +509,9 @@
                 password2: "",
                 isLogin: false,
                 username: "",
+                // 展示图片的img URL
+                displayImg: "https://www.atcgn.com/t2t/bioRepository/img/fig1.png",
+                fitStyle: "contain", // 图片的填充格式
             }
         },
         methods: {
