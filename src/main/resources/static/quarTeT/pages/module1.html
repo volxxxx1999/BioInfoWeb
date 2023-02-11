@@ -763,10 +763,10 @@
                     desc: 'Specify alignment program (support minimap2 and mummer), default: minimap2',
                 }, {
                     param: 'Plot',
-                    desc: 'Plot a co-linearity graph for alignments. (will cost more time)',
+                    desc: 'Plot a colinearity graph for draft genome to reference alignments. (will cost more time)',
                 }, {
                     param: 'FileName',
-                    desc: 'The name used on your generated files. Default: quarTeT',
+                    desc: 'The name (prefix) used on your generated files. Default: quarTeT',
                 },
                 ],
                 // 登录注册用变量
@@ -819,7 +819,7 @@
             resetForm() {
                 this.formData = {
                     minAlign: 50000,
-                    minContig: 50000,
+                    minContig: 10000,
                     minIdentity: 90,
                     prefix: 'quarTeT',
                     aligner: 'minimap2',
