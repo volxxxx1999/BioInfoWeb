@@ -821,13 +821,15 @@
             /*重置参数表单*/
             resetForm() {
                 this.formData = {
-                    minAlign: 50000,
-                    minContig: 10000,
+                    minAlign: 10000,
+                    minContig: 50000,
                     minIdentity: 90,
                     prefix: 'quarTeT',
-                    aligner: 'minimap2',
                     plot: false,
                 }
+                // 客制化的值也一起修改
+                this.customMinLen = 10000;
+                this.customMinContig = 50000;
             },
             /*对文件名进行正则校验，不允许输入违法文件名 /[^\w]/g*/
             onNameWarning(val) {
