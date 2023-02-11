@@ -393,14 +393,17 @@
                     <!--第一个上传文件 Reference Genome Files-->
                     <el-aside width="50%">
                         <div class="upload1">
-                            <!--上传说明-->
+                            <!--上传说明  content="A high quality genome of close related species."-->
                             <el-popover
                                     style="font-size: 2rem"
                                     placement="top-start"
                                     title="Reference Genome:"
-                                    width="300"
-                                    trigger="hover"
-                                    content="A high quality genome of close related species.">
+                                    width="230"
+                                    trigger="hover">
+                                <!--提示内容-->
+                                <div>
+                                    A high quality genome of close <br/> related species.
+                                </div>
                                 <el-button
                                         slot="reference"
                                         style="margin-bottom: 5%;
@@ -436,17 +439,21 @@
                             </el-upload>
                         </div>
                     </el-aside>
-                    <!--上传Contigs文件-->
+                    <!--上传Contigs文件 content="Preliminary assembled sequence without gaps. Contigs should be haplotype solved."-->
                     <el-aside width="50%">
                         <div class="upload2">
                             <!-- 上传提示 -->
                             <el-popover
                                     placement="top-start"
                                     title="Contigs"
-                                    width="300"
-                                    trigger="hover"
-                                    content="Preliminary assembled sequence without gaps. 
-                                             Contigs should be haplotype solved.">
+                                    width="340"
+                                    trigger="hover">
+                                <!--提示内容-->
+                                <div>
+                                    Preliminary assembled sequence without gaps.
+                                    <br/>
+                                    Contigs should be haplotype solved."
+                                </div>
                                 <el-button slot="reference"
                                            style="margin-bottom: 5%;
                                           margin-top: 5%;
