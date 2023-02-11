@@ -726,7 +726,7 @@
                 maxFlanking:10000,
                 customFlanking:5000,
                 // filling的客制化值 最大值
-                maxMaxFilling:10000000,
+                maxMaxFilling:2000000,
                 customFilling:1000000,
                 formData: {
                     flankLength:5000,
@@ -746,7 +746,7 @@
                         desc: 'The flanking seq length of gap used to anchor (bp), default: 5000',
                     },{
                         param: 'Max Filling Length',
-                        desc: 'The max sequence length acceptable to fill any gaps, default: 100000',
+                        desc: 'The max sequence length acceptable to fill any gaps, default: 1000000',
                     },{
                         param: 'Filename',
                         desc: 'The prefix used on generated files. Default: quarTeT',
@@ -903,7 +903,7 @@
                     flankLength:5000,
                     minAlignLength: 1000,
                     minAlignIdentity: 40,
-                    maxFillingLength:100000,
+                    maxFillingLength:1000000,
                     prefix: 'quarTeT',
                 }
             },
