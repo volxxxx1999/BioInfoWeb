@@ -813,11 +813,11 @@
                 console.log(res.data.data)
                 let resultUrl = res.data.data;
                 this.hifiRefUrl = [resultUrl.hifiRefUrl];
-                let plot = resultUrl.hifiRefUrl;
+                let plot = resultUrl.genomeRefUrl;
+                console.log("Choose plot?")
+                console.log(plot)
                 // 如果勾选了Plot 就展示那个模块
                 if (plot !== "NotPlot") {
-                    console.log('genomeRefUrl')
-                    console.log(this.genomeRefUrl)
                     // 显示这个div
                     $("#doPlot").css('display', 'block');
                     // 隐藏两个div
