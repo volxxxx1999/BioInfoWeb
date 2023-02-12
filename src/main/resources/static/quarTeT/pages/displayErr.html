@@ -72,22 +72,10 @@
 
         /* 设置页脚下元素属性*/
         .el-footer > div {
-            font-size: 140%;
+            font-size: 1.4rem;
             color: #f7f6f2;
             font-family: Helvetica, sans-serif;
             text-align: center;
-        }
-
-        /* el-aside格式*/
-        .el-aside {
-            background-color: #ffffff;
-            color: #333;
-            text-align: center;
-            float: left;
-        }
-
-        #el-form {
-            margin-left: 0;
         }
 
         /*主体组件el-main格式*/
@@ -127,149 +115,6 @@
             text-decoration: none;
         }
 
-        /*登录注册的格式*/
-        .loginDiv {
-            display: inline-block;
-            float: right;
-            padding-top: 2rem;
-            padding-right: 3rem;
-        }
-
-        /*登录注册的按钮格式*/
-        .loginDiv > .el-button {
-            font-size: 1.5rem;
-            font-family: "Helvetica", sans-serif;
-        }
-
-        .loginDiv > span {
-            color: #ffffff;
-            font-size: 2rem;
-            padding-top: 1rem;
-            padding-left: 1rem;
-        }
-
-        /*下一步的按钮格式*/
-        .next-button {
-            font-family: "Comic Sans MS", serif;
-            font-size: 20px;
-            font-weight: bold;
-            background-color: #205573;
-            width: 15rem;
-            height: 4rem;
-        }
-
-        /*每个区块里面对应蓝色的标签*/
-        /*css button ψ(｀∇´)ψ*/
-        .btn-24,
-        .btn-24 *,
-        .btn-24 :after,
-        .btn-24 :before,
-        .btn-24:after,
-        .btn-24:before {
-            border: 0 solid;
-            box-sizing: border-box;
-        }
-
-        .btn-24 {
-            -webkit-tap-highlight-color: transparent;
-            -webkit-appearance: button;
-            background-color: #000;
-            background-image: none;
-            color: #fff;
-            cursor: pointer;
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-            Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-            font-size: 100%;
-            font-weight: 900;
-            line-height: 1.5;
-            margin: 0;
-            -webkit-mask-image: -webkit-gradient(radial, left top, left bottom, from(green), to(pink), color-stop(0.5, #000), color-stop(50%, #ffffff));
-            padding: 0;
-            text-transform: uppercase;
-        }
-
-        .btn-24:disabled {
-            cursor: default;
-        }
-
-        .btn-24:-moz-focusring {
-            outline: auto;
-        }
-
-        .btn-24 svg {
-            display: block;
-            vertical-align: middle;
-        }
-
-        .btn-24 [hidden] {
-            display: none;
-        }
-
-        .btn-24 {
-            --background: #205573;
-            background: none;
-            overflow: hidden;
-            padding: 0.8rem 3rem;
-            position: relative;
-        }
-
-        .btn-24 span {
-            display: block;
-            position: relative;
-            transition: transform 0.2s ease;
-        }
-
-        .btn-24:after,
-        .btn-24:before {
-            --tilt: 20px;
-            background: #fff;
-            -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
-            content: "";
-            display: block;
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
-            transition: -webkit-clip-path 0.2s ease;
-            transition: clip-path 0.2s ease;
-            transition: clip-path 0.2s ease, -webkit-clip-path 0.2s ease;
-            width: 100%;
-            z-index: -1;
-        }
-
-        .btn-24:after {
-            --thickness: 5px;
-            background: var(--background);
-            height: calc(100% - var(--thickness) * 2);
-            left: var(--thickness);
-            top: var(--thickness);
-            width: calc(100% - var(--thickness) * 2);
-        }
-
-        .btn-24:hover span {
-            transform: translateX(-20px);
-        }
-
-        .btn-24:hover:after,
-        .btn-24:hover:before {
-            -webkit-clip-path: polygon(
-                    0 0,
-                    calc(100% - var(--tilt)) 0,
-                    100% 50%,
-                    calc(100% - var(--tilt)) 100%,
-                    0 100%
-            );
-            clip-path: polygon(
-                    0 0,
-                    calc(100% - var(--tilt)) 0,
-                    100% 50%,
-                    calc(100% - var(--tilt)) 100%,
-                    0 100%
-            );
-        }
-
         /*ele container setting*/
         body > .el-container {
             margin-bottom: 5rem;
@@ -284,138 +129,16 @@
             line-height: 50rem;
         }
 
-        /*展示图旁边放大的按钮*/
-        .zoom-out-button {
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-
-        #bigimg {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            display: none;
-            z-index: 20;
-        }
-
-        /*第一个模块程序中输出的警告信息*/
-        /*框*/
-        .warning-module {
-            background-color: #ffffff;
-            border-style: solid;
-            border-width: 2px;
-            border-color: #e3e3e3;
-            margin-right: 5rem;
-            margin-top: 5rem;
-            -webkit-animation: box-shadow-drop-tr 0.6s both;
-            animation: box-shadow-drop-tr 0.6s both;
-        }
-
-        /*给一个加阴影的动画*/
-        @-webkit-keyframes warning-module {
-            0% {
-                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-            }
-            100% {
-                box-shadow: 6px -6px 18px rgba(0, 0, 0, 0.35);
-            }
-        }
-
-        @keyframes box-shadow-drop-tr {
-            0% {
-                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-            }
-            100% {
-                box-shadow: 6px -6px 18px rgba(0, 0, 0, 0.35);
-            }
-        }
-
-        /*框中的标签*/
-        .warning-module > h2 {
-            font-family: Helvetica, sans-serif;
-            color: #494949;
-            font-weight: bold;
-        }
-
-        /*框中的字*/
-        .warning-module > p {
-            font-size: 1.2rem;
-            font-family: Helvetica, sans-serif;
-            color: #767676;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        /*p中的warning语句*/
-        .warning-module > p > em {
-            font-size: 1rem;
-            font-family: Helvetica, sans-serif;
-            color: #e24e4e;
-        }
-
-        /*框内描述结果的文字box*/
-        .illustration-box {
-            font-size: 1.3rem;
-            color: #4d4d4d;
-            font-family: Helvetica, sans-serif;
-        }
-
-        /*两个展示表格的下载的span和按钮格式*/
-        .download-stat {
-            margin-left: 1rem;
-            float: left;
-            margin-bottom: 1rem;
-        }
-
-        .download-stat > .el-button {
-            margin: 0 0 0 0;
-        }
-
-
-
-        /*整个的遮罩*/
-        .shade{
-            position:fixed;
-            left:0;
-            top:0;
-            width:100%;
-            height:100%;
-            background-color: rgba(0,0,0,0.6);
-            display: none;
-        }
-        /*放大图片后：包含图片的div*/
-        .show-bigImg{
-            width:100rem;
-            height: auto;
-            /*实现div永远居中*/
-            margin: auto;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            -moz-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            -o-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-        }
-        /*放大后的图片*/
-        .show-bigImg img{
-            /*width: 66rem;*/
-            /*height: 66rem;*/
-            max-width: 100rem;
-            max-height: 100rem;
-        }
         /*Logs提示*/
         .text {
             font-size: 14px;
         }
 
         .item {
-            padding: 10px 0;
+            text-align: left;
         }
+
         .box-card {
-            width: 480px;
-            margin: auto;
         }
     </style>
 </head>
@@ -426,12 +149,6 @@
     <div class="banner">
         <!--标题-->
         <a href="home.html"> quarTeT </a>
-        <!--登陆注册 使用 暂弃-->
-        <!-- <span class="loginDiv">
-                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
-                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
-                <span class="username" v-show="isLogin">{{this.username}}</span>
-        </span> -->
     </div>
 
     <el-container>
@@ -443,10 +160,12 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssemblyMapper
+                    </el-menu-item>
                     <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFiller</el-menu-item>
                     <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroMiner</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer
+                    </el-menu-item>
                 </el-submenu>
                 <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
@@ -454,7 +173,7 @@
             </el-menu>
         </el-header>
     </el-container>
-
+    <!--3 log信息-->
     <div id="thinner">
         <el-container>
             <el-main>
@@ -462,15 +181,17 @@
                 </el-empty>
                 <el-card class="box-card">
                     <div v-for="o in processLogs.length" :key="o" class="text item">
-                        {{processLogs[o-1]}}
+                        {{processLogs[o - 1]}}
                     </div>
                 </el-card>
             </el-main>
         </el-container>
     </div>
-    <!--5 页脚信息-->
-    <el-footer style="height: 120%; background-color: #205573">
+
+    <!--4 页脚信息-->
+    <el-footer style="height:6rem; background-color: #205573">
         <div>
+            <br/>
             Powered by <a href="https://www.atcgn.com/" style="color: #ffffff ">ATCG</a>
         </div>
     </el-footer>
@@ -496,12 +217,14 @@
         data: function () {
             return {
                 activeBar: "2", // 导航栏激活的栏，默认为Home
-                processLogs:['Quartet.Quartet.telo.info',
-                            '[Error] Unexpected error happened.'],
+                processLogs: ['Quartet.Quartet.telo.info',
+                    '[Error] Unexpected error happened.',
+                    '[Error] Unexpected error happened.',
+                    '[Error] Unexpected error happened.'],
             }
         },
         /*这里需要mounted读errors*/
-        mounted(){
+        mounted() {
             axios.get("/quarTeT/common/errDisplay").then((res) => {
                 console.log(res);
                 console.log(res.data.data)
@@ -509,9 +232,7 @@
                 this.$message.error(res.data.message);
             });
         },
-        methods: {
-
-        }
+        methods: {}
     });
 </script>
 
