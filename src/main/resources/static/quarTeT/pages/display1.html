@@ -357,44 +357,6 @@
             margin: 0 0 0 0;
         }
 
-        /*点击放大*/
-        /*整个的遮罩*/
-        .shade {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: none;
-            /*使得遮罩能在页面最上方*/
-            z-index: 999;
-        }
-
-        /*放大图片后：包含图片的div*/
-        .show-bigImg {
-            width: 100rem;
-            height: auto;
-            /*实现div永远居中*/
-            margin: auto;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            -moz-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            -o-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-        }
-
-        /*放大后的图片*/
-        .show-bigImg img {
-            /*width: 66rem;*/
-            /*height: 66rem;*/
-            max-width: 90rem;
-            max-height: 90rem;
-        }
-
         /*  登录框的样式  */
         .login-box {
             padding: 0 10px;
@@ -419,12 +381,6 @@
     <div class="banner">
         <!--标题-->
         <a href="home.html"> quarTeT </a>
-        <!--登陆注册 使用 暂弃-->
-        <!-- <span class="loginDiv">
-                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
-                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
-                <span class="username" v-show="isLogin">{{this.username}}</span>
-        </span> -->
     </div>
 
     <!--2 导航栏-->
@@ -456,15 +412,6 @@
         <!--3 区域1 展示png结果图-->
         <el-container>
             <el-main>
-                <!--[放大的图片 只要src变就可以了~]-->
-                <div class="shade" @click="closeImg">
-                    <div class="show-bigImg">
-                        <img
-                                v-bind:src="this.bigPng"
-                                alt="bigger img"
-                                @click="closeImg">
-                    </div>
-                </div>
                 <!-- 3.1 该区域标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
@@ -837,8 +784,8 @@
                 draftStat: [],
                 draftMapInfo: [],
                 // 三张图片Url
-                hifiRefUrl: ['../imgs/pdf2.jpg'],
-                genomeRefUrl: ['../imgs/pdf1.jpg'],
+                hifiRefUrl: ['http://192.168.0.103:8887/bioRepository/user_dir/Assemble/0035c4e9-5684-4163-8498-7f13b0591a61/Quartet.contig_map_ref.png'],
+                genomeRefUrl: ['http://192.168.0.103:8887/bioRepository/user_dir/Assemble/0035c4e9-5684-4163-8498-7f13b0591a61/Quartet.contig_map_ref.png'],
                 genomePng: ['http://192.168.0.103:8887/bioRepository/user_dir/Assemble/0035c4e9-5684-4163-8498-7f13b0591a61/Quartet.draftgenome.png'],
                 // 表格展示下载链接
                 mapInfoUrl: '',
