@@ -409,12 +409,6 @@
     <div class="banner">
         <!--标题-->
         <a href="home.html"> quarTeT </a>
-        <!--登陆注册 使用 暂弃-->
-        <!-- <span class="loginDiv">
-                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
-                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
-                <span class="username" v-show="isLogin">{{this.username}}</span>
-        </span> -->
     </div>
 
     <!--2 导航栏-->
@@ -448,17 +442,6 @@
         <!--3 区域1 展示png结果图-->
         <el-container>
             <el-main>
-                <!--3.0 [放大的图片]-->
-                <!-- 1 整个的遮罩,点击黑色遮罩也可以关闭这个div-->
-                <div class="shade" @click="closeImg">
-                    <!-- 2 包含放大后图片的div-->
-                    <div class="show-bigImg">
-                        <img
-                                v-bind:src="bigPng"
-                                alt="bigger img"
-                                @click="closeImg">
-                    </div>
-                </div>
                 <!--3.1 该区域标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
@@ -476,19 +459,10 @@
                 <div>
                     <!--侧栏 1 按钮-->
                     <el-aside width="5%">
-                        <!--放大按钮-->
-                        <div class="zoom-out-button">
-                            <el-button
-                                    circle
-                                    icon="el-icon-zoom-in"
-                                    @click="ClickBig">
-                            </el-button>
-                        </div>
                         <!--下载按钮-->
                         <div>
                             <el-button
                                     circle
-                                    type="primary"
                                     icon="el-icon-download"
                                     @click="downloadPng">
                             </el-button>
@@ -502,11 +476,12 @@
                             height: 450px;
                             overflow: hidden">
                             <!--[原图]-->
-                            <img
-                                    v-bind:src="genomePng"
+                            <el-image
+                                    style="width: 550px; height: 600px"
                                     alt="plot of genome result"
-                                    style="width: 550px;
-                                height: 600px">
+                                    :src="genomePng[0]"
+                                    :preview-src-list="genomePng">
+                            </el-image>
                         </div>
                     </el-aside>
                     <!--侧栏 3 程序运行中的Warnings展示-->
@@ -759,8 +734,7 @@
         data: function () {
             return {
                 activeBar: "2", // 导航栏激活的栏，默认为Home 话说下拉栏显示不了啊喂
-                genomePng: '../imgs/empty.jpg',
-                bigPng: '',
+                genomePng: ['https://inews.gtimg.com/newsapp_bt/0/13732648356/1000'],
                 // 下载文件&表格链接
                 fastaUrl: '',
                 detailUrl: '',
@@ -785,7 +759,7 @@
                 // res->response res.data->响应体(Result) res.data.data->FillResultUrl
                 let resultUrl = res.data.data;
                 // 1. 常规信息
-                this.genomePng = resultUrl.genomePng;
+                this.genomePng = [resultUrl.genomePng];
                 this.fastaUrl = resultUrl.fastaUrl;
                 this.statUrl = resultUrl.statUrl;
                 this.detailUrl = resultUrl.detailUrl;
@@ -811,18 +785,6 @@
         },
 
         methods: {
-            /*点击放大图片*/
-            // 1. 点击隐藏大图
-            closeImg() {
-                $(".shade").css("display", "none");
-            },
-            // 点击原图变大
-            ClickBig() {
-                // 1. 把原图的src给放大图的div 设置放大图的css可见
-                this.bigPng = this.genomePng;
-                // 2. 展示遮罩
-                $(".shade").css('display', 'block');
-            },
             // 下载
             /*点击按钮下载文件*/
             downloadCommon(src) {

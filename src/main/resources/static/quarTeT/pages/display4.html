@@ -436,17 +436,6 @@
         <!--3 区域1 展示png结果图-->
         <el-container>
             <el-main>
-                <!--3.0 [放大的图片]-->
-                <!-- 1 整个的遮罩,点击黑色遮罩也可以关闭这个div-->
-                <div class="shade" @click="closeImg">
-                    <!-- 2 包含放大后图片的div-->
-                    <div class="show-bigImg">
-                        <img
-                                v-bind:src="this.bigPng"
-                                alt="bigger img"
-                                @click="closeImg">
-                    </div>
-                </div>
                 <!--3.1 该区域标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
@@ -464,19 +453,10 @@
                 <div>
                     <!--侧栏 1 按钮-->
                     <el-aside width="5%">
-                        <!--放大按钮-->
-                        <div class="zoom-out-button">
-                            <el-button
-                                    circle
-                                    icon="el-icon-zoom-in"
-                                    @click="ClickBig">
-                            </el-button>
-                        </div>
                         <!--下载按钮-->
                         <div>
                             <el-button
                                     circle
-                                    type="primary"
                                     icon="el-icon-download"
                                     @click="downloadPng">
                             </el-button>
@@ -490,11 +470,12 @@
                             height: 450px;
                             overflow: hidden">
                             <!--[原图]-->
-                            <img
-                                    v-bind:src="this.genomePng"
+                            <el-image
+                                    style="width: 550px; height: 600px"
                                     alt="plot of genome result"
-                                    style="width: 550px;
-                                height: 600px">
+                                    :src="genomePng[0]"
+                                    :preview-src-list="genomePng">
+                            </el-image>
                         </div>
                     </el-aside>
                     <!--侧栏 3 程序运行中的Warnings展示-->
@@ -877,8 +858,7 @@
                 showMoreDialogTableVisible: false,
                 showMoreTableData: [],
                 activeBar: "2", // 导航栏激活的栏，默认为Home
-                genomePng: '../imgs/empty.jpg',
-                bigPng: '',
+                genomePng: ['https://inews.gtimg.com/newsapp_bt/0/13732648356/1000'],
                 fastaZipUrl: '',
                 candidateZipUrl: '',
                 gff3ZipUrl: '',
@@ -942,7 +922,7 @@
                 let resultUrl = res.data.data;
                 console.log(resultUrl)
                 // 1. 常规信息
-                this.genomePng = resultUrl.genomePng;
+                this.genomePng = [resultUrl.genomePng];
                 this.candidateUrl = resultUrl.candidateUrl;
                 this.fastaZipUrl = resultUrl.fastaZipUrl;
                 this.gff3ZipUrl = resultUrl.gff3ZipUrl;

@@ -500,7 +500,7 @@
                                         </el-select>
                                     </el-col>
                                 </el-row>
-                                <!--4.3 Prefix 文本输入  TODO: 防注入不允许违法文件名-->
+                                <!--4.3 Prefix 文本输入   防注入不允许违法文件名-->
                                 <el-row :gutter="10">
                                     <el-col :xs="12" :sm="12" :md="9" lg="9" xl="10">
                                         Filename:
@@ -522,8 +522,10 @@
         </el-container>
     </div>
 
-    <el-footer style="height: 120%; background-color: #205573">
+    <!--5 页脚信息-->
+    <el-footer style="height:6rem; background-color: #205573">
         <div>
+            <br/>
             Powered by <a href="https://www.atcgn.com/" style="color: #ffffff ">ATCG</a>
         </div>
     </el-footer>
