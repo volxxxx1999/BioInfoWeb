@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>quarTeT - Error</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>quarTeT - Web Guide</title>
     <style>
         /*根节点html字体大小*/
         html {
@@ -128,22 +129,9 @@
         .el-container:nth-child(7) .el-aside {
             line-height: 50rem;
         }
-
-        /*Logs提示*/
-        .text {
-            font-size: 14px;
-        }
-
-        .item {
-            text-align: left;
-        }
-
-        .box-card {
-        }
     </style>
 </head>
 <body>
-
 <div id="app">
     <!--1. 登录注册-->
     <div class="banner">
@@ -151,8 +139,8 @@
         <a href="home.html"> quarTeT </a>
     </div>
 
+    <!--2 导航栏-->
     <el-container>
-        <!--2 导航栏-->
         <el-header style="background-color: #ffffff; margin-top: 0">
             <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
             <el-menu :default-active="activeBar" class="el-menu-demo"
@@ -177,17 +165,12 @@
             </el-menu>
         </el-header>
     </el-container>
+
     <!--3 log信息-->
     <div id="thinner">
         <el-container>
             <el-main>
-                <el-empty description="Sorry...Some Errors Occurred During the Process. Here is the Log:">
-                </el-empty>
-                <el-card class="box-card">
-                    <div v-for="o in processLogs.length" :key="o" class="text item">
-                        {{processLogs[o - 1]}}
-                    </div>
-                </el-card>
+                <div id="content" style="text-align: justify"></div>
             </el-main>
         </el-container>
     </div>
@@ -200,7 +183,6 @@
         </div>
     </el-footer>
 </div>
-
 </body>
 
 <!-- 引入组件库 -->
@@ -214,6 +196,8 @@
 <!--Axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../../js/axios-0.18.0.js"></script>
+<!--marked-->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
     new Vue({
@@ -221,23 +205,15 @@
         data: function () {
             return {
                 activeBar: "2", // 导航栏激活的栏，默认为Home
-                processLogs: ['Quartet.Quartet.telo.info',
-                    '[Error] Unexpected error happened.',
-                    '[Error] Unexpected error happened.',
-                    '[Error] Unexpected error happened.'],
             }
         },
-        /*这里需要mounted读errors*/
+        /* 加载本地md*/
         mounted() {
-            axios.get("/quarTeT/common/errDisplay").then((res) => {
-                console.log(res);
-                console.log(res.data.data)
-                this.processLogs = res.data.data;
-                this.$message.error(res.data.message);
+            axios.get("document-web.md").then((res) => {
+                document.getElementById('content').innerHTML = marked.parse(res.data);
             });
         },
         methods: {}
     });
 </script>
-
 </html>

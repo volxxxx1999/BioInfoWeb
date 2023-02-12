@@ -399,7 +399,11 @@
                     <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer
                     </el-menu-item>
                 </el-submenu>
-                <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
+                <el-submenu index="3">
+                    <template slot="title">Document</template>
+                    <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
+                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
+                </el-submenu>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
                 <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
             </el-menu>
@@ -742,8 +746,9 @@
     </div>
 
     <!--7 页脚信息-->
-    <el-footer style="height: 120%; background-color: #205573">
+    <el-footer style="height:6rem; background-color: #205573">
         <div>
+            <br/>
             Powered by <a href="https://www.atcgn.com/" style="color: #ffffff ">ATCG</a>
         </div>
     </el-footer>

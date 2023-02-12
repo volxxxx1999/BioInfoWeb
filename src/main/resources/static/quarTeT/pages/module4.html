@@ -344,12 +344,6 @@
     <div class="banner">
         <!--标题-->
         <a href="home.html"> quarTeT </a>
-        <!--登陆注册 使用 暂弃-->
-        <!-- <span class="loginDiv">
-                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
-                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
-                <span class="username" v-show="isLogin">{{this.username}}</span>
-        </span> -->
     </div>
 
     <el-container>
@@ -366,7 +360,11 @@
                     <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroMiner</el-menu-item>
                     <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="3" onclick="document.location.href='document.html'">Document</el-menu-item>
+                <el-submenu index="3">
+                    <template slot="title">Document</template>
+                    <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
+                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
+                </el-submenu>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
                 <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
             </el-menu>
@@ -637,65 +635,12 @@
     </div>
 
     <!--5 页脚信息-->
-    <el-footer style="height: 120%; background-color: #205573">
+    <el-footer style="height:6rem; background-color: #205573">
         <div>
+            <br/>
             Powered by <a href="https://www.atcgn.com/" style="color: #ffffff ">ATCG</a>
         </div>
     </el-footer>
-
-    <!--6 登录 Dialog    -->
-    <el-dialog
-            title="Sign in"
-            :close-on-click-modal="false"
-            :visible.sync="loginDialogVisible"
-            width="450px">
-        <div class="login-box">
-            <el-input placeholder="email" v-model="email" clearable size="20px">
-            </el-input>
-            <el-input
-                    placeholder="password"
-                    v-model="password"
-                    show-password
-            ></el-input>
-            <!-- <div class="check-box">
-              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
-              <img :src="captchaPath" @click="getCaptcha()" alt="">
-            </div> -->
-            <el-button type="success" round style="width: 100%" @click="login"
-            >Login
-            </el-button
-            >
-        </div>
-    </el-dialog>
-    <!--7 注册 Dialog    -->
-    <el-dialog
-            title="Sign up"
-            :close-on-click-modal="false"
-            :visible.sync="registerDialogVisible"
-            width="450px">
-        <div class="login-box">
-            <el-input placeholder="email" v-model="email" clearable size="20px">
-            </el-input>
-            <el-input
-                    placeholder="password"
-                    v-model="password"
-                    show-password
-            ></el-input>
-            <el-input
-                    placeholder="password again"
-                    v-model="password2"
-                    show-password
-            ></el-input>
-            <!-- <div class="check-box">
-              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
-              <img :src="captchaPath" @click="getCaptcha()" alt="">
-            </div> -->
-            <el-button type="success" round style="width: 100%" @click="register"
-            >Register
-            </el-button
-            >
-        </div>
-    </el-dialog>
 </div>
 </body>
 
