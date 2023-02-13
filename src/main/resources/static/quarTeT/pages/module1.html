@@ -129,24 +129,6 @@
             text-decoration: none;
         }
 
-        .loginDiv {
-            display: inline-block;
-            float: right;
-            padding-top: 2rem;
-            padding-right: 3rem;
-        }
-
-        .loginDiv > .el-button {
-            font-size: 1.5rem;
-            font-family: "Helvetica", sans-serif;
-        }
-
-        .loginDiv > span {
-            color: #ffffff;
-            font-size: 2rem;
-            padding-top: 1rem;
-            padding-left: 1rem;
-        }
 
         /*下一步按钮*/
         .next-button {
@@ -167,7 +149,6 @@
             margin-left: 5rem;
             margin-right: 2rem;
             padding-bottom: 4rem;
-
             font-size: 2rem;
         }
 
@@ -179,7 +160,6 @@
             margin-right: 5rem;
             margin-left: 2rem;
             padding-bottom: 4rem;
-
             font-size: 2rem;
         }
 
@@ -308,7 +288,6 @@
             );
         }
 
-        /*setting 搬来的*/
         /*表单格式设置*/
         .paramForm {
             font-size: 1.4rem;
@@ -316,9 +295,11 @@
             font-weight: bold;
             line-height: 4.8rem;
         }
+        /*描述框格式*/
         .paramDesc {
             font-size: 1.3rem;
             font-family: "Helvetica", sans-serif;
+            line-height: 2rem;
         }
 
         /* v-loading 的样式修改*/
@@ -333,26 +314,10 @@
             font-family: Helvetica, sans-serif;
             font-size: 2rem;
         }
-
-        /*  登录注册用样式  */
-        .login-box {
-            padding: 0 10px;
-        }
-
-        .login-box * {
-            margin-bottom: 10px;
-        }
-
-        .el-table .cell {
-            word-break: break-word;
-            /*white-space: pre-wrap;*/
-        }
     </style>
 </head>
 <body>
 
-
-<!--全覆盖条幅-->
 <div id="app">
     <!--1. 登录注册-->
     <div class="banner">
@@ -360,8 +325,8 @@
         <a href="home.html"> quarTeT </a>
     </div>
 
+    <!--2 导航栏-->
     <el-container>
-        <!--2 导航栏-->
         <el-header style="background-color: #ffffff; margin-top: 0">
             <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
             <el-menu :default-active="activeBar" class="el-menu-demo"
@@ -403,7 +368,7 @@
                     <!--第一个上传文件 Reference Genome Files-->
                     <el-aside width="50%">
                         <div class="upload1">
-                            <!--上传说明  content="A high quality genome of close related species."-->
+                            <!--上传说明-->
                             <el-popover
                                     style="font-size: 2rem"
                                     placement="top-start"
@@ -449,7 +414,7 @@
                             </el-upload>
                         </div>
                     </el-aside>
-                    <!--上传Contigs文件 content="Preliminary assembled sequence without gaps. Contigs should be haplotype solved."-->
+                    <!--上传Contigs文件"-->
                     <el-aside width="50%">
                         <div class="upload2">
                             <!-- 上传提示 -->
@@ -514,7 +479,7 @@
                 <div>
                     <!--填充左 让表单居中-->
                     <el-aside width="20%">
-                        <div id="rightPadding" style="height: 10rem"></div>
+                        <div style="height: 10rem"></div>
                     </el-aside>
                     <!--参数设置-->
                     <el-aside width="60%" >
@@ -528,19 +493,23 @@
                                                 class="item"
                                                 effect="light"
                                                 placement="left">
+                                            <!--对该参数的描述-->
                                             <div slot="content" class="paramDesc">
                                                 Contigs shorter than INT (bp) will
                                                 <br/>
                                                 be removed, default: 50000
                                             </div>
+                                            <!--该参数-->
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
-                                                           font-weight: bold;border-color: #ffffff">
+                                                           font-weight: bold;
+                                                           border-color: #ffffff">
                                                 Min Contigs Length:
                                             </el-button>
                                         </el-tooltip>
                                     </el-col>
+                                    <!--滑条-->
                                     <el-col :xs="16" :sm="8" :md="8" lg="16" xl="16" style="padding-top: 10px">
                                         <el-slider v-model="formData.minContig"
                                                    :step="5000"
@@ -549,6 +518,7 @@
                                                    max="100000">
                                         </el-slider>
                                     </el-col>
+                                    <!--输入框-->
                                     <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
                                         <el-input-number v-model="customMinContig"
                                                          @change="onMinContigInputChange"
@@ -564,11 +534,13 @@
                                                 class="item"
                                                 effect="light"
                                                 placement="left">
+                                            <!--对该参数的描述-->
                                             <div slot="content" class="paramDesc">
                                                 The min alignment length to be
                                                 <br/>
                                                 select (bp), default: 10000
                                             </div>
+                                            <!--该参数-->
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
@@ -577,6 +549,7 @@
                                             </el-button>
                                         </el-tooltip>
                                     </el-col>
+                                    <!--滑条-->
                                     <el-col :xs="16" :sm="8" :md="8" lg="16" xl="16" style="padding-top: 10px">
                                         <el-slider v-model="formData.minAlign"
                                                    :step="5000"
@@ -585,6 +558,7 @@
                                                    max="100000">
                                         </el-slider>
                                     </el-col>
+                                    <!--输入框-->
                                     <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
                                         <el-input-number v-model="customMinLen"
                                                          @change="onMinLenInputChange"
@@ -593,18 +567,20 @@
                                         </el-input-number>
                                     </el-col>
                                 </el-row>
-                                <!--增加 百分比 必须是正整数且不能0开头-->
+                                <!--4.3 增加 百分比 必须是正整数且不能0开头-->
                                 <el-row :gutter="10">
                                     <el-col :xs="16" :sm="16" :md="9" lg="8" xl="10">
                                         <el-tooltip
                                                 class="item"
                                                 effect="light"
                                                 placement="left">
+                                            <!--对该参数的描述-->
                                             <div slot="content" class="paramDesc">
                                                 The min alignment identity to be
                                                 <br/>
                                                 select (%), default: 90
                                             </div>
+                                            <!--该参数-->
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
@@ -613,6 +589,7 @@
                                             </el-button>
                                         </el-tooltip>
                                     </el-col>
+                                    <!--滑条-->
                                     <el-col :xs="16" :sm="8" :md="8" lg="16" xl="16" style="padding-top: 10px">
                                         <el-slider v-model="formData.minIdentity"
                                                    :step="5"
@@ -620,6 +597,7 @@
                                                    max="100">
                                         </el-slider>
                                     </el-col>
+                                    <!--输入框-->
                                     <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
                                         <el-input-number v-model="formData.minIdentity"
                                                          :step="5"
@@ -628,21 +606,6 @@
                                         </el-input-number>
                                     </el-col>
                                 </el-row>
-                                <!--4.3 下拉框 二选一-->
-                                <!--  <el-row :gutter="10">
-                                      <el-col :xs="16" :sm="14" :md="8" lg="8" xl="10">
-                                          Aligner:
-                                      </el-col>
-                                      <el-col :xs="6" :sm="10" :md="8" :lg="6" :xl="6">
-                                          <el-select
-                                                  v-model="formData.aligner"
-                                                  placeholder="Please choose the alignment program:"
-                                                  @change="currentStateChange">
-                                              <el-option label="minimap2" value="minimap2"></el-option>
-                                              <el-option label="mummer" value="mummer"></el-option>
-                                          </el-select>
-                                      </el-col>
-                                  </el-row>-->
                                 <!--4.4 是否画图-->
                                 <el-row :gutter="10">
                                     <el-col :xs="8" :sm="8" :md="8" lg="8" xl="8">
@@ -650,11 +613,13 @@
                                                 class="item"
                                                 effect="light"
                                                 placement="left">
+                                            <!--对该参数的描述-->
                                             <div slot="content" class="paramDesc">
                                                 Plot a colinearity graph for draft genome to
                                                 <br/>
                                                 reference alignments. (will cost more time)
                                             </div>
+                                            <!--该参数-->
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
@@ -664,6 +629,7 @@
                                             </el-button>
                                         </el-tooltip>
                                     </el-col>
+                                    <!--按钮-->
                                     <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4" >
                                         <el-switch v-model="formData.plot"></el-switch>
                                     </el-col>
@@ -675,11 +641,13 @@
                                                 class="item"
                                                 effect="light"
                                                 placement="left">
+                                            <!--对该参数的描述-->
                                             <div slot="content" class="paramDesc">
                                                 The name (prefix) used on your
                                                 <br/>
                                                 generated files. Default: quarTeT
                                             </div>
+                                            <!--该参数-->
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
@@ -687,33 +655,30 @@
                                                 Filename:
                                             </el-button>
                                         </el-tooltip>
-
+                                    <!--输入框-->
                                     </el-col>
                                     <el-col :xs="10" :sm="10" :md="10" :lg="10" :xl="10">
                                         <el-input v-model="formData.prefix"
-                                                  @input="onNameWarning"></el-input>
+                                                  @input="onNameWarning">
+                                        </el-input>
                                     </el-col>
                                 </el-row>
                             </div>
-                            <!-- 5 下一步的按钮-->
+                            <!-- 4.5 下一步的按钮-->
                             <div style="margin-top: 5%;">
                                 <el-button class="next-button" @click="resetForm">RESET</el-button>
                                 <el-button class="next-button" type="primary" @click="onParamSubmit">RUN</el-button>
                             </div>
                         </el-main>
                     </el-aside>
-                    <!--填充 让表单居中-->
+                    <!-- 4.6 填充 让表单居中-->
                     <el-aside width="20%">
-                        <div id="leftPadding"
-                             style="height: 10rem">
-                        </div>
+                        <div style="height: 10rem"></div>
                     </el-aside>
                 </div>
             </el-main>
         </el-container>
     </div>
-
-
     <!--5 页脚信息-->
     <el-footer style="height:6rem; background-color: #205573">
         <div>
@@ -757,7 +722,6 @@
                 customMinLen: 10000,
                 // min alignment identity 滑块和输入框相关(不用超出值)
                 maxMinIdentity: 100,
-
                 // 参数表单 aligner: 'minimap2',
                 formData: {
                     minAlign: 10000,
@@ -811,7 +775,6 @@
                     this.formData.minAlign = value;
                 }
             },
-
             /*重置参数表单*/
             resetForm() {
                 this.formData = {
@@ -835,7 +798,6 @@
                     this.formData.prefix = '';
                 }
             },
-
             /* 上传基因组文件的钩子函数*/
             // FASTA文件列表只允许上传一个文件
             handleExceed(files, fileList) {
@@ -882,7 +844,6 @@
                 this.$message.success("Upload Successfully");
                 this.uploadSeqFile = 1;
             },
-
             /* 上传参数基因组文件的钩子函数*/
             // 超出一个文件限制
             handleExceed2(files, fileList) {
@@ -931,7 +892,6 @@
                     this.activeStep = 1;
                 }
             },
-
             // 参数提交训练
             onParamSubmit() {
                 // 训练前先判断一下是否Required的文件都已经上传
@@ -991,15 +951,6 @@
                     });
                 }
             },
-            /* el-table单元格格式*/
-            /* set_cell_style({row, column, rowIndex, columnIndex}){
-                 if(columnIndex === 1){
-                     console.log(row)
-                     return 'color:black; white-space: pre-wrap; white-space: pre-wrap';
-                 }
-             },*/
-
-
         },
     });
 </script>

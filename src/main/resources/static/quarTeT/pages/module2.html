@@ -128,25 +128,6 @@
             text-decoration: none;
         }
 
-        .loginDiv {
-            display: inline-block;
-            float: right;
-            padding-top: 2rem;
-            padding-right: 3rem;
-        }
-
-        .loginDiv > .el-button {
-            font-size: 1.5rem;
-            font-family: "Helvetica", sans-serif;
-        }
-
-        .loginDiv > span {
-            color: #ffffff;
-            font-size: 2rem;
-            padding-top: 1rem;
-            padding-left: 1rem;
-        }
-
         /*下一步按钮*/
         .next-button {
             font-family: "Comic Sans MS", serif;
@@ -166,7 +147,6 @@
             margin-left: 5rem;
             margin-right: 2rem;
             padding-bottom: 4rem;
-
             font-size: 2rem;
         }
 
@@ -178,7 +158,6 @@
             margin-right: 5rem;
             margin-left: 2rem;
             padding-bottom: 4rem;
-
             font-size: 2rem;
         }
 
@@ -318,6 +297,7 @@
         .paramDesc {
             font-size: 1.3rem;
             font-family: "Helvetica", sans-serif;
+            line-height: 2rem;
         }
 
         /* v-loading 的样式修改*/
@@ -349,9 +329,8 @@
         <!--标题-->
         <a href="home.html"> quarTeT </a>
     </div>
-
+    <!--2 导航栏-->
     <el-container>
-        <!--2 导航栏-->
         <el-header style="background-color: #ffffff; margin-top: 0">
             <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
             <el-menu :default-active="activeBar" class="el-menu-demo"
@@ -434,7 +413,6 @@
                             </el-upload>
                         </div>
                     </el-aside>
-
                     <!--2 上传contig file-->
                     <el-aside width="50%">
                         <div class="upload2">
@@ -482,7 +460,6 @@
                 </div>
             </el-main>
         </el-container>
-
         <!--4 设置setting-->
         <el-container>
             <el-main>
@@ -497,7 +474,7 @@
                 <div>
                     <!--填充左 让表单居中-->
                     <el-aside width="20%">
-                        <div id="rightPadding" style="height: 10rem"></div>
+                        <div style="height: 10rem"></div>
                     </el-aside>
                     <!--4.3 参数设置-->
                     <el-aside width="60%">
@@ -505,7 +482,7 @@
                             <div class="paramForm" style="line-height: 5rem">
                                 <!--1 min alignment length 默认1000 最大10000 步长50-->
                                 <el-row :gutter="10">
-                                    <el-col :xs="12" :sm="12" :md="9" lg="9" xl="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
                                         <el-tooltip
                                                 class="item"
                                                 effect="light"
@@ -518,21 +495,22 @@
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
-                                                           font-weight: bold;border-color: #ffffff">
+                                                           font-weight: bold;
+                                                           border-color: #ffffff">
                                                 Min Alignment Length:
                                             </el-button>
                                         </el-tooltip>
                                     </el-col>
                                     <el-col
                                             style="padding-top: 10px"
-                                            :xs="12" :sm="12" :md="8" lg="15" xl="14">
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
                                         <el-slider v-model="formData.minAlignLength"
                                                    :step="50"
                                                    v-bind:max="maxMinAlignLen"
                                                    @change="onMinAlignLenSliderChange">
                                         </el-slider>
                                     </el-col>
-                                    <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
                                         <el-input-number v-model="customMinAlignLen"
                                                          @change="onMinAlignLenInputChange"
                                                          :step="50"
@@ -542,7 +520,7 @@
                                 </el-row>
                                 <!--2 min_alignment_identity 默认40 最大100 step为5-->
                                 <el-row :gutter="10">
-                                    <el-col :xs="12" :sm="12" :md="9" lg="9" xl="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
                                         <el-tooltip
                                                 class="item"
                                                 effect="light"
@@ -555,20 +533,21 @@
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
-                                                           font-weight: bold;border-color: #ffffff">
+                                                           font-weight: bold;
+                                                           border-color: #ffffff">
                                                 Min Alignment Identity:
                                             </el-button>
                                         </el-tooltip>
                                     </el-col>
                                     <el-col
                                             style="padding-top: 10px"
-                                            :xs="12" :sm="12" :md="8" lg="15" xl="16">
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
                                         <el-slider v-model="formData.minAlignIdentity"
                                                    :step="5"
                                                    v-bind:max="maxMinAlignIdentity">
                                         </el-slider>
                                     </el-col>
-                                    <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
                                         <el-input-number v-model="formData.minAlignIdentity"
                                                          :step="5"
                                                          v-bind:max="maxMinAlignIdentity"
@@ -578,7 +557,7 @@
                                 </el-row>
                                 <!--3 flanking_len 默认5000 step设置250 最大值设置10000-->
                                 <el-row :gutter="10">
-                                    <el-col :xs="12" :sm="12" :md="9" lg="9" xl="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
                                         <el-tooltip
                                                 class="item"
                                                 effect="light"
@@ -591,21 +570,22 @@
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
-                                                           font-weight: bold;border-color: #ffffff">
+                                                           font-weight: bold;
+                                                           border-color: #ffffff">
                                                 Flanking Sequence Length:
                                             </el-button>
                                         </el-tooltip>
                                     </el-col>
                                     <el-col
                                             style="padding-top: 10px"
-                                            :xs="12" :sm="12" :md="8" lg="15" xl="14">
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
                                         <el-slider v-model="formData.flankLength"
                                                    :step="250"
                                                    v-bind:max="maxFlanking"
                                                    @change="onFlankingSliderChange">
                                         </el-slider>
                                     </el-col>
-                                    <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
                                         <el-input-number v-model="customFlanking"
                                                          @change="onFlankingInputChange"
                                                          :step="250"
@@ -615,7 +595,7 @@
                                 </el-row>
                                 <!--4 max Filling Length 默认100,000 最大1，000，000 step为5000 -->
                                 <el-row :gutter="10">
-                                    <el-col :xs="12" :sm="12" :md="9" lg="9" xl="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
                                         <el-tooltip
                                                 class="item"
                                                 effect="light"
@@ -628,21 +608,22 @@
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
-                                                           font-weight: bold;border-color: #ffffff">
+                                                           font-weight: bold;
+                                                           border-color: #ffffff">
                                                 Max Filling Length:
                                             </el-button>
                                         </el-tooltip>
                                     </el-col>
                                     <el-col
                                             style="padding-top: 10px"
-                                            :xs="12" :sm="12" :md="8" lg="15" xl="16">
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
                                         <el-slider v-model="formData.maxFillingLength"
                                                    :step="50000"
                                                    v-bind:max="maxMaxFilling"
                                                    @change="onFillingSliderChange">
                                         </el-slider>
                                     </el-col>
-                                    <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
                                         <el-input-number v-model="customFilling"
                                                          @change="onFillingInputChange"
                                                          :step="50000"
@@ -650,9 +631,9 @@
                                         </el-input-number>
                                     </el-col>
                                 </el-row>
-                                <!--5 Prefix 文本输入  TODO: 防注入不允许违法文件名-->
+                                <!--5 Prefix 文本输入-->
                                 <el-row :gutter="10">
-                                    <el-col :xs="12" :sm="12" :md="9" lg="9" xl="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
                                         <el-tooltip
                                                 class="item"
                                                 effect="light"
@@ -665,14 +646,16 @@
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
-                                                           font-weight: bold;border-color: #ffffff">
+                                                           font-weight: bold;
+                                                           border-color: #ffffff">
                                                 Filename:
                                             </el-button>
                                         </el-tooltip>
                                     </el-col>
-                                    <el-col :xs="12" :sm="12" :md="15" :lg="9" :xl="14">
+                                    <el-col :xs="8" :sm="8" :md="8" :lg="8" :xl="8">
                                         <el-input v-model="formData.prefix"
-                                                  @input="onNameWarning"></el-input>
+                                                  @input="onNameWarning">
+                                        </el-input>
                                     </el-col>
                                 </el-row>
                             </div>
@@ -684,14 +667,11 @@
                     </el-aside>
                     <!--填充 让表单居中-->
                     <el-aside width="20%">
-                        <div id="leftPadding"
-                             style="height: 10rem">
-                        </div>
+                        <div style="height: 10rem"> </div>
                     </el-aside>
                 </div>
             </el-main>
         </el-container>
-
     </div>
 
     <!--5 页脚信息-->
@@ -703,7 +683,6 @@
     </el-footer>
 
 </div>
-
 </body>
 
 <!-- 引入组件库 -->
@@ -758,11 +737,6 @@
                 isLogin: false,
                 username: "",
             }
-        },
-
-        // TODO new 用户离开页面 提示内容未保存
-        beforeDestroy() {
-            alert("Are you sure to leave? Your data will be missing!")
         },
 
         methods: {
@@ -979,105 +953,7 @@
                 }
             },
 
-            // 登录注册用方法
-            // 打开登录对话框
-            openLogin() {
-                this.loginDialogVisible = true;
-            },
-            login() {
-                // 登录逻辑
-                axios.post("/quarTeT/user/login", {
-                    "email": this.email,
-                    "password": this.password,
-                }).then(
-                    ({ data }) => {
-                        if (data.code === 10000) {
-                            this.$message({
-                                message: 'Login successful',
-                                type: 'success'
-                            });
-                            localStorage.setItem("token", data.data); // 存储一下 token
-                            this.loginDialogVisible = false;
-                        } else {
-                            this.$message({
-                                message: data.message,
-                                type: 'error'
-                            });
-                        }
-                        this.email = "";
-                        this.password = "";
-                    },
-                    err => {
-                        this.email = "";
-                        this.password = "";
-                        console.error(err)
-                    }
-                );
-            },
-            // 打开注册对话框
-            openRegister() {
-                this.registerDialogVisible = true;
-            },
-            register() {
-                if (this.password !== this.password2) {
-                    this.$message({
-                        message: '两次密码输入不同',
-                        type: 'warning'
-                    });
-                    return
-                }
-                axios.post("/quarTeT/user/register", {
-                    email: this.email,
-                    password: this.password,
-                }).then(
-                    ({ data }) => {
-                        if (data.code === 10001) {
-                            this.$message({
-                                message: 'Register successful',
-                                type: 'success'
-                            });
-                            this.registerDialogVisible = false;
-                        } else {
-                            this.$message({
-                                message: data.message,
-                                type: 'error'
-                            });
-                        }
-                        this.email = "";
-                        this.password = "";
-                        this.password2 = "";
-                    },
-                    err => {
-                        this.email = "";
-                        this.password = "";
-                        this.password2 = "";
-                        console.error(err)
-                    }
-                );
-            },
-            // 验证身份, 判断是否登录
-            verify() {
-                const token = localStorage.getItem("token");
-                // console.log(token);
-                axios.get('/quarTeT/user/verify', {
-                    headers: {
-                        'Authorization': token
-                    }
-                }).then(
-                    ({ data }) => {
-                        if (data.code === 10002) {
-                            this.isLogin = true;
-                            this.username = data.data.email;
-                        }
-                        console.log(this.isLogin);
-                    },
-                    err => console.error(err)
-                );
-            },
         },
-        created() {
-            this.verify();
-        }
     });
 </script>
 
