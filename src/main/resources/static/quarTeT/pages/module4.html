@@ -308,9 +308,14 @@
         /*setting 搬来的*/
         /*表单格式设置*/
         .paramForm {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-family: "Helvetica", sans-serif;
             font-weight: bold;
+            line-height: 4.8rem;
+        }
+        .paramDesc {
+            font-size: 1.3rem;
+            font-family: "Helvetica", sans-serif;
         }
 
         /* v-loading 的样式修改*/
@@ -491,42 +496,38 @@
                     </button>
                 </div>
                 <div>
-                    <!--4.2 参数描述表格-->
-                    <el-aside width="50%">
-                        <el-table
-                                :data="tableData"
-                                stripe
-                                border
-                                style=" width: 95%;
-                                font-size: 1.3rem;
-                                font-family: Helvetica,sans-serif;
-                                margin:10px 10px 10px 10px"
-                                class="tableSet"
-                                :header-cell-style="{'text-align':'center'}"
-                                :row-class-name="tableRowClassName">
-                            <el-table-column
-                                    prop="param"
-                                    label="Parameter"
-                                    min-width="40%">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="desc"
-                                    label="Description"
-                                    min-width="60%">
-                            </el-table-column>
-                        </el-table>
+                    <!--填充左 让表单居中-->
+                    <el-aside width="20%">
+                        <div style="height: 10rem"></div>
                     </el-aside>
                     <!--4.3 参数设置-->
-                    <el-aside width="50%">
+                    <el-aside width="60%">
                         <el-main id="param-form">
                             <!--1. Period min:0 max:500 default:100~200 step:25-->
                             <div class="paramForm" style="line-height: 5rem">
                                 <el-row :gutter="10">
                                     <el-col :xs="12" :sm="12" :md="6" lg="9" xl="10">
-                                        Period:
+                                        <el-tooltip
+                                                class="item"
+                                                effect="light"
+                                                placement="left">
+                                            <div slot="content" class="paramDesc">
+                                                Period (monomer length) range to be
+                                                <br/>
+                                                consider as centromere repeat
+                                                <br/>
+                                                monomer. Default: 100~200
+                                            </div>
+                                            <el-button
+                                                    style="font-family: Helvetica, sans-serif;
+                                                           font-size: 1.2rem;
+                                                           font-weight: bold;border-color: #ffffff">
+                                                Period:
+                                            </el-button>
+                                        </el-tooltip>
                                     </el-col>
                                     <!--滑条-->
-                                    <el-col style="margin-top: 10px"
+                                    <el-col style="padding-top: 10px"
                                             :xs="12" :sm="12" :md="14" lg="15" xl="14">
                                         <el-slider v-model="formData.period"
                                                    :step="25"
@@ -550,7 +551,7 @@
                                                 :min="0"
                                                 :max="maxPeriod"
                                                 :step="25"
-                                                size="mini"
+                                                size="small"
                                                 @change="handleMinPeriodChange"></el-input-number>
                                     </el-col>
                                     <!--杠杠-->
@@ -564,17 +565,36 @@
                                                 controls-position="right"
                                                 :min="minPeriod"
                                                 :step="25"
-                                                size="mini"
+                                                size="small"
                                                 @change="handleMaxPeriodChange"></el-input-number>
                                     </el-col>
                                 </el-row>
                                 <!--2. max gap default:50000 max:100000 step:5000 -->
                                 <el-row :gutter="10">
                                     <el-col :xs="12" :sm="12" :md="6" lg="9" xl="10">
-                                        Max Gap:
+                                        <el-tooltip
+                                                class="item"
+                                                effect="light"
+                                                placement="left">
+                                            <div slot="content" class="paramDesc">
+                                                Max allowed gap size between two
+                                                <br/>
+                                                tandem repeats to be considered
+                                                <br/>
+                                                as in one tandem repeat region.
+                                                <br/>
+                                                Default: 50000
+                                            </div>
+                                            <el-button
+                                                    style="font-family: Helvetica, sans-serif;
+                                                           font-size: 1.2rem;
+                                                           font-weight: bold;border-color: #ffffff">
+                                                Max Gap:
+                                            </el-button>
+                                        </el-tooltip>
                                     </el-col>
                                     <el-col
-                                            style="margin-top: 10px"
+                                            style="padding-top: 10px"
                                             :xs="12" :sm="12" :md="9" lg="15" xl="16">
                                         <el-slider v-model="formData.maxGap"
                                                    :step="5000"
@@ -593,9 +613,26 @@
                                 <!--3. min  length default:100000 max 500000 step:25000-->
                                 <el-row :gutter="10">
                                     <el-col :xs="12" :sm="12" :md="6" lg="9" xl="10">
-                                        Min Length:
+                                        <el-tooltip
+                                                class="item"
+                                                effect="light"
+                                                placement="left">
+                                            <div slot="content" class="paramDesc">
+                                                Min size of tandem repeat region
+                                                <br/>
+                                                to be selected as candidate.
+                                                <br/>
+                                                Default: 100000
+                                            </div>
+                                            <el-button
+                                                    style="font-family: Helvetica, sans-serif;
+                                                           font-size: 1.2rem;
+                                                           font-weight: bold;border-color: #ffffff">
+                                                Min Length:
+                                            </el-button>
+                                        </el-tooltip>
                                     </el-col>
-                                    <el-col style="margin-top: 10px"
+                                    <el-col style="padding-top: 10px"
                                             :xs="12" :sm="12" :md="9" lg="15" xl="14">
                                         <el-slider v-model="formData.minLength"
                                                    :step="25000"
@@ -607,14 +644,29 @@
                                         <el-input-number v-model="customMinLength"
                                                          @change="onMinLengthInputChange"
                                                          :step="25000"
-                                                         size="mini">
+                                                         size="small">
                                         </el-input-number>
                                     </el-col>
                                 </el-row>
                                 <!--4. Prefix 文本输入-->
                                 <el-row :gutter="10">
                                     <el-col :xs="12" :sm="12" :md="6" lg="9" xl="10">
-                                        Filename:
+                                        <el-tooltip
+                                                class="item"
+                                                effect="light"
+                                                placement="left">
+                                            <div slot="content" class="paramDesc">
+                                                The prefix used on generated
+                                                <br/>
+                                                files. Default: quarTeT
+                                            </div>
+                                            <el-button
+                                                    style="font-family: Helvetica, sans-serif;
+                                                           font-size: 1.2rem;
+                                                           font-weight: bold;border-color: #ffffff">
+                                                Filename:
+                                            </el-button>
+                                        </el-tooltip>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="15" :lg="9" :xl="14">
                                         <el-input v-model="formData.prefix"
@@ -628,6 +680,10 @@
                                 <el-button class="next-button" type="primary" @click="onParamSubmit">RUN</el-button>
                             </div>
                         </el-main>
+                    </el-aside>
+                    <!--填充右 让表单居中-->
+                    <el-aside width="20%">
+                        <div style="height: 10rem"></div>
                     </el-aside>
                 </div>
             </el-main>
@@ -685,20 +741,6 @@
                 maxMinLength: 500000,
                 // minLength的客制化值
                 customMinLength: 100000,
-                tableData: [{
-                    param: 'Period',
-                    desc: 'Period (monomer length) range to be consider as centromere repeat monomer. Default: 100~200',
-                }, {
-                    param: 'Max Gap',
-                    desc: 'Max allowed gap size between two tandem repeats to be considered as in one tandem repeat region. Default: 50000',
-                }, {
-                    param: 'Min Length',
-                    desc: 'Min size of tandem repeat region to be selected as candidate. Default: 100000',
-                }, {
-                    param: 'FileName',
-                    desc: 'The prefix used on generated files. Default: quarTeT',
-                },
-                ],
                 // 登录注册用变量
                 loginDialogVisible: false,
                 registerDialogVisible: false,
@@ -851,6 +893,8 @@
                 }
                 this.minPeriod = 100;
                 this.maxPeriod = 200;
+                this.customMinLength = 100000;
+                this.customMaxGap = 50000;
             },
             // 参数提交训练
             onParamSubmit() {
