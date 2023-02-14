@@ -80,7 +80,7 @@ Output files should be as follow:
 {prefix}.draftgenome.stat         | The statistic of this assembly, including total size and each chromosome's size, GC content, gap count and locations.
 {prefix}.draftgenome.png          | The figure draws relative length of chromosomes and gap locations for assembly.
 {prefix}.contig.mapinfo           | The statistic of input contigs, including total mapped and discarded size, and each contig's destination.
-{prefix}.contig_map_ref.png   | The alignment colinearity graph between contigs and reference genome.
+{prefix}.contig_map_ref.png       | The alignment colinearity graph between contigs and reference genome.
 {prefix}.draftgenome_map_ref.png  | The alignment colinearity graph between this assembly genome and reference genome. Only available with --plot.
 ```
 
@@ -152,9 +152,9 @@ Output files should be as follow:
 ```
 {prefix}.best.candidate | The best centromere candidate on each chromosome, and corresponding monomers.
 {prefix}.centro.png     | The figure draws best centromere candidate location, alongside relative length of chromosomes and gap locations for assembly.
-candidate/             | The folder of all centromere candidates. Check here if the best candidate doesn't look well.
-TRfasta/               | The folder of all tandem repeat monomers identified by trf and cluster result on each chromosome.
-TRgff3/                | The folder of all tandem repeat hit by BLAST on each chromosome, in gff3 format.
+candidate/              | The folder of all centromere candidates. Check here if the best candidate doesn't look well.
+TRfasta/                | The folder of all tandem repeat monomers identified by trf and cluster result on each chromosome.
+TRgff3/                 | The folder of all tandem repeat hit by BLAST on each chromosome, in gff3 format.
 ```
 
 ### TeloExplorer
