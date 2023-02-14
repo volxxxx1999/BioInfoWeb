@@ -35,7 +35,7 @@ Some task may be processed with warning messages, you can check them at the top 
 
 Click download icon/buttom will open a new page. If download dialog doesn't pop up, right click the page and select `Save as ...` to download.  
 
-For plots, you can click the magnifier icon beside the plot to enlarge it.   
+For plots, you can click it to enlarge.   
 For statistic tables, you can drag to resize tabs.
 
 ## AssemblyMapper
