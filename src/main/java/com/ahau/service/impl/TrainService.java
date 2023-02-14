@@ -113,7 +113,7 @@ public class TrainService {
             for (String log : processLogs) {
                 content.append("# ").append(log).append("\n");
             }
-            content.append("# You can have another try by click http://www.atcgn.com:8080/quarTeT/pages/home.html" + "\n" +
+            content.append("# You can have another try at http://www.atcgn.com:8080/quarTeT/pages/home.html" + "\n" +
                            "# or contact us with the error log for help at: t2t_quartet@163.com ");
             // 修改Result状态
             result.setCode(Code.TRAIN_ERR);
