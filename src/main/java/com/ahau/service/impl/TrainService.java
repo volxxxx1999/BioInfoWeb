@@ -252,7 +252,6 @@ public class TrainService {
         String minContig = draftParam.getMinContig().toString();
         String minIdentity = draftParam.getMinIdentity().toString();
         String prefix = draftParam.getPrefix();
-        String aligner = draftParam.getAligner();
         Boolean plot = draftParam.getPlot();
         // 3 plot是store_true属性 需要特殊处理下
         String plotArg;
@@ -266,7 +265,6 @@ public class TrainService {
                 assembleExePath + " " +
                 "-r=" + assembleGenome + " " +
                 "-q=" + assembleHiFi + " " +
-                "-a=" + aligner + " " +
                 "-c=" + minContig + " " +
                 "-l=" + minAlign + " " +
                 "-i=" + minIdentity + " " +

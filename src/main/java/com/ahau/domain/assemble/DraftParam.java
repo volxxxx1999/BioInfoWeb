@@ -8,6 +8,5 @@ public class DraftParam {
     private Integer minContig;
     private Integer minIdentity;
     private String prefix;
-    private String aligner;
     private Boolean plot;
 }
