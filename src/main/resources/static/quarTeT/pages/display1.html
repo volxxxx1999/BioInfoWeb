@@ -372,6 +372,15 @@
             font-weight: bold;
             font-family: "Arial", sans-serif;
         }
+
+        /*下载的div*/
+        .downloadDiv{
+            margin-top: 2rem;
+            height: 7rem;
+        }
+        .downloadDiv .el-button{
+            background-color: #ecf8ff;
+        }
     </style>
 </head>
 
@@ -412,7 +421,42 @@
 
     <!--thinner div中是主体内容-->
     <div id="thinner">
-
+        <!--3 区域0 下载移动最前+单独区域-->
+        <el-container>
+            <el-main>
+                <!-- 3.1 该区域标签-->
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <span>Download</span>
+                    </button>
+                </div>
+                <!-- 提供下载的FASTA和apg-->
+                <div class="downloadDiv">
+                    <el-row :gutter="10">
+                        <el-col :xs="16" :sm="16" :md="6" lg="4" xl="12">
+                            <div style="height: 1rem;"></div>
+                        </el-col>
+                        <el-col :xs="16" :sm="16" :md="6" lg="7" xl="12">
+                            <el-button
+                                    class="next-button"
+                                    @click="downloadDraftFasta">
+                                Download Assembly
+                            </el-button>
+                        </el-col>
+                        <el-col :xs="16" :sm="16" :md="6" lg="7" xl="12">
+                            <el-button
+                                    class="next-button"
+                                    @click="downloadDraftAGP">
+                                Download AGP
+                            </el-button>
+                        </el-col>
+                        <el-col :xs="16" :sm="16" :md="6" lg="4" xl="12">
+                            <div style="height: 1rem;"></div>
+                        </el-col>
+                    </el-row>
+                </div>
+            </el-main>
+        </el-container>
         <!--3 区域1 展示png结果图-->
         <el-container>
             <el-main>
@@ -443,7 +487,7 @@
                     </el-aside>
                     <!-- 侧栏 2 png图片-->
                     <el-aside width="50%">
-                        <!--TODO 原始图片一个长条 加个div和hidden给整整 放大里面的图片 限制div大小-->
+                        <!--原始图片一个长条 加个div和hidden给整整 放大里面的图片 限制div大小-->
                         <div
                                 style="width: 500px;
                             height: 450px;
@@ -727,7 +771,7 @@
                         </el-table>
                     </el-aside>
                 </div>
-                <!--6 提供下载的FASTA和apg-->
+             <!--   &lt;!&ndash;6 提供下载的FASTA和apg&ndash;&gt;
                 <div style="margin-top: 2rem;">
                     <el-button
                             class="next-button"
@@ -740,7 +784,7 @@
                             @click="downloadDraftAGP">
                         Download AGP
                     </el-button>
-                </div>
+                </div>-->
             </el-main>
         </el-container>
     </div>
