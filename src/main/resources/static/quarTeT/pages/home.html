@@ -85,9 +85,10 @@
         }
 
         .el-aside {
-            background-color: #f7f6f2;
+            background-color: #ffffff;
             color: #333;
             text-align: center;
+            float: left;
         }
 
         #el-form {
@@ -338,6 +339,21 @@
         .el-divider--horizontal{
             border-top: 1px solid #adadad;
         }
+
+        /*小程序入口样式*/
+        .action-item{
+            background-color: #ffffff;
+        }
+        .action-item a{
+            text-decoration: none;
+            color: #205573;
+            font-weight: bold;
+            font-size: 1.2rem;
+            font-family: Helvetica, sans-serif;
+        }
+        .action-item a:hover{
+            color: #f4ba1d;
+        }
     </style>
 </head>
 <body>
@@ -426,28 +442,68 @@
         <!--小程序样式入口-->
         <el-container>
             <el-main>
-                <!--入口1-->
-                <el-aside width="25%">
-                    <div class="action-item">
-                        <!--图片-->
-                        <el-image
-                                style="width: 100px; height: 100px"
-                                :src="logo1"
-                                :fit="fill">
-                        </el-image>
-                        <!--文字链接-->
-                        <a href="module1.html">AssemblyMapper</a>
-                    </div>
-                </el-aside>
-                <el-aside width="25%">
-
-                </el-aside>
-                <el-aside width="25%">
-
-                </el-aside>
-                <el-aside width="25%">
-
-                </el-aside>
+                <div>
+                    <!--入口1-->
+                    <el-aside width="25%">
+                        <div class="action-item">
+                            <!--图片-->
+                            <el-image
+                                    style="width: 100px; height: 100px"
+                                    :src="logo1"
+                                    :fit="fill">
+                            </el-image>
+                            <!--文字链接-->
+                            <div>
+                                <a href="module1.html">AssemblyMapper</a>
+                            </div>
+                        </div>
+                    </el-aside>
+                    <!--入口2-->
+                    <el-aside width="25%">
+                        <div class="action-item">
+                            <!--图片-->
+                            <el-image
+                                    style="width: 100px; height: 100px"
+                                    :src="logo2"
+                                    :fit="fill">
+                            </el-image>
+                            <!--文字链接-->
+                            <div>
+                                <a href="module2.html">GapFiller</a>
+                            </div>
+                        </div>
+                    </el-aside>
+                    <!--入口3-->
+                    <el-aside width="25%">
+                        <div class="action-item">
+                            <!--图片-->
+                            <el-image
+                                    style="width: 100px; height: 100px"
+                                    :src="logo3"
+                                    :fit="fill">
+                            </el-image>
+                            <!--文字链接-->
+                            <div>
+                                <a href="module3.html">CentroMiner</a>
+                            </div>
+                        </div>
+                    </el-aside>
+                    <!--入口4-->
+                    <el-aside width="25%">
+                        <div class="action-item">
+                            <!--图片-->
+                            <el-image
+                                    style="width: 100px; height: 100px"
+                                    :src="logo4"
+                                    :fit="fill">
+                            </el-image>
+                            <!--文字链接-->
+                            <div>
+                                <a href="module4.html">TeloExplorer</a>
+                            </div>
+                        </div>
+                    </el-aside>
+                </div>
             </el-main>
         </el-container>
 
