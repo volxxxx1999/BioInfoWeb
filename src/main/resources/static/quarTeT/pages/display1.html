@@ -127,27 +127,6 @@
             text-decoration: none;
         }
 
-        /*登录注册的格式*/
-        .loginDiv {
-            display: inline-block;
-            float: right;
-            padding-top: 2rem;
-            padding-right: 3rem;
-        }
-
-        /*登录注册的按钮格式*/
-        .loginDiv > .el-button {
-            font-size: 1.5rem;
-            font-family: "Helvetica", sans-serif;
-        }
-
-        .loginDiv > span {
-            color: #ffffff;
-            font-size: 2rem;
-            padding-top: 1rem;
-            padding-left: 1rem;
-        }
-
         /*下一步的按钮格式*/
         .next-button {
             font-family: "Comic Sans MS", serif;
@@ -284,59 +263,28 @@
             line-height: 50rem;
         }
 
-        /*展示图旁边放大的按钮*/
-        .zoom-out-button {
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-
-        #bigimg {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            display: none;
-            z-index: 20;
-        }
-
         /*第一个模块程序中输出的警告信息*/
         /*框*/
         .result-module {
-            display: none;
-            background-color: #ffffff;
+            display: block;
+            background-color: #67c23a;
             border-style: solid;
             border-width: 2px;
             border-color: #e3e3e3;
-            margin-right: 5rem;
-            margin-top: 5rem;
-            -webkit-animation: box-shadow-drop-tr 0.6s both;
-            animation: box-shadow-drop-tr 0.6s both;
+            height: 4rem;
+            color: #ffffff;
+            margin: 0;
         }
-
-        /*框中的标签*/
-        .result-module > h3 {
+        /*框中的文字*/
+        .result-module > p {
             font-family: Helvetica, sans-serif;
-            color: #494949;
             font-weight: bold;
-            margin-bottom: 0;
+            font-size: 1.2rem;
+            text-align: center;
         }
-
-        /*给一个加阴影的动画*/
-        @-webkit-keyframes result-module {
-            0% {
-                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-            }
-            100% {
-                box-shadow: 6px -6px 18px rgba(0, 0, 0, 0.35);
-            }
-        }
-
-        @keyframes box-shadow-drop-tr {
-            0% {
-                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-            }
-            100% {
-                box-shadow: 6px -6px 18px rgba(0, 0, 0, 0.35);
-            }
+        .result-module > p > .el-button{
+            color: #a5dbff;
+            font-weight: bold;
         }
 
         /*框内描述结果的文字box*/
@@ -355,15 +303,6 @@
 
         .download-stat > .el-button {
             margin: 0 0 0 0;
-        }
-
-        /*  登录框的样式  */
-        .login-box {
-            padding: 0 10px;
-        }
-
-        .login-box * {
-            margin-bottom: 10px;
         }
 
         /* 表格统计的字体*/
@@ -419,6 +358,52 @@
         </el-header>
     </el-container>
 
+    <!--Warnings横幅顶端显示-->
+    <!--正确的结果-->
+    <div class="result-module" id="withCorrect">
+        <p>
+            <em style="padding-right: 1rem">Process Result:</em>
+            Success! No Errors Occur During the Process.
+        </p>
+    </div>
+    <!--存在Warnings的结果-->
+    <div class="result-module" id="withWarnings"
+         style="display: none; background-color:#ed7d31">
+        <p>
+            <em style="padding-right: 1rem">Process Result:</em>
+            Warning! Process is completed, but here are some warnings.
+            <el-button type="text" @click="dialogTableVisible = true">
+                Show Details
+            </el-button>
+        </p>
+        <!--warning表格-->
+        <el-dialog title="Warning Infos" :visible.sync="dialogTableVisible">
+            <el-table :data="warnings"
+                      class="tableSet"
+                      style="width: 95%;
+                            font-size: 1.1rem;
+                            font-family: Helvetica,sans-serif;
+                            margin:10px 10px 10px 10px;"
+                      stripe
+                      border
+                      height="20rem"
+                      :row-class-name="tableRowClassName"
+                      :cell-style="cellStyle">
+                <el-table-column
+                        prop="wid"
+                        label="ID"
+                        min-width="30%">
+                </el-table-column>
+                <el-table-column
+                        prop="warning"
+                        label="warning"
+                        min-width="70%">
+                </el-table-column>
+            </el-table>
+        </el-dialog>
+    </div>
+
+
     <!--thinner div中是主体内容-->
     <div id="thinner">
         <!--3 区域0 下载移动最前+单独区域-->
@@ -473,20 +458,14 @@
                         Here is an overview of this draft genome assembly.
                     </p>
                 </div>
-                <!-- 3.3 -->
+                <!-- 3.3 图片-->
                 <div>
-                    <!--侧栏 1 下载+放大按钮-->
-                    <el-aside width="5%">
-                        <div>
-                            <el-button
-                                    circle
-                                    icon="el-icon-download"
-                                    @click="downloadDraftGenomePng">
-                            </el-button>
-                        </div>
+                    <!--填充 让图片居中-->
+                    <el-aside width="27%">
+                        <div style="height: 10rem"> </div>
                     </el-aside>
                     <!-- 侧栏 2 png图片-->
-                    <el-aside width="50%">
+                    <el-aside width="45%">
                         <!--原始图片一个长条 加个div和hidden给整整 放大里面的图片 限制div大小-->
                         <div
                                 style="width: 500px;
@@ -501,61 +480,19 @@
                             </el-image>
                         </div>
                     </el-aside>
-                    <!-- 侧栏 3 程序运行中的Warnings展示-->
-                    <el-aside
-                            style="box-shadow: #4d4d4d"
-                            width="45%">
-                        <div
-                                class="result-module"
-                                style="display: block"
-                                id="withCorrect">
-                            <h3>
-                                Process Result
-                            </h3>
-                            <el-result
-                                    icon='success'
-                                    title='Success!'
-                                    sub-title='No Errors Occur During the Process'>
-                            </el-result>
+                    <!--侧栏 1 下载按钮-->
+                    <el-aside width="5%">
+                        <div>
+                            <el-button
+                                    circle
+                                    icon="el-icon-download"
+                                    @click="downloadDraftGenomePng">
+                            </el-button>
                         </div>
-                        <div
-                                class="result-module"
-                                style="display: none"
-                                id="withWarnings">
-                            <h3>
-                                Process Result
-                            </h3>
-                            <el-result
-                                    icon='warning'
-                                    title='Warning!'
-                                    sub-title='Process is completed, but here are some warning'>
-                            </el-result>
-                            <el-button type="text" @click="dialogTableVisible = true">Show Details</el-button>
-                            <el-dialog title="Warning Infos" :visible.sync="dialogTableVisible">
-                                <el-table :data="warnings"
-                                          class="tableSet"
-                                          style="width: 95%;
-                                                font-size: 1.1rem;
-                                                font-family: Helvetica,sans-serif;
-                                                margin:10px 10px 10px 10px;"
-                                          stripe
-                                          border
-                                          height="20rem"
-                                          :row-class-name="tableRowClassName"
-                                          :cell-style="cellStyle">
-                                    <el-table-column
-                                            prop="wid"
-                                            label="ID"
-                                            min-width="30%">
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="warning"
-                                            label="warning"
-                                            min-width="70%">
-                                    </el-table-column>
-                                </el-table>
-                            </el-dialog>
-                        </div>
+                    </el-aside>
+                    <!--填充 让图片居中-->
+                    <el-aside width="23%">
+                        <div style="height: 10rem"></div>
                     </el-aside>
                 </div>
             </el-main>
