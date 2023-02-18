@@ -138,21 +138,20 @@
             text-decoration: none;
         }
 
-        .loginDiv{
-            display: inline-block;
+        /*导航栏样式*/
+        /*父div*/
+        .navDiv{
             float: right;
-            padding-top: 2rem;
-            padding-right: 3rem;
+            padding-right: 4rem;
         }
-        .loginDiv>.el-button{
-            font-size: 1.5rem;
-            font-family: "Helvetica",sans-serif;
-        }
-        .loginDiv > span {
-            color: #ffffff;
-            font-size: 2rem;
+        /*整体导航栏*/
+        .navDiv>.el-menu-demo{
+            margin: auto;
             padding-top: 1rem;
-            padding-left: 1rem;
+        }
+        /*导航栏item字体大小*/
+        .navDiv>.el-menu-demo>.el-menu-item{
+            /*font-size: 18px;*/
         }
 
         /*走马灯设置 item和主盒子要一起设置宽高*/
@@ -314,6 +313,31 @@
             font-family: Helvetica, sans-serif;
             font-size: 2rem;
         }
+
+        /*页脚格式*/
+        .pageFooter{
+            font-size: 1.5rem;
+            color: #575d66;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+            margin: auto;
+        }
+        /*a链接的格式*/
+        .pageFooter>a{
+            text-decoration: none;
+            font-weight: bold;
+            color: #205573;
+        }
+        .pageFooter>a:hover{
+            color: #f4ba1d;
+        }
+        .pageFooter>a:visited{
+            color: #312e2e;
+        }
+        /*分割线样式*/
+        .el-divider--horizontal{
+            border-top: 1px solid #adadad;
+        }
     </style>
 </head>
 <body>
@@ -324,20 +348,39 @@
     <div class="banner">
         <!--标题-->
         <a href="home.html"> quarTeT </a>
-        <!--登陆注册 使用 暂弃-->
-        <!-- <span class="loginDiv">
-                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
-                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
-                <span class="username" v-show="isLogin">{{this.username}}</span>
-        </span> -->
+        <span class="navDiv">
+            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引  -->
+            <el-menu :default-active="activeBar"
+                     class="el-menu-demo"
+                     background-color="#205573"
+                     text-color="#e3e3e0"
+                     active-text-color="#ffffff"
+                     mode="horizontal" @select="handleSelect">
+                <el-menu-item  index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title" style="font-size: 18px">Tools</template>
+                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFiller</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroMiner</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer</el-menu-item>
+                </el-submenu>
+                <el-submenu index="3">
+                    <template slot="title">Document</template>
+                    <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
+                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
+                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
+            </el-menu>
+        </span>
     </div>
 
     <!--使用container布局-->
     <el-container>
         <!--2 导航栏-->
-        <el-header style="background-color: #ffffff; margin-top: 0">
+<!--        <el-header style="background-color: #ffffff; margin-top: 0">-->
             <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
-            <el-menu :default-active="activeBar" class="el-menu-demo"
+           <!-- <el-menu :default-active="activeBar" class="el-menu-demo"
                      mode="horizontal" @select="handleSelect">
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
@@ -354,13 +397,13 @@
                 </el-submenu>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
                 <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
-            </el-menu>
-        </el-header>
+            </el-menu>-->
+<!--        </el-header>-->
     </el-container>
 
     <!--2. 栏目-->
     <div id="thinner">
-        <!--TODO 新增 搜索功能-->
+        <!--搜索功能-->
         <el-container>
             <el-main>
                 <div class="searchDiv">
@@ -377,6 +420,34 @@
                         </el-col>
                     </el-row>
                 </div>
+            </el-main>
+        </el-container>
+
+        <!--小程序样式入口-->
+        <el-container>
+            <el-main>
+                <!--入口1-->
+                <el-aside width="25%">
+                    <div class="action-item">
+                        <!--图片-->
+                        <el-image
+                                style="width: 100px; height: 100px"
+                                :src="logo1"
+                                :fit="fill">
+                        </el-image>
+                        <!--文字链接-->
+                        <a href="module1.html">AssemblyMapper</a>
+                    </div>
+                </el-aside>
+                <el-aside width="25%">
+
+                </el-aside>
+                <el-aside width="25%">
+
+                </el-aside>
+                <el-aside width="25%">
+
+                </el-aside>
             </el-main>
         </el-container>
 
@@ -412,65 +483,17 @@
     </div>
 
     <!--5 页脚信息-->
-    <el-footer style="height:6rem; background-color: #205573">
+    <el-divider></el-divider>
+    <div class="pageFooter">
+        Powered by
+        <a href="https://www.atcgn.com/">ATCG</a>
+    </div>
+   <!-- <el-footer style="height:6rem; background-color: #205573">
         <div>
             <br/>
             Powered by <a href="https://www.atcgn.com/" style="color: #ffffff ">ATCG</a>
         </div>
-    </el-footer>
-
-    <!--6 登录 Dialog    -->
-    <el-dialog
-            title="Sign in"
-            :close-on-click-modal="false"
-            :visible.sync="loginDialogVisible"
-            width="450px">
-        <div class="login-box">
-            <el-input placeholder="email" v-model="email" clearable size="20px">
-            </el-input>
-            <el-input
-                    placeholder="password"
-                    v-model="password"
-                    show-password
-            ></el-input>
-            <!-- <div class="check-box">
-              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
-              <img :src="captchaPath" @click="getCaptcha()" alt="">
-            </div> -->
-            <el-button type="success" round style="width: 100%" @click="login"
-            >Login</el-button
-            >
-        </div>
-    </el-dialog>
-    <!--7 注册 Dialog    -->
-    <el-dialog
-            title="Sign up"
-            :close-on-click-modal="false"
-            :visible.sync="registerDialogVisible"
-            width="450px">
-        <div class="login-box">
-            <el-input placeholder="email" v-model="email" clearable size="20px">
-            </el-input>
-            <el-input
-                    placeholder="password"
-                    v-model="password"
-                    show-password
-            ></el-input>
-            <el-input
-                placeholder="password again"
-                v-model="password2"
-                show-password
-            ></el-input>
-            <!-- <div class="check-box">
-              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
-              <img :src="captchaPath" @click="getCaptcha()" alt="">
-            </div> -->
-            <el-button type="success" round style="width: 100%" @click="register"
-            >Register</el-button
-            >
-        </div>
-    </el-dialog>
-
+    </el-footer>-->
 </div>
 
 </body>
@@ -507,6 +530,11 @@
                 // 展示图片的img URL
                 displayImg: "https://www.atcgn.com/t2t/bioRepository/img/fig1.png",
                 fitStyle: "contain", // 图片的填充格式
+                // 小程序入口logo链接
+                logo1: "https://inews.gtimg.com/newsapp_bt/0/13732648356/1000",
+                logo2: "https://inews.gtimg.com/newsapp_bt/0/13732648356/1000",
+                logo3: "https://inews.gtimg.com/newsapp_bt/0/13732648356/1000",
+                logo4: "https://inews.gtimg.com/newsapp_bt/0/13732648356/1000",
             }
         },
         methods: {
