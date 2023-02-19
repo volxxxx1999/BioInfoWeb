@@ -405,16 +405,16 @@
 
     <!--thinner div中是主体内容-->
     <div id="thinner">
-        <!--3 区域0 下载移动最前+单独区域-->
+        <!--3 下载移动最前+单独区域-->
         <el-container>
             <el-main>
-                <!-- 3.1 该区域标签-->
+                <!--该区域标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <span>Download</span>
                     </button>
                 </div>
-                <!-- 提供下载的FASTA和apg-->
+                <!--提供下载的FASTA和apg-->
                 <div class="downloadDiv">
                     <el-row :gutter="10">
                         <el-col :xs="16" :sm="16" :md="6" lg="4" xl="12">
@@ -441,32 +441,38 @@
                 </div>
             </el-main>
         </el-container>
-        <!--3 区域1 展示png结果图-->
+
+        <!--4 展示png结果图-->
         <el-container>
             <el-main>
-                <!-- 3.1 该区域标签-->
+                <!--该区域标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <span>Genome Overview</span>
                     </button>
                 </div>
-                <!--3.2对图的说明-->
+                <!--对图的说明-->
                 <div class="illustration-box">
                     <p>
                         Here is an overview of this draft genome assembly.
                     </p>
                 </div>
-                <!-- 3.3 图片-->
+                <!--图片-->
                 <div>
-                    <!--填充 让图片居中-->
-                    <el-aside width="27%">
-                        <div style="height: 10rem"> </div>
+                    <!--侧栏1 下载按钮-->
+                    <el-aside width="5%">
+                        <div>
+                            <el-button
+                                    circle
+                                    icon="el-icon-download"
+                                    @click="downloadDraftGenomePng">
+                            </el-button>
+                        </div>
                     </el-aside>
-                    <!-- 侧栏 2 png图片-->
+                    <!-- 侧栏2 png图片-->
                     <el-aside width="45%">
                         <!--原始图片一个长条 加个div和hidden给整整 放大里面的图片 限制div大小-->
-                        <div
-                                style="width: 500px;
+                        <div style="width: 500px;
                             height: 450px;
                             overflow: hidden">
                             <!--[原图]-->
@@ -478,118 +484,7 @@
                             </el-image>
                         </div>
                     </el-aside>
-                    <!--侧栏 1 下载按钮-->
-                    <el-aside width="5%">
-                        <div>
-                            <el-button
-                                    circle
-                                    icon="el-icon-download"
-                                    @click="downloadDraftGenomePng">
-                            </el-button>
-                        </div>
-                    </el-aside>
-                    <!--填充 让图片居中-->
-                    <el-aside width="23%">
-                        <div style="height: 10rem"></div>
-                    </el-aside>
-                </div>
-            </el-main>
-        </el-container>
-
-        <!--4 区域2 展示两个pdf图结果-->
-        <el-container>
-            <el-main>
-                <!-- 4.1 该区域标签-->
-                <div style="margin:1rem 1rem 1rem 1rem">
-                    <button class="btn-24">
-                        <span>Colinearity Plot</span>
-                    </button>
-                </div>
-                <!-- 4.2 对两个图的说明-->
-                <div class="illustration-box">
-                    <p>
-                        Here are colinearity plots for contigs/draft genome against reference.
-                    </p>
-                </div>
-                <!-- 4.3 -->
-                <div>
-                    <!--侧栏1 -->
-                    <div id="doPlot" style="display: none">
-                        <el-aside width="5%">
-                            <div>
-                                <el-button
-                                        circle
-                                        icon="el-icon-download"
-                                        @click="downloadDraftGenomeRef"></el-button>
-                            </div>
-                        </el-aside>
-                        <!--侧栏2 pdf图1-->
-                        <el-aside width="45%">
-                            <!--[原图]-->
-                            <el-image
-                                    style="width: 410px; height: 410px"
-                                    alt="plot of genome result"
-                                    :src="genomeRefUrl[0]"
-                                    :preview-src-list="genomeRefUrl">
-                            </el-image>
-                        </el-aside>
-                    </div>
-
-                    <!--侧栏3 pdf图2-->
-                    <div>
-                        <!--填充 让图片居中-->
-                        <el-aside width="27%">
-                            <div id="leftPadding"
-                                 style="height: 10rem">
-                            </div>
-                        </el-aside>
-                        <!--图片和按钮-->
-                        <div>
-                            <el-aside width="45%">
-                                <el-image
-                                        style="width: 410px; height: 410px"
-                                        :src="hifiRefUrl[0]"
-                                        alt="plot of hifi result"
-                                        :preview-src-list="hifiRefUrl">
-                                </el-image>
-                            </el-aside>
-                            <!--侧栏4 下载按钮-->
-                            <el-aside width="5%">
-                                <div>
-                                    <el-button
-                                            circle
-                                            icon="el-icon-download"
-                                            @click="downloadDraftHiFiRef">
-                                    </el-button>
-                                </div>
-                            </el-aside>
-                        </div>
-                        <!--填充 让图片居中-->
-                        <el-aside width="23%">
-                            <div id="rightPadding" style="height: 10rem"></div>
-                        </el-aside>
-                    </div>
-                </div>
-            </el-main>
-        </el-container>
-
-        <!--5 区域3 展示mapinfo 和 stat文件结果-->
-        <el-container>
-            <el-main>
-                <!--5.1 该区域标签-->
-                <div style="margin:1rem 1rem 1rem 1rem">
-                    <button class="btn-24">
-                        <span>Statistic</span>
-                    </button>
-                </div>
-                <!--5.2 对两个表格的说明-->
-                <div class="illustration-box">
-                    <p>
-                        Here are some statistic data of this assembly.
-                    </p>
-                </div>
-                <!--5.3-->
-                <div>
+                   <!--侧栏3 Genome Statistic表-->
                     <!--侧栏1 table1-->
                     <el-aside width="50%">
                         <!--标题-->
@@ -615,6 +510,228 @@
                             </el-button>
                         </span>
                         <!--表格-->
+                        <el-table
+                                :data="draftStat"
+                                stripe
+                                border
+                                height="27rem"
+                                class="tableSet"
+                                style=" width: 95%;
+                            font-size: 1.3rem;
+                            font-family: Helvetica,sans-serif;
+                            margin:10px 10px 10px 10px;"
+                                :header-cell-style="{'text-align':'center'}"
+                                :row-class-name="tableRowClassName">
+                            <el-table-column
+                                    prop="assemblyID"
+                                    label="AssemblyID"
+                                    min-width="25%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="length"
+                                    label="Length"
+                                    min-width="25%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="gapCount"
+                                    label="GapCount"
+                                    min-width="25%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="gapLocus"
+                                    label="GapLocus"
+                                    min-width="25%">
+                            </el-table-column>
+                        </el-table>
+                    </el-aside>
+                </div>
+            </el-main>
+        </el-container>
+
+        <!--4 pdf图结果-->
+        <el-container>
+            <el-main>
+                <!-- 4.1 该区域标签-->
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <span>Colinearity Plot</span>
+                    </button>
+                </div>
+                <!-- 4.2 对两个图的说明-->
+                <div class="illustration-box">
+                    <p>
+                        Here are colinearity plots for contigs/draft genome against reference.
+                    </p>
+                </div>
+                <!-- 4.3 -->
+                <!--侧栏3 pdf图2-->
+                <div>
+                    <!--下载按钮-->
+                    <el-aside width="5%">
+                        <div>
+                            <el-button
+                                    circle
+                                    icon="el-icon-download"
+                                    @click="downloadDraftHiFiRef">
+                            </el-button>
+                        </div>
+                    </el-aside>
+                    <!--图片-->
+                    <el-aside width="45%">
+                        <el-image
+                                style="width: 410px; height: 410px"
+                                :src="hifiRefUrl[0]"
+                                alt="plot of hifi result"
+                                :preview-src-list="hifiRefUrl">
+                        </el-image>
+                    </el-aside>
+                    <el-aside width="50%">
+                        <!--标题-->
+                        <h3
+                                style="font-family: Helvetica,sans-serif;
+                        font-size: 1.3rem;
+                        color:#666666">
+                            Alignment Information
+                        </h3>
+                        <!--统计数据-->
+                        <div class="statFont">
+                            <i class="el-icon-s-data"></i>
+                            <span>{{totalMapped}}</span>
+                            <el-divider direction="vertical"></el-divider>
+                            <i class="el-icon-data-analysis"></i>
+                            <span>{{totalDiscarded}}</span>
+                        </div>
+                        <!--下载按钮-->
+                        <span class="download-stat">
+                        <el-button
+                                icon="el-icon-download"
+                                @click="downloadDraftStat">
+                        </el-button>
+                    </span>
+                        <!--表格-->
+                        <el-table
+                                :data="draftMapInfo"
+                                stripe
+                                border
+                                style=" width: 95%;
+                        font-size: 1.3rem;
+                        font-family: Helvetica,sans-serif;
+                        margin:10px 10px 10px 10px;"
+                                height="27rem"
+                                class="tableSet"
+                                :header-cell-style="{'text-align':'center'}"
+                                :row-class-name="tableRowClassName">
+                            <el-table-column
+                                    prop="contigID"
+                                    label="ContigID"
+                                    min-width="30%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="contigLength"
+                                    label="ContigLength"
+                                    min-width="40%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="targetID"
+                                    label="TargetID"
+                                    min-width="30%">
+                            </el-table-column>
+                        </el-table>
+                    </el-aside>
+                </div>
+            </el-main>
+        </el-container>
+
+        <!--5 额外的画图显示-->
+        <el-container>
+            <el-main id="doPlot" style="display: block">
+                <!-- 4.1 该区域标签-->
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <span>Extra Plot</span>
+                    </button>
+                </div>
+                <!-- 4.2 对两个图的说明-->
+                <div class="illustration-box">
+                    <p>
+                        Here are colinearity plots for contigs/draft genome against reference.
+                    </p>
+                </div>
+                <div>
+                    <!--填充左-->
+                    <el-aside width="23%">
+                        <div style="height: 3rem"></div>
+                    </el-aside>
+                    <!--侧栏1 说明-->
+                    <el-aside width="5%">
+                        <div>
+                            <el-button
+                                circle
+                                icon="el-icon-download"
+                                @click="downloadDraftGenomeRef">
+                            </el-button>
+                        </div>
+                    </el-aside>
+                    <!--侧栏2 图-->
+                    <el-aside width="45%">
+                        <el-image
+                                style="width: 410px; height: 410px"
+                                alt="plot of genome result"
+                                :src="genomeRefUrl[0]"
+                                :preview-src-list="genomeRefUrl">
+                        </el-image>
+                    </el-aside>
+                    <!--填充右-->
+                    <el-aside width="27%">
+                        <div style="height: 3rem"></div>
+                    </el-aside>
+                </div>
+            </el-main>
+        </el-container>
+
+
+       <!-- &lt;!&ndash;5 区域3 展示mapinfo 和 stat文件结果&ndash;&gt;
+        <el-container>
+            <el-main>
+                &lt;!&ndash;5.1 该区域标签&ndash;&gt;
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <span>Statistic</span>
+                    </button>
+                </div>
+                &lt;!&ndash;5.2 对两个表格的说明&ndash;&gt;
+                <div class="illustration-box">
+                    <p>
+                        Here are some statistic data of this assembly.
+                    </p>
+                </div>
+                &lt;!&ndash;5.3&ndash;&gt;
+                <div>
+                    &lt;!&ndash;侧栏1 table1&ndash;&gt;
+                    <el-aside width="50%">
+                        &lt;!&ndash;标题&ndash;&gt;
+                        <h3
+                                style="font-family: Helvetica,sans-serif;
+                                   font-size: 1.3rem;
+                                   color:#666666">
+                            Genome Statistic
+                        </h3>
+                        &lt;!&ndash;统计数据&ndash;&gt;
+                        <div class="statFont">
+                            <i class="el-icon-s-data"></i>
+                            <span>{{totalSize}}</span>
+                            <el-divider direction="vertical"></el-divider>
+                            <i class="el-icon-data-analysis"></i>
+                            <span>{{gcContent}}</span>
+                        </div>
+                        &lt;!&ndash;下载按钮&ndash;&gt;
+                        <span class="download-stat">
+                            <el-button
+                                    icon="el-icon-download"
+                                    @click="downloadDraftMapInfo">
+                            </el-button>
+                        </span>
+                        &lt;!&ndash;表格&ndash;&gt;
                         <el-table
                                 :data="draftStat"
                                 stripe
@@ -649,16 +766,16 @@
                             </el-table-column>
                         </el-table>
                     </el-aside>
-                    <!--侧栏2 table2-->
+                    &lt;!&ndash;侧栏2 table2&ndash;&gt;
                     <el-aside width="50%">
-                        <!--标题-->
+                        &lt;!&ndash;标题&ndash;&gt;
                         <h3
                                 style="font-family: Helvetica,sans-serif;
                             font-size: 1.3rem;
                             color:#666666">
                             Alignment Information
                         </h3>
-                        <!--统计数据-->
+                        &lt;!&ndash;统计数据&ndash;&gt;
                         <div class="statFont">
                             <i class="el-icon-s-data"></i>
                             <span>{{totalMapped}}</span>
@@ -666,14 +783,14 @@
                             <i class="el-icon-data-analysis"></i>
                             <span>{{totalDiscarded}}</span>
                         </div>
-                        <!--下载按钮-->
+                        &lt;!&ndash;下载按钮&ndash;&gt;
                         <span class="download-stat">
                             <el-button
                                     icon="el-icon-download"
                                     @click="downloadDraftStat">
                             </el-button>
                         </span>
-                        <!--表格-->
+                        &lt;!&ndash;表格&ndash;&gt;
                         <el-table
                                 :data="draftMapInfo"
                                 stripe
@@ -703,7 +820,7 @@
                             </el-table-column>
                         </el-table>
                     </el-aside>
-                </div>
+                </div>-->
              <!--   &lt;!&ndash;6 提供下载的FASTA和apg&ndash;&gt;
                 <div style="margin-top: 2rem;">
                     <el-button
