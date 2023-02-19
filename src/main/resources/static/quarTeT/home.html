@@ -105,14 +105,6 @@
             border-style: solid;
         }
 
-        /*设置导航栏的字体格式*/
-        .el-menu-demo {
-            font-family: Helvetica, sans-serif;
-            font-size: 130%;
-            font-weight: bold;
-        }
-        /* TODO: submenu的设置 hover变色*/
-
         /* 引用Demo的设置*/
         .citationFormat {
             font-family: Helvetica, sans-serif;
@@ -144,15 +136,33 @@
         .navDiv{
             float: right;
             padding-right: 4rem;
+            margin-right: 4rem;
         }
         /*整体导航栏*/
         .navDiv>.el-menu-demo{
             margin: auto;
             padding-top: 1rem;
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
         }
         /*导航栏item字体大小*/
-        .navDiv>.el-menu-demo>.el-menu-item{
-            /*font-size: 18px;*/
+        .navDiv .el-menu-item{
+            font-size: 18px;
+            width: 10rem;
+            text-align: center;
+        }
+        /*submenu字体大小*/
+        .navDiv .el-submenu__title{
+            font-size: 18px;
+            color: #303133;
+            padding: 0 20px;
+            cursor: pointer;
+            -webkit-transition: border-color .3s,background-color .3s,color .3s;
+            transition: border-color .3s,background-color .3s,color .3s;
+            box-sizing: border-box;
+        }
+        .navDiv>.el-menu-demo.el-menu--horizontal{
+            border-bottom: none;
         }
 
         /*走马灯设置 item和主盒子要一起设置宽高*/
@@ -259,16 +269,6 @@
             }
         }
 
-        /*下一步按钮*/
-        .next-button {
-            font-family: "Comic Sans MS", serif;
-            font-size: 20px;
-            font-weight: bold;
-            background-color: #205573;
-            width: 15rem;
-            height: 4rem;
-        }
-
         /*ele container setting*/
         body > .el-container {
             margin-bottom: 5rem;
@@ -281,14 +281,6 @@
 
         .el-container:nth-child(7) .el-aside {
             line-height: 50rem;
-        }
-
-        /*  登录框的样式  */
-        .login-box {
-            padding: 0 10px;
-        }
-        .login-box * {
-            margin-bottom: 10px;
         }
 
         /*搜索框的样式*/
@@ -332,9 +324,6 @@
         .pageFooter>a:hover{
             color: #f4ba1d;
         }
-        .pageFooter>a:visited{
-            color: #312e2e;
-        }
         /*分割线样式*/
         .el-divider--horizontal{
             border-top: 1px solid #adadad;
@@ -374,7 +363,9 @@
                      mode="horizontal" @select="handleSelect">
                 <el-menu-item  index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
-                    <template slot="title" style="font-size: 18px">Tools</template>
+                    <template slot="title">
+                        Tools
+                    </template>
                     <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
                     <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
                     <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
