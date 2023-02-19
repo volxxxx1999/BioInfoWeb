@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>quarTeT - GapFiller - Result</title>
+    <title>quarTeT - TeloExplorer - Result</title>
     <style>
         /*根节点html字体大小*/
         html {
@@ -115,6 +115,7 @@
             margin: 0;
         }
 
+        /*banner下面那个quarTeT标题的格式*/
         .banner > a {
             color: #ffffff;
             font-size: 5rem;
@@ -356,46 +357,8 @@
             margin: 0 0 0 0;
         }
 
-        /*点击放大*/
-        /* 1. 整个的遮罩*/
-        .shade {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: none;
-            /*使得遮罩能在页面最上方*/
-            z-index: 999;
-        }
-
-        /* 2. 放大图片后：包含图片的div*/
-        .show-bigImg {
-            width: 100rem;
-            height: auto;
-            /*实现div永远居中*/
-            margin: auto;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            -moz-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            -o-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-        }
-
-        /* 3. 放大后的图片*/
-        .show-bigImg img {
-            /*width: 66rem;*/
-            /*height: 66rem;*/
-            max-width: 90rem;
-            max-height: 90rem;
-        }
-
         /* 表格统计的字体*/
-        .statFont{
+        .statFont {
             color: #409eff;
             font-weight: bold;
             font-family: "Arial", sans-serif;
@@ -411,7 +374,7 @@
         <a href="home.html"> quarTeT </a>
     </div>
 
-    <!--2 导航栏-->
+    <!--使用container布局-->
     <el-container>
         <!--2 导航栏-->
         <el-header style="background-color: #ffffff; margin-top: 0">
@@ -421,10 +384,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssemblyMapper</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFiller</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroMiner</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
                 </el-submenu>
                 <el-submenu index="3">
                     <template slot="title">Document</template>
@@ -436,8 +399,6 @@
             </el-menu>
         </el-header>
     </el-container>
-
-    <!--thinner div中是主体内容-->
     <div id="thinner">
         <!--3 区域1 展示png结果图-->
         <el-container>
@@ -446,18 +407,18 @@
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <i class="el-icon-picture"></i>
-                        <span>Genome Overview</span>
+                        <span>Telomere Overview</span>
                     </button>
                 </div>
                 <!--3.2 对该图的说明-->
                 <div class="illustration-box">
                     <p>
-                        Here is an overview of this gap-filled genome.
+                        Here is an overview of telomere distribution in your genome.
                     </p>
                 </div>
                 <!--3.3 主体内容-->
                 <div>
-                    <!--侧栏1 按钮-->
+                    <!--侧栏 1 按钮-->
                     <el-aside width="5%">
                         <!--下载按钮-->
                         <div>
@@ -468,8 +429,8 @@
                             </el-button>
                         </div>
                     </el-aside>
-                    <!--侧栏2 生成的png图片-->
-                    <el-aside width="45%">
+                    <!--侧栏 2 生成的png图片-->
+                    <el-aside width="50%">
                         <!--限制原图的外部div-->
                         <div
                                 style="width: 500px;
@@ -484,67 +445,67 @@
                             </el-image>
                         </div>
                     </el-aside>
-                    <!--侧栏3 表格-->
-                    <el-aside width="50%">
-                        <!--小标题-->
-                        <h3 style="font-family: Helvetica,sans-serif;
-                                   font-size: 1.3rem;
-                                   color:#666666">
-                            Genome Statistic
-                        </h3>
-                        <!--统计数据-->
-                        <div class="statFont">
-                            <i class="el-icon-s-data"></i>
-                            <span>{{totalSize}}</span>
-                            <el-divider direction="vertical"></el-divider>
-                            <i class="el-icon-data-analysis"></i>
-                            <span>{{gcContent}}</span>
+                    <!--侧栏 3 程序运行中的Warnings展示-->
+                    <el-aside
+                            style="box-shadow: #4d4d4d"
+                            width="45%">
+                        <!--默认为正常的Result div,block-->
+                        <div
+                                class="result-module"
+                                style="display: block"
+                                id="withCorrect">
+                            <h3>
+                                Process Result
+                            </h3>
+                            <el-result
+                                    icon='success'
+                                    title='Success!'
+                                    sub-title='No Errors Occur During the Process'>
+                            </el-result>
                         </div>
-                        <!--下载按钮-->
-                        <span class="download-stat">
-                            <el-button icon="el-icon-download" @click="downloadStat">
-                            </el-button>
-                        </span>
-                        <!--表格-->
-                        <el-table
-                                :data="gapStat"
-                                stripe
-                                border
-                                height="27rem"
-                                class="tableSet"
-                                style=" width: 95%;
-                        font-size: 1.3rem;
-                        font-family: Helvetica,sans-serif;
-                        margin:10px 10px 10px 10px;"
-                                :header-cell-style="{'text-align':'center'}"
-                                :row-class-name="tableRowClassName">
-                            <el-table-column
-                                    prop="cID"
-                                    label="ChrID"
-                                    min-width="25%">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="len"
-                                    label="Length"
-                                    min-width="25%">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="gCount"
-                                    label="GapCount"
-                                    min-width="25%">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="gLocus"
-                                    label="GapLocus"
-                                    min-width="25%">
-                            </el-table-column>
-                        </el-table>
+                        <!--不显示的,根据display请求改变的出错的div-->
+                        <div
+                                class="result-module"
+                                style="display: none"
+                                id="withWarnings">
+                            <h3>
+                                Process Result
+                            </h3>
+                            <el-result
+                                    icon='warning'
+                                    title='Warning!'
+                                    sub-title='Process is completed, but here are some warning'>
+                            </el-result>
+                            <el-button type="text" @click="dialogTableVisible = true">Show Details</el-button>
+                            <el-dialog title="Warning Infos" :visible.sync="dialogTableVisible">
+                                <el-table :data="warnings"
+                                          class="tableSet"
+                                          style="width: 95%;
+                                                font-size: 1.1rem;
+                                                font-family: Helvetica,sans-serif;
+                                                margin:10px 10px 10px 10px;"
+                                          stripe
+                                          border
+                                          height="20rem"
+                                          :row-class-name="tableRowClassName"
+                                          :cell-style="cellStyle">
+                                    <el-table-column
+                                            prop="wid"
+                                            label="ID"
+                                            min-width="30%">
+                                    </el-table-column>
+                                    <el-table-column
+                                            prop="warning"
+                                            label="warning"
+                                            min-width="70%">
+                                    </el-table-column>
+                                </el-table>
+                            </el-dialog>
+                        </div>
                     </el-aside>
                 </div>
             </el-main>
         </el-container>
-
-        <!--4 区域3 展示detail文件结果-->
         <el-container>
             <el-main>
                 <!--4.1 该区域标签-->
@@ -557,33 +518,32 @@
                 <!--4.2 对两个表格的说明-->
                 <div class="illustration-box">
                     <p>
-                        Here are some statistic data of this gap-filled genome.
+                        Here is statistic data about telomere in this genome.
                     </p>
                 </div>
-               <!-- &lt;!&ndash;4.3 stat&ndash;&gt;
+                <!--4.3 stat-->
                 <div>
-                    &lt;!&ndash;小标题&ndash;&gt;
-                    <h3
-                            style="font-family: Helvetica,sans-serif;
-                                   font-size: 1.3rem;
-                                   color:#666666">
-                        Genome Statistic
-                    </h3>
-                    &lt;!&ndash;统计数据&ndash;&gt;
+                    <!--统计数据-->
                     <div class="statFont">
                         <i class="el-icon-s-data"></i>
-                        <span>{{totalSize}}</span>
+                        <span>{{teloRepeat}}</span>
                         <el-divider direction="vertical"></el-divider>
                         <i class="el-icon-data-analysis"></i>
-                        <span>{{gcContent}}</span>
+                        <span>{{teloBoth}}</span>
+                        <el-divider direction="vertical"></el-divider>
+                        <i class="el-icon-s-flag"></i>
+                        <span>{{teloOnlyOne}}</span>
+                        <el-divider direction="vertical"></el-divider>
+                        <i class="el-icon-collection-tag"></i>
+                        <span>{{teloNo}}</span>
                     </div>
-                    &lt;!&ndash;下载按钮&ndash;&gt;
+                    <!--下载按钮-->
                     <span class="download-stat">
-                        <el-button icon="el-icon-download" @click="downloadStat"></el-button>
+                        <el-button icon="el-icon-download" @click="downloadInfo"></el-button>
                     </span>
-                    &lt;!&ndash;表格&ndash;&gt;
+                    <!--表格-->
                     <el-table
-                            :data="gapStat"
+                            :data="teloInfo"
                             stripe
                             border
                             height="30rem"
@@ -595,111 +555,45 @@
                             :header-cell-style="{'text-align':'center'}"
                             :row-class-name="tableRowClassName">
                         <el-table-column
-                                prop="cID"
+                                prop="chrID"
                                 label="ChrID"
                                 min-width="25%">
                         </el-table-column>
                         <el-table-column
-                                prop="len"
-                                label="Length"
+                                prop="chrLength"
+                                label="ChrLen"
                                 min-width="25%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="gCount"
-                                label="GapCount"
-                                min-width="25%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="gLocus"
-                                label="GapLocus"
-                                min-width="25%">
-                        </el-table-column>
-                    </el-table>
-                </div>-->
-                <!--4.4 detail-->
-                <div>
-                    <!--小标题-->
-                    <h3 style="font-family: Helvetica,sans-serif;
-                                   font-size: 1.3rem;
-                                   color:#666666">
-                        Gap Filling Detail
-                    </h3>
-                    <!--统计数据-->
-                    <div class="statFont">
-                        <i class="el-icon-s-data"></i>
-                        <span>{{gapClosed}}</span>
-                        <el-divider direction="vertical"></el-divider>
-                        <i class="el-icon-data-analysis"></i>
-                        <span>{{totalFilledLength}}</span>
-                        <el-divider direction="vertical"></el-divider>
-                        <i class="el-icon-s-flag"></i>
-                        <span>{{gapRemains}}</span>
-                    </div>
-                    <!--按钮-->
-                    <span class="download-stat">
-                        <el-button icon="el-icon-download" @click="downloadDetail"></el-button>
-                    </span>
-                    <!--表格-->
-                    <el-table
-                            :data="gapDetail"
-                            stripe
-                            border
-                            style=" width: 95%;
-                            font-size: 1.3rem;
-                            font-family: Helvetica,sans-serif;
-                            margin:10px 10px 10px 10px;"
-                            height="30rem"
-                            class="tableSet"
-                            :header-cell-style="{'text-align':'center'}"
-                            :row-class-name="tableRowClassName">
-                        <el-table-column
-                                prop="sID"
-                                label="SequenceID"
-                                min-width="15%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="gIdentify"
-                                label="GapIdentify"
-                                min-width="15%">
                         </el-table-column>
                         <el-table-column
                                 prop="status"
                                 label="Status"
-                                min-width="10%">
+                                min-width="25%">
                         </el-table-column>
                         <el-table-column
-                                prop="cTigID"
-                                label="CloserTigID"
-                                min-width="20%">
+                                prop="leftNum"
+                                label="LeftNum"
+                                min-width="25%">
                         </el-table-column>
                         <el-table-column
-                                prop="cRange"
-                                label="CloserRange"
-                                min-width="15%">
+                                prop="leftDirection"
+                                label="LeftDirection"
+                                min-width="25%">
                         </el-table-column>
                         <el-table-column
-                                prop="cLen"
-                                label="CloserLength"
-                                min-width="20%">
+                                prop="rightNum"
+                                label="RightNum"
+                                min-width="25%">
                         </el-table-column>
                         <el-table-column
-                                prop="cStrand"
-                                label="CloserStrand"
-                                min-width="15%">
-                        </el-table-column>
-                        <el-table-column
-                                prop="cScore"
-                                label="CloserScore"
-                                min-width="20%">
+                                prop="rightDirection"
+                                label="RightDirection"
+                                min-width="25%">
                         </el-table-column>
                     </el-table>
                 </div>
-                <!--5 提供下载的FASTA和apg-->
-                <div style="margin-top: 3rem;">
-                    <el-button class="next-button" type="primary" @click="downloadFasta">Download Genome</el-button>
-                </div>
             </el-main>
         </el-container>
+
     </div>
 
     <!--6 页脚信息-->
@@ -710,9 +604,8 @@
         </div>
     </el-footer>
 </div>
-</body>
 
-<!-- 引入组件库 -->
+</body>
 <!--JQuery-->
 <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 <!--Vue-->
@@ -722,8 +615,7 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!--Axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../../js/axios-0.18.0.js"></script>
-
+<script src="../js/axios-0.18.0.js"></script>
 
 <script>
     new Vue({
@@ -732,46 +624,37 @@
             return {
                 activeBar: "2", // 导航栏激活的栏，默认为Home 话说下拉栏显示不了啊喂
                 genomePng: ['https://inews.gtimg.com/newsapp_bt/0/13732648356/1000'],
-                // 下载文件&表格链接
-                fastaUrl: '',
-                detailUrl: '',
-                statUrl: '',
-                // 表格数据
-                gapDetail: [],
-                gapStat: [],
-                // detail统计信息
-                gapClosed: 5,
-                totalFilledLength: 5894,
-                gapRemains: 7,
-                // stat统计信息
-                totalSize: 598510887,
-                gcContent: 0.3541809607884376,
-                // 警告表格
+                infoUrl: '',
+                teloInfo: [],
                 warnings: [],
+                // 警告表格
                 dialogTableVisible: false,
+                // 统计信息
+                teloRepeat: 'abcd',
+                teloBoth: '2',
+                teloOnlyOne: '3',
+                teloNo: '1',
             }
         },
         mounted() {
-            axios.get("/quarTeT/common/fillDisplay").then((res) => {
+            axios.get("/quarTeT/common/teloDisplay").then((res) => {
                 // res->response res.data->响应体(Result) res.data.data->FillResultUrl
                 let resultUrl = res.data.data;
+                console.log(resultUrl)
                 // 1. 常规信息
                 this.genomePng = [resultUrl.genomePng];
-                this.fastaUrl = resultUrl.fastaUrl;
-                this.statUrl = resultUrl.statUrl;
-                this.detailUrl = resultUrl.detailUrl;
+                this.infoUrl = resultUrl.infoUrl;
                 // 2. 展示信息
-                this.gapDetail = resultUrl.gapDetailResult.data;
-                this.gapStat = resultUrl.gapStatResult.data;
-                this.warnings = resultUrl.warnings;
+                this.teloInfo = resultUrl.teloInfoResult.data;
                 // 3. 统计信息
-                this.gapClosed = resultUrl.gapDetailResult.gapClosed;
-                this.totalFilledLength = resultUrl.gapDetailResult.totalFilledLength;
-                this.gapRemains = resultUrl.gapDetailResult.gapRemains;
+                let stat = resultUrl.teloInfoResult;
+                this.teloRepeat = stat.telomereRepeat;
+                this.teloBoth = stat.bothFound;
+                this.teloOnlyOne = stat.onlyOne;
+                this.teloNo = stat.noFound;
 
-                this.totalSize = resultUrl.gapStatResult.totalSize;
-                this.gcContent = resultUrl.gapStatResult.gcContent;
-                // 4. Warnings的结果展示
+                this.warnings = resultUrl.warnings;
+                // 3. Warnings的结果展示
                 if (this.warnings.length !== 0) {
                     // 把正确的div取消
                     $("#withCorrect").css("display", "none");
@@ -782,6 +665,18 @@
         },
 
         methods: {
+            /*点击放大图片*/
+            // 1. 点击隐藏大图
+            closeImg() {
+                $(".shade").css("display", "none");
+            },
+            // 点击原图变大
+            ClickBig() {
+                // 1. 把原图的src给放大图的div 设置放大图的css可见
+                this.bigPng = this.genomePng;
+                // 2. 展示遮罩
+                $(".shade").css('display', 'block');
+            },
             // 下载
             /*点击按钮下载文件*/
             downloadCommon(src) {
@@ -800,26 +695,15 @@
                 $a.dispatchEvent(eventObj);
             },
             // 下载图片
-            downloadPng(){
+            downloadPng() {
                 let src = this.genomePng;
                 this.downloadCommon(src);
             },
             // 下载stat
-            downloadStat(){
-                let src = this.statUrl;
+            downloadInfo() {
+                let src = this.infoUrl;
                 this.downloadCommon(src);
             },
-            // 下载detail
-            downloadDetail(){
-                let src = this.detailUrl;
-                this.downloadCommon(src);
-            },
-            // 下载fasta
-            downloadFasta(){
-                let src = this.fastaUrl;
-                this.downloadCommon(src);
-            },
-
             /*修改表格单元格样式*/
             cellStyle({row, column, rowIndex, columnIndex}) {
                 if (column.property === 'warning') {

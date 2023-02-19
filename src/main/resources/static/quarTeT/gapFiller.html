@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>quarTeT - AssembleMapper</title>
+    <title>quarTeT - GapFiller</title>
     <style>
         /*根节点html字体大小*/
         html {
@@ -128,7 +127,6 @@
             display: inline-block;
             text-decoration: none;
         }
-
 
         /*下一步按钮*/
         .next-button {
@@ -288,6 +286,7 @@
             );
         }
 
+        /*setting 搬来的*/
         /*表单格式设置*/
         .paramForm {
             font-size: 1.4rem;
@@ -295,7 +294,6 @@
             font-weight: bold;
             line-height: 4.8rem;
         }
-        /*描述框格式*/
         .paramDesc {
             font-size: 1.3rem;
             font-family: "Helvetica", sans-serif;
@@ -314,17 +312,23 @@
             font-family: Helvetica, sans-serif;
             font-size: 2rem;
         }
+
+        /*  登录注册用样式  */
+        .login-box {
+            padding: 0 10px;
+        }
+        .login-box * {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-
 <div id="app">
     <!--1. 登录注册-->
     <div class="banner">
         <!--标题-->
         <a href="home.html"> quarTeT </a>
     </div>
-
     <!--2 导航栏-->
     <el-container>
         <el-header style="background-color: #ffffff; margin-top: 0">
@@ -334,18 +338,15 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssemblyMapper
-                    </el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFiller</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroMiner</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer
-                    </el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
                 </el-submenu>
                 <el-submenu index="3">
                     <template slot="title">Document</template>
                     <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
-                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial
-                    </el-menu-item>
+                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
                 <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
@@ -357,7 +358,7 @@
         <!--3 上传文件-->
         <el-container>
             <el-main>
-                <!--该模块小标签-->
+                <!--3.1 小标题-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <i class="el-icon-upload"></i>
@@ -365,32 +366,30 @@
                     </button>
                 </div>
                 <div>
-                    <!--第一个上传文件 Reference Genome Files-->
+                    <!--1. 上传genome file-->
                     <el-aside width="50%">
                         <div class="upload1">
-                            <!--上传说明-->
+                            <!-- 功能提示 -->
                             <el-popover
                                     style="font-size: 2rem"
                                     placement="top-start"
-                                    title="Reference Genome:"
-                                    width="230"
-                                    trigger="hover">
-                                <!--提示内容-->
-                                <div>
-                                    A high quality genome of close <br/> related species.
-                                </div>
+                                    title="Draft Genome:"
+                                    width="300"
+                                    trigger="hover"
+                                    content="Your gap-tied draft genome.">
                                 <el-button
                                         slot="reference"
                                         style="margin-bottom: 5%;
-                                        margin-top: 5%;
-                                        font-size: 1.3rem">
-                                    Upload Reference Genome
+                                       margin-top: 5%;
+                                font-size: 1.5rem">
+                                    Upload Genome
                                 </el-button>
                             </el-popover>
+                            <!-- 上传模块-->
                             <el-upload
                                     class="upload-demo"
                                     drag
-                                    action="/quarTeT/common/uploadAssembleGenome"
+                                    action="/quarTeT/common/uploadFillGenome"
                                     :on-success="handleUploadSuccess"
                                     :on-remove="handleRemove"
                                     :before-remove="beforeRemove"
@@ -409,45 +408,40 @@
                                 <div class="el-upload__tip"
                                      slot="tip"
                                      style="font-size: 1.5rem">
-                                    Reference Genome File (FASTA format)
+                                    Draft Genome File (FASTA Format)
                                 </div>
                             </el-upload>
                         </div>
                     </el-aside>
-                    <!--上传Contigs文件"-->
+                    <!--2 上传contig file-->
                     <el-aside width="50%">
                         <div class="upload2">
-                            <!-- 上传提示 -->
+                            <!-- 功能提示 -->
                             <el-popover
                                     placement="top-start"
-                                    title="Contigs:"
-                                    width="340"
-                                    trigger="hover">
-                                <!--提示内容-->
-                                <div>
-                                    Preliminary assembled sequence without gaps.
-                                    <br/>
-                                    Contigs should be haplotype solved.
-                                </div>
+                                    title="Gap Closer Sequence"
+                                    width="300"
+                                    trigger="hover"
+                                    content="Sequences of the same genome from other platforms.">
                                 <el-button slot="reference"
                                            style="margin-bottom: 5%;
                                           margin-top: 5%;
-                                          font-size: 1.3rem">
-                                    Upload Contigs
+                                          font-size: 1.5rem">
+                                    Upload Gap Closer Sequence
                                 </el-button>
                             </el-popover>
+                            <!--上传模块-->
                             <el-upload
                                     class="upload-demo"
                                     drag
-                                    action="/quarTeT/common/uploadAssembleHiFi"
+                                    action="/quarTeT/common/uploadFillContig"
                                     :on-success="handleUploadSuccess2"
                                     :on-remove="handleRemove2"
                                     :before-remove="beforeRemove2"
                                     :before-upload="beforeUpload2"
-                                    :on-exceed="handleExceed2"
-                                    :file-list="fileList"
+                                    :file-list="fileList2"
                                     :show-file-list="true"
-                                    :limit="1"
+                                    multiple
                                     ref="upload">
                                 <i class="el-icon-upload"></i>
                                 <div class="el-upload__text"
@@ -458,7 +452,7 @@
                                 <div class="el-upload__tip"
                                      slot="tip"
                                      style="font-size: 1.5rem">
-                                    Contigs File (FASTA format)
+                                    Gap Closer Sequences Files (FASTA Format)<br>Multiple Files Allowed 
                                 </div>
                             </el-upload>
                         </div>
@@ -468,217 +462,218 @@
         </el-container>
         <!--4 设置setting-->
         <el-container>
-            <!--该模块标签-->
             <el-main>
+                <!--4.1 小标题-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
                         <i class="el-icon-edit"></i>
                         <span>Setting Algorithm Parameters</span>
                     </button>
                 </div>
+                <!--4.2 参数描述表格-->
                 <div>
                     <!--填充左 让表单居中-->
                     <el-aside width="20%">
                         <div style="height: 10rem"></div>
                     </el-aside>
-                    <!--参数设置-->
-                    <el-aside width="60%" >
-                        <el-main>
-                            <div class="paramForm">
-                                <!--使用bootstrap栏栅布局实现input自适应-->
-                                <!--4.1 整型数据 有上下限-->
+                    <!--4.3 参数设置-->
+                    <el-aside width="60%">
+                        <el-main id="param-form">
+                            <div class="paramForm" style="line-height: 5rem">
+                                <!--1 min alignment length 默认1000 最大10000 步长50-->
                                 <el-row :gutter="10">
-                                    <el-col :xs="16" :sm="16" :md="9" lg="8" xl="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
                                         <el-tooltip
                                                 class="item"
                                                 effect="light"
                                                 placement="left">
-                                            <!--对该参数的描述-->
                                             <div slot="content" class="paramDesc">
-                                                Contigs shorter than INT (bp) will
+                                                The min alignment length to be
                                                 <br/>
-                                                be removed, default: 50000
+                                                select (bp), default: 1000
                                             </div>
-                                            <!--该参数-->
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
                                                            font-weight: bold;
                                                            border-color: #ffffff">
-                                                Min Contigs Length:
-                                            </el-button>
-                                        </el-tooltip>
-                                    </el-col>
-                                    <!--滑条-->
-                                    <el-col :xs="16" :sm="8" :md="8" lg="16" xl="16" style="padding-top: 10px">
-                                        <el-slider v-model="formData.minContig"
-                                                   :step="5000"
-                                                   v-bind:max="maxMinContig"
-                                                   @change="onMinContigSliderChange"
-                                                   max="100000">
-                                        </el-slider>
-                                    </el-col>
-                                    <!--输入框-->
-                                    <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
-                                        <el-input-number v-model="customMinContig"
-                                                         @change="onMinContigInputChange"
-                                                         :step="5000"
-                                                         size="small">
-                                        </el-input-number>
-                                    </el-col>
-                                </el-row>
-                                <!--4.2 整数型 必须是正整数且不能0开头-->
-                                <el-row :gutter="10">
-                                    <el-col :xs="16" :sm="16" :md="9" lg="8" xl="10">
-                                        <el-tooltip
-                                                class="item"
-                                                effect="light"
-                                                placement="left">
-                                            <!--对该参数的描述-->
-                                            <div slot="content" class="paramDesc">
-                                                The min alignment length to be
-                                                <br/>
-                                                select (bp), default: 10000
-                                            </div>
-                                            <!--该参数-->
-                                            <el-button
-                                                    style="font-family: Helvetica, sans-serif;
-                                                           font-size: 1.2rem;
-                                                           font-weight: bold;border-color: #ffffff">
                                                 Min Alignment Length:
                                             </el-button>
                                         </el-tooltip>
                                     </el-col>
-                                    <!--滑条-->
-                                    <el-col :xs="16" :sm="8" :md="8" lg="16" xl="16" style="padding-top: 10px">
-                                        <el-slider v-model="formData.minAlign"
-                                                   :step="5000"
-                                                   v-bind:max="maxMinLen"
-                                                   @change="onMinLenSliderChange"
-                                                   max="100000">
+                                    <el-col
+                                            style="padding-top: 10px"
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
+                                        <el-slider v-model="formData.minAlignLength"
+                                                   :step="50"
+                                                   v-bind:max="maxMinAlignLen"
+                                                   @change="onMinAlignLenSliderChange">
                                         </el-slider>
                                     </el-col>
-                                    <!--输入框-->
-                                    <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
-                                        <el-input-number v-model="customMinLen"
-                                                         @change="onMinLenInputChange"
-                                                         :step="5000"
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
+                                        <el-input-number v-model="customMinAlignLen"
+                                                         @change="onMinAlignLenInputChange"
+                                                         :step="50"
                                                          size="small">
                                         </el-input-number>
                                     </el-col>
                                 </el-row>
-                                <!--4.3 增加 百分比 必须是正整数且不能0开头-->
+                                <!--2 min_alignment_identity 默认40 最大100 step为5-->
                                 <el-row :gutter="10">
-                                    <el-col :xs="16" :sm="16" :md="9" lg="8" xl="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
                                         <el-tooltip
                                                 class="item"
                                                 effect="light"
                                                 placement="left">
-                                            <!--对该参数的描述-->
                                             <div slot="content" class="paramDesc">
-                                                The min alignment identity to be
+                                                The min alignment identity to
                                                 <br/>
-                                                select (%), default: 90
+                                                be select, default: 40
                                             </div>
-                                            <!--该参数-->
-                                            <el-button
-                                                    style="font-family: Helvetica, sans-serif;
-                                                           font-size: 1.2rem;
-                                                           font-weight: bold; border-color: #ffffff">
-                                                Min Alignment Identity:
-                                            </el-button>
-                                        </el-tooltip>
-                                    </el-col>
-                                    <!--滑条-->
-                                    <el-col :xs="16" :sm="8" :md="8" lg="16" xl="16" style="padding-top: 10px">
-                                        <el-slider v-model="formData.minIdentity"
-                                                   :step="5"
-                                                   v-bind:max="maxMinIdentity"
-                                                   max="100">
-                                        </el-slider>
-                                    </el-col>
-                                    <!--输入框-->
-                                    <el-col :xs="12" :sm="12" :md="7" lg="9" xl="10">
-                                        <el-input-number v-model="formData.minIdentity"
-                                                         :step="5"
-                                                         v-bind:max="maxMinIdentity"
-                                                         size="small">
-                                        </el-input-number>
-                                    </el-col>
-                                </el-row>
-                                <!--4.4 是否画图-->
-                                <el-row :gutter="10">
-                                    <el-col :xs="8" :sm="8" :md="8" lg="8" xl="8">
-                                        <el-tooltip
-                                                class="item"
-                                                effect="light"
-                                                placement="left">
-                                            <!--对该参数的描述-->
-                                            <div slot="content" class="paramDesc">
-                                                Plot a colinearity graph for draft genome to
-                                                <br/>
-                                                reference alignments. (will cost more time)
-                                            </div>
-                                            <!--该参数-->
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
                                                            font-weight: bold;
-                                                            border-color: #ffffff">
-                                                Plot:
+                                                           border-color: #ffffff">
+                                                Min Alignment Identity:
                                             </el-button>
                                         </el-tooltip>
                                     </el-col>
-                                    <!--按钮-->
-                                    <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4" >
-                                        <el-switch v-model="formData.plot"></el-switch>
+                                    <el-col
+                                            style="padding-top: 10px"
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
+                                        <el-slider v-model="formData.minAlignIdentity"
+                                                   :step="5"
+                                                   v-bind:max="maxMinAlignIdentity">
+                                        </el-slider>
+                                    </el-col>
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
+                                        <el-input-number v-model="formData.minAlignIdentity"
+                                                         :step="5"
+                                                         v-bind:max="maxMinAlignIdentity"
+                                                         size="small">
+                                        </el-input-number>
                                     </el-col>
                                 </el-row>
-                                <!--4.5 Prefix 文本输入 -->
+                                <!--3 flanking_len 默认5000 step设置250 最大值设置10000-->
                                 <el-row :gutter="10">
-                                    <el-col :xs="8" :sm="8" :md="8" lg="8" xl="8">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
                                         <el-tooltip
                                                 class="item"
                                                 effect="light"
                                                 placement="left">
-                                            <!--对该参数的描述-->
                                             <div slot="content" class="paramDesc">
-                                                The name (prefix) used on your
+                                                The flanking seq length of gap used
                                                 <br/>
-                                                generated files. Default: quarTeT
+                                                to anchor (bp), default: 5000
                                             </div>
-                                            <!--该参数-->
                                             <el-button
                                                     style="font-family: Helvetica, sans-serif;
                                                            font-size: 1.2rem;
-                                                           font-weight: bold;border-color: #ffffff">
+                                                           font-weight: bold;
+                                                           border-color: #ffffff">
+                                                Flanking Sequence Length:
+                                            </el-button>
+                                        </el-tooltip>
+                                    </el-col>
+                                    <el-col
+                                            style="padding-top: 10px"
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
+                                        <el-slider v-model="formData.flankLength"
+                                                   :step="250"
+                                                   v-bind:max="maxFlanking"
+                                                   @change="onFlankingSliderChange">
+                                        </el-slider>
+                                    </el-col>
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
+                                        <el-input-number v-model="customFlanking"
+                                                         @change="onFlankingInputChange"
+                                                         :step="250"
+                                                         size="small">
+                                        </el-input-number>
+                                    </el-col>
+                                </el-row>
+                                <!--4 max Filling Length 默认100,000 最大1，000，000 step为5000 -->
+                                <el-row :gutter="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
+                                        <el-tooltip
+                                                class="item"
+                                                effect="light"
+                                                placement="left">
+                                            <div slot="content" class="paramDesc">
+                                                The max sequence length acceptable
+                                                <br/>
+                                                to fill any gaps, default: 1000000
+                                            </div>
+                                            <el-button
+                                                    style="font-family: Helvetica, sans-serif;
+                                                           font-size: 1.2rem;
+                                                           font-weight: bold;
+                                                           border-color: #ffffff">
+                                                Max Filling Length:
+                                            </el-button>
+                                        </el-tooltip>
+                                    </el-col>
+                                    <el-col
+                                            style="padding-top: 10px"
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
+                                        <el-slider v-model="formData.maxFillingLength"
+                                                   :step="50000"
+                                                   v-bind:max="maxMaxFilling"
+                                                   @change="onFillingSliderChange">
+                                        </el-slider>
+                                    </el-col>
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
+                                        <el-input-number v-model="customFilling"
+                                                         @change="onFillingInputChange"
+                                                         :step="50000"
+                                                         size="small">
+                                        </el-input-number>
+                                    </el-col>
+                                </el-row>
+                                <!--5 Prefix 文本输入-->
+                                <el-row :gutter="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
+                                        <el-tooltip
+                                                class="item"
+                                                effect="light"
+                                                placement="left">
+                                            <div slot="content" class="paramDesc">
+                                                The prefix used on generated files.
+                                                <br/>
+                                                Default: quarTeT
+                                            </div>
+                                            <el-button
+                                                    style="font-family: Helvetica, sans-serif;
+                                                           font-size: 1.2rem;
+                                                           font-weight: bold;
+                                                           border-color: #ffffff">
                                                 Filename:
                                             </el-button>
                                         </el-tooltip>
-                                    <!--输入框-->
                                     </el-col>
-                                    <el-col :xs="10" :sm="10" :md="10" :lg="10" :xl="10">
+                                    <el-col :xs="8" :sm="8" :md="8" :lg="8" :xl="8">
                                         <el-input v-model="formData.prefix"
                                                   @input="onNameWarning">
                                         </el-input>
                                     </el-col>
                                 </el-row>
                             </div>
-                            <!-- 4.5 下一步的按钮-->
                             <div style="margin-top: 5%;">
                                 <el-button class="next-button" @click="resetForm">RESET</el-button>
                                 <el-button class="next-button" type="primary" @click="onParamSubmit">RUN</el-button>
                             </div>
                         </el-main>
                     </el-aside>
-                    <!-- 4.6 填充 让表单居中-->
+                    <!--填充 让表单居中-->
                     <el-aside width="20%">
-                        <div style="height: 10rem"></div>
+                        <div style="height: 10rem"> </div>
                     </el-aside>
                 </div>
             </el-main>
         </el-container>
     </div>
+
     <!--5 页脚信息-->
     <el-footer style="height:6rem; background-color: #205573">
         <div>
@@ -686,6 +681,7 @@
             Powered by <a href="https://www.atcgn.com/" style="color: #ffffff ">ATCG</a>
         </div>
     </el-footer>
+
 </div>
 </body>
 
@@ -699,8 +695,7 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!--Axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../../js/axios-0.18.0.js"></script>
-
+<script src="../js/axios-0.18.0.js"></script>
 
 <script>
     // import fa from "../element-ui/src/locale/lang/fa";
@@ -711,24 +706,27 @@
             return {
                 // 导航栏激活的栏，默认为Home
                 activeBar: "2",
-                // 两个文件flag 都上传了才给训练
                 uploadSeqFile: 0,
-                uploadHiFiFile: 0,
-                // Min Contigs Length 滑块和输入框相关
-                maxMinContig: 100000,
-                customMinContig: 50000,
-                // min alignment length 滑块和输入框相关
-                maxMinLen: 100000,
-                customMinLen: 10000,
-                // min alignment identity 滑块和输入框相关(不用超出值)
-                maxMinIdentity: 100,
-                // 参数表单 aligner: 'minimap2',
+                // 记录contigFile个数
+                contigFile:0,
+                uploadContigFile: 0,
+                // Min Align Length 的客制化值 最大值
+                maxMinAlignLen:10000,
+                customMinAlignLen:1000,
+                // Min Align Identity的客制化值 最大值
+                maxMinAlignIdentity:100,
+                // flank的客制化值 最大值
+                maxFlanking:10000,
+                customFlanking:5000,
+                // filling的客制化值 最大值
+                maxMaxFilling:2000000,
+                customFilling:1000000,
                 formData: {
-                    minAlign: 10000,
-                    minContig: 50000,
-                    minIdentity: 90,
+                    flankLength:5000,
+                    minAlignLength: 1000,
+                    minAlignIdentity: 40,
+                    maxFillingLength:1000000,
                     prefix: 'quarTeT',
-                    plot: false,
                 },
                 // 登录注册用变量
                 loginDialogVisible: false,
@@ -740,9 +738,10 @@
                 username: "",
             }
         },
+
         methods: {
             // 超出范围通用的通知
-            sendNotify() {
+            sendNotify(){
                 this.$notify({
                     title: 'Reminder',
                     message: 'The value has exceeded the Recommended Range, may not achieve satisfactory results.',
@@ -751,75 +750,60 @@
                     position: 'bottom-right',
                 });
             },
-            // min contigs length 滑块和输入框相关
-            onMinContigSliderChange(value) {
-                this.customMinContig = value;
+            // min alignment length 滑块和输入框相关
+            onMinAlignLenSliderChange(value){
+                this.customMinAlignLen = value;
             },
-            onMinContigInputChange(value) {
-                if (value > this.maxMinContig) {
-                    this.formData.minContig = this.maxMinContig;
+            onMinAlignLenInputChange(value){
+                if(value>this.maxMinAlignLen){
+                    this.formData.minAlignLength = this.maxMinAlignLen;
                     this.sendNotify();
-                } else {
-                    this.formData.minContig = value;
+                }else {
+                    this.formData.minAlignLength = value;
                 }
             },
-            // min align length 滑块和输入框相关
-            onMinLenSliderChange(value) {
-                this.customMinLen = value;
+            // flanking_len 滑块和输入框相关
+            onFlankingSliderChange(value){
+                this.customFlanking = value;
             },
-            onMinLenInputChange(value) {
-                if (value > this.maxMinLen) {
-                    this.formData.minAlign = this.maxMinLen;
+            onFlankingInputChange(value){
+                if(value>this.maxFlanking){
+                    this.formData.flankLength = this.maxFlanking;
                     this.sendNotify();
-                } else {
-                    this.formData.minAlign = value;
+                }else {
+                    this.formData.flankLength = value;
                 }
             },
-            /*重置参数表单*/
-            resetForm() {
-                this.formData = {
-                    minAlign: 10000,
-                    minContig: 50000,
-                    minIdentity: 90,
-                    prefix: 'quarTeT',
-                    plot: false,
-                }
-                // 客制化的值也一起修改
-                this.customMinLen = 10000;
-                this.customMinContig = 50000;
+            // max Filling Length 滑块和输入框相关
+            onFillingSliderChange(value){
+               this.customFilling = value;
             },
-            /*对文件名进行正则校验，不允许输入违法文件名 /[^\w]/g*/
-            onNameWarning(val) {
-                // let reg = /.*[/\\:*?|].*/;
-                // 存在返回true
-                let reg = /[^\w]/g;
-                if (reg.test(val)) {
-                    this.$message.error("Filename can only consist of numbers, letters and underscores!");
-                    this.formData.prefix = '';
+            onFillingInputChange(value){
+                if(value>this.maxMaxFilling){
+                    this.formData.maxFillingLength = this.maxMaxFilling;
+                    this.sendNotify();
+                }else {
+                    this.formData.maxFillingLength = value;
                 }
             },
-            /* 上传基因组文件的钩子函数*/
-            // FASTA文件列表只允许上传一个文件
+
+            // genome file 上传文件相关函数
             handleExceed(files, fileList) {
                 this.$message.error(`Limit ONE File Only, You Have To Remove the Current File!`);
             },
-            // 文件的后缀和大小限制 更新：不需要大小限制了（随便吧！
             beforeUpload(file) {
                 let filename = file.name.toString();
-                console.log(filename);
                 let suffix = filename.substring(filename.lastIndexOf(".") + 1);
-                console.log(suffix);
                 let suffixList = ["fasta", "fas", "fa", "FASTA", "FA", "FAS"];
                 let isFas = (suffixList.indexOf(suffix) !== -1);
+                // 后缀判断
                 if (!isFas) {
                     this.$message.error('The File Format Must Be .FASTA, .FAS or .FA!');
                 }
                 return isFas;
             },
-            // 文件的移除
             beforeRemove(file, fileList) {
                 if (file && file.status === "success") {
-                    console.log(file)
                     //移除方法
                     return this.$confirm(`Are You Confirm to Remove ${file.name}？`, '(＃°Д°)', {
                         confirmButtonText: 'Yes',
@@ -828,12 +812,12 @@
                     });
                 }
             },
-            // 删除后 重新设置一下文件的状态flag
+            // 删除后 重新设置
             handleRemove(file, fileList) {
                 if (file && file.status === "success") {
                     let filename = file.name;
                     console.log("deleteFile:" + filename);
-                    axios.get("/quarTeT/common/removeAssembleGenome").then((res) => {
+                    axios.get("/quarTeT/common/removeFile/"+filename).then((res) => {
                         this.uploadSeqFile = 0;
                         this.$message.info("Removed Successfully");
                     });
@@ -844,42 +828,35 @@
                 this.$message.success("Upload Successfully");
                 this.uploadSeqFile = 1;
             },
-            /* 上传参数基因组文件的钩子函数*/
-            // 超出一个文件限制
-            handleExceed2(files, fileList) {
-                this.$message.error(`Limit ONE File Only, You Have To Remove the Current File!`);
-            },
-            // 文件的后缀和规格限制 不需要了
+
             beforeUpload2(file) {
                 let filename = file.name.toString();
-                console.log(filename);
                 let suffix = filename.substring(filename.lastIndexOf(".") + 1);
-                console.log(suffix);
                 let suffixList = ["fasta", "fas", "fa", "FASTA", "FA", "FAS"];
                 let isFas = (suffixList.indexOf(suffix) !== -1);
+                // 后缀判断
                 if (!isFas) {
                     this.$message.error('The File Format Must Be .FASTA, .FAS or .FA!');
                 }
                 return isFas;
             },
-            // 文件的移除
-            beforeRemove2(file, fileList) {
+            beforeRemove2(file, fileList2) {
                 if (file && file.status === "success") {
                     //移除方法
-                    return this.$confirm(`Are You Confirm to Remove ${file.name}？`, 'Warning', {
+                    return this.$confirm(`Are You Confirm to Remove ${file.name}？`, 'Σ(っ °Д °;)っ', {
                         confirmButtonText: 'Yes',
                         cancelButtonText: 'No',
                         type: 'warning'
                     });
                 }
             },
-            // 删除后 重新设置
-            handleRemove2(file, fileList) {
+           handleRemove2(file, fileList2) {
                 if (file && file.status === "success") {
                     let filename = file.name;
                     console.log("deleteFile:" + filename);
-                    axios.get("/quarTeT/common/removeAssembleHiFi").then((res) => {
-                        this.uploadHiFiFile = 0;
+                    axios.get("/quarTeT/common/removeFillContig/"+filename).then((res) => {
+                        this.contigFile -= 1;
+                        console.log("contigs文件个数：" + this.contigFile);
                         this.$message.info("Removed Successfully");
                     });
                 }
@@ -887,31 +864,46 @@
             // 上传成功提示
             handleUploadSuccess2() {
                 this.$message.success("Upload Successfully");
-                this.uploadHiFiFile = 1;
-                if (this.uploadSeqFile === 1) {
-                    this.activeStep = 1;
+                this.uploadContigFile = 1;
+                this.contigFile += 1;
+                console.log("contigs文件个数：" + this.contigFile);
+            },
+            // 重置参数表单
+            resetForm() {
+                this.formData = {
+                    flankLength:5000,
+                    minAlignLength: 1000,
+                    minAlignIdentity: 40,
+                    maxFillingLength:1000000,
+                    prefix: 'quarTeT',
                 }
+                // 客制化值也重置
+                this.customFlanking = 5000;
+                this.customMinAlignLen = 1000;
+                this.customFilling = 1000000;
             },
             // 参数提交训练
             onParamSubmit() {
-                // 训练前先判断一下是否Required的文件都已经上传
+                console.log("上传的GapContigs文件个数")
+                console.log(this.contigFile);
+                // 1 先判断一下是否两个文件都已经上传
                 if (this.uploadSeqFile === 0) {
-                    this.$message.error("Reference Genome File is REQUIRED");
-                } else if (this.uploadHiFiFile === 0) {
-                    this.$message.error("Contigs File is REQUIRED");
+                    this.$message.error("Draft Genome File is REQUIRED");
+                } else if (this.contigFile < 1) { // 由于第二个是上传多个文件 应该查看的是文件的个数
+                    this.$message.error("Gap Closer Sequence File is REQUIRED");
                 } else {
                     // 重新组合一下训练参数
                     let trainParam = {
-                        minAlign: this.customMinLen,
-                        minContig: this.customMinContig,
-                        minIdentity: this.formData.minIdentity,
+                        flankLength: this.customFlanking,
+                        minAlignLength: this.customMinAlignLen,
+                        minAlignIdentity: this.formData.minAlignIdentity,
+                        maxFillingLength: this.customFilling,
                         prefix: this.formData.prefix,
-                        plot: this.formData.plot,
                     };
                     // 提示用户留下邮箱
                     this.$prompt('The program may run for a while. ' +
-                        'Please leave your email address and' +
-                        ' we will send the query ID to your email once completed.', 'Reminder', {
+                    'Please leave your email address and' +
+                    ' we will send the query ID to your email once completed.', 'Reminder', {
                         confirmButtonText: 'Confirm',
                         cancelButtonText: 'Cancel',
                         inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
@@ -919,13 +911,13 @@
                     }).then(({value}) => {
                         // 把email存储进session
                         console.log(value)
-                        axios.get("/quarTeT/common/setEmail/" + value).then((res) => {
+                        axios.get("/quarTeT/common/setEmail/"+value).then((res) => {
                             console.log(res)
                             this.$message({
                                 type: 'success',
                                 message: 'Your email is: ' + value
                             });
-                        });
+                         });
                         // 开始运行
                         const loading1 = this.$loading({
                             lock: true,
@@ -934,23 +926,12 @@
                             background: 'rgba(2,1,1,0.7)'
                         });
                         console.log(trainParam)
-                        axios.post("/quarTeT/exec/assembleBlast", trainParam).then((res) => {
+                        axios.post("/quarTeT/exec/fillBlast", trainParam).then((res) => {
                             loading1.close();
-                            // 脚本运行出错
-                            if (res.data.code === 20020) {
+                            if(res.data.code ===  20020){
                                 document.location.href = "displayErr.html";
-                            }
-                            // 上传出现null错误
-                            else if(res.data.code === 50003){
-                                let msg = res.data.message;
-                                this.$message({
-                                    type: 'error',
-                                    message: msg,
-                                });
-                            }
-                            // 正常运行
-                            else {
-                                document.location.href = "display1.html";
+                            }else{
+                                document.location.href = "gapFillerDisplay.html";
                             }
                         });
                     }).catch(() => {
@@ -961,7 +942,19 @@
                     });
                 }
             },
+
+            /*对文件名进行正则校验，不允许输入违法文件名*/
+            onNameWarning(val) {
+                let reg = /[^\w]/g;
+                // 存在返回true
+                if (reg.test(val)) {
+                    this.$message.error("Filename can only consist of numbers, letters and underscores!");
+                    this.formData.prefix = '';
+                }
+            },
+
         },
     });
 </script>
+
 </html>

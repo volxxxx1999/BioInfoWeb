@@ -3,31 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>quarTeT - Contact</title>
+    <title>quarTeT - Web Guide</title>
     <style>
         /*根节点html字体大小*/
-        html{
-            font-size:12px
+        html {
+            font-size: 12px;
         }
+
         body {
-            background-color:#f7f6f2; /*#f7f6f2  #d5d5d5*/
+            background-color: #f7f6f2; /*#f7f6f2  #d5d5d5*/
             /* 针对web元素塌陷*/
             /*min-width: 65rem;*/
             /*max-width: 130rem;*/
             margin: 0 auto;
         }
+
         /* 针对设备自适应自适应*/
         #thinner {
             width: 106rem;
             margin: 0 auto;
-
             /* 针对web元素塌陷*/
             min-width: 65rem;
             max-width: 130rem;
-            /*border-style: solid;*/
-            /*border-color: #3e3e3e;*/
-            /*border-width: 2px;*/
-            /*box-shadow: 2rem 2rem 1rem #888888;*/
         }
 
         /* 手机 宽度小于768px的 */
@@ -58,6 +55,7 @@
             }
         }
 
+        /*页脚页头格式*/
         .el-header, .el-footer {
             background-color: #fefefe;
             color: #333;
@@ -66,7 +64,7 @@
             margin-top: 1rem;
         }
 
-        /* 设置页头下元素属性*/
+        /* 设置页头下p元素属性*/
         .el-header > p {
             font-size: 140%;
             color: #4d4d4d;
@@ -75,22 +73,13 @@
 
         /* 设置页脚下元素属性*/
         .el-footer > div {
-            font-size: 140%;
+            font-size: 1.4rem;
             color: #f7f6f2;
             font-family: Helvetica, sans-serif;
             text-align: center;
         }
 
-        .el-aside {
-            background-color: #f7f6f2;
-            color: #333;
-            text-align: center;
-        }
-        /*让表单不空出来*/
-        #el-form{
-            margin-left: 0px;
-            /*margin-top: 60px;*/
-        }
+        /*主体组件el-main格式*/
         .el-main {
             background-color: #ffffff;
             color: #333;
@@ -100,9 +89,10 @@
             border-width: 1px;
             border-style: solid;
         }
-        /*设置导航栏的字体*/
-        .el-menu-demo{
-            font-family: Helvetica,sans-serif;
+
+        /*设置导航栏的字体格式*/
+        .el-menu-demo {
+            font-family: Helvetica, sans-serif;
             font-size: 130%;
             font-weight: bold;
         }
@@ -113,6 +103,8 @@
             background-color: #205573;
             margin: 0;
         }
+
+        /*banner下面那个quarTeT标题的格式*/
         .banner > a {
             color: #ffffff;
             font-size: 5rem;
@@ -123,29 +115,24 @@
             display: inline-block;
             text-decoration: none;
         }
-        /*设置提交表单字体*/
-        .el-form-item{
-            font-family: Helvetica,sans-serif;
-            font-size: 120%;
-        }
 
         /*ele container setting*/
         body > .el-container {
-            margin-bottom: 40px;
+            margin-bottom: 5rem;
         }
+
         .el-container:nth-child(5) .el-aside,
         .el-container:nth-child(6) .el-aside {
-            line-height: 260px;
+            line-height: 30rem;
         }
+
         .el-container:nth-child(7) .el-aside {
-            line-height: 320px;
+            line-height: 50rem;
         }
     </style>
 </head>
 <body>
-
-<!--Vue 控制-->
-<div id="app" >
+<div id="app">
     <!--1. 登录注册-->
     <div class="banner">
         <!--标题-->
@@ -161,10 +148,10 @@
                 <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='module1.html'">AssemblyMapper</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='module2.html'">GapFiller</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='module4.html'">CentroMiner</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='module3.html'">TeloExplorer</el-menu-item>
+                    <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
                 </el-submenu>
                 <el-submenu index="3">
                     <template slot="title">Document</template>
@@ -177,44 +164,16 @@
         </el-header>
     </el-container>
 
-
+    <!--3 log信息-->
     <div id="thinner">
-        <!--介绍信息-->
         <el-container>
-            <el-main style="font-size: 120%; font-family: Helvetica,sans-serif">
-                <h3 style="font-weight: bold; text-align: center">quarTeT</h3>
-                <p style="text-align: center">
-                    quarTeT is a collection of tools for T2T genome assembly and basic analysis in automatic workflow.
-                </p>
-            </el-main>
-        </el-container>
-
-        <el-container>
-            <!--提交用户意见的表单的模块-->
-            <el-main style="font-weight: bold; text-align: left">
-                <!-- 给表单加一个边框div-->
-                <div style="border-color: white; border-style: dashed; border-radius: 20px; padding-left: 20px;padding-right: 20px">
-                    <!--表单本体-->
-                    <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
-                        <el-form-item label="Name">
-                            <el-input v-model="formLabelAlign.name"></el-input>
-                        </el-form-item>
-                        <el-form-item label="Email Address">
-                            <el-input v-model="formLabelAlign.mail"></el-input>
-                        </el-form-item>
-                        <el-form-item label="Suggestion">
-                            <el-input  type="textarea" v-model="formLabelAlign.advice"></el-input>
-                        </el-form-item>
-                        <el-form-item style="text-align: center">
-                            <el-button type="primary" @click="onAdviceSubmit">Submit</el-button>
-                        </el-form-item>
-                    </el-form>
-                </div>
+            <el-main>
+                <div id="content" style="text-align: justify"></div>
             </el-main>
         </el-container>
     </div>
 
-    <!--5 页脚信息-->
+    <!--4 页脚信息-->
     <el-footer style="height:6rem; background-color: #205573">
         <div>
             <br/>
@@ -234,45 +193,25 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <!--Axios-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="../../js/axios-0.18.0.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<!--marked-->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
     new Vue({
-        el:"#app",
-        data:function () {
-            return{
-                username:"",
-                labelPosition: 'top',
-                activeBar:"5",
-                formLabelAlign: {
-                    name: '',
-                    mail: '',
-                    advice: '',
-                }
+        el: `#app`,
+        data: function () {
+            return {
+                activeBar: "2", // 导航栏激活的栏，默认为Home
             }
         },
-        methods: {
-            handleSelect(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            // https://blog.csdn.net/weixin_46822367/article/details/123893527
-            onAdviceSubmit() {
-                if(this.formLabelAlign.name === ''){
-                    this.$message.warning("Please enter your name")
-                }else if(this.formLabelAlign.eMail === ''){
-                    this.$message.warning("Please enter your Email")
-                }else if(this.formLabelAlign.advice === ''){
-                    this.$message.warning("Please enter your advice")
-                }else{
-                    axios.post("/quarTeT/mail/simple",this.formLabelAlign).then((res)=>{
-                        this.$message({
-                            message: 'Thank you, Your comment has been successfully sent!',
-                            type: 'success'
-                        });
-                    });
-                }
-            },
-        }
+        /* 加载本地md*/
+        mounted() {
+            axios.get("document-web.md").then((res) => {
+                document.getElementById('content').innerHTML = marked.parse(res.data);
+            });
+        },
+        methods: {}
     });
 </script>
 </html>
