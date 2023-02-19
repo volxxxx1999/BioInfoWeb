@@ -128,25 +128,6 @@
             text-decoration: none;
         }
 
-        .loginDiv {
-            display: inline-block;
-            float: right;
-            padding-top: 2rem;
-            padding-right: 3rem;
-        }
-
-        .loginDiv > .el-button {
-            font-size: 1.5rem;
-            font-family: "Helvetica", sans-serif;
-        }
-
-        .loginDiv > span {
-            color: #ffffff;
-            font-size: 2rem;
-            padding-top: 1rem;
-            padding-left: 1rem;
-        }
-
         /*css Button*/
         .btn-54,
         .btn-54 *,
@@ -256,17 +237,140 @@
             transform: translateY(-30%);
         }
 
-        /*下载div的格式*/
-        .download_div {
-            height: 22rem;
-            width: 40rem;
-            margin: auto;
-            line-height: 6rem;
+        .btn-24,
+        .btn-24 *,
+        .btn-24 :after,
+        .btn-24 :before,
+        .btn-24:after,
+        .btn-24:before {
+            border: 0 solid;
+            box-sizing: border-box;
         }
-        .download_span {
-            font-size: 1.5rem;
-            font-family: Helvetica, sans-serif;
+
+        .btn-24 {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: button;
+            background-color: #000;
+            background-image: none;
+            color: #fff;
+            cursor: pointer;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+            Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+            font-size: 100%;
+            font-weight: 900;
+            line-height: 1.5;
+            margin: 0;
+            -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(green), to(pink), color-stop(0.5, #000), color-stop(50%, #ffffff));
+            padding: 0;
+            text-transform: uppercase;
+        }
+
+        .btn-24:disabled {
+            cursor: default;
+        }
+
+        .btn-24:-moz-focusring {
+            outline: auto;
+        }
+
+        .btn-24 svg {
+            display: block;
+            vertical-align: middle;
+        }
+
+        .btn-24 [hidden] {
+            display: none;
+        }
+
+        .btn-24 {
+            --background: #205573;
+            background: none;
+            overflow: hidden;
+            padding: 0.8rem 3rem;
+            position: relative;
+        }
+
+        .btn-24 span {
+            display: block;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-24:after,
+        .btn-24:before {
+            --tilt: 20px;
+            background: #fff;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+            content: "";
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transition: -webkit-clip-path 0.2s ease;
+            transition: clip-path 0.2s ease;
+            transition: clip-path 0.2s ease, -webkit-clip-path 0.2s ease;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .btn-24:after {
+            --thickness: 5px;
+            background: var(--background);
+            height: calc(100% - var(--thickness) * 2);
+            left: var(--thickness);
+            top: var(--thickness);
+            width: calc(100% - var(--thickness) * 2);
+        }
+
+        .btn-24:hover span {
+            transform: translateX(-20px);
+        }
+
+        .btn-24:hover:after,
+        .btn-24:hover:before {
+            -webkit-clip-path: polygon(
+                    0 0,
+                    calc(100% - var(--tilt)) 0,
+                    100% 50%,
+                    calc(100% - var(--tilt)) 100%,
+                    0 100%
+            );
+            clip-path: polygon(
+                    0 0,
+                    calc(100% - var(--tilt)) 0,
+                    100% 50%,
+                    calc(100% - var(--tilt)) 100%,
+                    0 100%
+            );
+        }
+
+        /*下载div的格式*/
+        /*说明框*/
+        .download_desc{
+            font-size: 120%;
+            font-family: Helvetica,sans-serif
+        }
+        .download_desc>h3{
             font-weight: bold;
+            text-align: center;
+        }
+        .download_desc>p{
+            text-align: center;
+        }
+        .download_desc a{
+            text-decoration: none;
+            color: #205573;
+        }
+        .download_desc a:hover{
+            color: #f4ba1d;
+        }
+        /*下载按钮*/
+        .download_button {
+            margin: auto;
+            width: 10rem;
         }
 
         /*ele container setting*/
@@ -283,13 +387,26 @@
             line-height: 50rem;
         }
 
-        /*  登录框的样式  */
-        .login-box {
-            padding: 0 10px;
+        /*页脚格式*/
+        .pageFooter{
+            font-size: 1.5rem;
+            color: #575d66;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+            margin: auto;
         }
-
-        .login-box * {
-            margin-bottom: 10px;
+        /*a链接的格式*/
+        .pageFooter>a{
+            text-decoration: none;
+            font-weight: bold;
+            color: #205573;
+        }
+        .pageFooter>a:hover{
+            color: #f4ba1d;
+        }
+        /*分割线样式*/
+        .el-divider--horizontal{
+            border-top: 1px solid #adadad;
         }
     </style>
 </head>
@@ -301,12 +418,6 @@
     <div class="banner">
         <!--标题-->
         <a href="home.html"> quarTeT </a>
-        <!--登陆注册 使用 暂弃-->
-        <!-- <span class="loginDiv">
-                <el-button plain @click="openLogin" v-show="!isLogin">Sign in</el-button>
-                <el-button plain @click="openRegister" v-show="!isLogin">Sign up</el-button>
-                <span class="username" v-show="isLogin">{{this.username}}</span>
-        </span> -->
     </div>
 
     <el-container>
@@ -335,120 +446,88 @@
     </el-container>
 
     <div id="thinner">
-        <!--3. 下载说明-->
         <el-container>
             <el-main>
-                <div style="font-size: 120%; font-family: Helvetica,sans-serif">
-                    <h3 style="font-weight: bold; text-align: center">
+                <!--3. 下载说明-->
+                <div class="download_desc">
+                    <h3 >
                         Download quarTeT CLI Tools
                     </h3>
-                    <p style="text-align: center">
+                    <p>
                         quarTeT CLI toolkit is freely available to academic under MIT license, and
                         provided
                         <em>without any warranty</em>.<br>
                         For details of usages and understandings, Please refer to the
-                        <a href="docuWeb.html" style="text-decoration: none">
+                        <a href="docuWeb.html">
                             document section
                         </a>.<br>
                         If you have any questions, feel free to
-                        <a href="contact.html" style="text-decoration: none">
+                        <a href="contact.html">
                             contact us
                         </a>.
                     </p>
                 </div>
+                <!--4. 下载按钮-->
+                <div class="download_button">
+                    <button class="btn-54" @click="downloadquartet">
+                        <span class="shadow"></span>
+                        <span class="depth"></span>
+                        <span class="content">quarTeT Download</span>
+                    </button>
+                </div>
             </el-main>
         </el-container>
 
-        <!--4. 下载按钮-->
+        <!--5. 依赖窗格-->
         <el-container>
             <el-main>
-                <div class="download_div">
-                    <div style="padding-top: 6rem">
-                        <el-row :gutter="10">
-                            <el-col :xs="16" :sm="16" :md="16" lg="12" xl="12">
-                                    <span class="download_span">
-                                        quarTeT
-                                        <i class="el-icon-document"></i>
-                                    </span>
-                            </el-col>
-                            <el-col :xs="16" :sm="8" :md="8" lg="12" xl="12">
-                                <button class="btn-54" @click="downloadquartet">
-                                    <span class="shadow"></span>
-                                    <span class="depth"></span>
-                                    <span class="content">Download</span>
-                                </button>
-                            </el-col>
-                        </el-row>
-                    </div>
+                <!-- 5.1 该区域标签-->
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <span>Dependency Description</span>
+                    </button>
+                </div>
+                <!--5.2 表格-->
+                <!--参数描述列表-->
+                <div style="margin: auto; width: 80rem">
+                    <el-table
+                            :data="descData"
+                            stripe
+                            border
+                            style=" width: 95%;
+                            font-size: 1.2rem;
+                            font-family: Helvetica,sans-serif;
+                            margin:10px 10px 10px 10px;text-align: center"
+                            class="tableSet"
+                            :header-cell-style="{'text-align':'center'}"
+                            :cell-style="cellStyle">
+                        <el-table-column
+                                prop="name"
+                                label="Dependency"
+                                min-width="30%">
+                        </el-table-column>
+                        <el-table-column
+                                prop="version"
+                                label="Version"
+                                min-width="30%">
+                        </el-table-column>
+                        <el-table-column
+                                prop="link"
+                                label="Link"
+                                min-width="40%">
+                        </el-table-column>
+                    </el-table>
                 </div>
             </el-main>
         </el-container>
     </div>
 
     <!--5. 页脚-->
-    <el-footer style="height:6rem; background-color: #205573">
-        <div>
-            <br/>
-            Powered by <a href="https://www.atcgn.com/" style="color: #ffffff ">ATCG</a>
-        </div>
-    </el-footer>
-
-    <!--6 登录 Dialog    -->
-    <el-dialog
-            title="Sign in"
-            :close-on-click-modal="false"
-            :visible.sync="loginDialogVisible"
-            width="450px"
-    >
-        <div class="login-box">
-            <el-input placeholder="email" v-model="email" clearable size="20px">
-            </el-input>
-            <el-input
-                    placeholder="password"
-                    v-model="password"
-                    show-password
-            ></el-input>
-            <!-- <div class="check-box">
-              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
-              <img :src="captchaPath" @click="getCaptcha()" alt="">
-            </div> -->
-            <el-button type="success" round style="width: 100%" @click="login"
-            >Login
-            </el-button
-            >
-        </div>
-    </el-dialog>
-    <!--7 注册 Dialog    -->
-    <el-dialog
-            title="Sign up"
-            :close-on-click-modal="false"
-            :visible.sync="registerDialogVisible"
-            width="450px"
-    >
-        <div class="login-box">
-            <el-input placeholder="email" v-model="email" clearable size="20px">
-            </el-input>
-            <el-input
-                    placeholder="password"
-                    v-model="password"
-                    show-password
-            ></el-input>
-            <el-input
-                    placeholder="password again"
-                    v-model="password2"
-                    show-password
-            ></el-input>
-            <!-- <div class="check-box">
-              <el-input v-model="check" placeholder="验证码" style="width: 150px; float: left;"></el-input>
-              <img :src="captchaPath" @click="getCaptcha()" alt="">
-            </div> -->
-            <el-button type="success" round style="width: 100%" @click="register"
-            >Register
-            </el-button
-            >
-        </div>
-    </el-dialog>
-
+    <el-divider></el-divider>
+    <div class="pageFooter">
+        Powered by
+        <a href="https://www.atcgn.com/">ATCG</a>
+    </div>
 </div>
 
 </body>
@@ -471,22 +550,29 @@
         el: "#app",
         data: function () {
             return {
+                // 当前激活的页面index
                 activeBar: "4",
-                // 登录需要变量
-                loginDialogVisible: false,
-                registerDialogVisible: false,
-                email: "",
-                password: "",
-                password2: "",
-                isLogin: false,
-                username: "",
+                // 依赖表格数据
+                descData:[
+                    // 直接复制大括号自己添加内容
+                    {
+                        name:'Python3',
+                        version:'>3.6',
+                        link:'...',
+                    },
+                    {
+                        name:'minimap2',
+                        version:'>2.24',
+                        link:'...',
+                    },
+
+                ]
+
             }
         },
 
         methods: {
-            handleSelect(key, keyPath) {
-                console.log(key, keyPath);
-            },
+            // 下载
             downloadquartet(){
                 let quartet_src = "https://www.atcgn.com/t2t/bioRepository/exec/quartet.tar.gz";
                 this.downloadCommon(quartet_src);
@@ -506,108 +592,12 @@
                 // 触发单击事件
                 $a.dispatchEvent(eventObj);
             },
-            // 打开登录对话框
-            openLogin() {
-                this.loginDialogVisible = true;
-            },
-            login() {
-                // 登录逻辑
-                axios.post("/quarTeT/user/login", {
-                    "email": this.email,
-                    "password": this.password,
-                }).then(
-                    ({ data }) => {
-                        if (data.code === 10000) {
-                            this.$message({
-                                message: 'Login successful',
-                                type: 'success'
-                            });
-                            localStorage.setItem("token", data.data); // 存储一下 token
-                            this.loginDialogVisible = false;
-                        } else {
-                            this.$message({
-                                message: data.message,
-                                type: 'error'
-                            });
-                        }
-                        this.email = "";
-                        this.password = "";
-                    },
-                    err => {
-                        this.email = "";
-                        this.password = "";
-                        console.error(err)
+            cellStyle({row, column, rowIndex, columnIndex}) {
+                    return {
+                        'text-align': 'center',
                     }
-                );
-            },
-            // 打开注册对话框
-            openRegister() {
-                this.registerDialogVisible = true;
-            },
-            register() {
-                if (this.password !== this.password2) {
-                    this.$message({
-                        message: '两次密码输入不同',
-                        type: 'warning'
-                    });
-                    return
-                }
-                axios.post("/quarTeT/user/register", {
-                    email: this.email,
-                    password: this.password,
-                }).then(
-                    ({ data }) => {
-                        if (data.code === 10001) {
-                            this.$message({
-                                message: 'Register successful',
-                                type: 'success'
-                            });
-                            this.registerDialogVisible = false;
-                        } else {
-                            this.$message({
-                                message: data.message,
-                                type: 'error'
-                            });
-                        }
-                        this.email = "";
-                        this.password = "";
-                        this.password2 = "";
-                    },
-                    err => {
-                        this.email = "";
-                        this.password = "";
-                        this.password2 = "";
-                        console.error(err)
-                    }
-                );
-            },
-            // 验证身份, 判断是否登录
-            verify() {
-                const token = localStorage.getItem("token");
-                // console.log(token);
-                axios.get('/quarTeT/user/verify', {
-                    headers: {
-                        'Authorization': token
-                    }
-                }).then(
-                    ({ data }) => {
-                        if (data.code === 10002) {
-                            this.isLogin = true;
-                            this.username = data.data.email;
-                        }
-                        console.log(this.isLogin);
-                    },
-                    err => console.error(err)
-                );
-            },
-            // 第二部分的 TopBar 有需要这个方法，为了不报错，先声明在这里
-            handleSelect() {
-
             },
         },
-        created() {
-            this.verify();
-        }
     });
 </script>
 </html>
