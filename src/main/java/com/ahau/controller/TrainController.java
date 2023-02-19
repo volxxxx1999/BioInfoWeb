@@ -1,5 +1,6 @@
 package com.ahau.controller;
 
+import com.ahau.common.Code;
 import com.ahau.common.Result;
 import com.ahau.domain.assemble.DraftParam;
 import com.ahau.domain.centro.CentroParam;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Vector;
 
 @RestController
@@ -31,6 +33,14 @@ public class TrainController {
         System.out.println("===》TrainController--->AssembleBlast:参数指令开始训练，读取Session中文件属性......");
         // 1. 接受返回数据
         String catalogue = "Assemble/";
+        // 判断一下Session的问题
+        HttpSession session = request.getSession();
+        Object assembleGenome = session.getAttribute("AssembleGenome");
+        Object assembleHiFi = session.getAttribute("AssembleHiFi");
+        // 如果其中有一个是null，则让用户重新刷新试试看
+        if(assembleGenome == null || assembleHiFi==null){
+            return new Result(Code.UNKNOWN_ERR,"Unknown Error happened, please refresh this page and retry.");
+        }
         Vector<String> trainResult = trainService.trainAssemble(request, draftParam, catalogue);
         // 2. 把生成的结果存储在Session中 该部分会检验每一个打印语句
         Boolean err = trainService.assembleSetSession(request, trainResult, catalogue);

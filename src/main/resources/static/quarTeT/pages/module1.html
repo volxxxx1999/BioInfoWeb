@@ -936,9 +936,20 @@
                         console.log(trainParam)
                         axios.post("/quarTeT/exec/assembleBlast", trainParam).then((res) => {
                             loading1.close();
+                            // 脚本运行出错
                             if (res.data.code === 20020) {
                                 document.location.href = "displayErr.html";
-                            } else {
+                            }
+                            // 上传出现null错误
+                            else if(res.data.code === 50003){
+                                let msg = res.data.message;
+                                this.$message({
+                                    type: 'error',
+                                    message: msg,
+                                });
+                            }
+                            // 正常运行
+                            else {
                                 document.location.href = "display1.html";
                             }
                         });
