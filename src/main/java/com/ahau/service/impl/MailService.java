@@ -16,7 +16,7 @@ import java.util.Date;
 @Service
 public class MailService {
 
-    // 导入邮件工具类（啊咧咧为什么报错....算了修改为warning级别吧（x 报告！JDK改为版本8不报错
+    // 导入邮件工具类 JDK改为版本8不报错
     @Autowired
     JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
@@ -26,19 +26,21 @@ public class MailService {
 
     public void sendSimpleMail(Mail mail) {
         try {
+            System.out.println("------>MailService - send simple mail");
             SimpleMailMessage message = new SimpleMailMessage();
+            // 谁发的
+            message.setFrom(sendMailer);
             // 发给谁（这里是用户意见，发到自己邮箱）
             message.setTo(sendMailer);
             // 主题
-            message.setSubject("【BlastProject】用户意见反馈");
+            message.setSubject("【Quartet】用户意见反馈：");
             // 内容+发送时间
             message.setText("UserName: " + mail.getName() + "\n" +
                     "UserAdvice: " + mail.getAdvice() + "\n" +
-                    "UserContact: " + mail.getEMail());
+                    "UserContact: " + mail.getMail());
             message.setSentDate(new Date());
             // 发送
             javaMailSender.send(message);
-            System.out.println("=========JavaMail调用=========");
         }
         catch (Exception e) {
             throw new SystemException("Send Failed！Bad Network Connection", Code.SEND_ERR);

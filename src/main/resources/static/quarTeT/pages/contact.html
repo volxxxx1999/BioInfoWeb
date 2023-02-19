@@ -200,7 +200,7 @@
                             <el-input v-model="formLabelAlign.name"></el-input>
                         </el-form-item>
                         <el-form-item label="Email Address">
-                            <el-input v-model="formLabelAlign.eMail"></el-input>
+                            <el-input v-model="formLabelAlign.mail"></el-input>
                         </el-form-item>
                         <el-form-item label="Suggestion">
                             <el-input  type="textarea" v-model="formLabelAlign.advice"></el-input>
@@ -246,7 +246,7 @@
                 activeBar:"5",
                 formLabelAlign: {
                     name: '',
-                    eMail: '',
+                    mail: '',
                     advice: '',
                 }
             }
@@ -255,7 +255,7 @@
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            // TODO 邮箱发送 https://blog.csdn.net/weixin_46822367/article/details/123893527
+            // https://blog.csdn.net/weixin_46822367/article/details/123893527
             onAdviceSubmit() {
                 if(this.formLabelAlign.name === ''){
                     this.$message.warning("Please enter your name")
