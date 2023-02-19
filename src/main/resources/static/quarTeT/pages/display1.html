@@ -644,7 +644,7 @@
 
         <!--5 额外的画图显示-->
         <el-container>
-            <el-main id="doPlot" style="display: block">
+            <el-main id="doPlot" style="display: none">
                 <!-- 4.1 该区域标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
@@ -920,8 +920,8 @@
                     // 显示这个div
                     $("#doPlot").css('display', 'block');
                     // 隐藏两个div
-                    $("#rightPadding").css('height', 0);
-                    $("#leftPadding").css('height', 0);
+                    // $("#rightPadding").css('height', 0);
+                    // $("#leftPadding").css('height', 0);
                     // 赋值给data
                     this.genomeRefUrl = [plot];
                 }

@@ -457,7 +457,7 @@
                 </div>
                 <!--3.3 主体内容-->
                 <div>
-                    <!--侧栏 1 按钮-->
+                    <!--侧栏1 按钮-->
                     <el-aside width="5%">
                         <!--下载按钮-->
                         <div>
@@ -468,8 +468,8 @@
                             </el-button>
                         </div>
                     </el-aside>
-                    <!--侧栏 2 生成的png图片-->
-                    <el-aside width="50%">
+                    <!--侧栏2 生成的png图片-->
+                    <el-aside width="45%">
                         <!--限制原图的外部div-->
                         <div
                                 style="width: 500px;
@@ -484,69 +484,67 @@
                             </el-image>
                         </div>
                     </el-aside>
-                    <!--侧栏 3 程序运行中的Warnings展示-->
-                    <el-aside
-                            style="box-shadow: #4d4d4d"
-                            width="45%">
-                        <!--默认为正常的Result div,block-->
-                        <div
-                                class="result-module"
-                                style="display: block"
-                                id="withCorrect">
-                            <h3>
-                                Process Result
-                            </h3>
-                            <el-result
-                                    icon='success'
-                                    title='Success!'
-                                    sub-title='No Errors Occur During the Process'>
-                            </el-result>
+                    <!--侧栏3 表格-->
+                    <el-aside width="50%">
+                        <!--小标题-->
+                        <h3 style="font-family: Helvetica,sans-serif;
+                                   font-size: 1.3rem;
+                                   color:#666666">
+                            Genome Statistic
+                        </h3>
+                        <!--统计数据-->
+                        <div class="statFont">
+                            <i class="el-icon-s-data"></i>
+                            <span>{{totalSize}}</span>
+                            <el-divider direction="vertical"></el-divider>
+                            <i class="el-icon-data-analysis"></i>
+                            <span>{{gcContent}}</span>
                         </div>
-                        <!--不显示的,根据display请求改变的出错的div-->
-                        <div
-                                class="result-module"
-                                style="display: none"
-                                id="withWarnings">
-                            <h3>
-                                Process Result
-                            </h3>
-                            <el-result
-                                    icon='warning'
-                                    title='Warning!'
-                                    sub-title='Process is completed, but here are some warning'>
-                            </el-result>
-                            <el-button type="text" @click="dialogTableVisible = true">Show Details</el-button>
-                            <el-dialog title="Warning Infos" :visible.sync="dialogTableVisible">
-                                <el-table :data="warnings"
-                                          class="tableSet"
-                                          style="width: 95%;
-                                                font-size: 1.1rem;
-                                                font-family: Helvetica,sans-serif;
-                                                margin:10px 10px 10px 10px;"
-                                          stripe
-                                          border
-                                          height="20rem"
-                                          :row-class-name="tableRowClassName"
-                                          :cell-style="cellStyle">
-                                    <el-table-column
-                                            prop="wid"
-                                            label="ID"
-                                            min-width="30%">
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="warning"
-                                            label="warning"
-                                            min-width="70%">
-                                    </el-table-column>
-                                </el-table>
-                            </el-dialog>
-                        </div>
+                        <!--下载按钮-->
+                        <span class="download-stat">
+                            <el-button icon="el-icon-download" @click="downloadStat">
+                            </el-button>
+                        </span>
+                        <!--表格-->
+                        <el-table
+                                :data="gapStat"
+                                stripe
+                                border
+                                height="27rem"
+                                class="tableSet"
+                                style=" width: 95%;
+                        font-size: 1.3rem;
+                        font-family: Helvetica,sans-serif;
+                        margin:10px 10px 10px 10px;"
+                                :header-cell-style="{'text-align':'center'}"
+                                :row-class-name="tableRowClassName">
+                            <el-table-column
+                                    prop="cID"
+                                    label="ChrID"
+                                    min-width="25%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="len"
+                                    label="Length"
+                                    min-width="25%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="gCount"
+                                    label="GapCount"
+                                    min-width="25%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="gLocus"
+                                    label="GapLocus"
+                                    min-width="25%">
+                            </el-table-column>
+                        </el-table>
                     </el-aside>
                 </div>
             </el-main>
         </el-container>
 
-        <!--4 区域3 展示detail 和 stat文件结果-->
+        <!--4 区域3 展示detail文件结果-->
         <el-container>
             <el-main>
                 <!--4.1 该区域标签-->
@@ -562,16 +560,16 @@
                         Here are some statistic data of this gap-filled genome.
                     </p>
                 </div>
-                <!--4.3 stat-->
+               <!-- &lt;!&ndash;4.3 stat&ndash;&gt;
                 <div>
-                    <!--小标题-->
+                    &lt;!&ndash;小标题&ndash;&gt;
                     <h3
                             style="font-family: Helvetica,sans-serif;
                                    font-size: 1.3rem;
                                    color:#666666">
                         Genome Statistic
                     </h3>
-                    <!--统计数据-->
+                    &lt;!&ndash;统计数据&ndash;&gt;
                     <div class="statFont">
                         <i class="el-icon-s-data"></i>
                         <span>{{totalSize}}</span>
@@ -579,11 +577,11 @@
                         <i class="el-icon-data-analysis"></i>
                         <span>{{gcContent}}</span>
                     </div>
-                    <!--下载按钮-->
+                    &lt;!&ndash;下载按钮&ndash;&gt;
                     <span class="download-stat">
                         <el-button icon="el-icon-download" @click="downloadStat"></el-button>
                     </span>
-                    <!--表格-->
+                    &lt;!&ndash;表格&ndash;&gt;
                     <el-table
                             :data="gapStat"
                             stripe
@@ -617,12 +615,11 @@
                                 min-width="25%">
                         </el-table-column>
                     </el-table>
-                </div>
+                </div>-->
                 <!--4.4 detail-->
                 <div>
                     <!--小标题-->
-                    <h3
-                            style="font-family: Helvetica,sans-serif;
+                    <h3 style="font-family: Helvetica,sans-serif;
                                    font-size: 1.3rem;
                                    color:#666666">
                         Gap Filling Detail
