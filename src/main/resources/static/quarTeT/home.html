@@ -141,7 +141,7 @@
         /*整体导航栏*/
         .navDiv>.el-menu-demo{
             margin: auto;
-            padding-top: 1rem;
+            padding-top: 1.2rem;
             font-family: Helvetica, sans-serif;
             font-weight: bold;
         }
@@ -161,8 +161,31 @@
             transition: border-color .3s,background-color .3s,color .3s;
             box-sizing: border-box;
         }
+        /*去除导航栏原生下划线*/
         .navDiv>.el-menu-demo.el-menu--horizontal{
             border-bottom: none;
+        }
+
+        /*页脚格式*/
+        .pageFooter{
+            font-size: 1.5rem;
+            color: #575d66;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+            margin: auto;
+        }
+        /*a链接的格式*/
+        .pageFooter>a{
+            text-decoration: none;
+            font-weight: bold;
+            color: #205573;
+        }
+        .pageFooter>a:hover{
+            color: #f4ba1d;
+        }
+        /*分割线样式*/
+        .el-divider--horizontal{
+            border-top: 1px solid #adadad;
         }
 
         /*走马灯设置 item和主盒子要一起设置宽高*/
@@ -307,28 +330,6 @@
             font-size: 2rem;
         }
 
-        /*页脚格式*/
-        .pageFooter{
-            font-size: 1.5rem;
-            color: #575d66;
-            font-family: Helvetica, sans-serif;
-            text-align: center;
-            margin: auto;
-        }
-        /*a链接的格式*/
-        .pageFooter>a{
-            text-decoration: none;
-            font-weight: bold;
-            color: #205573;
-        }
-        .pageFooter>a:hover{
-            color: #f4ba1d;
-        }
-        /*分割线样式*/
-        .el-divider--horizontal{
-            border-top: 1px solid #adadad;
-        }
-
         /*小程序入口样式*/
         .action-item{
             background-color: #ffffff;
@@ -343,6 +344,10 @@
         .action-item a:hover{
             color: #f4ba1d;
         }
+        .logoImg{
+            height: 200px;
+            width: 200px;
+        }
     </style>
 </head>
 <body>
@@ -353,6 +358,7 @@
     <div class="banner">
         <!--标题-->
         <a href="home.html"> quarTeT </a>
+        <!--2. 导航栏-->
         <span class="navDiv">
             <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引  -->
             <el-menu :default-active="activeBar"
@@ -381,32 +387,6 @@
             </el-menu>
         </span>
     </div>
-
-    <!--使用container布局-->
-    <el-container>
-        <!--2 导航栏-->
-<!--        <el-header style="background-color: #ffffff; margin-top: 0">-->
-            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引-->
-           <!-- <el-menu :default-active="activeBar" class="el-menu-demo"
-                     mode="horizontal" @select="handleSelect">
-                <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
-                <el-submenu index="2">
-                    <template slot="title">Tools</template>
-                    <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
-                </el-submenu>
-                <el-submenu index="3">
-                    <template slot="title">Document</template>
-                    <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
-                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
-                </el-submenu>
-                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
-                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
-            </el-menu>-->
-<!--        </el-header>-->
-    </el-container>
 
     <!--2. 栏目-->
     <div id="thinner">
@@ -439,7 +419,7 @@
                         <div class="action-item">
                             <!--图片-->
                             <el-image
-                                    style="width: 100px; height: 100px"
+                                    class="logoImg"
                                     :src="logo1"
                                     :fit="fill">
                             </el-image>
@@ -454,7 +434,7 @@
                         <div class="action-item">
                             <!--图片-->
                             <el-image
-                                    style="width: 100px; height: 100px"
+                                    class="logoImg"
                                     :src="logo2"
                                     :fit="fill">
                             </el-image>
@@ -469,7 +449,7 @@
                         <div class="action-item">
                             <!--图片-->
                             <el-image
-                                    style="width: 100px; height: 100px"
+                                    class="logoImg"
                                     :src="logo3"
                                     :fit="fill">
                             </el-image>
@@ -484,7 +464,7 @@
                         <div class="action-item">
                             <!--图片-->
                             <el-image
-                                    style="width: 100px; height: 100px"
+                                    class="logoImg"
                                     :src="logo4"
                                     :fit="fill">
                             </el-image>
@@ -535,28 +515,34 @@
         Powered by
         <a href="https://www.atcgn.com/">ATCG</a>
     </div>
-   <!-- <el-footer style="height:6rem; background-color: #205573">
-        <div>
-            <br/>
-            Powered by <a href="https://www.atcgn.com/" style="color: #ffffff ">ATCG</a>
-        </div>
-    </el-footer>-->
+    <!--这里可以添加一些友情链接什么的 页脚看起来比较空 诸如reference FAQs Licensing Use scenarios Funding等等-->
 </div>
 
 </body>
 
 <!-- 引入组件库 -->
-<!--JQuery-->
-<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-<!--Vue-->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<!--ElementUI index.css index.js-->
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-<!--Axios-->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!--<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+<!--<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+<!--<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+<!--<script src="../js/axios-0.18.0.js"></script>-->
+
+<!--bytedance-->
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.js"></script>
+<!--需要用Vue2-->
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/2.6.0/vue.js" type="application/javascript"></script>
+<link href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/theme-chalk/index.css" rel="stylesheet" />
+<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/index.js"></script>
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js"></script>
 <script src="../js/axios-0.18.0.js"></script>
 
+<!--极兔云-->
+<!--<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.cjs.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.13/index.js"></script>
+<link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.13/theme-chalk/index.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/1.3.3/axios.js"></script>-->
 
 <script>
     new Vue({
@@ -606,19 +592,16 @@
                                 this.$message.error("No related record with this Query ID was found in the database");
                                 break;
                             case 20051:
-                                document.location.href = "display1.html";
+                                document.location.href = "assemblyMapper.html";
                                 break;
                             case 20052:
-                                document.location.href = "display2.html";
+                                document.location.href = "gapFiller.html";
                                 break;
                             case 20053:
-                                document.location.href = "display3.html";
+                                document.location.href = "centroMiner.html";
                                 break;
                             case 20054:
-                                document.location.href = "display4.html";
-                                break;
-                            case '20055':
-                                document.location.href = "display5.html";
+                                document.location.href = "teloExplorer.html";
                                 break;
                         }
                     })
