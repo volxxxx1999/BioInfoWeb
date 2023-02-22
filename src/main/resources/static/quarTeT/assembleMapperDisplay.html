@@ -179,6 +179,7 @@
             font-family: Helvetica, sans-serif;
             text-align: center;
             margin: auto;
+            padding-bottom: 2rem;
         }
         /*a链接的格式*/
         .pageFooter>a{
@@ -223,6 +224,7 @@
             -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(green), to(pink), color-stop(0.5, #000), color-stop(50%, #ffffff));
             padding: 0;
             text-transform: uppercase;
+            height: 4rem;
         }
 
         .btn-24:disabled {
@@ -375,14 +377,15 @@
             height: 7rem;
         }
         .downloadDiv .el-button{
-            background-color: #ecf8ff;
+            background-color: #f6f8fa;
+            font-weight: bold;
+            border-width: 2px;
         }
     </style>
 </head>
 
 <body>
 <div id="app">
-    <!--1. 登录注册-->
     <div class="banner">
         <!--标题-->
         <a href="home.html"> quarTeT </a>
@@ -475,6 +478,11 @@
                 </div>
                 <!--下载按钮-->
                 <div class="downloadDiv">
+                    <div class="illustration-box">
+                        <p>
+                            Here you can download assembly and agp files.
+                        </p>
+                    </div>
                     <el-row :gutter="10">
                         <el-col :xs="16" :sm="16" :md="6" lg="4" xl="12">
                             <div style="height: 1rem;"></div>

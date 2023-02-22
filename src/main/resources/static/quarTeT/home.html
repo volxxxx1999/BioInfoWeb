@@ -105,21 +105,42 @@
             border-style: solid;
         }
 
+        /*ele container setting*/
+        body > .el-container {
+            margin-bottom: 5rem;
+        }
+
+        .el-container:nth-child(5) .el-aside,
+        .el-container:nth-child(6) .el-aside {
+            line-height: 30rem;
+        }
+
+        .el-container:nth-child(7) .el-aside {
+            line-height: 50rem;
+        }
+
         /* 引用Demo的设置*/
         .citationFormat {
             font-family: Helvetica, sans-serif;
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 300;
             color: #4b4b4b;
-            margin: 1rem 1rem 1rem 1rem;
+            margin-left: 6%;
+            text-align: left;
         }
 
-        /*登录+标题banner的设置*/
+        .citationFormat a {
+            color: #205573;
+            text-decoration: none;
+        }
+
+        /*标题banner的设置*/
         .banner {
             height: 8rem;
             background-color: #205573;
             margin: 0;
         }
+
         .banner > a {
             color: #ffffff;
             font-size: 5rem;
@@ -133,60 +154,70 @@
 
         /*导航栏样式*/
         /*父div*/
-        .navDiv{
+        .navDiv {
             float: right;
             padding-right: 4rem;
             margin-right: 4rem;
         }
+
         /*整体导航栏*/
-        .navDiv>.el-menu-demo{
+        .navDiv > .el-menu-demo {
             margin: auto;
             padding-top: 1.2rem;
             font-family: Helvetica, sans-serif;
             font-weight: bold;
         }
+
         /*导航栏item字体大小*/
-        .navDiv .el-menu-item{
+        .navDiv .el-menu-item {
             font-size: 18px;
             width: 10rem;
             text-align: center;
         }
+
         /*submenu字体大小*/
-        .navDiv .el-submenu__title{
+        .navDiv .el-submenu__title {
             font-size: 18px;
             color: #303133;
             padding: 0 20px;
             cursor: pointer;
-            -webkit-transition: border-color .3s,background-color .3s,color .3s;
-            transition: border-color .3s,background-color .3s,color .3s;
+            -webkit-transition: border-color .3s, background-color .3s, color .3s;
+            transition: border-color .3s, background-color .3s, color .3s;
             box-sizing: border-box;
         }
+
         /*去除导航栏原生下划线*/
-        .navDiv>.el-menu-demo.el-menu--horizontal{
+        .navDiv > .el-menu-demo.el-menu--horizontal {
             border-bottom: none;
         }
 
+
         /*页脚格式*/
-        .pageFooter{
+        .pageFooter {
             font-size: 1.5rem;
             color: #575d66;
             font-family: Helvetica, sans-serif;
             text-align: center;
             margin: auto;
+            padding-bottom: 2rem;
         }
+
         /*a链接的格式*/
-        .pageFooter>a{
+        .pageFooter > a {
             text-decoration: none;
             font-weight: bold;
             color: #205573;
         }
-        .pageFooter>a:hover{
+
+        .pageFooter > a:hover {
             color: #f4ba1d;
         }
+
         /*分割线样式*/
-        .el-divider--horizontal{
+        .el-divider--horizontal {
             border-top: 1px solid #adadad;
         }
+
 
         /*走马灯设置 item和主盒子要一起设置宽高*/
         /* 控制外面的大盒子*/
@@ -260,7 +291,6 @@
             margin-bottom: 1rem;
             color: #565c65;
             font-family: "Arial", sans-serif;
-
             -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
             animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
         }
@@ -292,72 +322,74 @@
             }
         }
 
-        /*ele container setting*/
-        body > .el-container {
-            margin-bottom: 5rem;
-        }
-
-        .el-container:nth-child(5) .el-aside,
-        .el-container:nth-child(6) .el-aside {
-            line-height: 30rem;
-        }
-
-        .el-container:nth-child(7) .el-aside {
-            line-height: 50rem;
-        }
 
         /*搜索框的样式*/
-        .searchDiv{
-            font-size: 1.5rem;
-            font-family: Helvetica, sans-serif;
-            color: #575d66;
-            font-weight: bold;
-        }
-        .searchDiv p{
-            margin-bottom: 10%;
-            margin-left: 5%;
-        }
-        /* v-loading 的样式修改*/
-        /* 修改动画的大小  给文字加粗效果*/
-        .el-loading-spinner {
-            font-size: 8rem;
-            /*font-weight: bold;*/
+        .searchDiv {
+            width: 90%;
+            margin: auto
         }
 
-        /* 文字大小修改*/
-        .el-loading-mask .el-loading-spinner .el-loading-text {
+        /*每个框的粗体描述字*/
+        .descHead {
             font-family: Helvetica, sans-serif;
             font-size: 2rem;
+            font-weight: bold;
+            color: #444649;
+            text-align: left;
+            margin-bottom: 2rem;
+            margin-left: 6%;
         }
 
-        /*小程序入口样式*/
-        .action-item{
+        /*小程序入口样式模块*/
+        /*每个小块*/
+        .action-item {
             background-color: #ffffff;
         }
-        .action-item a{
+
+        /*块里面的链接*/
+        .action-item a {
             text-decoration: none;
             color: #205573;
             font-weight: bold;
             font-size: 1.2rem;
             font-family: Helvetica, sans-serif;
         }
-        .action-item a:hover{
+
+        .action-item a:hover {
             color: #f4ba1d;
         }
-        .logoImg{
-            height: 200px;
+
+        /*展示图片大小*/
+        .appletImg {
+            height: 240px;
             width: 200px;
+        }
+
+        /*download 下载模块*/
+        .downloadBtn {
+            float: left;
+            margin-left: 6%;
+            margin-top: 2rem;
+        }
+
+        .downloadBtn > img {
+            height: 5rem;
+            padding-right: 5rem;
         }
     </style>
 </head>
 <body>
 
-<!--全覆盖条幅-->
 <div id="app">
-    <!--1. 登录注册-->
     <div class="banner">
-        <!--标题-->
-        <a href="home.html"> quarTeT </a>
+        <!--1 标题-->
+            <a href="home.html">
+              <!--  <el-image
+                        :src="headImg"
+                        :fit="fill">
+                </el-image>-->
+                quarTeT
+            </a>
         <!--2. 导航栏-->
         <span class="navDiv">
             <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引  -->
@@ -367,20 +399,24 @@
                      text-color="#e3e3e0"
                      active-text-color="#ffffff"
                      mode="horizontal" @select="handleSelect">
-                <el-menu-item  index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">
                         Tools
                     </template>
-                    <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-1"
+                                  onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
                     <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
+                    <el-menu-item index="2-3"
+                                  onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
+                    <el-menu-item index="2-4"
+                                  onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
                 </el-submenu>
                 <el-submenu index="3">
                     <template slot="title">Document</template>
                     <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
-                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
+                    <el-menu-item index="3-2"
+                                  onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
                 </el-submenu>
                 <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
                 <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
@@ -388,89 +424,96 @@
         </span>
     </div>
 
-    <!--2. 栏目-->
     <div id="thinner">
-        <!--搜索功能-->
+        <!--3 搜索功能-->
         <el-container>
             <el-main>
+                <h2 class="descHead"> Access your results with a created Job ID </h2>
                 <div class="searchDiv">
                     <el-row :gutter="10">
-                        <el-col style="margin-top: 1rem;"
-                                :xs="4" :sm="4" :md="4" lg="4" xl="4">
-                           <span> Query ID: </span>
-                        </el-col>
-                        <el-col :xs="16" :sm="16" :md="16" :lg="16" :xl="16">
-                            <el-input v-model="taskID" placeholder="Access your result with query ID"></el-input>
+                        <el-col :xs="20" :sm="20" :md="20" :lg="20" :xl="20">
+                            <el-input v-model="taskID" placeholder="Job ID"></el-input>
                         </el-col>
                         <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
-                            <el-button  type="primary" @click="searchResult">Access</el-button>
+                            <el-button type="primary" @click="searchResult">Access</el-button>
                         </el-col>
                     </el-row>
                 </div>
             </el-main>
         </el-container>
 
-        <!--小程序样式入口-->
+        <!--4 小程序样式入口-->
         <el-container>
             <el-main>
+                <h2 class="descHead"> Start a new job using the user-friendly web interface </h2>
                 <div>
                     <!--入口1-->
                     <el-aside width="25%">
                         <div class="action-item">
-                            <!--图片-->
-                            <el-image
-                                    class="logoImg"
-                                    :src="logo1"
-                                    :fit="fill">
-                            </el-image>
                             <!--文字链接-->
-                            <div>
-                                <a href="assemblyMapper.html">AssemblyMapper</a>
-                            </div>
+                            <a href="assemblyMapper.html">
+                                <!--图片-->
+                                <el-image
+                                        class="appletImg"
+                                        :src="logo1"
+                                        :fit="fill">
+                                </el-image>
+                                <div>
+                                    AssemblyMapper
+                                </div>
+                            </a>
                         </div>
                     </el-aside>
                     <!--入口2-->
                     <el-aside width="25%">
                         <div class="action-item">
-                            <!--图片-->
-                            <el-image
-                                    class="logoImg"
-                                    :src="logo2"
-                                    :fit="fill">
-                            </el-image>
                             <!--文字链接-->
-                            <div>
-                                <a href="gapFiller.html">GapFiller</a>
-                            </div>
+                            <a href="gapFiller.html">
+                                <!--图片-->
+                                <el-image
+                                        class="appletImg"
+                                        :src="logo2"
+                                        :fit="fill">
+                                </el-image>
+                                <div>
+                                    GapFiller
+                                </div>
+                            </a>
                         </div>
                     </el-aside>
                     <!--入口3-->
                     <el-aside width="25%">
                         <div class="action-item">
-                            <!--图片-->
-                            <el-image
-                                    class="logoImg"
-                                    :src="logo3"
-                                    :fit="fill">
-                            </el-image>
-                            <!--文字链接-->
-                            <div>
-                                <a href="teloExplorer.html">CentroMiner</a>
-                            </div>
+                            <!--链接-->
+                            <a href="teloExplorer.html">
+                                <!--图片-->
+                                <el-image
+                                        class="appletImg"
+                                        :src="logo3"
+                                        :fit="fill">
+                                </el-image>
+                                <div>
+                                    CentroMiner
+                                </div>
+                            </a>
                         </div>
                     </el-aside>
                     <!--入口4-->
                     <el-aside width="25%">
                         <div class="action-item">
-                            <!--图片-->
-                            <el-image
-                                    class="logoImg"
-                                    :src="logo4"
-                                    :fit="fill">
-                            </el-image>
                             <!--文字链接-->
                             <div>
-                                <a href="centroMiner.html">TeloExplorer</a>
+                                <a href="centroMiner.html">
+                                    <!--图片-->
+                                    <el-image
+                                            class="appletImg"
+                                            :src="logo4"
+                                            :fit="fill">
+                                    </el-image>
+                                    <div>
+                                        TeloExplorer
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </el-aside>
@@ -478,8 +521,35 @@
             </el-main>
         </el-container>
 
-        <!--3 展示框架的图片-->
+        <!--5 Download-->
         <el-container>
+            <el-main>
+                <!--块的描述-->
+                <h2 class="descHead">
+                    Download the source code and run it locally
+                </h2>
+                <div class="citationFormat">
+                    <span>
+                        quarTeT has been designed to run on every
+                        POSIX compliant UNIX system. It is easiest
+                        to download the entire repository from
+                        here or GitHub.
+                    </span>
+                </div>
+                <!--下载按钮-->
+                <div class="downloadBtn">
+                    <!--下载本地-->
+                    <img src="../imgs/unixbutton.png" @click="downloadquartet"/>
+                    <!--跳转github-->
+                    <a href="https://github.com/volxxxx1999/BioInfoWeb">
+                        <img style="height: 60px" src="../imgs/gitButton.jpg"/>
+                    </a>
+                </div>
+            </el-main>
+        </el-container>
+
+        <!--3 展示框架的图片-->
+        <!--<el-container>
             <el-main>
                 <span class="demonstration">
                     <h4 class="demo">- The WorkFlow of quarTeT -</h4>
@@ -490,26 +560,26 @@
                         :fit="fitStyle">
                 </el-image>
             </el-main>
-        </el-container>
+        </el-container>-->
 
-        <!--4 Citation-->
+        <!--6 Citation-->
         <el-container>
             <el-main>
+                <!--块的描述-->
+                <h2 class="descHead"> Publication and citation </h2>
                 <div class="citationFormat">
-                    <i class="el-icon-collection"></i>
                     <span>
                     If you find quarTeT useful, please cite:
-                    <!--TODO: replace link after publish-->
-                    <a href="https://www.baidu.com" style="color: #4d4d4d ">
-                        Here is your article link
-                    </a>
-                </span>
+                        <a href="http://atcgn.com/quarTeT/home.html">
+                            http://atcgn.com/quarTeT/home.html
+                        </a>
+                    </span>
                 </div>
             </el-main>
         </el-container>
     </div>
 
-    <!--5 页脚信息-->
+    <!--7 页脚信息-->
     <el-divider></el-divider>
     <div class="pageFooter">
         Powered by
@@ -532,7 +602,7 @@
 <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.js"></script>
 <!--需要用Vue2-->
 <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/2.6.0/vue.js" type="application/javascript"></script>
-<link href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/theme-chalk/index.css" rel="stylesheet" />
+<link href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/theme-chalk/index.css" rel="stylesheet"/>
 <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/index.js"></script>
 <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js"></script>
 <script src="../js/axios-0.18.0.js"></script>
@@ -550,8 +620,8 @@
         data: function () {
             return {
                 // 用户搜索的taskID
-                taskID:'',
-                activeBar:"1",
+                taskID: '',
+                activeBar: "1",
                 // 登录需要变量
                 loginDialogVisible: false,
                 registerDialogVisible: false,
@@ -568,26 +638,28 @@
                 logo2: "https://inews.gtimg.com/newsapp_bt/0/13732648356/1000",
                 logo3: "https://inews.gtimg.com/newsapp_bt/0/13732648356/1000",
                 logo4: "https://inews.gtimg.com/newsapp_bt/0/13732648356/1000",
+                // banner的图标
+                headImg: "../imgs/head.png",
             }
         },
         methods: {
             // 搜索之前的结果
-            searchResult(){
+            searchResult() {
                 // 先对输入的内容进行初步鉴定 字母开头 下划线 字母数字连接符结尾
                 let reg = /^[a-zA-Z]{3,10}_[-a-zA-Z0-9]{36}$/;
                 if (!reg.test(this.taskID)) {
                     this.$message.error("Incorrect Query ID. Please Check Your Input.");
-                }else{
+                } else {
                     const loading1 = this.$loading({
                         lock: true,
                         text: 'Wait a moment......',
                         spinner: 'el-icon-loading',
                         background: 'rgba(2,1,1,0.7)'
                     });
-                    axios.get("/quarTeT/search/resultSearch/"+this.taskID).then((res)=>{
+                    axios.get("/quarTeT/search/resultSearch/" + this.taskID).then((res) => {
                         loading1.close();
                         console.log(res.data.data)
-                        switch (res.data.code){
+                        switch (res.data.code) {
                             case 20050:
                                 this.$message.error("No related record with this Query ID was found in the database");
                                 break;
@@ -607,109 +679,26 @@
                     })
                 }
             },
-
-            // 打开登录对话框
-            openLogin() {
-                this.loginDialogVisible = true;
+            downloadquartet() {
+                let quartet_src = "https://www.atcgn.com/t2t/bioRepository/exec/quartet.tar.gz";
+                this.downloadCommon(quartet_src);
             },
-            login() {
-                // 登录逻辑
-                axios.post("/quarTeT/user/login", {
-                    "email": this.email,
-                    "password": this.password,
-                }).then(
-                    ({ data }) => {
-                        if (data.code === 10000) {
-                            this.$message({
-                                message: 'Login successful',
-                                type: 'success'
-                            });
-                            localStorage.setItem("token", data.data); // 存储一下 token
-                            this.loginDialogVisible = false;
-                        } else {
-                            this.$message({
-                                message: data.message,
-                                type: 'error'
-                            });
-                        }
-                        this.email = "";
-                        this.password = "";
-                    },
-                    err => {
-                        this.email = "";
-                        this.password = "";
-                        console.error(err)
-                    }
-                );
+            downloadCommon(src) {
+                // 创建一个a标签
+                let $a = document.createElement('a');
+                // 给标签设置 href 和 download 属性
+                $a.setAttribute("href", src);
+                $a.setAttribute("download", "");
+                // 创建单击事件
+                let eventObj = document.createEvent('MouseEvents');
+                eventObj.initMouseEvent('click', true, true, window,
+                    0, 0, 0, 0, 0,
+                    false, false, true, false,
+                    0, null);
+                // 触发单击事件
+                $a.dispatchEvent(eventObj);
             },
-            // 打开注册对话框
-            openRegister() {
-                this.registerDialogVisible = true;
-            },
-            register() {
-                if (this.password !== this.password2) {
-                    this.$message({
-                        message: '两次密码输入不同',
-                        type: 'warning'
-                    });
-                    return
-                }
-                axios.post("/quarTeT/user/register", {
-                    email: this.email,
-                    password: this.password,
-                }).then(
-                    ({ data }) => {
-                        if (data.code === 10001) {
-                            this.$message({
-                                message: 'Register successful',
-                                type: 'success'
-                            });
-                            this.registerDialogVisible = false;
-                        } else {
-                            this.$message({
-                                message: data.message,
-                                type: 'error'
-                            });
-                        }
-                        this.email = "";
-                        this.password = "";
-                        this.password2 = "";
-                    },
-                    err => {
-                        this.email = "";
-                        this.password = "";
-                        this.password2 = "";
-                        console.error(err)
-                    }
-                );
-            },
-            // 验证身份, 判断是否登录
-            verify() {
-                const token = localStorage.getItem("token");
-                // console.log(token);
-                axios.get('/quarTeT/user/verify', {
-                    headers: {
-                        'Authorization': token
-                    }
-                }).then(
-                    ({ data }) => {
-                        if (data.code === 10002) {
-                            this.isLogin = true;
-                            this.username = data.data.email;
-                        }
-                        console.log(this.isLogin);
-                    },
-                    err => console.error(err)
-                );
-            },
-            // 第二部分的 TopBar 有需要这个方法，为了不报错，先声明在这里
-            handleSelect() {
-
-            }
         },
-        created() {
-            this.verify();
-        }
     });
 </script>
 </html>

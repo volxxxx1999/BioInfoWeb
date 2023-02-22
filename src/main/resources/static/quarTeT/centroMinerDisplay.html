@@ -166,6 +166,7 @@
             -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(green), to(pink), color-stop(0.5, #000), color-stop(50%, #ffffff));
             padding: 0;
             text-transform: uppercase;
+            height: 4rem;
         }
 
         .btn-24:disabled {
@@ -364,6 +365,7 @@
             font-family: Helvetica, sans-serif;
             text-align: center;
             margin: auto;
+            padding-bottom: 2rem;
         }
         /*a链接的格式*/
         .pageFooter>a{
@@ -378,6 +380,24 @@
         .el-divider--horizontal{
             border-top: 1px solid #adadad;
         }
+        /*下载的div*/
+        .downloadDiv{
+            margin-top: 2rem;
+        }
+        .downloadDiv .el-button{
+            background-color: #f6f8fa;
+            font-weight: bold;
+            border-width: 2px;
+        }
+        /*candidate的格式要不同*/
+        #candiButton{
+            background-color: #67c23a;
+            color: #fff;
+        }
+        #candiButton:hover{
+            background-color: #4cea64;
+        }
+
     </style>
 </head>
 <body>
@@ -418,13 +438,47 @@
     </div>
 
     <div id="thinner">
+        <!--4.1 下载-->
+        <el-container>
+            <el-main>
+                <!--该区域标签-->
+                <div style="margin:1rem 1rem 1rem 1rem">
+                    <button class="btn-24">
+                        <span>Download</span>
+                    </button>
+                </div>
+                <!--下载按钮-->
+                <div class="downloadDiv">
+                    <div>
+                        <div class="illustration-box">
+                            <p>
+                                Here is all candidates detail data, and <em>all TR data involved</em>.
+                            </p>
+                        </div>
+                        <el-button class="next-button"
+                                   id="candiButton"
+                                   @click="downloadCandidateZip">
+                            Download candidates data
+                        </el-button>
+                    </div>
+                    <div style="margin-top: 3rem;">
+                        <el-button class="next-button" @click="downloadGFF3Zip">
+                            Download TR annotation
+                        </el-button>
+                        <el-button class="next-button" @click="downloadFastaZip">
+                            Download TR sequence
+                        </el-button>
+                    </div>
+                </div>
+            </el-main>
+        </el-container>
         <!--3 区域1 展示png结果图-->
         <el-container>
             <el-main>
                 <!--3.1 该区域标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
-                        <i class="el-icon-picture"></i>
+                       <!-- <i class="el-icon-picture"></i>-->
                         <span>Centromere Overview</span>
                     </button>
                 </div>
@@ -530,7 +584,7 @@
                 <!--4.1 该区域标签-->
                 <div style="margin:1rem 1rem 1rem 1rem">
                     <button class="btn-24">
-                        <i class="el-icon-tickets"></i>
+                        <!--<i class="el-icon-tickets"></i>-->
                         <span>Statistic</span>
                     </button>
                 </div>
@@ -792,19 +846,6 @@
                         </el-table-column>
                     </el-table>
                 </el-dialog>
-
-
-                <!--5 区域3 3个下载ZIP文件-->
-                <!--TODO 单独的Candidate下载，并且有candidate说明-->
-                <div>
-                    <p style="font-family: Helvetica, sans-serif; font-size: 1.3rem">Here is all candidates detail data, and all TR data involved.</p>
-                    <el-button class="next-button" type="success" @click="downloadCandidateZip">Download candidates data
-                    </el-button>
-                </div>
-                <div style="margin-top: 3rem;">
-                    <el-button class="next-button" type="primary" @click="downloadGFF3Zip">Download TR annotation</el-button>
-                    <el-button class="next-button" type="primary" @click="downloadFastaZip">Download TR sequence</el-button>
-                </div>
             </el-main>
         </el-container>
     </div>
