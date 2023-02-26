@@ -406,11 +406,13 @@
                     </template>
                     <el-menu-item index="2-1"
                                   onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
+                    <el-menu-item index="2-2" 
+                                  onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
                     <el-menu-item index="2-3"
-                                  onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
-                    <el-menu-item index="2-4"
                                   onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
+                    <el-menu-item index="2-4"
+                                  onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
+
                 </el-submenu>
                 <el-submenu index="3">
                     <template slot="title">Document</template>
@@ -428,7 +430,7 @@
         <!--3 搜索功能-->
         <el-container>
             <el-main>
-                <h2 class="descHead"> Access your results with a created Job ID </h2>
+                <h2 class="descHead"> Access your results with Job ID </h2>
                 <div class="searchDiv">
                     <el-row :gutter="10">
                         <el-col :xs="20" :sm="20" :md="20" :lg="20" :xl="20">
@@ -493,7 +495,7 @@
                                         :fit="fill">
                                 </el-image>
                                 <div>
-                                    CentroMiner
+                                    TeloExplorer
                                 </div>
                             </a>
                         </div>
@@ -511,7 +513,7 @@
                                             :fit="fill">
                                     </el-image>
                                     <div>
-                                        TeloExplorer
+                                        CentroMiner
                                     </div>
                                 </a>
                             </div>
@@ -541,7 +543,7 @@
                     <!--下载本地-->
                     <img src="../imgs/unixbutton.png" @click="downloadquartet"/>
                     <!--跳转github-->
-                    <a href="https://github.com/volxxxx1999/BioInfoWeb">
+                    <a href="https://github.com/Echoring/Quartet">
                         <img style="height: 60px" src="../imgs/gitButton.jpg"/>
                     </a>
                 </div>
@@ -571,7 +573,7 @@
                     <span>
                     If you find quarTeT useful, please cite:
                         <a href="http://atcgn.com/quarTeT/home.html">
-                            http://atcgn.com/quarTeT/home.html
+                            http://atcgn.com:8080/quarTeT/home.html
                         </a>
                     </span>
                 </div>
@@ -634,10 +636,10 @@
                 displayImg: "https://www.atcgn.com/t2t/bioRepository/img/fig1.png",
                 fitStyle: "contain", // 图片的填充格式
                 // 小程序入口logo链接
-                logo1: "https://inews.gtimg.com/newsapp_bt/0/13732648356/1000",
-                logo2: "https://inews.gtimg.com/newsapp_bt/0/13732648356/1000",
-                logo3: "https://inews.gtimg.com/newsapp_bt/0/13732648356/1000",
-                logo4: "https://inews.gtimg.com/newsapp_bt/0/13732648356/1000",
+                logo1: "https://www.atcgn.com/t2t/bioRepository/img/module1.png",
+                logo2: "https://www.atcgn.com/t2t/bioRepository/img/module2.png",
+                logo3: "https://www.atcgn.com/t2t/bioRepository/img/module3.png",
+                logo4: "https://www.atcgn.com/t2t/bioRepository/img/module4.png",
                 // banner的图标
                 headImg: "../imgs/head.png",
             }
