@@ -197,6 +197,39 @@
         .el-divider--horizontal{
             border-top: 1px solid #adadad;
         }
+
+        /*每个框的粗体描述字*/
+        .descHead {
+            font-family: Helvetica, sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #444649;
+            text-align: left;
+            margin-bottom: 2rem;
+            margin-left: 6%;
+        }
+        /* 块的文字描述*/
+        .descFormat {
+            font-family: Helvetica, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #4b4b4b;
+            margin-left: 6%;
+            text-align: left;
+        }
+        .descFormat a {
+            color: #205573;
+            text-decoration: none;
+        }
+
+        /*意见表单*/
+        .suggestForm{
+            border-color: white;
+            border-style: dashed;
+            border-radius: 20px;
+            margin-left: 6%;
+            width: 80rem;
+        }
     </style>
 </head>
 <body>
@@ -241,31 +274,51 @@
         <!--介绍信息-->
         <el-container>
             <el-main style="font-size: 120%; font-family: Helvetica,sans-serif">
-                <h3 style="font-weight: bold; text-align: center">quarTeT</h3>
-                <p style="text-align: center">
-                    quarTeT is a collection of tools for T2T genome assembly and basic analysis in automatic workflow.
-                </p>
+                <!--块的描述-->
+                <h2 class="descHead">
+                    Contact US
+                </h2>
+<!--                <h3 style="font-weight: bold; text-align: center">quarTeT</h3>-->
+                <div class="descFormat">
+                    <p>
+                        quarTeT is a collection of tools for T2T genome assembly and basic analysis in automatic workflow.
+                        To ensure that your query is handled in a timely manner, please use the following channel to contact us.
+                    </p>
+                </div>
             </el-main>
         </el-container>
 
         <el-container>
             <!--提交用户意见的表单的模块-->
             <el-main style="font-weight: bold; text-align: left">
+                <!--块的描述-->
+                <h2 class="descHead">
+                    Support and feedback
+                </h2>
+                <div class="descFormat">
+                    <p>
+                        We would like you to send us feedback on quarTeT and help us improve the application.
+                        Please use this form if you are having problems using one of the quarTeT resources or tools,
+                        or if you would just like to send us some feedback.
+                    </p>
+                </div>
                 <!-- 给表单加一个边框div-->
-                <div style="border-color: white; border-style: dashed; border-radius: 20px; padding-left: 20px;padding-right: 20px">
+                <div class="suggestForm">
                     <!--表单本体-->
-                    <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
-                        <el-form-item label="Name">
+                    <el-form
+                            :label-position="labelPosition"
+                            :model="formLabelAlign">
+                        <el-form-item label="Your Name" label-width="100px">
                             <el-input v-model="formLabelAlign.name"></el-input>
                         </el-form-item>
-                        <el-form-item label="Email Address">
+                        <el-form-item label="Your Email Address">
                             <el-input v-model="formLabelAlign.mail"></el-input>
                         </el-form-item>
-                        <el-form-item label="Suggestion">
+                        <el-form-item label="Your Suggestion">
                             <el-input  type="textarea" v-model="formLabelAlign.advice"></el-input>
                         </el-form-item>
                         <el-form-item style="text-align: center">
-                            <el-button type="primary" @click="onAdviceSubmit">Submit</el-button>
+                            <el-button type="primary" @click="onAdviceSubmit">Send Your Message</el-button>
                         </el-form-item>
                     </el-form>
                 </div>

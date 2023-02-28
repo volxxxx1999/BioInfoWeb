@@ -16,6 +16,8 @@ pathConfig:
   centroPath: ../../../exec/server/quartet_centro_server.py
   # 脚本启动方式
   exeMethod: python3
+  # 存储在线genome的地址
+  genomePath: ../bioRepository/genome/
 
 
 

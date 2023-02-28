@@ -431,7 +431,6 @@
             text-align: center;
             margin: auto;
             padding-bottom: 2rem;
-            padding-bottom: 2rem;
         }
         /*a链接的格式*/
         .pageFooter>a{
@@ -445,6 +444,30 @@
         /*分割线样式*/
         .el-divider--horizontal{
             border-top: 1px solid #adadad;
+        }
+
+        /*每个框的粗体描述字*/
+        .descHead {
+            font-family: Helvetica, sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #444649;
+            text-align: left;
+            margin-bottom: 2rem;
+            margin-left: 6%;
+        }
+        /* 块的文字描述*/
+        .descFormat {
+            font-family: Helvetica, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #4b4b4b;
+            margin-left: 6%;
+            text-align: left;
+        }
+        .descFormat a {
+            color: #205573;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -489,19 +512,21 @@
     <div id="thinner">
         <el-container>
             <el-main>
+                <!--块的描述-->
+                <h2 class="descHead">
+                    Download quarTeT CLI Tools
+                </h2>
                 <!--3. 下载说明-->
-                <div class="download_desc">
-                    <h3 >
-                        Download quarTeT CLI Tools
-                    </h3>
+                <div class="descFormat">
                     <p>
                         quarTeT CLI toolkit is freely available to academic under MIT license, and
                         provided
-                        <em>without any warranty</em>.<br>
+                        <em>without any warranty</em>.
+                        <br/>
                         For details of usages and understandings, Please refer to the
                         <a href="docuWeb.html">
                             document section
-                        </a>.<br>
+                        </a>.
                         If you have any questions, feel free to
                         <a href="contact.html">
                             contact us
@@ -513,7 +538,7 @@
                     <button class="btn-54" @click="downloadquartet">
                         <span class="shadow"></span>
                         <span class="depth"></span>
-                        <span class="content">quarTeT Download</span>
+                        <span class="content">Download quarTeT</span>
                     </button>
                 </div>
             </el-main>
@@ -522,15 +547,11 @@
         <!--5. 依赖窗格-->
         <el-container>
             <el-main>
-                <!-- 5.1 该区域标签-->
-                <div style="margin:1rem 1rem 1rem 1rem">
-                    <button class="btn-24">
-                        <span>Dependency Description</span>
-                    </button>
-                </div>
-                <!--5.2 表格-->
-                <!--参数描述列表-->
-                <div style="margin: auto; width: 80rem">
+                <!--块的描述-->
+                <h2 class="descHead">
+                    Dependency Description
+                </h2>
+                <div style="margin-left: 5%; width: 80rem">
                     <el-table
                             :data="descData"
                             stripe
@@ -564,11 +585,14 @@
     </div>
 
     <!--5. 页脚-->
-    <el-divider></el-divider>
-    <div class="pageFooter">
-        Powered by
-        <a href="https://www.atcgn.com/">ATCG</a>
+    <div style="margin-bottom: 5px">
+        <el-divider></el-divider>
+        <div class="pageFooter">
+            Powered by
+            <a href="https://www.atcgn.com/">ATCG</a>
+        </div>
     </div>
+
 </div>
 
 </body>
