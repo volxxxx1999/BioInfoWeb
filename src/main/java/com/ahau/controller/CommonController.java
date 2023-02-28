@@ -30,6 +30,23 @@ public class CommonController {
 
 
     /**
+     * @Description: 获取服务器中的基因组数据
+     * @Param:
+     * @Return: Result
+     */
+    @GetMapping("/getOnlineGenome")
+    public Result getOnlineGenome(){
+        System.out.println("===》CommonController: getOnlineGenome");
+        ArrayList<String> onlineGenome = commonService.getOnlineGenome();
+        if(onlineGenome.size() == 0){
+            return new Result(Code.FIND_ERR,"The repository is empty!");
+        }else{
+            return new Result(Code.FIND_OK,onlineGenome);
+        }
+    }
+
+
+    /**
      * @Description: 把用户的邮箱存储在Session中
      * @Param: String value
      * @Param: HttpServletRequest

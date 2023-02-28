@@ -19,6 +19,10 @@ public class Code {
     public final static  Integer REMOVE_ERR = 20040;
     public final static Integer SEARCH_ERR = 20050;
 
+    // 查找服务器基因组文件
+    public final static Integer FIND_OK = 20061;
+    public final static Integer FIND_ERR = 20060;
+
     //异常相关
     public final static Integer SYSTEM_ERR = 50001;
     public final static Integer BUSINESS_ERR = 50002;

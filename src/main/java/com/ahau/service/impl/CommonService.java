@@ -37,6 +37,34 @@ public class CommonService {
     // 3. 上传文件的地址
     @Value("${pathConfig.uploadPath}")
     private String uploadDir;
+    // 4. 存储基因组文件的地址
+    @Value("${pathConfig.genomePath}")
+    private String genomePath;
+
+    /**
+     * @Description: 读取指定路径，返回所有的Genome文件
+     * @Param:
+     * @Return: String[]
+     */
+    public ArrayList<String> getOnlineGenome() {
+        System.out.println("--->CommonService: getOnlineGenome......");
+        ArrayList<String> gList = new ArrayList<>();
+        File file = new File(genomePath);
+        File[] files = file.listFiles();
+        if (files == null) {
+            return null;
+        } else {
+            for (File gfile : files) {
+                String name = gfile.getName();
+                // 为了美观 去除尾部的.fasta
+                name = name.substring(0, name.lastIndexOf("."));
+                gList.add(name);
+            }
+        }
+        System.out.println("------>gList:");
+        System.out.println(gList);
+        return gList;
+    }
 
 
     /**
