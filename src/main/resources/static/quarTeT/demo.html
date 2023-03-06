@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>quarTeT - Demo</title>
+    <style>
+        /*根节点html字体大小*/
+        html {
+            font-size: 12px;
+        }
+
+        body {
+            background-color: #f7f6f2; /*#f7f6f2  #d5d5d5*/
+            /* 针对web元素塌陷*/
+            /*min-width: 65rem;*/
+            /*max-width: 130rem;*/
+            margin: 0 auto;
+        }
+
+        /* 针对设备自适应自适应*/
+        #thinner {
+            width: 106rem;
+            margin: 0 auto;
+            /* 针对web元素塌陷*/
+            min-width: 65rem;
+            max-width: 130rem;
+        }
+
+        /* 手机 宽度小于768px的 */
+        @media only screen and (max-width: 768px) {
+            #thinner {
+                width: 100%;
+            }
+        }
+
+        /* 平板 宽度大于768px的*/
+        @media only screen and (min-width: 768px) {
+            #thinner {
+                width: 62rem;
+            }
+        }
+
+        /* 电脑 */
+        @media only screen and (min-width: 992px) {
+            #thinner {
+                width: 80rem;
+            }
+        }
+
+        /* web 更宽的屏幕 */
+        @media only screen and (min-width: 1200px) {
+            #thinner {
+                width: 97rem;
+            }
+        }
+
+        /*页脚页头格式*/
+        .el-header, .el-footer {
+            background-color: #fefefe;
+            color: #333;
+            text-align: justify; /*设置文字 两端分布*/
+            line-height: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* 设置页头下p元素属性*/
+        .el-header > p {
+            font-size: 140%;
+            color: #4d4d4d;
+            font-family: Helvetica, sans-serif
+        }
+
+        /* 设置页脚下元素属性*/
+        .el-footer > div {
+            font-size: 1.4rem;
+            color: #f7f6f2;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        /*主体组件el-main格式*/
+        .el-main {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+            margin-top: 1rem;
+            border-color: #e5e5e5;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        /*设置导航栏的字体格式*/
+        .el-menu-demo {
+            font-family: Helvetica, sans-serif;
+            font-size: 130%;
+            font-weight: bold;
+        }
+
+        /*登录+标题banner的设置*/
+        .banner {
+            height: 8rem;
+            background-color: #205573;
+            margin: 0;
+        }
+
+        /*banner下面那个quarTeT标题的格式*/
+        .banner > a {
+            color: #ffffff;
+            font-size: 5rem;
+            font-family: Helvetica, sans-serif;
+            padding-top: 1rem;
+            padding-left: 1rem;
+            margin: 0;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        /*ele container setting*/
+        body > .el-container {
+            margin-bottom: 5rem;
+        }
+
+        .el-container:nth-child(5) .el-aside,
+        .el-container:nth-child(6) .el-aside {
+            line-height: 30rem;
+        }
+
+        .el-container:nth-child(7) .el-aside {
+            line-height: 50rem;
+        }
+
+        /*Logs提示*/
+        .text {
+            font-size: 14px;
+        }
+
+        .item {
+            text-align: left;
+        }
+
+        .box-card {
+        }
+        /*导航栏样式*/
+        /*父div*/
+        .navDiv{
+            float: right;
+            padding-right: 4rem;
+            margin-right: 4rem;
+        }
+        /*整体导航栏*/
+        .navDiv>.el-menu-demo{
+            margin: auto;
+            padding-top: 1.2rem;
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+        }
+        /*导航栏item字体大小*/
+        .navDiv .el-menu-item{
+            font-size: 18px;
+            width: 10rem;
+            text-align: center;
+        }
+        /*submenu字体大小*/
+        .navDiv .el-submenu__title{
+            font-size: 18px;
+            color: #303133;
+            padding: 0 20px;
+            cursor: pointer;
+            -webkit-transition: border-color .3s,background-color .3s,color .3s;
+            transition: border-color .3s,background-color .3s,color .3s;
+            box-sizing: border-box;
+        }
+        /*去除导航栏原生下划线*/
+        .navDiv>.el-menu-demo.el-menu--horizontal{
+            border-bottom: none;
+        }
+
+        /*页脚格式*/
+        .pageFooter{
+            font-size: 1.5rem;
+            color: #575d66;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+            margin: auto;
+            padding-bottom: 2rem;
+        }
+        /*a链接的格式*/
+        .pageFooter>a{
+            text-decoration: none;
+            font-weight: bold;
+            color: #205573;
+        }
+        .pageFooter>a:hover{
+            color: #f4ba1d;
+        }
+        /*分割线样式*/
+        .el-divider--horizontal{
+            border-top: 1px solid #adadad;
+        }
+
+        /*懒加载图*/
+        .demo-image__lazy {
+            height: 400px;
+            overflow-y: auto;
+        }
+
+
+        /*每个模块的大标题*/
+        .descModule {
+            font-family: Helvetica, sans-serif;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #444649;
+            text-align: left;
+            margin-bottom: 2rem;
+            margin-left: 6%;
+        }
+
+        /*每个框的粗体描述字*/
+        .descHead {
+            font-family: Helvetica, sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #444649;
+            text-align: left;
+            margin-bottom: 2rem;
+            margin-left: 6%;
+        }
+
+        /* 块的文字描述*/
+        .descFormat {
+            font-family: Helvetica, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #4b4b4b;
+            margin-left: 6%;
+            text-align: left;
+        }
+
+        .descFormat a {
+            color: #205573;
+            text-decoration: none;
+        }
+
+        .descFormat em{
+            color: #409eff;
+            font-weight: 600;
+        }
+
+        /*对块主体的css*/
+        .blockMain{
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!--1. 登录注册-->
+    <div class="banner">
+        <!--标题-->
+        <a href="home.html"> quarTeT </a>
+        <!--2. 导航栏-->
+        <span class="navDiv">
+            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引  -->
+            <el-menu :default-active="activeBar"
+                     class="el-menu-demo"
+                     background-color="#205573"
+                     text-color="#e3e3e0"
+                     active-text-color="#ffffff"
+                     mode="horizontal" @select="handleSelect">
+                <el-menu-item  index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">
+                        Tools
+                    </template>
+                    <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
+                    <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
+                    <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
+                    <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
+                </el-submenu>
+                <el-submenu index="3">
+                    <template slot="title">Document</template>
+                    <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
+                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
+                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
+            </el-menu>
+        </span>
+    </div>
+
+    <!--3 log信息-->
+    <div id="thinner">
+        <el-container>
+            <el-main>
+                <h1 class="descModule">
+                    Process Demo
+                </h1>
+                <div class="descFormat">
+                    <span>
+                        <i class="el-icon-caret-right"></i>
+                        这是demo页面。<br/>
+                    </span>
+                </div>
+                <!--块的描述-->
+                <h2 class="descHead">
+                    这是使用懒加载图的方式，可以添加图和文字。（随便找的图
+                </h2>
+                <div class="descFormat">
+                    <span>
+                        <i class="el-icon-caret-right"></i>
+                        This is the lazy image.<br/>
+                    </span>
+                </div>
+
+                <!--懒加载图-->
+                <div class="blockMain">
+                    <div class="demo-image__lazy">
+                        <el-image v-for="url in urls" :key="url" :src="url" lazy></el-image>
+                    </div>
+                </div>
+
+                <!--视频-->
+                <!--块的描述-->
+                <h2 class="descHead">
+                    这是使用视频的方式。（没写视频源所以是黑的）
+                </h2>
+                <div class="descFormat">
+                    <span>
+                        <i class="el-icon-caret-right"></i>
+                        This is the video.<br/>
+                    </span>
+                </div>
+                <div class="blockMain">
+                    <video height="400" controls>
+                        <source  type="video/mp4">
+                    </video>
+                </div>
+            </el-main>
+        </el-container>
+    </div>
+
+    <!--4 页脚信息-->
+    <el-divider></el-divider>
+    <div class="pageFooter">
+        Powered by
+        <a href="https://www.atcgn.com/">ATCG</a>
+    </div>
+</div>
+
+</body>
+
+<!--bytedance-->
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.js"></script>
+<!--需要用Vue2-->
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/2.6.0/vue.js" type="application/javascript"></script>
+<link href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/theme-chalk/index.css" rel="stylesheet"/>
+<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/index.js"></script>
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+
+<script>
+    new Vue({
+        el: `#app`,
+        data: function () {
+            return {
+                activeBar: "2", // 导航栏激活的栏，默认为Home
+                urls: [
+                    'https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-023-05747-9/MediaObjects/41586_2023_5747_Fig1_HTML.png?as=webp',
+                    'https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41586-023-05747-9/MediaObjects/41586_2023_5747_Fig2_HTML.png?as=webp',
+                ]
+            }
+        },
+        methods: {}
+    });
+</script>
+
+</html>
