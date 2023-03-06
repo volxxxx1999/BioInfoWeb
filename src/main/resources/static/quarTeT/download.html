@@ -8,91 +8,94 @@
         /*根节点html字体大小*/
         html {
             font-size: 12px;
+            /*初始化height*/
+            height: 100%;
+            margin: 0;
+            padding:0;
         }
-
         body {
             background-color: #f7f6f2; /*#f7f6f2  #d5d5d5*/
             /* 针对web元素塌陷*/
             /*min-width: 65rem;*/
             /*max-width: 130rem;*/
+
+            /*初始化height*/
+            height: 100%;
             margin: 0 auto;
+            padding: 0;
         }
 
-        /* 针对设备自适应自适应*/
-        #thinner {
-            width: 106rem;
-            margin: 0 auto;
-
+        /*总div*/
+        #app{
+            /*初始化height*/
+            min-height: 100%;
+        }
+        /* 页面主体 */
+        #mainContent {
             /* 针对web元素塌陷*/
             min-width: 65rem;
             max-width: 130rem;
-            /*border-style: solid;*/
-            /*border-color: #3e3e3e;*/
-            /*border-width: 2px;*/
-            /*box-shadow: 2rem 2rem 1rem #888888;*/
+            width: 106rem;
+            margin: 0 auto;
+        }
+        /*页脚pusher*/
+        .footerPush{
+            height: 5rem;
+        }
+        /*页脚*/
+        .footer{
+            clear: both;
+            position: relative;
+            margin-top: -5rem;
+            height: 5rem;
+            background-color: #205573;
+        }
+        /*a链接的格式*/
+        .footer>p{
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+            padding-top: 2rem;
+        }
+        .footer a{
+            text-decoration: none;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .footer a:hover{
+            color: #f4ba1d;
         }
 
         /* 手机 宽度小于768px的 */
         @media only screen and (max-width: 768px) {
-            #thinner {
+            #mainContent {
                 width: 100%;
             }
         }
 
         /* 平板 宽度大于768px的*/
         @media only screen and (min-width: 768px) {
-            #thinner {
+            #mainContent {
                 width: 62rem;
             }
         }
 
         /* 电脑 */
         @media only screen and (min-width: 992px) {
-            #thinner {
+            #mainContent {
                 width: 80rem;
             }
         }
 
         /* web 更宽的屏幕 */
         @media only screen and (min-width: 1200px) {
-            #thinner {
+            #mainContent {
                 width: 97rem;
             }
         }
 
-        .el-header, .el-footer {
-            background-color: #fefefe;
-            color: #333;
-            text-align: justify; /*设置文字 两端分布*/
-            line-height: 2rem;
-            margin-top: 1rem;
-        }
-
-        /* 设置页头下元素属性*/
-        .el-header > p {
-            font-size: 140%;
-            color: #4d4d4d;
-            font-family: Helvetica, sans-serif
-        }
-
-        /* 设置页脚下元素属性*/
-        .el-footer > div {
-            font-size: 140%;
-            color: #f7f6f2;
-            font-family: Helvetica, sans-serif;
-            text-align: center;
-        }
-
-        .el-aside {
-            background-color: #f7f6f2;
-            color: #333;
-            text-align: center;
-        }
-
-        #el-form {
-            margin-left: 0;
-        }
-
+        /*主体块的css*/
         .el-main {
             background-color: #ffffff;
             color: #333;
@@ -116,7 +119,6 @@
             background-color: #205573;
             margin: 0;
         }
-
         .banner > a {
             color: #ffffff;
             font-size: 5rem;
@@ -237,137 +239,6 @@
             transform: translateY(-30%);
         }
 
-        .btn-24,
-        .btn-24 *,
-        .btn-24 :after,
-        .btn-24 :before,
-        .btn-24:after,
-        .btn-24:before {
-            border: 0 solid;
-            box-sizing: border-box;
-        }
-
-        .btn-24 {
-            -webkit-tap-highlight-color: transparent;
-            -webkit-appearance: button;
-            background-color: #000;
-            background-image: none;
-            color: #fff;
-            cursor: pointer;
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-            Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-            Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-            font-size: 100%;
-            font-weight: 900;
-            line-height: 1.5;
-            margin: 0;
-            -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(green), to(pink), color-stop(0.5, #000), color-stop(50%, #ffffff));
-            padding: 0;
-            text-transform: uppercase;
-            height: 4rem;
-        }
-
-        .btn-24:disabled {
-            cursor: default;
-        }
-
-        .btn-24:-moz-focusring {
-            outline: auto;
-        }
-
-        .btn-24 svg {
-            display: block;
-            vertical-align: middle;
-        }
-
-        .btn-24 [hidden] {
-            display: none;
-        }
-
-        .btn-24 {
-            --background: #205573;
-            background: none;
-            overflow: hidden;
-            padding: 0.8rem 3rem;
-            position: relative;
-        }
-
-        .btn-24 span {
-            display: block;
-            position: relative;
-            transition: transform 0.2s ease;
-        }
-
-        .btn-24:after,
-        .btn-24:before {
-            --tilt: 20px;
-            background: #fff;
-            -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
-            content: "";
-            display: block;
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
-            transition: -webkit-clip-path 0.2s ease;
-            transition: clip-path 0.2s ease;
-            transition: clip-path 0.2s ease, -webkit-clip-path 0.2s ease;
-            width: 100%;
-            z-index: -1;
-        }
-
-        .btn-24:after {
-            --thickness: 5px;
-            background: var(--background);
-            height: calc(100% - var(--thickness) * 2);
-            left: var(--thickness);
-            top: var(--thickness);
-            width: calc(100% - var(--thickness) * 2);
-        }
-
-        .btn-24:hover span {
-            transform: translateX(-20px);
-        }
-
-        .btn-24:hover:after,
-        .btn-24:hover:before {
-            -webkit-clip-path: polygon(
-                    0 0,
-                    calc(100% - var(--tilt)) 0,
-                    100% 50%,
-                    calc(100% - var(--tilt)) 100%,
-                    0 100%
-            );
-            clip-path: polygon(
-                    0 0,
-                    calc(100% - var(--tilt)) 0,
-                    100% 50%,
-                    calc(100% - var(--tilt)) 100%,
-                    0 100%
-            );
-        }
-
-        /*下载div的格式*/
-        /*说明框*/
-        .download_desc{
-            font-size: 120%;
-            font-family: Helvetica,sans-serif
-        }
-        .download_desc>h3{
-            font-weight: bold;
-            text-align: center;
-        }
-        .download_desc>p{
-            text-align: center;
-        }
-        .download_desc a{
-            text-decoration: none;
-            color: #205573;
-        }
-        .download_desc a:hover{
-            color: #f4ba1d;
-        }
         /*下载按钮*/
         .download_button {
             margin: auto;
@@ -377,15 +248,6 @@
         /*ele container setting*/
         body > .el-container {
             margin-bottom: 5rem;
-        }
-
-        .el-container:nth-child(5) .el-aside,
-        .el-container:nth-child(6) .el-aside {
-            line-height: 30rem;
-        }
-
-        .el-container:nth-child(7) .el-aside {
-            line-height: 50rem;
         }
 
         /*导航栏样式*/
@@ -423,29 +285,6 @@
             border-bottom: none;
         }
 
-        /*页脚格式*/
-        .pageFooter{
-            font-size: 1.5rem;
-            color: #575d66;
-            font-family: Helvetica, sans-serif;
-            text-align: center;
-            margin: auto;
-            padding-bottom: 2rem;
-        }
-        /*a链接的格式*/
-        .pageFooter>a{
-            text-decoration: none;
-            font-weight: bold;
-            color: #205573;
-        }
-        .pageFooter>a:hover{
-            color: #f4ba1d;
-        }
-        /*分割线样式*/
-        .el-divider--horizontal{
-            border-top: 1px solid #adadad;
-        }
-
         /*每个框的粗体描述字*/
         .descHead {
             font-family: Helvetica, sans-serif;
@@ -469,54 +308,56 @@
             color: #205573;
             text-decoration: none;
         }
+        .descFormat a:hover {
+            color: #f4ba1d;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
-
-<!--Vue 控制-->
 <div id="app">
-    <!--1. 登录注册-->
+    <!--页头-->
     <div class="banner">
         <!--标题-->
         <a href="home.html"> quarTeT </a>
         <!--2. 导航栏-->
         <span class="navDiv">
-            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引  -->
-            <el-menu :default-active="activeBar"
-                     class="el-menu-demo"
-                     background-color="#205573"
-                     text-color="#e3e3e0"
-                     active-text-color="#ffffff"
-                     mode="horizontal" @select="handleSelect">
-                <el-menu-item  index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
-                <el-submenu index="2">
-                    <template slot="title">
-                        Tools
-                    </template>
-                    <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
-                </el-submenu>
-                <el-submenu index="3">
-                    <template slot="title">Document</template>
-                    <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
-                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
-                </el-submenu>
-                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
-                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
-            </el-menu>
-        </span>
+                <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引  -->
+                <el-menu :default-active="activeBar"
+                         class="el-menu-demo"
+                         background-color="#205573"
+                         text-color="#e3e3e0"
+                         active-text-color="#ffffff"
+                         mode="horizontal" @select="handleSelect">
+                    <el-menu-item  index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                    <el-submenu index="2">
+                        <template slot="title">
+                            Tools
+                        </template>
+                        <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
+                        <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
+                        <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
+                        <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="3">
+                        <template slot="title">Document</template>
+                        <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
+                        <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
+                    </el-submenu>
+                    <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
+                    <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
+                </el-menu>
+            </span>
     </div>
-
-    <div id="thinner">
+    <!--页主体-->
+    <div id="mainContent">
         <el-container>
             <el-main>
                 <!--块的描述-->
                 <h2 class="descHead">
                     Download quarTeT CLI Tools
                 </h2>
-                <!--3. 下载说明-->
+                <!--下载说明-->
                 <div class="descFormat">
                     <p>
                         quarTeT CLI toolkit is freely available to academic under MIT license, and
@@ -533,7 +374,7 @@
                         </a>.
                     </p>
                 </div>
-                <!--4. 下载按钮-->
+                <!--下载按钮-->
                 <div class="download_button">
                     <button class="btn-54" @click="downloadquartet">
                         <span class="shadow"></span>
@@ -544,7 +385,7 @@
             </el-main>
         </el-container>
 
-        <!--5. 依赖窗格-->
+        <!--依赖窗格-->
         <el-container>
             <el-main>
                 <!--块的描述-->
@@ -557,9 +398,9 @@
                             stripe
                             border
                             style=" width: 95%;
-                            font-size: 1.2rem;
-                            font-family: Helvetica,sans-serif;
-                            margin:10px 10px 10px 10px;text-align: center"
+                                font-size: 1.2rem;
+                                font-family: Helvetica,sans-serif;
+                                margin:10px 10px 10px 10px;text-align: center"
                             class="tableSet"
                             :header-cell-style="{'text-align':'center'}"
                             :cell-style="cellStyle">
@@ -583,31 +424,17 @@
             </el-main>
         </el-container>
     </div>
-
-    <!--5. 页脚-->
-    <div style="margin-bottom: 5px">
-        <el-divider></el-divider>
-        <div class="pageFooter">
-            Powered by
-            <a href="https://www.atcgn.com/">ATCG</a>
-        </div>
-    </div>
-
+    <div class="footerPush"></div>
 </div>
-
+<!--页脚-->
+<div class="footer">
+    <p>
+        Powered by
+        <a href="https://www.atcgn.com/">ATCG</a>
+    </p>
+</div>
 </body>
 
-<!-- 引入组件库 -->
-<!--JQuery-->
-<!--<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>-->
-<!--Vue-->
-<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
-<!--ElementUI index.css index.js-->
-<!--<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
-<!--<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
-<!--Axios-->
-<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<!--<script src="../js/axios-0.18.0.js"></script>-->
 
 <!--bytedance-->
 <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.js"></script>
@@ -638,12 +465,26 @@
                         version:'>2.24',
                         link:'...',
                     },
+                    {
+                        name:'minimap2',
+                        version:'>2.24',
+                        link:'...',
+                    },
+                    {
+                        name:'minimap2',
+                        version:'>2.24',
+                        link:'...',
+                    },
+                    {
+                        name:'minimap2',
+                        version:'>2.24',
+                        link:'...',
+                    },
 
                 ]
 
             }
         },
-
         methods: {
             // 下载
             downloadquartet(){
@@ -659,16 +500,16 @@
                 // 创建单击事件
                 let eventObj = document.createEvent('MouseEvents');
                 eventObj.initMouseEvent('click', true, true, window,
-                                        0, 0, 0, 0, 0,
-                                        false, false, true, false,
-                                        0, null);
+                    0, 0, 0, 0, 0,
+                    false, false, true, false,
+                    0, null);
                 // 触发单击事件
                 $a.dispatchEvent(eventObj);
             },
             cellStyle({row, column, rowIndex, columnIndex}) {
-                    return {
-                        'text-align': 'center',
-                    }
+                return {
+                    'text-align': 'center',
+                }
             },
         },
     });

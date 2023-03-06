@@ -6,91 +6,96 @@
     <title>quarTeT - Contact</title>
     <style>
         /*根节点html字体大小*/
-        html{
-            font-size:12px
+        html {
+            font-size: 12px;
+            /*初始化height*/
+            height: 100%;
+            margin: 0;
+            padding:0;
         }
+
         body {
-            background-color:#f7f6f2; /*#f7f6f2  #d5d5d5*/
+            background-color: #f7f6f2; /*#f7f6f2  #d5d5d5*/
             /* 针对web元素塌陷*/
             /*min-width: 65rem;*/
             /*max-width: 130rem;*/
-            margin: 0 auto;
+
+            /*初始化height*/
+            height: 100%;
+            margin: 0;
+            padding:0;
+        }
+
+        /*总div*/
+        #app{
+            /*初始化height*/
+            min-height: 100%;
         }
         /* 针对设备自适应自适应*/
-        #thinner {
-            width: 106rem;
-            margin: 0 auto;
-
+        #mainContent {
             /* 针对web元素塌陷*/
             min-width: 65rem;
             max-width: 130rem;
-            /*border-style: solid;*/
-            /*border-color: #3e3e3e;*/
-            /*border-width: 2px;*/
-            /*box-shadow: 2rem 2rem 1rem #888888;*/
+            width: 106rem;
+            margin: 0 auto;
+        }
+        /*页脚pusher*/
+        .footerPush{
+            height: 5rem;
+        }
+        /*页脚*/
+        .footer{
+            clear: both;
+            position: relative;
+            margin-top: -5rem;
+            height: 5rem;
+            background-color: #205573;
+        }
+        /*a链接的格式*/
+        .footer>p{
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+            padding-top: 2rem;
+        }
+        .footer a{
+            text-decoration: none;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .footer a:hover{
+            color: #f4ba1d;
         }
 
         /* 手机 宽度小于768px的 */
         @media only screen and (max-width: 768px) {
-            #thinner {
+            #mainContent {
                 width: 100%;
             }
         }
 
         /* 平板 宽度大于768px的*/
         @media only screen and (min-width: 768px) {
-            #thinner {
+            #mainContent {
                 width: 62rem;
             }
         }
 
         /* 电脑 */
         @media only screen and (min-width: 992px) {
-            #thinner {
+            #mainContent {
                 width: 80rem;
             }
         }
 
         /* web 更宽的屏幕 */
         @media only screen and (min-width: 1200px) {
-            #thinner {
+            #mainContent {
                 width: 97rem;
             }
         }
 
-        .el-header, .el-footer {
-            background-color: #fefefe;
-            color: #333;
-            text-align: justify; /*设置文字 两端分布*/
-            line-height: 2rem;
-            margin-top: 1rem;
-        }
-
-        /* 设置页头下元素属性*/
-        .el-header > p {
-            font-size: 140%;
-            color: #4d4d4d;
-            font-family: Helvetica, sans-serif
-        }
-
-        /* 设置页脚下元素属性*/
-        .el-footer > div {
-            font-size: 140%;
-            color: #f7f6f2;
-            font-family: Helvetica, sans-serif;
-            text-align: center;
-        }
-
-        .el-aside {
-            background-color: #f7f6f2;
-            color: #333;
-            text-align: center;
-        }
-        /*让表单不空出来*/
-        #el-form{
-            margin-left: 0px;
-            /*margin-top: 60px;*/
-        }
         .el-main {
             background-color: #ffffff;
             color: #333;
@@ -133,13 +138,7 @@
         body > .el-container {
             margin-bottom: 40px;
         }
-        .el-container:nth-child(5) .el-aside,
-        .el-container:nth-child(6) .el-aside {
-            line-height: 260px;
-        }
-        .el-container:nth-child(7) .el-aside {
-            line-height: 320px;
-        }
+
         /*导航栏样式*/
         /*父div*/
         .navDiv{
@@ -173,29 +172,6 @@
         /*去除导航栏原生下划线*/
         .navDiv>.el-menu-demo.el-menu--horizontal{
             border-bottom: none;
-        }
-
-        /*页脚格式*/
-        .pageFooter{
-            font-size: 1.5rem;
-            color: #575d66;
-            font-family: Helvetica, sans-serif;
-            text-align: center;
-            margin: auto;
-            padding-bottom: 2rem;
-        }
-        /*a链接的格式*/
-        .pageFooter>a{
-            text-decoration: none;
-            font-weight: bold;
-            color: #205573;
-        }
-        .pageFooter>a:hover{
-            color: #f4ba1d;
-        }
-        /*分割线样式*/
-        .el-divider--horizontal{
-            border-top: 1px solid #adadad;
         }
 
         /*每个框的粗体描述字*/
@@ -233,44 +209,38 @@
     </style>
 </head>
 <body>
-
-<!--Vue 控制-->
 <div id="app" >
-    <!--1. 登录注册-->
     <div class="banner">
         <!--标题-->
         <a href="home.html"> quarTeT </a>
-        <!--2. 导航栏-->
         <span class="navDiv">
-            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引  -->
-            <el-menu :default-active="activeBar"
-                     class="el-menu-demo"
-                     background-color="#205573"
-                     text-color="#e3e3e0"
-                     active-text-color="#ffffff"
-                     mode="horizontal" @select="handleSelect">
-                <el-menu-item  index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
-                <el-submenu index="2">
-                    <template slot="title">
-                        Tools
-                    </template>
-                    <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
-                </el-submenu>
-                <el-submenu index="3">
-                    <template slot="title">Document</template>
-                    <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
-                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
-                </el-submenu>
-                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
-                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
-            </el-menu>
-        </span>
+                <el-menu :default-active="activeBar"
+                         class="el-menu-demo"
+                         background-color="#205573"
+                         text-color="#e3e3e0"
+                         active-text-color="#ffffff"
+                         mode="horizontal" @select="handleSelect">
+                    <el-menu-item  index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                    <el-submenu index="2">
+                        <template slot="title">
+                            Tools
+                        </template>
+                        <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
+                        <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
+                        <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
+                        <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="3">
+                        <template slot="title">Document</template>
+                        <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
+                        <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
+                    </el-submenu>
+                    <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
+                    <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
+                </el-menu>
+            </span>
     </div>
-
-    <div id="thinner">
+    <div id="mainContent">
         <!--介绍信息-->
         <el-container>
             <el-main style="font-size: 120%; font-family: Helvetica,sans-serif">
@@ -278,7 +248,7 @@
                 <h2 class="descHead">
                     Contact US
                 </h2>
-<!--                <h3 style="font-weight: bold; text-align: center">quarTeT</h3>-->
+                <!--                <h3 style="font-weight: bold; text-align: center">quarTeT</h3>-->
                 <div class="descFormat">
                     <p>
                         quarTeT is a collection of tools for T2T genome assembly and basic analysis in automatic workflow.
@@ -325,27 +295,17 @@
             </el-main>
         </el-container>
     </div>
-
-    <!--5 页脚信息-->
-    <el-divider></el-divider>
-    <div class="pageFooter">
+    <div class="footerPush"></div>
+</div>
+<!--页脚-->
+<div class="footer">
+    <p>
         Powered by
         <a href="https://www.atcgn.com/">ATCG</a>
-    </div>
+    </p>
 </div>
 </body>
 
-<!-- 引入组件库 -->
-<!--JQuery-->
-<!--<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>-->
-<!--Vue-->
-<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
-<!--ElementUI index.css index.js-->
-<!--<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
-<!--<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
-<!--Axios-->
-<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<!--<script src="../js/axios-0.18.0.js"></script>-->
 
 <!--bytedance-->
 <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.js"></script>
@@ -372,7 +332,6 @@
             }
         },
         methods: {
-            // https://blog.csdn.net/weixin_46822367/article/details/123893527
             onAdviceSubmit() {
                 if(this.formLabelAlign.name === ''){
                     this.$message.warning("Please enter your name")
