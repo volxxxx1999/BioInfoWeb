@@ -8,6 +8,10 @@
         /*根节点html字体大小*/
         html {
             font-size: 12px;
+            /*初始化height*/
+            height: 100%;
+            margin: 0;
+            padding:0;
         }
 
         body {
@@ -15,68 +19,81 @@
             /* 针对web元素塌陷*/
             /*min-width: 65rem;*/
             /*max-width: 130rem;*/
-            margin: 0 auto;
+
+            /*初始化height*/
+            height: 100%;
+            margin: 0;
+            padding:0;
         }
 
+        /*总div*/
+        #app{
+            /*初始化height*/
+            min-height: 100%;
+        }
         /* 针对设备自适应自适应*/
-        #thinner {
-            width: 106rem;
-            margin: 0 auto;
+        #mainContent {
             /* 针对web元素塌陷*/
             min-width: 65rem;
             max-width: 130rem;
+            width: 106rem;
+            margin: 0 auto;
+        }
+        /*页脚pusher*/
+        .footerPush{
+            height: 5rem;
+        }
+        /*页脚*/
+        .footer{
+            clear: both;
+            position: relative;
+            margin-top: -5rem;
+            height: 5rem;
+            background-color: #205573;
+        }
+        /*a链接的格式*/
+        .footer>p{
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+            padding-top: 2rem;
+        }
+        .footer a{
+            text-decoration: none;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .footer a:hover{
+            color: #f4ba1d;
         }
 
         /* 手机 宽度小于768px的 */
         @media only screen and (max-width: 768px) {
-            #thinner {
+            #mainContent {
                 width: 100%;
             }
         }
 
         /* 平板 宽度大于768px的*/
         @media only screen and (min-width: 768px) {
-            #thinner {
+            #mainContent {
                 width: 62rem;
             }
         }
 
         /* 电脑 */
         @media only screen and (min-width: 992px) {
-            #thinner {
+            #mainContent {
                 width: 80rem;
             }
         }
 
         /* web 更宽的屏幕 */
         @media only screen and (min-width: 1200px) {
-            #thinner {
+            #mainContent {
                 width: 97rem;
             }
-        }
-
-        /*页脚页头格式*/
-        .el-header, .el-footer {
-            background-color: #fefefe;
-            color: #333;
-            text-align: justify; /*设置文字 两端分布*/
-            line-height: 2rem;
-            margin-top: 1rem;
-        }
-
-        /* 设置页头下p元素属性*/
-        .el-header > p {
-            font-size: 140%;
-            color: #4d4d4d;
-            font-family: Helvetica, sans-serif
-        }
-
-        /* 设置页脚下元素属性*/
-        .el-footer > div {
-            font-size: 1.4rem;
-            color: #f7f6f2;
-            font-family: Helvetica, sans-serif;
-            text-align: center;
         }
 
         /*主体组件el-main格式*/
@@ -103,7 +120,6 @@
             background-color: #205573;
             margin: 0;
         }
-
         /*banner下面那个quarTeT标题的格式*/
         .banner > a {
             color: #ffffff;
@@ -121,70 +137,118 @@
             margin-bottom: 5rem;
         }
 
-        .el-container:nth-child(5) .el-aside,
-        .el-container:nth-child(6) .el-aside {
-            line-height: 30rem;
-        }
-
-        .el-container:nth-child(7) .el-aside {
-            line-height: 50rem;
-        }
         /*导航栏样式*/
         /*父div*/
-        .navDiv{
+        .navDiv {
             float: right;
             padding-right: 4rem;
             margin-right: 4rem;
         }
         /*整体导航栏*/
-        .navDiv>.el-menu-demo{
+        .navDiv > .el-menu-demo {
             margin: auto;
             padding-top: 1.2rem;
             font-family: Helvetica, sans-serif;
             font-weight: bold;
         }
         /*导航栏item字体大小*/
-        .navDiv .el-menu-item{
+        .navDiv .el-menu-item {
             font-size: 18px;
             width: 10rem;
             text-align: center;
         }
         /*submenu字体大小*/
-        .navDiv .el-submenu__title{
+        .navDiv .el-submenu__title {
             font-size: 18px;
             color: #303133;
             padding: 0 20px;
             cursor: pointer;
-            -webkit-transition: border-color .3s,background-color .3s,color .3s;
-            transition: border-color .3s,background-color .3s,color .3s;
+            -webkit-transition: border-color .3s, background-color .3s, color .3s;
+            transition: border-color .3s, background-color .3s, color .3s;
             box-sizing: border-box;
         }
         /*去除导航栏原生下划线*/
-        .navDiv>.el-menu-demo.el-menu--horizontal{
+        .navDiv > .el-menu-demo.el-menu--horizontal {
             border-bottom: none;
         }
 
-        /*页脚格式*/
-        .pageFooter{
-            font-size: 1.5rem;
-            color: #575d66;
+        /*每个模块的大标题*/
+        .descModule {
             font-family: Helvetica, sans-serif;
-            text-align: center;
-            margin: auto;
-            padding-bottom: 2rem;
-        }
-        /*a链接的格式*/
-        .pageFooter>a{
-            text-decoration: none;
+            font-size: 3rem;
             font-weight: bold;
+            color: #444649;
+            text-align: left;
+            margin-bottom: 2rem;
+            margin-left: 6%;
+        }
+        /*每个框的粗体描述字*/
+        .descHead {
+            font-family: Helvetica, sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #444649;
+            text-align: left;
+            margin-bottom: 2rem;
+            margin-left: 6%;
+        }
+        /* 块的文字描述*/
+        .descFormat {
+            font-family: Helvetica, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #4b4b4b;
+            margin-left: 6%;
+            text-align: left;
+        }
+        .descFormat a {
             color: #205573;
+            text-decoration: none;
         }
-        .pageFooter>a:hover{
-            color: #f4ba1d;
+        .descFormat em {
+            color: #409eff;
+            font-weight: 600;
         }
-        /*分割线样式*/
-        .el-divider--horizontal{
-            border-top: 1px solid #adadad;
+
+        /*模拟代码块 总样式*/
+        .codeBlock {
+            width: 90%;
+            box-shadow: 3px 3px 3px #949ba3;
+            background-color: #20242b;  /*#20242b*/
+            border: solid 1px #c2cdcd;
+            color: #53dfdd;  /*#53dfdd*/
+            font-size: 15px;
+            font-family: Tahoma, serif;
+            text-align: justify;
+        }
+        .codeBlock > .codeMain {
+            margin: 1rem 1rem 1rem 1rem;
+        }
+        /*缩进代码*/
+        .codeBlock > .indent {
+            margin-left: 3rem;
+            margin-right: 1rem;
+        }
+
+        /*回到页头*/
+        .el-backtop {
+            position: fixed;
+            background-color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: #409eff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            box-shadow: 0 0 6px rgb(88, 102, 109);
+            cursor: pointer;
+            z-index: 5;
+        }
+        .el-backtop > a {
+            text-decoration: none;
+            color: #409eff;
         }
     </style>
 </head>
@@ -196,89 +260,697 @@
         <a href="home.html"> quarTeT </a>
         <!--2. 导航栏-->
         <span class="navDiv">
-            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引  -->
-            <el-menu :default-active="activeBar"
-                     class="el-menu-demo"
-                     background-color="#205573"
-                     text-color="#e3e3e0"
-                     active-text-color="#ffffff"
-                     mode="horizontal" @select="handleSelect">
-                <el-menu-item  index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
-                <el-submenu index="2">
-                    <template slot="title">
-                        Tools
-                    </template>
-                    <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
-                </el-submenu>
-                <el-submenu index="3">
-                    <template slot="title">Document</template>
-                    <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
-                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
-                </el-submenu>
-                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
-                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
-            </el-menu>
-        </span>
+                <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引  -->
+                <el-menu :default-active="activeBar"
+                         class="el-menu-demo"
+                         background-color="#205573"
+                         text-color="#e3e3e0"
+                         active-text-color="#ffffff"
+                         mode="horizontal" @select="handleSelect">
+                    <el-menu-item index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                    <el-submenu index="2">
+                        <template slot="title">
+                            Tools
+                        </template>
+                        <el-menu-item index="2-1"
+                                      onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
+                        <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
+                        <el-menu-item index="2-3"
+                                      onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
+                        <el-menu-item index="2-4"
+                                      onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="3">
+                        <template slot="title">Document</template>
+                        <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
+                        <el-menu-item index="3-2"
+                                      onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
+                    </el-submenu>
+                    <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
+                    <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
+                </el-menu>
+            </span>
+    </div>
+
+    <!--定位 回到页头-->
+    <div class="el-backtop" style="right: 120px; bottom: 150px;">
+        <a href="javascript:scrollTo(0,0);">
+            <i class="el-icon-caret-top" style="font-size: 1.5rem;"></i>
+        </a>
     </div>
 
     <!--3 log信息-->
-    <div id="thinner">
+    <div id="mainContent">
         <el-container>
             <el-main>
-                <div id="content" style="text-align: justify"></div>
+                <!--H1标题-->
+                <h1 class="descModule">
+                    quarTeT: Telomere-to-telomere Toolkit
+                </h1>
+                <!--描述文字-->
+                <div class="descFormat">
+                        <span>
+                            quarTeT is a collection of tools for T2T genome assembly and basic analysis in automatic workflow.<br/><br/>
+                            Task include:<br/>
+                            <i class="el-icon-caret-right"></i>
+                            <a><em>AssemblyMapper</em></a>
+                            : reference-guided genome assembly <br/>
+                            <i class="el-icon-caret-right"></i>
+                            <a><em>GapFiller</em></a>
+                            : long-reads based gap filling <br/>
+                            <i class="el-icon-caret-right"></i>
+                            <a><em>CentroMiner</em></a>
+                            : centromere candidate prediction <br/>
+                            <i class="el-icon-caret-right"></i>
+                            <a><em>TeloExplorer</em></a>
+                            : telomere identification <br/>
+                        </span>
+                </div>
             </el-main>
         </el-container>
-    </div>
 
-    <!--4 页脚信息-->
-    <el-divider></el-divider>
-    <div class="pageFooter">
+        <el-container>
+            <el-main>
+                <h2 class="descHead">
+                    Getting Started
+                </h2>
+                <!--Dependencies-->
+                <h3 class="descHead" style="font-size: 20px">
+                    Dependencies
+                </h3>
+                <div class="descFormat">
+                        <span>
+                            <i class="el-icon-caret-right"></i>
+                            <a href="https://www.python.org/">
+                                <em>Python3</em>
+                            </a>
+                            (>3.6, tested on 3.7.4 and 3.9.12)<br/>
+
+                            <i class="el-icon-caret-right"></i>
+                            <a href="https://github.com/lh3/minimap2">
+                                <em>Minimap2</em>
+                            </a>
+                            (tested on 2.24-r1122 and 2.24-r1155-dirty)<br/>
+
+                            <i class="el-icon-caret-right"></i>
+                            <a href="https://github.com/mummer4/mummer">
+                                <em>MUMmer4</em>
+                            </a>
+                            tested on 4.0.0rc1<br/>
+
+                            <i class="el-icon-caret-right"></i>
+                            <a href="https://github.com/Benson-Genomics-Lab/TRF">
+                                <em>trf</em>
+                            </a>
+                            (tested on 4.0.0rc1)<br/>
+
+                            <i class="el-icon-caret-right"></i>
+                            <a href="https://github.com/weizhongli/cdhit">
+                                <em>CD-hit</em>
+                            </a>
+                            (tested on 4.6 and 4.8.1)<br/>
+
+                            <i class="el-icon-caret-right"></i>
+                            <a href="https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/">
+                                <em>BLAST+</em>
+                            </a>
+                            (tested on 2.8.1 and 2.11.0)<br/>
+
+                            <i class="el-icon-caret-right"></i>
+                            <a href="https://github.com/tolkit/telomeric-identifier ">
+                                <em>tidk</em>
+                            </a>
+                            (tested on 0.2.1)<br/>
+
+                            <i class="el-icon-caret-right"></i>
+                            <a href="https://github.com/gnuplot/gnuplot">
+                                <em>gnuplot</em>
+                            </a>
+                            (tested on 4.6 patchlevel 2 and 6)<br/>
+
+                            <i class="el-icon-caret-right"></i>
+                            <a href="https://www.R-project.org/">
+                                <em>R</em>
+                            </a>
+                            (tested on 3.6.0)<br/>
+
+                            <i class="el-icon-caret-right"></i>
+                            <a>
+                                <em>RIdeogram</em>
+                            </a>
+                            (tested on 0.2.2)<br/>
+                        </span>
+                </div>
+                <!--Installation-->
+                <h3 class="descHead" style="font-size: 20px">
+                    Installation
+                </h3>
+                <div class="descFormat">
+                    <!--在这里 你可以添加对这下载文件的说明-->
+                    <span>
+                            quarTeT do not require installation.<br/><br/>
+                            1. <a href="https://www.atcgn.com/t2t/bioRepository/exec/quartet.tar.gz">
+                            <em>Download quarTeT</em></a><br/>
+                            2. Extract files by <em>tar -xf {path}/quartet.tar.gz</em><br/>
+                            3. Run <em>python3 {path}/quartet.py</em> to start.<br/>
+                        </span>
+                </div>
+            </el-main>
+        </el-container>
+
+        <el-container>
+            <el-main>
+                <h2 class="descHead">
+                    Usage
+                </h2>
+                <div class="descFormat">
+                    <div class="codeBlock">
+                        <div class="codeMain">
+                            <p>quarTeT: Telomere-to-telomere Toolkit</p><br/>
+                            <p>Usage: python3 quartet.py &lt;module&gt; &lt;parameters&gt;</p>
+                            <p>Modules:</p>
+                            <table cellpadding="5">
+                                <tr>
+                                    <td>AssemblyMapper</td>
+                                    <td>am</td>
+                                    <td>Assemble draft genome.</td>
+                                </tr>
+                                <tr>
+                                    <td>GapFiller</td>
+                                    <td>gf</td>
+                                    <td>Fill gaps in draft genome.</td>
+                                </tr>
+                                <tr>
+                                    <td>CentroMiner</td>
+                                    <td>cm</td>
+                                    <td>Identify centromere candidates.</td>
+                                </tr>
+                                <tr>
+                                    <td>TeloExplorer</td>
+                                    <td>te</td>
+                                    <td>Identify telomeres.</td>
+                                </tr>
+                            </table>
+                            <p>Use &lt;module&gt; -h for module usage.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <h3 class="descHead" style="font-size: 20px">
+                    AssemblyMapper
+                </h3>
+                <div class="descFormat">
+                    <p>AssemblyMapper is a reference-guided assemble tool.</p>
+                    <p>A haplotype-resloved contig-level assembly and a close-related reference genome are required as
+                        input, both in fasta format.</p>
+                    <p>Note that contigs should be haplotype-resloved.</p>
+                    <p>It's recommended to obtain such an assembly using
+                        <a href="https://github.com/chhylp123/hifiasm">
+                            <em>hifiasm.</em>
+                        </a>
+                    </p>
+                    <p>you can convert
+                        <em>{prefix}.bp.hap1.p_ctg.gfa</em>
+                        and
+                        <em>{prefix}.bp.hap2.p_ctg.gfa</em>
+                        generated by hifiasm to FASTA format as input, separately.
+                    </p>
+                    <div class="codeBlock">
+                        <div class="codeMain">
+                            <p>Usage: python3 quartet.py AssemblyMapper &lt;parameters&gt;</p>
+                            <div class="indent">
+                                <table cellpadding="5">
+                                    <tr>
+                                        <td>-h, --help</td>
+                                        <td>show this help message and exit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-r REFERENCE_GENOME</td>
+                                        <td>(*Required) Reference genome file, FASTA format.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-q CONTIGS</td>
+                                        <td>(*Required) Haplotype solved contigs file, FASTA format.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-c MIN_CONTIG_LENGTH</td>
+                                        <td>Contigs shorter than INT (bp) will be removed, default: 50000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-l MIN_ALIGNMENT_LENGTH</td>
+                                        <td>The min alignment length to be select (bp), default: 10000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-i MIN_ALIGNMENT_IDENTITY</td>
+                                        <td>The min alignment identity to be select (%), default: 90</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-p PREFIX</td>
+                                        <td>The prefix used on generated files, default: quarTeT</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-t THREADS</td>
+                                        <td>Use number of threads, default: 1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-a {minimap2,mummer}</td>
+                                        <td>Specify alignment program (support minimap2 and mummer), default: minimap2
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>--plot</td>
+                                        <td>Plot a colinearity graph for draft genome to reference alignments. (will
+                                            cost more time)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>--overwrite</td>
+                                        <td>Overwrite existing alignment file instead of reuse.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>--minimapoption MINIMAPOPTION</td>
+                                        <td>Pass additional parameters to minimap2 program, default: -x asm5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>--nucmeroption NUCMEROPTION</td>
+                                        <td>Pass additional parameters to nucmer program.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>--deltafilteroption DELTAFILTEROPTION</td>
+                                        <td>Pass additional parameters to delta-filter program.</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <p>Output files should be as follow:</p>
+                    <div class="codeBlock">
+                        <div class="codeMain">
+                            <p>Usage: python3 quartet.py AssemblyMapper &lt;parameters&gt;</p>
+                            <div class="indent">
+                                <table cellpadding="5">
+                                    <tr>
+                                        <td>{prefix}.draftgenome.fasta</td>
+                                        <td>The pseudo-chromosome-level assembly, fasta format.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{prefix}.draftgenome.agp</td>
+                                        <td>The structure of this assembly, AGP format.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{prefix}.draftgenome.stat</td>
+                                        <td>The statistic of this assembly, including total size and each chromosome's
+                                            size, GC content, gap count and locations.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{prefix}.draftgenome.png</td>
+                                        <td>The figure draws relative length of chromosomes and gap locations for
+                                            assembly.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{prefix}.contig.mapinfo</td>
+                                        <td>The statistic of input contigs, including total mapped and discarded size,
+                                            and each contig's destination.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{prefix}.contig_map_ref.png</td>
+                                        <td>The alignment colinearity graph between contigs and reference genome.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{prefix}.draftgenome_map_ref.png</td>
+                                        <td>The alignment colinearity graph between this assembly genome and reference
+                                            genome. Only available with --plot.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h3 class="descHead" style="font-size: 20px">
+                    GapFiller
+                </h3>
+                <div class="descFormat">
+                    <p>
+                        GapFiller is a long-reads based gapfilling tool.
+                    </p>
+                    <p>
+                        A gap-tied genome and corresponding long-reads are required as input, both in fasta format.
+                    </p>
+                    <p>
+                        If possible, using long-reads assembled and polished contigs instead of reads may improve the
+                        quality.
+                    </p>
+                    <div class="codeBlock">
+                        <div class="codeMain">
+                            <p>Usage: python3 quartet.py GapFiller &lt;parameters&gt;</p>
+                            <div class="indent">
+                                <table cellpadding="5">
+                                    <tr>
+                                        <td>-h, --help</td>
+                                        <td>show this help message and exit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-d DRAFT_GENOME</td>
+                                        <td>(*Required) Draft genome file to be filled, FASTA format.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-g GAPCLOSER_CONTIG [GAPCLOSER_CONTIG ...]</td>
+                                        <td>(*Required) All contigs files (accept multiple file) used to fill gaps,
+                                            FASTA format.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-f FLANKING_LEN</td>
+                                        <td>The flanking seq length of gap used to anchor (bp), default: 5000
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-l MIN_ALIGNMENT_LENGTH</td>
+                                        <td>The min alignment length to be select (bp), default: 1000
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-i MIN_ALIGNMENT_IDENTITY</td>
+                                        <td>The min alignment identity to be select (%), default: 40</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-m MAX_FILLING_LEN</td>
+                                        <td>The max sequence length acceptable to fill any gaps, default: 1000000
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-p PREFIX</td>
+                                        <td>The prefix used on generated files, default: quarTeT
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-t THREADS</td>
+                                        <td>Use number of threads, default: 1
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>--overwrite</td>
+                                        <td>Overwrite existing alignment file instead of reuse.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>--minimapoption MINIMAPOPTION</td>
+                                        <td>Pass additional parameters to minimap2 program, default: -x asm5
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Output files should be as follow:</p>
+                    <div class="codeBlock">
+                        <div class="codeMain">
+                            <p>Usage: python3 quartet.py GapFiller &lt;parameters&gt;</p>
+                            <div class="indent">
+                                <table cellpadding="5">
+                                    <tr>
+                                        <td>{prefix}.genome.filled.fasta</td>
+                                        <td>The gap-filled genome, fasta format.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{prefix}.genome.filled.detail</td>
+                                        <td>Detailed information for each gap, including gap closed and remains, total
+                                            filled size and closer's ID, range, etc.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{prefix}.genome.filled.stat</td>
+                                        <td>The statistic of filled genome, including total size and each chromosome's
+                                            size, GC content, gap count and locations.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{prefix}.genome.filled.png</td>
+                                        <td>The figure draws relative length of chromosomes and gap locations for
+                                            assembly.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="descHead" style="font-size: 20px">
+                    CentroMiner
+                </h3>
+                <div class="descFormat">
+                    <p>CentroMiner is a centromere prediction tool.
+                    </p>
+                    <p>A genome file in fasta format is required as input.
+                    </p>
+                    <p>Optionally, an addition input of TE annotation (or just LTR annotation) in gff3 format can
+                        improve the performance.
+                    </p>
+                    <p>It's recommended to obtain TE annotation using
+                        <a href="https://github.com/oushujun/EDTA">
+                            <em>EDTA</em>
+                        </a>
+                    </p>
+                    <p>
+                        <em>{genome file}.mod.EDTA.TEanno.gff3</em>
+                        generated by EDTA can directly feed CentroMiner, unless you
+                        have sequence ID longer than 15 characters.
+                    </p>
+                    <p>Note that the sequence ID in first column should be consistent with in genome. Some tools may
+                        change sequence ID if ID is too long.
+                    </p>
+                    <p>The sequence ontology in the third column should include "LTR" to be recognized.
+                    </p>
+
+                    <div class="codeBlock">
+                        <div class="codeMain">
+                            <p>Usage: python3 quartet.py CentroMiner &lt;parameters&gt;</p>
+                            <div class="indent">
+                                <table cellpadding="5">
+                                    <tr>
+                                        <td>-h, --help</td>
+                                        <td>show this help message and exit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>-i GENOME_FASTA</td>
+                                        <td>(*Required) Genome file, FASTA format.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>--TE TE</td>
+                                        <td>TE annotation file, gff3 format.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-n MIN_PERIOD</td>
+                                        <td>Min period to be consider as centromere repeat monomer. Default: 100
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-m MAX_PERIOD</td>
+                                        <td>Max period to be consider as centromere repeat monomer. Default: 200
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-s CLUSTER_IDENTITY</td>
+                                        <td>Min identity between TR monomers to be clustered (Cannot be smaller than
+                                            0.8). Default: 0.8
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-d CLUSTER_MAX_DELTA</td>
+                                        <td>Max period delta for TR monomers in a cluster. Default: 10
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-e EVALUE</td>
+                                        <td>E-value threholds in blast. Default: 0.00001
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-g MAX_GAP</td>
+                                        <td>Max allowed gap size between two tandem repeats to be considered as in one
+                                            tandem repeat region. Default: 50000
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-l MIN_LENGTH</td>
+                                        <td>Min size of tandem repeat region to be selected as candidate. Default:
+                                            100000
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-t THREADS</td>
+                                        <td>Limit number of using threads, default: 1
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>-p PREFIX</td>
+                                        <td>Prefix used by generated files. Default: quarTeT
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>--trf [TRF_PARAMETER ...]</td>
+                                        <td>Change TRF parameters: &lt;match&gt; &lt;mismatch&gt; &lt;delta&gt; &lt;PM&gt;
+                                            &lt;PI&gt; &lt;minscore&gt; Default: 2 7 7 80 10 50
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>--overwrite</td>
+                                        <td>Overwrite existing trf dat file instead of reuse.</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>
+                        Output files should be as follow:
+                    </p>
+
+                    <div class="codeBlock">
+                        <div class="codeMain">
+                            <p>Usage: python3 quartet.py CentroMiner &lt;parameters&gt;</p>
+                            <div class="indent">
+                                <table cellpadding="5">
+                                    <tr>
+                                        <td>{prefix}.best.candidate</td>
+                                        <td>The best centromere candidate on each chromosome, and corresponding
+                                            monomers.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{prefix}.centro.png</td>
+                                        <td>The figure draws best centromere candidate location, alongside relative
+                                            length of chromosomes and gap locations for assembly.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>candidate/</td>
+                                        <td>The folder of all centromere candidates. Check here if the best candidate
+                                            doesn't look well.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>TRfasta/</td>
+                                        <td>The folder of all tandem repeat monomers identified by trf and cluster
+                                            result on each chromosome.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>TRgff3/</td>
+                                        <td>The folder of all tandem repeat hit by BLAST on each chromosome, in gff3
+                                            format.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <h3 class="descHead" style="font-size: 20px">
+                    TeloExplorer
+                </h3>
+                <div class="descFormat">
+                        <span>
+                            TeloExplorer is a telomere identification tool.<br/><br/>
+                            A genome file in fasta format is required as input.<br/><br/>
+                            <div class="codeBlock">
+                                <div class="codeMain">
+                                    <p>Usage: python3 quartet.py TeloExplorer &lt;parameters&gt;</p>
+                                    <div class="indent">
+                                        <table cellpadding="5">
+                                            <tr>
+                                                <td>-h, --help</td>
+                                                <td>show this help message and exit</td>
+                                            </tr>
+                                            <tr>
+                                                <td>-i GENOME</td>
+                                                <td>(*Required) Genome file to be identified, FASTA format.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>-c {plant,animal,other}</td>
+                                                <td>Specify clade of this genome. Plant will search TTTAGGG, animal will search TTAGGG, other will use tidk explore's suggestion, default: other</td>
+                                            </tr>
+                                            <tr>
+                                                <td>-m MIN_REPEAT_TIMES</td>
+                                                <td>The min repeat times to be reported, default: 100</td>
+                                            </tr>
+                                            <tr>
+                                                <td>-p PREFIX</td>
+                                                <td>The prefix used on generated files, default: quarTeT</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Output files should be as follow:</p>
+                            <div class="codeBlock">
+                                <div class="codeMain">
+                                    <p>Usage: python3 quartet.py AssemblyMapper &lt;parameters&gt;</p>
+                                    <div class="indent">
+                                        <table cellpadding="5">
+                                            <tr>
+                                                <td>{prefix}.telo.info</td>
+                                                <td>The statistic of telomere, including monomer, repeat times on both end of each chromosome.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{prefix}.telo.png</td>
+                                                <td>The figure draws telomere location, alongside relative length of chromosomes and gap locations for assembly.</td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                             </div>
+                        </span>
+                </div>
+            </el-main>
+        </el-container>
+
+    </div>
+    <div class="footerPush"></div>
+</div>
+<!--页脚-->
+<div class="footer">
+    <p>
         Powered by
         <a href="https://www.atcgn.com/">ATCG</a>
-    </div>
+    </p>
 </div>
 </body>
 
-<!-- 引入组件库 -->
-<!--JQuery-->
-<!--<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>-->
-<!--Vue-->
-<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
-<!--ElementUI index.css index.js-->
-<!--<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
-<!--<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
-<!--Axios-->
-<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<!--<script src="../js/axios-0.18.0.js"></script>-->
-<!--marked-->
-<!--<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>-->
 
 <!--bytedance-->
 <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.js"></script>
 <!--需要用Vue2-->
 <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/2.6.0/vue.js" type="application/javascript"></script>
-<link href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/theme-chalk/index.css" rel="stylesheet" />
+<link href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/theme-chalk/index.css" rel="stylesheet"/>
 <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/index.js"></script>
 <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js"></script>
 <script src="../js/axios-0.18.0.js"></script>
-<script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/marked/4.0.2/marked.min.js" type="application/javascript"></script>
+<script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/marked/4.0.2/marked.min.js"
+        type="application/javascript"></script>
 
 <script>
     new Vue({
         el: `#app`,
         data: function () {
             return {
-                activeBar: "2", // 导航栏激活的栏，默认为Home
+                activeBar: "3", // 导航栏激活的栏，默认为Home
             }
-        },
-        /* 加载本地md*/
-        mounted() {
-            axios.get("document-cli.md").then((res) => {
-                document.getElementById('content').innerHTML = marked.parse(res.data);
-            });
         },
         methods: {}
     });
