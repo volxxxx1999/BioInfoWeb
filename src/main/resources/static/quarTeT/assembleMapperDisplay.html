@@ -8,6 +8,10 @@
         /*根节点html字体大小*/
         html {
             font-size: 12px;
+            /*初始化height*/
+            height: 100%;
+            margin: 0;
+            padding:0;
         }
 
         body {
@@ -15,68 +19,81 @@
             /* 针对web元素塌陷*/
             /*min-width: 65rem;*/
             /*max-width: 130rem;*/
-            margin: 0 auto;
+
+            /*初始化height*/
+            height: 100%;
+            margin: 0;
+            padding:0;
         }
 
+        /*总div*/
+        #app{
+            /*初始化height*/
+            min-height: 100%;
+        }
         /* 针对设备自适应自适应*/
-        #thinner {
-            width: 106rem;
-            margin: 0 auto;
+        #mainContent {
             /* 针对web元素塌陷*/
             min-width: 65rem;
             max-width: 130rem;
+            width: 106rem;
+            margin: 0 auto;
+        }
+        /*页脚pusher*/
+        .footerPush{
+            height: 5rem;
+        }
+        /*页脚*/
+        .footer{
+            clear: both;
+            position: relative;
+            margin-top: -5rem;
+            height: 5rem;
+            background-color: #205573;
+        }
+        /*a链接的格式*/
+        .footer>p{
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-family: Helvetica, sans-serif;
+            text-align: center;
+            padding-top: 2rem;
+        }
+        .footer a{
+            text-decoration: none;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .footer a:hover{
+            color: #f4ba1d;
         }
 
         /* 手机 宽度小于768px的 */
         @media only screen and (max-width: 768px) {
-            #thinner {
+            #mainContent {
                 width: 100%;
             }
         }
 
         /* 平板 宽度大于768px的*/
         @media only screen and (min-width: 768px) {
-            #thinner {
+            #mainContent {
                 width: 62rem;
             }
         }
 
         /* 电脑 */
         @media only screen and (min-width: 992px) {
-            #thinner {
+            #mainContent {
                 width: 80rem;
             }
         }
 
         /* web 更宽的屏幕 */
         @media only screen and (min-width: 1200px) {
-            #thinner {
+            #mainContent {
                 width: 97rem;
             }
-        }
-
-        /*页脚页头格式*/
-        .el-header, .el-footer {
-            background-color: #fefefe;
-            color: #333;
-            text-align: justify; /*设置文字 两端分布*/
-            line-height: 2rem;
-            margin-top: 1rem;
-        }
-
-        /* 设置页头下p元素属性*/
-        .el-header > p {
-            font-size: 140%;
-            color: #4d4d4d;
-            font-family: Helvetica, sans-serif
-        }
-
-        /* 设置页脚下元素属性*/
-        .el-footer > div {
-            font-size: 140%;
-            color: #f7f6f2;
-            font-family: Helvetica, sans-serif;
-            text-align: center;
         }
 
         /* el-aside格式*/
@@ -85,10 +102,6 @@
             color: #333;
             text-align: center;
             float: left;
-        }
-
-        #el-form {
-            margin-left: 0;
         }
 
         /*主体组件el-main格式*/
@@ -115,7 +128,6 @@
             background-color: #205573;
             margin: 0;
         }
-
         .banner > a {
             color: #ffffff;
             font-size: 5rem;
@@ -172,31 +184,7 @@
             height: 4rem;
         }
 
-        /*页脚格式*/
-        .pageFooter{
-            font-size: 1.5rem;
-            color: #575d66;
-            font-family: Helvetica, sans-serif;
-            text-align: center;
-            margin: auto;
-            padding-bottom: 2rem;
-        }
-        /*a链接的格式*/
-        .pageFooter>a{
-            text-decoration: none;
-            font-weight: bold;
-            color: #205573;
-        }
-        .pageFooter>a:hover{
-            color: #f4ba1d;
-        }
-        /*分割线样式*/
-        .el-divider--horizontal{
-            border-top: 1px solid #adadad;
-        }
-
-        /*每个区块里面对应蓝色的标签*/
-        /*css button ψ(｀∇´)ψ*/
+        /*css button*/
         .btn-24,
         .btn-24 *,
         .btn-24 :after,
@@ -224,7 +212,7 @@
             -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(green), to(pink), color-stop(0.5, #000), color-stop(50%, #ffffff));
             padding: 0;
             text-transform: uppercase;
-            height: 4rem;
+            height: 5rem;
         }
 
         .btn-24:disabled {
@@ -245,7 +233,7 @@
         }
 
         .btn-24 {
-            --background: #205573;
+            --background: #409eff;
             background: none;
             overflow: hidden;
             padding: 0.8rem 3rem;
@@ -313,15 +301,6 @@
             margin-bottom: 5rem;
         }
 
-        .el-container:nth-child(5) .el-aside,
-        .el-container:nth-child(6) .el-aside {
-            line-height: 30rem;
-        }
-
-        .el-container:nth-child(7) .el-aside {
-            line-height: 50rem;
-        }
-
         /*警告信息*/
         /*框*/
         .result-module {
@@ -346,27 +325,19 @@
             font-weight: bold;
         }
 
-        /*框内描述结果的文字box*/
-        .illustration-box {
-            font-size: 1.3rem;
-            color: #4d4d4d;
-            font-family: Helvetica, sans-serif;
-        }
-
         /*两个展示表格的下载的span和按钮格式*/
         .download-stat {
-            margin-left: 1rem;
-            float: left;
-            margin-bottom: 1rem;
+            margin-right: 15px;
+            float: right;
+            margin-bottom: 8px;
         }
-
         .download-stat > .el-button {
             margin: 0 0 0 0;
         }
-
         /* 表格统计的字体*/
         .statFont {
             color: #409eff;
+            font-size: 17px;
             font-weight: bold;
             font-family: "Arial", sans-serif;
         }
@@ -381,9 +352,103 @@
             font-weight: bold;
             border-width: 2px;
         }
+
+        /*每个模块的大标题*/
+        .descModule {
+            font-family: Helvetica, sans-serif;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #444649;
+            text-align: left;
+            margin-bottom: 2rem;
+            margin-left: 6%;
+        }
+        /*每个框的粗体描述字*/
+        .descHead {
+            font-family: Helvetica, sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #444649;
+            text-align: left;
+            margin-bottom: 2rem;
+            margin-left: 6%;
+        }
+        /* 块的文字描述*/
+        .descFormat {
+            font-family: Helvetica, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #4b4b4b;
+            margin-left: 6%;
+            text-align: left;
+        }
+        .descFormat a {
+            color: #205573;
+            text-decoration: none;
+        }
+        .descFormat em{
+            color: #409eff;
+            font-weight: 600;
+        }
+
+        /*对块主体的css*/
+        .blockMain{
+            margin-top: 2rem;
+        }
+
+        /*Step块主体内容样式*/
+        .stepMain {
+            margin-top: 3rem;
+            margin-left: 30%;
+            width: 40rem;
+            background-color: #ecf7f8;
+            border: solid 1px #c2cdcd;
+            font-size: 15px;
+            font-family: Helvetica, sans-serif;
+            font-weight: 600;
+            box-shadow: 3px 3px 3px #949ba3;
+        }
+
+        /*选择文件的格式*/
+        .onlineGenome {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .onlineGenome .el-col {
+            margin-bottom: 1rem;
+        }
+
+        .commonUpload {
+            margin-top: 1rem;
+        }
+
+        .commonUpload .el-col {
+            margin-bottom: 1rem;
+        }
+
+        /*回到页头*/
+        .el-backtop {
+            position: fixed;
+            background-color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: #409eff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            box-shadow: 0 0 6px rgb(88, 102, 109);
+            cursor: pointer;
+            z-index: 5;
+        }
+        .el-backtop > a {
+            text-decoration: none;
+            color: #409eff;
+        }
     </style>
 </head>
-
 <body>
 <div id="app">
     <div class="banner">
@@ -391,34 +456,39 @@
         <a href="home.html"> quarTeT </a>
         <!--2. 导航栏-->
         <span class="navDiv">
-            <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引  -->
-            <el-menu :default-active="activeBar"
-                     class="el-menu-demo"
-                     background-color="#205573"
-                     text-color="#e3e3e0"
-                     active-text-color="#ffffff"
-                     mode="horizontal" @select="handleSelect">
-                <el-menu-item  index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
-                <el-submenu index="2">
-                    <template slot="title">
-                        Tools
-                    </template>
-                    <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
-                    <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
-                    <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
-                    <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
-                </el-submenu>
-                <el-submenu index="3">
-                    <template slot="title">Document</template>
-                    <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
-                    <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
-                </el-submenu>
-                <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
-                <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
-            </el-menu>
-        </span>
+                <!-- :default-active v-bind为html属性绑定值，代表当前激活的bar索引  -->
+                <el-menu :default-active="activeBar"
+                         class="el-menu-demo"
+                         background-color="#205573"
+                         text-color="#e3e3e0"
+                         active-text-color="#ffffff"
+                         mode="horizontal" @select="handleSelect">
+                    <el-menu-item  index="1" onclick="document.location.href='home.html'">Home</el-menu-item>
+                    <el-submenu index="2">
+                        <template slot="title">
+                            Tools
+                        </template>
+                        <el-menu-item index="2-1" onclick="document.location.href='assemblyMapper.html'">AssemblyMapper</el-menu-item>
+                        <el-menu-item index="2-2" onclick="document.location.href='gapFiller.html'">GapFiller</el-menu-item>
+                        <el-menu-item index="2-3" onclick="document.location.href='centroMiner.html'">CentroMiner</el-menu-item>
+                        <el-menu-item index="2-4" onclick="document.location.href='teloExplorer.html'">TeloExplorer</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="3">
+                        <template slot="title">Document</template>
+                        <el-menu-item index="3-1" onclick="document.location.href='docuWeb.html'">Web Guide</el-menu-item>
+                        <el-menu-item index="3-2" onclick="document.location.href='docuCLI.html'">CLI Tutorial</el-menu-item>
+                    </el-submenu>
+                    <el-menu-item index="4" onclick="document.location.href='download.html'">Download</el-menu-item>
+                    <el-menu-item index="5" onclick="document.location.href='contact.html'">Contact</el-menu-item>
+                </el-menu>
+            </span>
     </div>
-
+    <!--定位 回到页头-->
+    <div class="el-backtop" style="right: 120px; bottom: 150px;">
+        <a href="javascript:scrollTo(0,0);">
+            <i class="el-icon-caret-top" style="font-size: 1.5rem;"></i>
+        </a>
+    </div>
     <!--3 Warnings横幅顶端显示-->
     <!--正确的结果-->
     <div class="result-module" id="withCorrect">
@@ -443,9 +513,9 @@
             <el-table :data="warnings"
                       class="tableSet"
                       style="width: 95%;
-                            font-size: 1.1rem;
-                            font-family: Helvetica,sans-serif;
-                            margin:10px 10px 10px 10px;"
+                                font-size: 1.1rem;
+                                font-family: Helvetica,sans-serif;
+                                margin:10px 10px 10px 10px;"
                       stripe
                       border
                       height="20rem"
@@ -466,23 +536,38 @@
     </div>
 
     <!--4 主体内容-->
-    <div id="thinner">
+    <div id="mainContent">
         <!--4.1 下载-->
         <el-container>
             <el-main>
-                <!--该区域标签-->
-                <div style="margin:1rem 1rem 1rem 1rem">
-                    <button class="btn-24">
-                        <span>Download</span>
-                    </button>
+                <!--一级标题：Assemble-->
+                <h1 class="descModule">
+                    AssemblyMapper - Display
+                </h1>
+                <!--块的描述-->
+                <h2 class="descHead">
+                    Downloadable Result
+                </h2>
+                <!--对于多个模块运行的解释-->
+                <div class="descFormat">
+                    <!--在这里 你可以添加对这下载文件的说明-->
+                    <span>
+                            <i class="el-icon-caret-right"></i>
+                            Here you can download assembly and agp files.<br/>
+                            <i class="el-icon-caret-right"></i>
+                            <em>
+                            Assembly:
+                            </em>
+                            The draft genome fasta file after AssemblyMapper process.<br/>
+                            <i class="el-icon-caret-right"></i>
+                            <em>
+                            AGP:
+                            </em>
+                            The AGP file is blablablabla.
+                        </span>
                 </div>
                 <!--下载按钮-->
                 <div class="downloadDiv">
-                    <div class="illustration-box">
-                        <p>
-                            Here you can download assembly and agp files.
-                        </p>
-                    </div>
                     <el-row :gutter="10">
                         <el-col :xs="16" :sm="16" :md="6" lg="4" xl="12">
                             <div style="height: 1rem;"></div>
@@ -512,20 +597,33 @@
         <!--4.2 展示png结果图-->
         <el-container>
             <el-main>
-                <!--该区域标签-->
-                <div style="margin:1rem 1rem 1rem 1rem">
-                    <button class="btn-24">
-                        <span>Genome Overview</span>
-                    </button>
-                </div>
-                <!--该区域说明-->
-                <div class="illustration-box">
-                    <p>
-                        Here is an overview of this draft genome assembly.
-                    </p>
+                <!--块的描述-->
+                <h2 class="descHead">
+                    Genome Overview
+                </h2>
+                <!--对于多个模块运行的解释-->
+                <div class="descFormat">
+                    <!--在这里 你可以添加对这下载文件的说明-->
+                    <span>
+                            <i class="el-icon-caret-right"></i>
+                            Here is an overview of this draft genome assembly.<br/>
+                            <i class="el-icon-caret-right"></i>
+                            The left part is the picture information about xxxx.
+                            You can click the picture to enlarge and view the details,
+                            and you can also click the round button to download the picture.<br/>
+                            <i class="el-icon-caret-right"></i>
+                            On the right half is a table,
+                            in which the blue subtitles are additional statistical information.
+                            Here you can briefly introduce the meaning of these headers.<br/>
+                            <i class="el-icon-caret-right"></i>
+                            For more information, you can refer to
+                            <a href="demo.html" title="demo">
+                                <em>our demo page</em>
+                            </a>.
+                        </span>
                 </div>
                 <!--图片和表格-->
-                <div>
+                <div class="blockMain">
                     <!--侧栏1 下载按钮-->
                     <el-aside width="5%">
                         <div>
@@ -540,26 +638,19 @@
                     <el-aside width="45%">
                         <!--原始图片一个长条 加个div和hidden给整整 放大里面的图片 限制div大小-->
                         <div style="width: 500px;
-                            height: 450px;
-                            overflow: hidden">
-                            <!--[原图]-->
+                                height: 410px;
+                                overflow: hidden">
+                            <!--[原图] P.S 原图格式原因需要相对偏移-->
                             <el-image
-                                    style="width: 550px; height: 600px"
+                                    style="width: 650px; height: 750px; position: relative; left: -7rem; top:-6rem"
                                     alt="plot of genome result"
                                     :src="genomePng[0]"
                                     :preview-src-list="genomePng">
                             </el-image>
                         </div>
                     </el-aside>
-                   <!--侧栏3 Genome Statistic表-->
+                    <!--侧栏3 Genome Statistic表-->
                     <el-aside width="50%">
-                        <!--标题-->
-                        <h3
-                            style="font-family: Helvetica,sans-serif;
-                                   font-size: 1.3rem;
-                                   color:#666666">
-                            Genome Statistic
-                        </h3>
                         <!--统计数据-->
                         <div class="statFont">
                             <i class="el-icon-s-data"></i>
@@ -568,24 +659,17 @@
                             <i class="el-icon-data-analysis"></i>
                             <span>{{gcContent}}</span>
                         </div>
-                        <!--下载按钮-->
-                        <span class="download-stat">
-                            <el-button
-                                    icon="el-icon-download"
-                                    @click="downloadDraftMapInfo">
-                            </el-button>
-                        </span>
                         <!--表格-->
                         <el-table
                                 :data="draftStat"
                                 stripe
                                 border
-                                height="27rem"
+                                height="30rem"
                                 class="tableSet"
                                 style=" width: 95%;
-                            font-size: 1.3rem;
-                            font-family: Helvetica,sans-serif;
-                            margin:10px 10px 10px 10px;"
+                                font-size: 1.3rem;
+                                font-family: Helvetica,sans-serif;
+                                margin:10px 10px 10px 10px;"
                                 :header-cell-style="{'text-align':'center'}"
                                 :row-class-name="tableRowClassName">
                             <el-table-column
@@ -609,121 +693,33 @@
                                     min-width="25%">
                             </el-table-column>
                         </el-table>
-                    </el-aside>
-                </div>
-            </el-main>
-        </el-container>
-
-        <!--4.3 pdf图结果-->
-        <el-container>
-            <el-main>
-                <!--该区域标签-->
-                <div style="margin:1rem 1rem 1rem 1rem">
-                    <button class="btn-24">
-                        <span>Colinearity Plot</span>
-                    </button>
-                </div>
-                <!--对两个图的说明-->
-                <div class="illustration-box">
-                    <p>
-                        Here are colinearity plots for contigs/draft genome against reference.
-                    </p>
-                </div>
-                <!--图和表格-->
-                <div>
-                    <!--下载按钮-->
-                    <el-aside width="5%">
-                        <div>
-                            <el-button
-                                    circle
-                                    icon="el-icon-download"
-                                    @click="downloadDraftHiFiRef">
-                            </el-button>
-                        </div>
-                    </el-aside>
-                    <!--图片-->
-                    <el-aside width="45%">
-                        <el-image
-                                style="width: 410px; height: 410px"
-                                :src="hifiRefUrl[0]"
-                                alt="plot of hifi result"
-                                :preview-src-list="hifiRefUrl">
-                        </el-image>
-                    </el-aside>
-                    <!--表格-->
-                    <el-aside width="50%">
-                        <!--标题-->
-                        <h3
-                            style="font-family: Helvetica,sans-serif;
-                        font-size: 1.3rem;
-                        color:#666666">
-                            Alignment Information
-                        </h3>
-                        <!--统计数据-->
-                        <div class="statFont">
-                            <i class="el-icon-s-data"></i>
-                            <span>{{totalMapped}}</span>
-                            <el-divider direction="vertical"></el-divider>
-                            <i class="el-icon-data-analysis"></i>
-                            <span>{{totalDiscarded}}</span>
-                        </div>
                         <!--下载按钮-->
                         <span class="download-stat">
-                            <el-button
-                                    icon="el-icon-download"
-                                    @click="downloadDraftStat">
-                            </el-button>
-                        </span>
-                        <!--表格-->
-                        <el-table
-                                :data="draftMapInfo"
-                                stripe
-                                border
-                                style=" width: 95%;
-                        font-size: 1.3rem;
-                        font-family: Helvetica,sans-serif;
-                        margin:10px 10px 10px 10px;"
-                                height="27rem"
-                                class="tableSet"
-                                :header-cell-style="{'text-align':'center'}"
-                                :row-class-name="tableRowClassName">
-                            <el-table-column
-                                    prop="contigID"
-                                    label="ContigID"
-                                    min-width="30%">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="contigLength"
-                                    label="ContigLength"
-                                    min-width="40%">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="targetID"
-                                    label="TargetID"
-                                    min-width="30%">
-                            </el-table-column>
-                        </el-table>
+                                <el-button
+                                        icon="el-icon-download"
+                                        @click="downloadDraftMapInfo">
+                                </el-button>
+                            </span>
                     </el-aside>
                 </div>
             </el-main>
         </el-container>
 
-        <!--4.4 额外的画图显示-->
+        <!--4.4 额外的画图显示 点击plot才有该模块-->
         <el-container>
             <el-main id="doPlot" style="display: none">
-                <!--该区域标签-->
-                <div style="margin:1rem 1rem 1rem 1rem">
-                    <button class="btn-24">
-                        <span>Extra Plot</span>
-                    </button>
+                <!--块的描述-->
+                <h2 class="descHead">
+                    Extra Plot
+                </h2>
+                <!--该步骤的描述内容-->
+                <div class="descFormat">
+                        <span>
+                            <i class="el-icon-caret-right"></i>Click plot and you got this figure.<br/>
+                            <i class="el-icon-caret-right"></i>You can say sth about this pic.<br/>
+                        </span>
                 </div>
-                <!--对两个图的说明-->
-                <div class="illustration-box">
-                    <p>
-                        Here are colinearity plots for contigs/draft genome against reference.
-                    </p>
-                </div>
-                <div>
+                <div class="blockMain">
                     <!--填充左-->
                     <el-aside width="23%">
                         <div style="height: 3rem"></div>
@@ -732,9 +728,9 @@
                     <el-aside width="5%">
                         <div>
                             <el-button
-                                circle
-                                icon="el-icon-download"
-                                @click="downloadDraftGenomeRef">
+                                    circle
+                                    icon="el-icon-download"
+                                    @click="downloadDraftGenomeRef">
                             </el-button>
                         </div>
                     </el-aside>
@@ -754,28 +750,380 @@
                 </div>
             </el-main>
         </el-container>
+
+        <!--4.3 pdf图结果-->
+        <el-container>
+            <el-main>
+                <!--块的描述-->
+                <h2 class="descHead">
+                    Colinearity Plot
+                </h2>
+                <!--该步骤的描述内容-->
+                <div class="descFormat">
+                        <span>
+                            <i class="el-icon-caret-right"></i>
+                            Here are colinearity plots for contigs/draft genome against reference.
+                            <br/>
+                            <i class="el-icon-caret-right"></i>
+                            Some descriptions of graphs
+                            <br/>
+                            <i class="el-icon-caret-right"></i>
+                            Some descriptions of tables
+                            <br/>
+                            <i class="el-icon-caret-right"></i>
+                            <em>Noteworthly, </em>
+                            Click the
+                            <em>GO GAPFILLER</em> button below,
+                            and you can directly use the results obtained
+                            in this step for the processing of the Gap Filler.
+                        </span>
+                </div>
+                <!--图和表格-->
+                <div class="blockMain">
+                    <!--下载按钮-->
+                    <el-aside width="5%">
+                        <div >
+                            <el-button
+                                    circle
+                                    icon="el-icon-download"
+                                    @click="downloadDraftHiFiRef">
+                            </el-button>
+                        </div>
+                    </el-aside>
+                    <!--图片-->
+                    <el-aside width="45%">
+                        <el-image
+                                style="width: 420px; height: 400px; margin-right: 3rem"
+                                :src="hifiRefUrl[0]"
+                                alt="plot of hifi result"
+                                :preview-src-list="hifiRefUrl">
+                        </el-image>
+                    </el-aside>
+                    <!--表格-->
+                    <el-aside width="50%">
+                        <!--统计数据-->
+                        <div class="statFont">
+                            <i class="el-icon-s-data"></i>
+                            <span>{{totalMapped}}</span>
+                            <el-divider direction="vertical"></el-divider>
+                            <i class="el-icon-data-analysis"></i>
+                            <span>{{totalDiscarded}}</span>
+                        </div>
+                        <!--表格-->
+                        <el-table
+                                :data="draftMapInfo"
+                                stripe
+                                border
+                                style=" width: 95%;
+                            font-size: 1.3rem;
+                            font-family: Helvetica,sans-serif;
+                            margin:10px 10px 10px 10px;"
+                                height="30rem"
+                                class="tableSet"
+                                :header-cell-style="{'text-align':'center'}"
+                                :row-class-name="tableRowClassName">
+                            <el-table-column
+                                    prop="contigID"
+                                    label="ContigID"
+                                    min-width="30%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="contigLength"
+                                    label="ContigLength"
+                                    min-width="40%">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="targetID"
+                                    label="TargetID"
+                                    min-width="30%">
+                            </el-table-column>
+                        </el-table>
+                        <!--下载按钮-->
+                        <span class="download-stat">
+                                <el-button
+                                        icon="el-icon-download"
+                                        @click="downloadDraftStat">
+                                </el-button>
+                            </span>
+                    </el-aside>
+                </div>
+                <!--TODO 新增 可以直接链接到gap模块-->
+                <!--<div class="blockMain">
+                    <button class="btn-24" @click="goGapFiller">
+                        <span>GO GAPFILLER</span>
+                    </button>
+                </div>-->
+            </el-main>
+        </el-container>
+
+        <!--STEP EXTRA 勾选GapFill的隐藏模块-->
+        <!--<el-container id="checkGapFiller" style="display:none;">
+            <el-main>
+                &lt;!&ndash;块的大标题&ndash;&gt;
+                <h2 class="descHead">
+                    GapFiller Settings
+                </h2>
+                &lt;!&ndash;该步骤的描述内容&ndash;&gt;
+                <div class="descFormat">
+                        <span>
+                            <i class="el-icon-caret-right"></i>More settings and files are required to run gapFiller.<br/>
+                            <i class="el-icon-caret-right"></i>All contigs files (accept multiple file) used to fill gaps.<br/>
+                            <i class="el-icon-caret-right"></i>GapFiller Process is ticked, more settings are required.<br/>
+                        </span>
+                </div>
+                <div class="stepMain">
+                    &lt;!&ndash;上传gapCloser文件"&ndash;&gt;
+                    <div class="commonUpload">
+                        <el-row :gutter="10">
+                            <el-col>
+                                    <span>
+                                        Upload GapCloser Contigs:
+                                    </span>
+                            </el-col>
+                            <el-col>
+                                <el-upload
+                                        class="upload-demo"
+                                        action="/blast/common/uploadFillContig"
+                                        :on-success="handleUploadSuccess2"
+                                        :on-remove="handleRemove2"
+                                        :before-remove="beforeRemove2"
+                                        :before-upload="beforeUpload2"
+                                        :file-list="fileList2"
+                                        :show-file-list="true"
+                                        multiple
+                                        ref="upload">
+                                    <el-button
+                                            size="medium"
+                                            type="primary">
+                                        Upload GapCloser Contigs
+                                    </el-button>
+                                    &lt;!&ndash;对上传的要求描述&ndash;&gt;
+                                    <div slot="tip"
+                                         class="el-upload__tip">
+                                        Gap Closer Contigs, Allow Multiple Files (FASTA Format)
+                                    </div>
+                                </el-upload>
+                            </el-col>
+                        </el-row>
+                    </div>
+                </div>
+                &lt;!&ndash;设置gapFiller的参数&ndash;&gt;
+                &lt;!&ndash;4.3 参数设置&ndash;&gt;
+                <div class="blockMain">
+                    &lt;!&ndash;填充左 让表单居中&ndash;&gt;
+                    <el-aside width="20%">
+                        <div style="height: 10rem"></div>
+                    </el-aside>
+                    <el-aside width="60%">
+                        <el-main>
+                            <div class="paramForm" style="line-height: 5rem">
+                                &lt;!&ndash;1 min alignment length 默认1000 最大10000 步长50&ndash;&gt;
+                                <el-row :gutter="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
+                                        <el-tooltip
+                                                class="item"
+                                                effect="light"
+                                                placement="left">
+                                            <div slot="content" class="paramDesc">
+                                                The min alignment length to be
+                                                <br/>
+                                                select (bp), default: 1000
+                                            </div>
+                                            <el-button
+                                                    style="font-family: Helvetica, sans-serif;
+                                                               font-size: 1.2rem;
+                                                               font-weight: bold;
+                                                               border-color: #ffffff">
+                                                Min Alignment Length:
+                                            </el-button>
+                                        </el-tooltip>
+                                    </el-col>
+                                    <el-col
+                                            style="padding-top: 10px"
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
+                                        <el-slider v-model="gapFormData.minAlignLength"
+                                                   :step="50"
+                                                   v-bind:max="gapMaxMinAlignLen"
+                                                   @change="gapOnMinAlignLenSliderChange">
+                                        </el-slider>
+                                    </el-col>
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
+                                        <el-input-number v-model="gapCustomMinAlignLen"
+                                                         @change="gapOnMinAlignLenInputChange"
+                                                         :step="50"
+                                                         size="small">
+                                        </el-input-number>
+                                    </el-col>
+                                </el-row>
+                                &lt;!&ndash;2 min_alignment_identity 默认40 最大100 step为5&ndash;&gt;
+                                <el-row :gutter="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
+                                        <el-tooltip
+                                                class="item"
+                                                effect="light"
+                                                placement="left">
+                                            <div slot="content" class="paramDesc">
+                                                The min alignment identity to
+                                                <br/>
+                                                be select, default: 40
+                                            </div>
+                                            <el-button
+                                                    style="font-family: Helvetica, sans-serif;
+                                                               font-size: 1.2rem;
+                                                               font-weight: bold;
+                                                               border-color: #ffffff">
+                                                Min Alignment Identity:
+                                            </el-button>
+                                        </el-tooltip>
+                                    </el-col>
+                                    <el-col
+                                            style="padding-top: 10px"
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
+                                        <el-slider v-model="gapFormData.minAlignIdentity"
+                                                   :step="5"
+                                                   v-bind:max="gapMaxMinAlignIdentity">
+                                        </el-slider>
+                                    </el-col>
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
+                                        <el-input-number v-model="gapFormData.minAlignIdentity"
+                                                         :step="5"
+                                                         v-bind:max="gapMaxMinAlignIdentity"
+                                                         size="small">
+                                        </el-input-number>
+                                    </el-col>
+                                </el-row>
+                                &lt;!&ndash;3 flanking_len 默认5000 step设置250 最大值设置10000&ndash;&gt;
+                                <el-row :gutter="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
+                                        <el-tooltip
+                                                class="item"
+                                                effect="light"
+                                                placement="left">
+                                            <div slot="content" class="paramDesc">
+                                                The flanking seq length of gap used
+                                                <br/>
+                                                to anchor (bp), default: 5000
+                                            </div>
+                                            <el-button
+                                                    style="font-family: Helvetica, sans-serif;
+                                                               font-size: 1.2rem;
+                                                               font-weight: bold;
+                                                               border-color: #ffffff">
+                                                Flanking Sequence Length:
+                                            </el-button>
+                                        </el-tooltip>
+                                    </el-col>
+                                    <el-col
+                                            style="padding-top: 10px"
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
+                                        <el-slider v-model="gapFormData.flankLength"
+                                                   :step="250"
+                                                   v-bind:max="gapMaxFlanking"
+                                                   @change="gapOnFlankingSliderChange">
+                                        </el-slider>
+                                    </el-col>
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
+                                        <el-input-number v-model="gapCustomFlanking"
+                                                         @change="gapOnFlankingInputChange"
+                                                         :step="250"
+                                                         size="small">
+                                        </el-input-number>
+                                    </el-col>
+                                </el-row>
+                                &lt;!&ndash;4 max Filling Length 默认100,000 最大1，000，000 step为5000 &ndash;&gt;
+                                <el-row :gutter="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
+                                        <el-tooltip
+                                                class="item"
+                                                effect="light"
+                                                placement="left">
+                                            <div slot="content" class="paramDesc">
+                                                The max sequence length acceptable
+                                                <br/>
+                                                to fill any gaps, default: 1000000
+                                            </div>
+                                            <el-button
+                                                    style="font-family: Helvetica, sans-serif;
+                                                               font-size: 1.2rem;
+                                                               font-weight: bold;
+                                                               border-color: #ffffff">
+                                                Max Filling Length:
+                                            </el-button>
+                                        </el-tooltip>
+                                    </el-col>
+                                    <el-col
+                                            style="padding-top: 10px"
+                                            :xs="8" :sm="8" :md="8" lg="8" xl="8">
+                                        <el-slider v-model="gapFormData.maxFillingLength"
+                                                   :step="50000"
+                                                   v-bind:max="gapMaxMaxFilling"
+                                                   @change="gapOnFillingSliderChange">
+                                        </el-slider>
+                                    </el-col>
+                                    <el-col :xs="7" :sm="7" :md="7" lg="7" xl="7">
+                                        <el-input-number v-model="gapCustomFilling"
+                                                         @change="gapOnFillingInputChange"
+                                                         :step="50000"
+                                                         size="small">
+                                        </el-input-number>
+                                    </el-col>
+                                </el-row>
+                                &lt;!&ndash;5 Prefix 文本输入&ndash;&gt;
+                                <el-row :gutter="10">
+                                    <el-col :xs="9" :sm="9" :md="9" lg="9" xl="9">
+                                        <el-tooltip
+                                                class="item"
+                                                effect="light"
+                                                placement="left">
+                                            <div slot="content" class="paramDesc">
+                                                The prefix used on generated files.
+                                                <br/>
+                                                Default: quarTeT
+                                            </div>
+                                            <el-button
+                                                    style="font-family: Helvetica, sans-serif;
+                                                               font-size: 1.2rem;
+                                                               font-weight: bold;
+                                                               border-color: #ffffff">
+                                                Filename:
+                                            </el-button>
+                                        </el-tooltip>
+                                    </el-col>
+                                    <el-col :xs="8" :sm="8" :md="8" :lg="8" :xl="8">
+                                        <el-input v-model="gapFormData.prefix"
+                                                  @input="onNameWarning">
+                                        </el-input>
+                                    </el-col>
+                                </el-row>
+                            </div>
+                            &lt;!&ndash;重置&ndash;&gt;
+                            <div class="blockMain">
+                                <el-button class="next-button" @click="gapResetForm">RESET</el-button>
+                                <el-button class="next-button" type="primary" @click="onParamSubmit">RUN</el-button>
+                            </div>
+                        </el-main>
+                    </el-aside>
+                    &lt;!&ndash; 4.6 填充 让表单居中&ndash;&gt;
+                    <el-aside width="20%">
+                        <div style="height: 10rem"></div>
+                    </el-aside>
+                </div>
+            </el-main>
+        </el-container>-->
+
     </div>
 
-    <!--5 页脚信息-->
-    <el-divider></el-divider>
-    <div class="pageFooter">
+    <div class="footerPush"></div>
+</div>
+<!--页脚-->
+<div class="footer">
+    <p>
         Powered by
         <a href="https://www.atcgn.com/">ATCG</a>
-    </div>
+    </p>
 </div>
 </body>
 
-<!-- 引入组件库 -->
-<!--JQuery-->
-<!--<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>-->
-<!--Vue-->
-<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
-<!--ElementUI index.css index.js-->
-<!--<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
-<!--<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
-<!--Axios-->
-<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<!--<script src="../js/axios-0.18.0.js"></script>-->
 
 <!--bytedance-->
 <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.js"></script>
@@ -798,9 +1146,9 @@
                 draftStat: [],
                 draftMapInfo: [],
                 // 三张图片Url
-                hifiRefUrl: ['https://inews.gtimg.com/newsapp_bt/0/13732648356/1000'],
-                genomeRefUrl: ['https://zkres1.myzaker.com/202201/61dffbe08e9f09127b7346ae_1024.jpg'],
-                genomePng: ['https://img.3dmgame.com/uploads/images/news/20200922/1600763362_545859.jpg'],
+                hifiRefUrl: ['http://127.0.0.1:8887/p2.png'],
+                genomeRefUrl: ['http://127.0.0.1:8887/p2.png'],
+                genomePng: ['http://127.0.0.1:8887/p1.png'],
                 // 表格展示下载链接
                 mapInfoUrl: '',
                 statUrl: '',
@@ -811,14 +1159,36 @@
                 warnings: [{wID: '1', warning: 'this is a testWarning'}],
                 // 警告表格
                 dialogTableVisible: false,
-                // 放大DIV
-                bigPng: '',
                 // stat表格的统计信息
                 totalSize: 'Total Size: 123',
                 gcContent: 'GC Content: 456',
                 // mapinfo表格的统计信息
                 totalMapped: 'Total mapped: 123 bp',
                 totalDiscarded: 'Total discarded: 456 bp',
+
+                /*gapFiller设置*/
+                // 记录contigFile个数
+                contigFile: 0,
+                uploadContigFile: 0,
+                // Min Align Length 的客制化值 最大值
+                gapMaxMinAlignLen: 10000,
+                gapCustomMinAlignLen: 1000,
+                // Min Align Identity的客制化值 最大值
+                gapMaxMinAlignIdentity: 100,
+                // flank的客制化值 最大值
+                gapMaxFlanking: 10000,
+                gapCustomFlanking: 5000,
+                // filling的客制化值 最大值
+                gapMaxMaxFilling: 10000000,
+                gapCustomFilling: 1000000,
+                gapFormData: {
+                    flankLength: 5000,
+                    minAlignLength: 1000,
+                    minAlignIdentity: 40,
+                    maxFillingLength: 1000000,
+                    prefix: 'Quartet',
+                },
+
             }
         },
         mounted() {
@@ -866,6 +1236,119 @@
             })
         },
         methods: {
+            /*点击gapFiller*/
+            goGapFiller(value) {
+                $("#checkGapFiller").show();
+            },
+
+            /*超出范围通用的通知*/
+            sendNotify() {
+                this.$notify({
+                    title: 'Reminder',
+                    message: 'The value has exceeded the Recommended Range, may not achieve satisfactory results.',
+                    type: 'warning',
+                    duration: 0,
+                    position: 'bottom-right',
+                });
+            },
+
+            /* gapFiller超出参数范围处理*/
+            // min alignment length 滑块和输入框相关
+            gapOnMinAlignLenSliderChange(value) {
+                this.gapCustomMinAlignLen = value;
+            },
+            gapOnMinAlignLenInputChange(value) {
+                if (value > this.gapMaxMinAlignLen) {
+                    this.gapFormData.minAlignLength = this.gapMaxMinAlignLen;
+                    this.sendNotify();
+                } else {
+                    this.gapFormData.minAlignLength = value;
+                }
+            },
+            // flanking_len 滑块和输入框相关
+            gapOnFlankingSliderChange(value) {
+                this.gapCustomFlanking = value;
+            },
+            gapOnFlankingInputChange(value) {
+                if (value > this.gapMaxFlanking) {
+                    this.gapFormData.flankLength = this.gapMaxFlanking;
+                    this.sendNotify();
+                } else {
+                    this.gapFormData.flankLength = value;
+                }
+            },
+            // max Filling Length 滑块和输入框相关
+            gapOnFillingSliderChange(value) {
+                this.gapCustomFilling = value;
+            },
+            gapOnFillingInputChange(value) {
+                if (value > this.gapMaxMaxFilling) {
+                    this.gapFormData.maxFillingLength = this.gapMaxMaxFilling;
+                    this.sendNotify();
+                } else {
+                    this.gapFormData.maxFillingLength = value;
+                }
+            },
+
+            /* gapFiller重置参数表单*/
+            // 重置参数表单
+            gapResetForm() {
+                this.gapFormData = {
+                    flankLength: 5000,
+                    minAlignLength: 1000,
+                    minAlignIdentity: 40,
+                    maxFillingLength: 100000,
+                    prefix: 'Quartet',
+                }
+                // 客制化值也重置
+                this.gapCustomFlanking = 5000;
+                this.gapCustomMinAlignLen = 1000;
+                this.gapCustomFilling = 100000;
+            },
+
+            /*对文件名进行正则校验，不允许输入违法文件名 /[^\w]/g*/
+            onNameWarning(val) {
+                // let reg = /.*[/\\:*?|].*/;
+                // 存在返回true
+                let reg = /[^\w]/g;
+                if (reg.test(val)) {
+                    this.$message.error("Filename can only consist of numbers, letters and underscores!");
+                    this.assemblyFormData.prefix = '';
+                }
+            },
+
+            /* GapCloser文件 注：可以上传多个*/
+            // 上传成功
+            gapHandleUploadSuccess() {
+                this.$message.success("Upload Successfully");
+                this.uploadContigFile = 1;
+                this.contigFile += 1;
+                console.log("contigs文件个数：" + this.contigFile);
+            },
+            // 移除前
+            gapBeforeRemove(file, fileList2) {
+                if (file && file.status === "success") {
+                    //移除方法
+                    return this.$confirm(`Are You Confirm to Remove ${file.name}？`, 'Σ(っ °Д °;)っ', {
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: 'No',
+                        type: 'warning'
+                    });
+                }
+            },
+            // 移除后
+            gapHandleRemove(file, fileList2) {
+                if (file && file.status === "success") {
+                    let filename = file.name;
+                    console.log("deleteFile:" + filename);
+                    axios.get("/blast/common/removeFillContig/" + filename).then((res) => {
+                        this.contigFile -= 1;
+                        console.log("contigs文件个数：" + this.contigFile);
+                        this.$message.info("Removed Successfully");
+                    });
+                }
+            },
+
             /*点击按钮下载文件*/
             downloadCommon(src) {
                 // 创建一个a标签
@@ -886,34 +1369,8 @@
                 let src = this.fastaUrl;
                 this.downloadCommon(src);
             },
-            // TODO 测试1下下载
-            notOpenDownload(url) {
-                let a = document.createElement('a');
-                a.href = url;
-                a.style.display = 'none';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            },
-            // TODO 测试2下载 后端设置
-            backendSetDownload() {
-                axios.get("/blast/common/testDownload").then((res) => {
-                    let ele = document.createElement('a');
-                    ele.download = "";
-                    ele.style.display = 'none';
-                    console.log(res.data);
-                    ele.href = res.data;
-                    // 触发点击
-                    document.body.appendChild(ele);
-                    ele.click();
-                    // 移除元素
-                    document.body.removeChild(ele);
-                })
-            },
             downloadDraftAGP() {
                 let src = this.agpUrl;
-                // this.backendSetDownload();
-                // this.notOpenDownload(src);
                 this.downloadCommon(src);
             },
             downloadDraftStat() {
