@@ -8,6 +8,7 @@ import com.ahau.domain.ProcessError;
 import com.ahau.domain.assemble.DraftParam;
 import com.ahau.domain.ProcessWarning;
 import com.ahau.domain.centro.CentroParam;
+import com.ahau.domain.combination.AGParam;
 import com.ahau.domain.gapFill.GapParam;
 import com.ahau.domain.telo.TeloParam;
 import com.ahau.exception.BusinessException;
@@ -38,6 +39,9 @@ public class TrainService {
     // 7. 对于taskDir来说，上传文件的目录
     @Value("${pathConfig.taskUploadPath}")
     private String taskUploadPath;
+    // 对于taskDir来说，存储在线genome的目录
+    @Value("${pathConfig.taskGenomePath}")
+    private String taskGenomePath;
 
     // 导入邮件工具类
     @Autowired
@@ -46,6 +50,7 @@ public class TrainService {
     //注入邮件工具类 外部类
     @Value("${spring.mail.username}")
     private String sendMailer;
+
 
     /**
      * @Description: 初始化taskID，建立对应的目录和catalogue
@@ -228,19 +233,34 @@ public class TrainService {
 
 
     /**
-     * @Description: DraftBlast的trainService
+     * @Description: 获取genome的路径
+     * @Param: String assembleGenome
      * @Param: HttpServletRequest request
-     * @Param: DraftParam draftParam
-     * @Param: String catalogue
-     * @Return: Vector<String> execResult
+     * @Return: String
      */
-    public Vector<String> trainAssemble(HttpServletRequest request, DraftParam draftParam, String catalogue) {
-        System.out.println("--->TrainService\ttrainAssemble 参数的处理\t命令的拼接......");
-        // 0. 创建TaskID属性和目录,是该任务脚本的运行目录（运行目录是相对idea项目的路径）
-        File taskDir = initTask(request, catalogue); // taskDir: ../../bioRepository/user_dir/upload/Assemble/uuid/
+    public String getGenome(String assembleGenome, HttpServletRequest request, String attrName) {
+        System.out.println("--->TrainService\tgetAssembleGenome 获取基因组路径......");
+        if (assembleGenome.isEmpty()) {
+            HttpSession session = request.getSession();
+            assembleGenome = taskUploadPath + session.getAttribute(attrName);
+        } else {
+            assembleGenome = taskGenomePath + assembleGenome + ".fasta";
+        }
+        return assembleGenome;
+    }
+
+
+    /**
+     * @Description: 通用的assemble运行 拼接命令行 调用运行
+     * @Param: HttpServletRequest request
+     * @Param: String catalogue
+     * @Param: String assembleGenome
+     * @Return: execResult
+     */
+    public Vector<String> assembleTrain(HttpServletRequest request, DraftParam draftParam, String assembleGenome, File taskDir) {
+        System.out.println("--->TrainService\tassembleTrain 命令的拼接......");
         // 1. 获取文件名 拼接出文件路径
         HttpSession session = request.getSession();
-        String assembleGenome = taskUploadPath + session.getAttribute("AssembleGenome"); // ../../upload/uuid_originalName
         String assembleHiFi = taskUploadPath + session.getAttribute("AssembleHiFi");
         System.out.println("------> 对于 运行根目录（taskDir）来说，用户上传的文件路径为：");
         System.out.println(assembleGenome);
@@ -276,7 +296,6 @@ public class TrainService {
         return train(cmd, taskDir);
     }
 
-
     /**
      * @Description: 把控制台打印的结果文件路径设置到Session中，Warnings
      * @Param: HttpServletRequest request
@@ -286,6 +305,63 @@ public class TrainService {
     public Boolean assembleSetSession(HttpServletRequest request, Vector<String> trainResult, String catalogue) {
         System.out.println("--->TrainService：setSession\t把训练的结果设置到session中......");
         return setSession(request, catalogue, trainResult);
+    }
+
+
+    /**
+     * @Description: Assmble + GapFiller模块
+     * @Param:
+     * @Return:
+     */
+    public Result agTrain(HttpServletRequest request, AGParam agParam, String genome, File taskDir, String catalogue) {
+        System.out.println("--->TrainService\tagTrain assemble->draftGenome->gap......");
+        System.out.println("------>Step1: Begin to Run Assembly......");
+        // 1.1 获取draftParam
+        DraftParam draftParam = agParam.getDraftParam();
+        // 1.2 调用assembleTrain
+        Vector<String> assembleResult = assembleTrain(request, draftParam, genome, taskDir);
+        // 1.3 获取assemble结果 区别1下
+        String AG_A_attr = "AG_A";
+        Boolean aErr = assembleSetSession(request, assembleResult, AG_A_attr);
+//        Boolean aErr = assembleSetSession(request, assembleResult, catalogue);
+        // 1.4 如果assemble模块发生错误，gap模块就不执行了 直接回显错误
+        if (!aErr) {
+            System.out.println("------>Assembly模块发生错误，提前结束运行！");
+            // 1.5 若有错误 提前结束 并发送邮件
+            return sendEmail(request, false, catalogue);
+        }
+        // 5. 若assmble模块没有发生错误，继续运行gap模块
+        else {
+            System.out.println("------>Step2: Begin to Run GapFiller......");
+            // 2.1 从TaskDir获取draftGenome
+            String draftGenome = "";
+            // 2.2 遍历taskDir，得到draftGenome
+            File projectPath = new File(rwRootPath + taskDir); // ../../bioRepository/user_dir/Assemble/uuid/
+            File[] asssmbleFiles = projectPath.listFiles();
+            // 2.3 若该目录为空 或 目录不存在
+            if (!projectPath.exists() || asssmbleFiles == null) {
+                System.out.println("------>错误：draft程序没有在taskDir生成需要的draftGenome");
+                return null;
+            } else {
+                // 2.4 遍历dir
+                for (File file : asssmbleFiles) {
+                    String fileName = file.getName(); // 文件名
+                    if (fileName.contains(".fasta")) {
+                        // 2.5 获取draftGenome相对于本taskid的相对路径
+                        draftGenome = "../../" + taskDir + fileName;  //  ../../Assemble/uuid/Quartet.draftgenome.fasta
+                        break;
+                    }
+                }
+            }
+            // 2.5 获取gapParam
+            GapParam gapParam = agParam.getGapParam();
+            // 2.6 获取GapFill的结果
+            Vector<String> gapResult = trainGapFill(request, gapParam, draftGenome, taskDir);
+            String AG_G_attr = "AG_G";
+            Boolean gErr = fillSetSession(request, gapResult, AG_G_attr);
+//            Boolean gErr = fillSetSession(request, gapResult, catalogue);
+            return sendEmail(request, gErr, catalogue);
+        }
     }
 
 
@@ -299,13 +375,10 @@ public class TrainService {
      * @Param: String catalogue
      * @Return: execResult Vector包含着命令行每行数据结果的队列
      */
-    public Vector<String> trainGapFill(HttpServletRequest request, GapParam gapParam, String catalogue) {
+    public Vector<String> trainGapFill(HttpServletRequest request, GapParam gapParam, String gapFillGenome, File taskDir) {
         System.out.println("--->TrainService\ttrainGapFill 参数的处理+命令的拼接......");
-        // 0. 创建TaskID属性和目录,是该任务脚本的运行目录（运行目录是相对idea项目的路径）
-        File taskDir = initTask(request, catalogue); // taskDir: ../../bioRepository/user_dir/upload/GapFill/uuid
         // 1. 获取文件名 拼接出文件路径
         HttpSession session = request.getSession();
-        String gapFillGenome = taskUploadPath + session.getAttribute("GapFillGenome"); // ../../upload/uuid_originalName
         ArrayList<FilenamePair> filenamePairs = (ArrayList<FilenamePair>) session.getAttribute("GapFillContigs");
         System.out.println("------> 对于 运行根目录（taskDir）来说，用户上传的文件路径为：");
         System.out.println(gapFillGenome);

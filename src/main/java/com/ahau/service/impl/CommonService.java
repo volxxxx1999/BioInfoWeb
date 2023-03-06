@@ -8,6 +8,7 @@ import com.ahau.domain.assemble.*;
 import com.ahau.domain.centro.CentroCandidate;
 import com.ahau.domain.centro.CentroResultUrl;
 import com.ahau.domain.centro.CentroSubCan;
+import com.ahau.domain.combination.AGResultUrl;
 import com.ahau.domain.gapFill.*;
 import com.ahau.domain.telo.TeloInfo;
 import com.ahau.domain.telo.TeloInfoResult;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -277,6 +279,50 @@ public class CommonService {
         }
         System.out.println(draftResultUrl);
         return draftResultUrl;
+    }
+
+
+    /**
+     * @Description: Assemble+gap显示
+     * @Param: request
+     * @Return: ResultUrl
+     */
+    public AGResultUrl agDisplay(HttpServletRequest request){
+        System.out.println("---> commonService: assembleDisplay......");
+        // 初始化agdisplay
+        AGResultUrl agResultUrl = new AGResultUrl();
+        // 获取AG的session
+        HttpSession session = request.getSession();
+        System.out.println("------> 获取Session中的所有属性名（枚举类型的输出）:");
+        Enumeration<String> attributeNames = session.getAttributeNames();
+        while(attributeNames.hasMoreElements()){
+            String attr = attributeNames.nextElement();
+            System.out.println(attr+"\t");
+        }
+        /*【注意】
+        1. 之前一直出现错误，直接跳到了展示页面
+        2. 在输出所有session的属性后，我们发现这个session的属性是不同的，也就是说warnings是空的
+        3. 在修改了这个不同后，就不会出错了
+        4. 但实际上，是在assemblyDisplay后停止运行的
+        5. 实际上，不存在的session属性的结果，应该只会得到null的结果，（会引发空指针异常吗？）
+        6. 实际就是发生了异常，所有异常向上抛出，被系统异常处理
+        7. 所以实际是什么问题还是悬而未决的，虽然解决了这个属性名后没有出错了*/
+
+        Vector<ProcessWarning> warnings = (Vector<ProcessWarning>) session.getAttribute("AG_AWarnings");
+        System.out.println(warnings);
+        Vector<ProcessWarning> gapWarnings = (Vector<ProcessWarning>) session.getAttribute("AG_GWarnings");
+        System.out.println(gapWarnings);
+        warnings.addAll(gapWarnings);
+        System.out.println(warnings);
+
+        // 调用assemblyDisplay和gapFillDisplay
+        DraftResultUrl draftResultUrl = assembleDisplay(request);
+        GapResultUrl gapResultUrl = gapFillDisplay(request);
+        // 设置属性
+        agResultUrl.setDraftResultUrl(draftResultUrl);
+        agResultUrl.setGapResultUrl(gapResultUrl);
+        agResultUrl.setWarnings(warnings);
+        return agResultUrl;
     }
 
 

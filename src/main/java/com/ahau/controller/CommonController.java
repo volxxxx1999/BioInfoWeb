@@ -6,6 +6,7 @@ import com.ahau.domain.ProcessError;
 import com.ahau.domain.assemble.DraftResultUrl;
 import com.ahau.domain.centro.CentroCandidate;
 import com.ahau.domain.centro.CentroResultUrl;
+import com.ahau.domain.combination.AGResultUrl;
 import com.ahau.domain.gapFill.GapResultUrl;
 import com.ahau.domain.telo.TeloResultUrl;
 import com.ahau.exception.BusinessException;
@@ -140,6 +141,22 @@ public class CommonController {
             System.out.println("===》CommonController: draftDisplay......");
             DraftResultUrl draftResultUrl = commonService.assembleDisplay(request);
             return new Result(Code.TRAIN_OK, "success", draftResultUrl);
+        } catch (Exception e) {
+            throw new BusinessException("Fail to generate the result, please check the format of your file", Code.BUSINESS_ERR);
+        }
+    }
+
+    /**
+     * @Description: assemble+gap的显示
+     * @Param: HttpServletRequest
+     * @Return: Result
+     */
+    @GetMapping("/agDisplay")
+    public Result agDisplay(HttpServletRequest request) {
+        try {
+            System.out.println("===》CommonController: assemble+gap display......");
+            AGResultUrl agResultUrl = commonService.agDisplay(request);
+            return new Result(Code.TRAIN_OK, "success", agResultUrl);
         } catch (Exception e) {
             throw new BusinessException("Fail to generate the result, please check the format of your file", Code.BUSINESS_ERR);
         }

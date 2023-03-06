@@ -4,6 +4,7 @@ import com.ahau.common.Code;
 import com.ahau.common.Result;
 import com.ahau.domain.assemble.DraftParam;
 import com.ahau.domain.centro.CentroParam;
+import com.ahau.domain.combination.AGParam;
 import com.ahau.domain.gapFill.GapParam;
 import com.ahau.domain.telo.TeloParam;
 import com.ahau.service.impl.TrainService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.Vector;
 
 @RestController
@@ -22,6 +24,7 @@ public class TrainController {
     @Autowired
     private TrainService trainService;
 
+
     /**
      * @Description: 对应前端DraftBlast的训练请求
      * @Param: HttpServletRequest request
@@ -31,21 +34,40 @@ public class TrainController {
     @PostMapping("/assembleBlast")
     public Result assembleBlast(HttpServletRequest request, @RequestBody DraftParam draftParam) {
         System.out.println("===》TrainController--->AssembleBlast:参数指令开始训练，读取Session中文件属性......");
-        // 1. 接受返回数据
+        // 定义高级目录
         String catalogue = "Assemble/";
-        // 判断一下Session的问题
-        HttpSession session = request.getSession();
-        Object assembleGenome = session.getAttribute("AssembleGenome");
-        Object assembleHiFi = session.getAttribute("AssembleHiFi");
-        // 如果其中有一个是null，则让用户重新刷新试试看
-        if(assembleGenome == null || assembleHiFi==null){
-            return new Result(Code.UNKNOWN_ERR,"Unknown Error happened, please refresh this page and retry.");
-        }
-        Vector<String> trainResult = trainService.trainAssemble(request, draftParam, catalogue);
-        // 2. 把生成的结果存储在Session中 该部分会检验每一个打印语句
+        // 0. 创建TaskID属性和目录,是该任务脚本的运行目录（运行目录是相对idea项目的路径）
+        File taskDir = trainService.initTask(request, catalogue); // taskDir: ../../bioRepository/user_dir/upload/Assemble/uuid/
+        // 1. 判断是否选择在线基因组，获取基因组路径
+        String onlineGenome = draftParam.getOnlineGenome();
+        System.out.println(onlineGenome.isEmpty());
+        String assembleGenome = trainService.getGenome(onlineGenome, request, "AssembleGenome");
+        // 2. 运行
+        Vector<String> trainResult = trainService.assembleTrain(request, draftParam, assembleGenome, taskDir);
+        // 3. 把生成的结果存储在Session中 该部分会检验每一个打印语句
         Boolean err = trainService.assembleSetSession(request, trainResult, catalogue);
-        // 3. 发邮件给用户
+        // 4. 发邮件给用户
         return trainService.sendEmail(request, err, catalogue);
+    }
+
+
+    /**
+     * @Description: Assemble+GapFiller的训练
+     * @Param:
+     * @Return:
+     */
+    @PostMapping("/agBlast")
+    public Result agBlast(HttpServletRequest request, @RequestBody AGParam agParam){
+        System.out.println("===》TrainController--->Assemble + GapFiller:参数指令开始训练，读取Session中文件属性......");
+        // 定义高级目录
+        String catalogue = "AG/";
+        // 0. 初始工作目录
+        File taskDir = trainService.initTask(request, catalogue);
+        // 1. 判断是否选择在线基因组，获取基因组路径
+        String onlineGenome = agParam.getOnlineGenome();
+        // 还是在Assemble模块，所以attribute是一样的
+        String genome = trainService.getGenome(onlineGenome, request, "AssembleGenome");
+        return trainService.agTrain(request, agParam, genome, taskDir, catalogue);
     }
 
 
@@ -58,9 +80,15 @@ public class TrainController {
     @PostMapping("/fillBlast")
     public Result fillBlast(HttpServletRequest request, @RequestBody GapParam gapParam) {
         System.out.println("===》TrainController---->gapFillBlast ：参数指令开始训练，读取Session中文件属性......");
-        // 1. 接受返回数据
+        // 定义高级目录
         String catalogue = "GapFill/";
-        Vector<String> trainResult = trainService.trainGapFill(request, gapParam, catalogue);
+        // 0. 创建TaskID属性和目录,是该任务脚本的运行目录（运行目录是相对idea项目的路径）
+        File taskDir = trainService.initTask(request, catalogue); // taskDir: ../../bioRepository/user_dir/upload/GapFill/uuid/
+        // 1. 判断是否选择在线基因组，获取基因组路径
+        String onlineGenome = gapParam.getOnlineGenome();
+        String genome = trainService.getGenome(onlineGenome, request, "GapFillGenome");
+        // 2. 运行
+        Vector<String> trainResult = trainService.trainGapFill(request, gapParam, genome, taskDir);
         // 2. 把生成的结果存储在Session中 该部分会检验每一个打印语句
         Boolean err = trainService.fillSetSession(request, trainResult, catalogue);
         // 3. 发邮件给用户
