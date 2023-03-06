@@ -9,4 +9,5 @@ public class GapParam {
     private Integer flankLength;
     private Integer maxFillingLength;
     private String prefix;
+    private String onlineGenome;
 }

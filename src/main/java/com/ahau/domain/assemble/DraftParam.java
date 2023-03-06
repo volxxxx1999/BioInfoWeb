@@ -9,4 +9,5 @@ public class DraftParam {
     private Integer minIdentity;
     private String prefix;
     private Boolean plot;
+    private String onlineGenome;
 }
