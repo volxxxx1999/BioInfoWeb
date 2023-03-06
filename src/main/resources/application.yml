@@ -18,7 +18,8 @@ pathConfig:
   exeMethod: python3
   # 存储在线genome的地址
   genomePath: ../bioRepository/genome/
-
+  # 对于taskDir，存储基因组文件的地址，每次训练使用
+  taskGenomePath: ../../../genome/
 
 
 ---
